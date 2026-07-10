@@ -46,6 +46,7 @@ def main() -> int:
     if missing:
         raise SystemExit(repair_template(missing))
     print("Bounded decision brief task")
+    print(f"Contract check: complete — {len(LABELS)}/{len(LABELS)} explicit fields; no content inferred.")
     print(f"Decision: {values['Decision']}")
     print(f"Evidence required: {values['Evidence']}")
     print(f"Constraints to preserve: {values['Constraints']}")
