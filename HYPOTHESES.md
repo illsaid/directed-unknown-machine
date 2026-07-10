@@ -24,11 +24,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 **Specific user:** A solo builder deciding whether an idea is worth another hour of implementation.
 
-**Evidence for:** Run 1 on `SCENARIOS/001-friendly.md` showed that the starter `machine.py` can read a concrete scenario and produce a structured usefulness report. The run also exposed a fixable gap and improved the report with explicit `Decision:` and `Recommended action:` fields, making the output more suitable for autonomous convergence.
+**Evidence for:** Run 1 on `SCENARIOS/001-friendly.md` showed that the starter `machine.py` can read a concrete scenario and produce a structured usefulness report. The run also exposed a fixable gap and improved the report with explicit `Decision:` and `Recommended action:` fields, making the output more suitable for autonomous convergence. Run 2 on `SCENARIOS/003-comparative.md` found that this is somewhat better than a plain checklist because it converts the scenario into a decision and next action.
 
-**Evidence against:** This may be too meta. The first friendly scenario helped only partially; before Run 1 the report pressured the hypothesis in prose but did not yet force a compact decision or action. A scenario evaluator can still become a generic framework unless hostile and comparative scenarios keep constraining it.
+**Evidence against:** This may be too meta. Run 2 showed only a thin advantage over a disciplined checklist; the system still does not name its baseline difference directly. A scenario evaluator can still become a generic framework unless hostile and transfer scenarios keep constraining it.
 
-**Next test:** Run the comparative scenario against a plain checklist. If `machine.py` is not sharper than a checklist, weaken H1 and test H2 more aggressively.
+**Next test:** Run the hostile vague-input scenario. If the system only asks for clarity, H1 should stop leading and H2 should get the next implementation cycle.
 
 **Kill criterion:** Kill or weaken if three scenarios produce generic advice that would be no better than a checklist or ChatGPT prompt.
 
