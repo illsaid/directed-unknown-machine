@@ -22,16 +22,18 @@ The system should produce a structured report that identifies the inferred probl
 
 ## Actual outcome
 
-Not yet recorded. Run `python machine.py run SCENARIOS/001-friendly.md` and paste or summarize the result here.
+Run 1 manually exercised the scenario against the starter `machine.py`. The original report did identify the inferred problem, expected outcome, unknown actual outcome, failure points, next improvement, and hypothesis pressure. It did not yet produce a crisp decision label or a directly named recommended action, so the output was useful but still too soft for an autonomous loop.
+
+After Run 1, `machine.py` now emits both `Decision:` and `Recommended action:` fields. For this scenario's current partial state, the decision should be `hold-but-improve` and the recommendation should point back to the recorded gap instead of encouraging new generic features.
 
 ## Whether the system helped
 
-unknown
+partial
 
 ## What broke
 
-Not yet tested.
+The starter report pressured the hypothesis in prose but did not give the next autonomous run a compact decision label or explicit action. That made it too easy for the agent to keep adding features instead of deciding whether the hypothesis strengthened, weakened, or merely stayed alive.
 
 ## What would make the result more useful
 
-The report should pressure the agent toward a concrete next implementation step or toward weakening the current hypothesis.
+Next, run a comparative scenario against a plain checklist. If `machine.py` cannot produce a sharper decision than a checklist, weaken H1 and strengthen or test H2.
