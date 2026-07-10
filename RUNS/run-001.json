@@ -1,0 +1,17 @@
+{
+  "run": 1,
+  "date": "2026-07-10",
+  "action": "manual first cycle",
+  "scenario_tested": "SCENARIOS/001-friendly.md",
+  "hypothesis_tested": "H1 — Scenario usefulness evaluator",
+  "summary": "Manual test showed the starter report had useful structure but lacked a compact decision and explicit recommended action. Added Decision and Recommended action fields to machine.py reports, recorded the friendly scenario outcome, and raised H1 confidence slightly from 0.30 to 0.32 while keeping it low.",
+  "files_changed": [
+    "machine.py",
+    "SCENARIOS/001-friendly.md",
+    "HYPOTHESES.md",
+    "JOURNAL.md",
+    "RUNS/run-001.json"
+  ],
+  "decision": "H1 alive, not primary",
+  "next": "Run SCENARIOS/003-comparative.md and test whether machine.py produces a sharper recommendation than a plain checklist. If not, weaken H1 and test H2."
+}
