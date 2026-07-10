@@ -22,16 +22,18 @@ The system should refuse to inflate the vague request into a generic platform. I
 
 ## Actual outcome
 
-Not yet recorded.
+Run 3 showed that the previous report could identify vagueness but could not recover from it. `machine.py` now detects broad capability language and emits one bounded task: use one real messy note set to support one named decision, produce a one-page brief with three evidence-backed options and one recommendation, and judge success by whether the user can choose without requesting a platform.
+
+This is more useful than asking the human for clarification, but the generated task is still a fixed default rather than evidence that the system understands multiple domains.
 
 ## Whether the system helped
 
-unknown
+partial
 
 ## What broke
 
-Not yet tested.
+The old report diagnosed vague input but only repeated that more specificity was needed. The new bounded task recovers one executable test, but it may be too opinionated outside decision-brief situations.
 
 ## What would make the result more useful
 
-The system should turn the vague input into one narrow scenario without asking the human for direction.
+Test the bounded-task output on a transfer scenario from a different domain. If it still produces a useful test without becoming generic, strengthen H2; otherwise narrow H2 specifically to decision-brief shaping.
