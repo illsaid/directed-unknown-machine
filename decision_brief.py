@@ -27,6 +27,15 @@ def labeled_value(raw: str, label: str) -> str | None:
     return " ".join(match.group(1).split()) if match else None
 
 
+def repair_template(missing: list[str]) -> str:
+    fields = "\n".join(f"{label}:" for label in missing)
+    return (
+        "cannot preserve the decision contract from unlabeled prose; "
+        "add these explicit fields without rewriting the notes:\n"
+        f"{fields}"
+    )
+
+
 def main() -> int:
     if len(sys.argv) != 2:
         raise SystemExit("usage: python decision_brief.py SCENARIOS/005-decision-support.md")
@@ -35,11 +44,7 @@ def main() -> int:
     values = {label: labeled_value(raw, label) for label in LABELS}
     missing = [label for label, value in values.items() if not value]
     if missing:
-        required = ", ".join(f"{label}:" for label in missing)
-        raise SystemExit(
-            "cannot preserve the decision contract from unlabeled prose; "
-            f"add these explicit fields: {required}"
-        )
+        raise SystemExit(repair_template(missing))
     print("Bounded decision brief task")
     print(f"Decision: {values['Decision']}")
     print(f"Evidence required: {values['Evidence']}")
