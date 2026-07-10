@@ -1,0 +1,9 @@
+{
+  "run": 0,
+  "date": "2026-07-10",
+  "action": "initial scaffold",
+  "summary": "Created the Directed Unknown Machine scaffold: operating rules, hypotheses ledger, purpose file, journal, four starter scenarios, a runnable machine.py scenario pressure harness, and a scheduled-agent prompt.",
+  "current_demo": "python machine.py run SCENARIOS/001-friendly.md",
+  "status": "ready for first autonomous run",
+  "next": "Run the friendly scenario, update the actual outcome, and adjust HYPOTHESES.md based on whether the output is more useful than a checklist."
+}
