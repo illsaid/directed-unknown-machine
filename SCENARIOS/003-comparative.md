@@ -22,16 +22,16 @@ Compared with a manual checklist, the system should add useful pressure: hypothe
 
 ## Actual outcome
 
-Not yet recorded.
+Run 2 compared the current report with a plain checklist. The report adds some value because it gives a decision and recommended action instead of only restating the scenario fields. The advantage is still thin because it does not name the baseline difference directly.
 
 ## Whether the system helped
 
-unknown
+partial
 
 ## What broke
 
-Not yet tested.
+The report is sharper than a checklist, but not yet distinctive enough.
 
 ## What would make the result more useful
 
-The system should produce a sharper recommendation than "clarify the task" or "test more scenarios."
+Next, test the vague-input scenario and see whether the system can produce one bounded task.
