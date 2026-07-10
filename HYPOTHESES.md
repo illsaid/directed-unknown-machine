@@ -18,17 +18,17 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 ## H1 — Scenario usefulness evaluator
 
 **Status:** alive  
-**Confidence:** 0.30
+**Confidence:** 0.32
 
 **Problem statement:** People with rough tasks, notes, or ideas need a quick way to test whether a proposed tool/output would actually help in a concrete situation before building more.
 
 **Specific user:** A solo builder deciding whether an idea is worth another hour of implementation.
 
-**Evidence for:** The starter `machine.py` can already read a concrete scenario and produce a structured usefulness report.
+**Evidence for:** Run 1 on `SCENARIOS/001-friendly.md` showed that the starter `machine.py` can read a concrete scenario and produce a structured usefulness report. The run also exposed a fixable gap and improved the report with explicit `Decision:` and `Recommended action:` fields, making the output more suitable for autonomous convergence.
 
-**Evidence against:** This may be too meta. A scenario evaluator can easily become a generic framework unless forced toward a sharper domain.
+**Evidence against:** This may be too meta. The first friendly scenario helped only partially; before Run 1 the report pressured the hypothesis in prose but did not yet force a compact decision or action. A scenario evaluator can still become a generic framework unless hostile and comparative scenarios keep constraining it.
 
-**Next test:** Run `machine.py` on `SCENARIOS/001-friendly.md` and decide whether the output suggests a more specific useful artifact.
+**Next test:** Run the comparative scenario against a plain checklist. If `machine.py` is not sharper than a checklist, weaken H1 and test H2 more aggressively.
 
 **Kill criterion:** Kill or weaken if three scenarios produce generic advice that would be no better than a checklist or ChatGPT prompt.
 
@@ -45,7 +45,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 **Evidence against:** The current executable does not yet transform messy inputs into better tasks; it only reports on scenarios.
 
-**Next test:** Create a hostile scenario with vague input and see whether the system can identify what must be specified before useful work can begin.
+**Next test:** Create or run a hostile scenario with vague input and see whether the system can identify what must be specified before useful work can begin.
 
 **Kill criterion:** Kill if the system repeatedly asks for more detail rather than producing a useful bounded task from imperfect input.
 
