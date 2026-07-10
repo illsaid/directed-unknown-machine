@@ -102,3 +102,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** H2 works better when its purpose is not “make vague requests specific,” but “preserve the decision contract while turning messy labeled notes into a bounded brief assignment.” The constraints are not metadata; they are the core value. H1 and H3 both weakened because this useful output does not depend on a broad usefulness report or a generic failure explainer.
 
 **Hypothesis movement:** H2 strengthens from 0.27 to 0.34 and narrows to a constraint-preserving decision-brief shaper. H1 falls from 0.25 to 0.20. H3 falls from 0.15 to 0.12. The next test should use unlabeled decision-support prose; failure should narrow the input contract rather than trigger a generic parser.
+
+## Run 6 — Reject unlabeled prose instead of faking preservation
+
+**What changed:** Added `SCENARIOS/006-unlabeled-decision-notes.md` and changed `decision_brief.py` to stop when any of the four decision-contract labels are missing. The executable now names the exact required fields instead of emitting a plausible brief full of `not stated` values.
+
+**Why it changed:** Run 5's next test was unlabeled decision-support prose. The existing parser could not recover the decision contract, but its fallback hid that failure. A narrow, explicit input contract is more trustworthy than a generic extractor or fabricated completeness.
+
+**Scenario tested:** `SCENARIOS/006-unlabeled-decision-notes.md`. The historical demo command was mentally simulated first and remains runnable: `python machine.py run SCENARIOS/001-friendly.md`. The current best-use command remains `python decision_brief.py SCENARIOS/005-decision-support.md`. Against scenario 006, the executable exits with the observable message: `cannot preserve the decision contract from unlabeled prose; add these explicit fields: Decision:, Evidence:, Constraints:, Success:`.
+
+**What was removed or rejected:** Rejected a generic natural-language extractor, fuzzy classification, inferred field assignment, and silent `not stated` fallbacks. No new mode was added.
+
+**What was learned:** Unlabeled prose is outside the proven use case. The useful system is becoming a labeled decision-contract shaper, not a universal note interpreter. Refusal is a useful output when it prevents a false claim that constraints were preserved.
+
+**Hypothesis movement:** H2 strengthens from 0.34 to 0.39 while narrowing to labeled decision notes. H1 is killed because its own criterion was met: this run was judged directly from executable output and scenario success conditions without the usefulness-report layer. H3 weakens from 0.12 to 0.09.
