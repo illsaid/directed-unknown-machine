@@ -130,3 +130,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** The labeled input contract can be made low-friction without broadening the system. A useful boundary is not merely a refusal; it should make the compliant retry obvious while preserving the original notes.
 
 **Hypothesis movement:** H2 strengthens from 0.39 to 0.42. It survives as the primary emerging use case. The next test is a repaired version of the same notes with wording unchanged, verifying exact clause preservation.
+
+## Run 8 — Verify a repaired contract without inference
+
+**What changed:** Added `SCENARIOS/007-repaired-decision-notes.md` and changed `decision_brief.py` to emit `Contract check: complete — 4/4 explicit fields; no content inferred.` before the bounded assignment.
+
+**Why it changed:** Run 7 made rejected notes repairable, but the successful retry did not expose whether its content came from explicit fields or interpretation. The smallest useful executable improvement was to make the parser's trust boundary visible.
+
+**Scenario tested:** `SCENARIOS/007-repaired-decision-notes.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged. The current best-use command also remains runnable. Against scenario 007, the parser finds all four labels, reports a complete explicit contract, and reproduces each clause under Decision, Evidence required, Constraints to preserve, and Success condition.
+
+**What was removed or rejected:** Rejected automatic repair, clause rewriting, confidence scoring, provenance metadata, and a second output mode. One explicit completeness line was sufficient for this scenario.
+
+**What was learned:** A repaired note set can cross the narrow input boundary without requiring a general extractor. The system is becoming useful not merely because it formats notes, but because it makes the difference between explicit operator intent and machine inference observable.
+
+**Hypothesis movement:** H2 strengthens from 0.42 to 0.46. It survives. The next test is transfer within the same narrow domain: a different editorial decision using the same four-field contract.
