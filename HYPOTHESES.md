@@ -17,8 +17,8 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 ## H1 — Scenario usefulness evaluator
 
-**Status:** weakened  
-**Confidence:** 0.20
+**Status:** killed  
+**Confidence:** 0.08
 
 **Problem statement:** People with rough tasks, notes, or ideas need a quick way to test whether a proposed tool/output would actually help in a concrete situation before building more.
 
@@ -26,33 +26,33 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 **Evidence for:** Run 1 on `SCENARIOS/001-friendly.md` showed that the starter `machine.py` can read a concrete scenario and produce a structured usefulness report. Run 2 on `SCENARIOS/003-comparative.md` found that this is somewhat better than a plain checklist because it converts the scenario into a decision and next action.
 
-**Evidence against:** Run 2 showed only a thin advantage over a disciplined checklist. Run 3 on `SCENARIOS/002-hostile.md` showed that evaluation alone could identify vagueness but could not turn it into useful work. Run 5 produced a useful bounded artifact without relying on the usefulness-report layer, further reducing H1's claim to primary value.
+**Evidence against:** Run 2 showed only a thin advantage over a disciplined checklist. Run 3 showed that evaluation alone could identify vagueness but could not turn it into useful work. Runs 5 and 6 were judged directly from their bounded output and scenario success conditions, so the usefulness-report layer added no necessary value.
 
-**Next test:** Do not lead implementation. Retain only while it helps compare shaped output with scenario expectations.
+**Next test:** None. Remove supporting code when that can be done without breaking the historical demo command.
 
-**Kill criterion:** Kill if the next decision-support test can be judged directly from its bounded output and scenario success condition without the usefulness report.
+**Kill criterion:** Met in Run 6: the decision-support boundary test was judged without the usefulness report.
 
-## H2 — Constraint-preserving decision-brief shaper
+## H2 — Labeled decision-contract shaper
 
 **Status:** alive  
-**Confidence:** 0.34
+**Confidence:** 0.39
 
-**Problem statement:** People with messy decision-support notes need help turning them into one bounded decision-brief task while preserving the actual decision, evidence requirements, domain constraints, and observable success condition.
+**Problem statement:** People with messy labeled decision-support notes need help turning them into one bounded decision-brief task while preserving the actual decision, evidence requirements, domain constraints, and observable success condition.
 
 **Specific user:** A nontechnical operator trying to give an agent or contractor a bounded decision-analysis task without losing important caveats or accidentally requesting a dashboard or generic information system.
 
-**Evidence for:** Run 3 showed that vague decision-support input becomes more useful when converted into one bounded brief. Run 5 on `SCENARIOS/005-decision-support.md` showed a narrower executable can preserve a named publishing decision, evidence categories, anti-causal constraint, non-invention rule, and success condition instead of substituting a generic three-option structure.
+**Evidence for:** Run 3 showed that vague decision-support input becomes more useful when converted into one bounded brief. Run 5 on `SCENARIOS/005-decision-support.md` showed a narrow executable can preserve a named publishing decision, evidence categories, anti-causal constraint, non-invention rule, and success condition. Run 6 on `SCENARIOS/006-unlabeled-decision-notes.md` showed that explicit rejection is more trustworthy than silently emitting plausible-looking missing fields when the contract cannot be preserved.
 
-**Evidence against:** Run 4 on `SCENARIOS/004-transfer-collaboration.md` showed the transformation does not apply to coordination problems. Run 5 depends on labeled `Decision`, `Evidence`, `Constraints`, and `Success` sections; it has not shown that it can recover these reliably from unlabeled prose.
+**Evidence against:** Run 4 showed the transformation does not apply to coordination problems. Run 6 showed that unlabeled prose is outside the current use case; the system cannot reliably recover the decision contract without explicit labels.
 
-**Next test:** Use a second real decision-support scenario without explicit labels. If preservation fails, keep labeled note sets as an explicit input contract rather than adding a generic extractor.
+**Next test:** Test whether a rejected unlabeled note set can be repaired quickly by adding `Decision`, `Evidence`, `Constraints`, and `Success` labels without rewriting the notes.
 
-**Kill criterion:** Kill if two decision-support scenarios produce briefs that lose the actual decision, evidence, constraints, or success condition. Narrow rather than generalize if unlabeled input fails.
+**Kill criterion:** Kill if two labeled decision-support scenarios still lose the actual decision, evidence, constraints, or success condition, or if repairing an unlabeled note set requires substantial rewriting.
 
 ## H3 — Failure-mode explainer for small tools
 
-**Status:** alive  
-**Confidence:** 0.12
+**Status:** weakened  
+**Confidence:** 0.09
 
 **Problem statement:** Small tools often fail because nobody tests them against hostile, comparative, and transfer scenarios; users need a lightweight way to surface brittleness before relying on them.
 
@@ -60,9 +60,9 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests from the start. Run 4 exposed a concrete category error: the fixed task shaper changed a coordination problem into a decision-support problem.
 
-**Evidence against:** The current repo has no real external tool under test except itself, and Run 5's useful result came from shaping a decision task rather than explaining a failure.
+**Evidence against:** The current repo has no real external tool under test except itself. Runs 5 and 6 produced their useful result by shaping or rejecting decision notes, not by offering a general failure explanation.
 
-**Next test:** Do not lead implementation. Reassess only if failure analysis contributes a specific correction the decision-brief shaper could not derive directly.
+**Next test:** Do not lead implementation. Reassess only if failure analysis contributes a specific correction the decision-contract shaper could not derive directly.
 
 **Kill criterion:** Kill if the system cannot produce failure insights more specific than obvious checklist items.
 
