@@ -1,23 +1,12 @@
 #!/usr/bin/env python3
-"""
-Directed Unknown Machine starter executable.
-
-This is not intended to be the final product. It is a small pressure chamber:
-read a scenario, infer what usefulness would mean, and emit a structured report.
-
-Usage:
-    python machine.py run SCENARIOS/001-friendly.md
-    python machine.py run SCENARIOS/001-friendly.md --json
-    python machine.py list SCENARIOS
-"""
+"""Run scenario pressure tests for the Directed Unknown Machine."""
 
 from __future__ import annotations
 
 import argparse
 import json
 import re
-import sys
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Dict, List
 
@@ -32,6 +21,16 @@ FIELD_NAMES = [
     "what broke",
     "what would make the result more useful",
 ]
+
+VAGUE_TERMS = {
+    "flexible",
+    "smart",
+    "many things",
+    "better decisions",
+    "messy information",
+    "organize",
+    "useful",
+}
 
 
 @dataclass
@@ -51,6 +50,7 @@ class UsefulnessReport:
     actual_outcome: str
     helped: str
     decision: str
+    bounded_task: str
     reasoning: List[str]
     failure_points: List[str]
     next_improvement: str
@@ -62,17 +62,21 @@ def normalize_key(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
 
 
+def compact(text: str, fallback: str = "unspecified") -> str:
+    value = " ".join((text or "").split())
+    return value if value else fallback
+
+
 def read_scenario(path: Path) -> Scenario:
     if not path.exists():
         raise SystemExit(f"scenario not found: {path}")
-    text = path.read_text(encoding="utf-8")
-    lines = text.splitlines()
-    title = path.stem
+
     fields: Dict[str, str] = {}
+    title = path.stem
     current_key = None
     current_value: List[str] = []
 
-    for line in lines:
+    for line in path.read_text(encoding="utf-8").splitlines():
         if line.startswith("# "):
             title = line[2:].strip()
             continue
@@ -91,13 +95,37 @@ def read_scenario(path: Path) -> Scenario:
     missing = [name for name in FIELD_NAMES if name not in fields]
     if missing:
         raise SystemExit(f"scenario {path} is missing sections: {', '.join(missing)}")
+    return Scenario(str(path), title, fields)
 
-    return Scenario(path=str(path), title=title, fields=fields)
+
+def analyze_helped(value: str) -> str:
+    normalized = normalize_key(value)
+    if normalized in {"yes", "helped", "true"}:
+        return "yes"
+    if normalized in {"no", "not helped", "false"}:
+        return "no"
+    if "partial" in normalized:
+        return "partial"
+    return "unknown"
 
 
-def compact(text: str, fallback: str = "unspecified") -> str:
-    text = " ".join((text or "").split())
-    return text if text else fallback
+def is_vague_input(text: str) -> bool:
+    normalized = normalize_key(text)
+    matches = sum(term in normalized for term in VAGUE_TERMS)
+    return matches >= 3 or len(normalized.split()) < 8
+
+
+def shape_bounded_task(scenario: Scenario) -> str:
+    raw_input = compact(scenario.fields.get("input", ""))
+    if not is_vague_input(raw_input):
+        return "No reshaping needed: run the concrete input against the expected outcome."
+
+    user = compact(scenario.fields.get("user", "the operator"))
+    return (
+        f"For {user}, take one real messy note set, identify one decision it must support, "
+        "produce a one-page decision brief with three evidence-backed options and one recommendation, "
+        "then judge success by whether the user can choose an option without requesting a new dashboard or platform."
+    )
 
 
 def infer_problem(scenario: Scenario) -> str:
@@ -107,74 +135,61 @@ def infer_problem(scenario: Scenario) -> str:
     return f"Help {user} get from this situation — {situation} — to this useful outcome: {expected}"
 
 
-def analyze_helped(value: str) -> str:
-    value_norm = normalize_key(value)
-    if value_norm in {"yes", "helped", "true"}:
-        return "yes"
-    if value_norm in {"no", "not helped", "false"}:
-        return "no"
-    if "partial" in value_norm:
-        return "partial"
-    if "unknown" in value_norm or "not yet" in value_norm:
-        return "unknown"
-    return "unknown"
-
-
 def decision_for(helped: str) -> str:
-    if helped == "yes":
-        return "candidate-strengthen"
-    if helped == "partial":
-        return "hold-but-improve"
-    if helped == "no":
-        return "weaken-or-kill"
-    return "hold-confidence"
+    return {
+        "yes": "candidate-strengthen",
+        "partial": "hold-but-improve",
+        "no": "weaken-or-kill",
+    }.get(helped, "hold-confidence")
 
 
-def action_for(scenario: Scenario, helped: str, improvement: str) -> str:
+def action_for(scenario: Scenario, helped: str, improvement: str, bounded_task: str) -> str:
+    if is_vague_input(scenario.fields.get("input", "")):
+        return f"Run this bounded task instead of expanding the request: {bounded_task}"
     if helped == "yes":
         return "Run a comparative scenario before raising confidence; a simpler checklist may still be enough."
     if helped == "partial":
         return f"Make one scenario-tied improvement: {improvement}"
     if helped == "no":
         return "Fix exactly one recorded failure, or lower the tested hypothesis confidence."
-    return f"Record a yes/partial/no outcome in {scenario.path}, then run a hostile or comparative scenario before adding unrelated features."
+    return f"Record a yes/partial/no outcome in {scenario.path}, then run a hostile or comparative scenario."
 
 
 def build_report(scenario: Scenario) -> UsefulnessReport:
     fields = scenario.fields
     helped = analyze_helped(fields.get("whether the system helped", "unknown"))
     what_broke = compact(fields.get("what broke", ""), "nothing recorded yet")
-    improvement = compact(fields.get("what would make the result more useful", ""), "run the scenario and record a concrete failure")
+    improvement = compact(fields.get("what would make the result more useful", ""), "run the scenario")
     scenario_type = compact(fields.get("type", ""), "unknown")
     decision = decision_for(helped)
+    bounded_task = shape_bounded_task(scenario)
 
     reasoning = [
         f"Scenario type is {scenario_type}.",
-        f"Useful output is defined by the scenario, not by feature count.",
+        "Useful output is defined by the scenario, not by feature count.",
         f"The current system should be judged against: {compact(fields.get('expected useful outcome', ''))}",
         f"Scenario outcome currently maps to decision: {decision}.",
     ]
+    if is_vague_input(fields.get("input", "")):
+        reasoning.append("The input uses broad capability language, so it was converted into one observable task.")
 
-    failure_points = []
+    failure_points: List[str] = []
     if helped == "unknown":
         failure_points.append("The scenario has not yet produced a yes/no usefulness result.")
     if helped == "partial":
-        failure_points.append("The scenario helped partially; the next step must target the recorded gap, not add a new mode.")
-    if "unspecified" in compact(fields.get("input", ""), "unspecified").lower():
-        failure_points.append("The input is underspecified; a real tool would need to recover or constrain it.")
+        failure_points.append("The scenario helped partially; target the recorded gap instead of adding a mode.")
+    if is_vague_input(fields.get("input", "")):
+        failure_points.append("The input lacks one named decision, one artifact, and one observable success condition.")
     if what_broke.lower() not in {"none", "nothing", "nothing recorded yet", "not yet tested"}:
         failure_points.append(what_broke)
     if not failure_points:
         failure_points.append("No failure recorded; add a hostile or comparative scenario before increasing confidence.")
 
-    if helped == "yes":
-        pressure = "strengthen the tested hypothesis, but only if a simpler baseline would not do as well"
-    elif helped == "partial":
-        pressure = "keep the hypothesis alive but do not raise confidence until the recorded gap is fixed"
-    elif helped == "no":
-        pressure = "weaken or kill the tested hypothesis unless one small change directly fixes the failure"
-    else:
-        pressure = "do not raise confidence yet; run or refine the scenario until the outcome is observable"
+    pressure = {
+        "yes": "strengthen the tested hypothesis only if a simpler baseline would not do as well",
+        "partial": "keep the hypothesis alive but do not raise confidence until the recorded gap is fixed",
+        "no": "weaken or kill the tested hypothesis unless one small change directly fixes the failure",
+    }.get(helped, "do not raise confidence yet; run or refine the scenario until the outcome is observable")
 
     return UsefulnessReport(
         scenario=scenario.title,
@@ -185,10 +200,11 @@ def build_report(scenario: Scenario) -> UsefulnessReport:
         actual_outcome=compact(fields.get("actual outcome", ""), "not yet recorded"),
         helped=helped,
         decision=decision,
+        bounded_task=bounded_task,
         reasoning=reasoning,
         failure_points=failure_points,
         next_improvement=improvement,
-        recommended_action=action_for(scenario, helped, improvement),
+        recommended_action=action_for(scenario, helped, improvement, bounded_task),
         hypothesis_pressure=pressure,
     )
 
@@ -196,45 +212,27 @@ def build_report(scenario: Scenario) -> UsefulnessReport:
 def print_text(report: UsefulnessReport) -> None:
     print(f"Scenario: {report.scenario}")
     print(f"Type: {report.scenario_type}")
-    print(f"User: {report.user}")
-    print()
-    print("Inferred problem:")
-    print(f"- {report.inferred_problem}")
-    print()
-    print("Expected useful outcome:")
-    print(f"- {report.expected_outcome}")
-    print()
-    print("Actual outcome:")
-    print(f"- {report.actual_outcome}")
-    print()
+    print(f"User: {report.user}\n")
+    print(f"Inferred problem:\n- {report.inferred_problem}\n")
+    print(f"Expected useful outcome:\n- {report.expected_outcome}\n")
+    print(f"Actual outcome:\n- {report.actual_outcome}\n")
     print(f"Helped: {report.helped}")
-    print(f"Decision: {report.decision}")
-    print()
+    print(f"Decision: {report.decision}\n")
+    print(f"Bounded task:\n- {report.bounded_task}\n")
     print("Reasoning:")
     for item in report.reasoning:
         print(f"- {item}")
-    print()
-    print("Failure points:")
+    print("\nFailure points:")
     for item in report.failure_points:
         print(f"- {item}")
-    print()
-    print("Next improvement:")
-    print(f"- {report.next_improvement}")
-    print()
-    print("Recommended action:")
-    print(f"- {report.recommended_action}")
-    print()
-    print("Hypothesis pressure:")
-    print(f"- {report.hypothesis_pressure}")
+    print(f"\nNext improvement:\n- {report.next_improvement}\n")
+    print(f"Recommended action:\n- {report.recommended_action}\n")
+    print(f"Hypothesis pressure:\n- {report.hypothesis_pressure}")
 
 
 def cmd_run(args: argparse.Namespace) -> int:
-    scenario = read_scenario(Path(args.scenario))
-    report = build_report(scenario)
-    if args.json:
-        print(json.dumps(asdict(report), indent=2, sort_keys=True))
-    else:
-        print_text(report)
+    report = build_report(read_scenario(Path(args.scenario)))
+    print(json.dumps(asdict(report), indent=2, sort_keys=True) if args.json else "", end="") if args.json else print_text(report)
     return 0
 
 
@@ -254,16 +252,13 @@ def cmd_list(args: argparse.Namespace) -> int:
 def main(argv: List[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run scenario pressure tests for the Directed Unknown Machine.")
     sub = parser.add_subparsers(dest="command", required=True)
-
     run_p = sub.add_parser("run", help="run one scenario and emit a usefulness report")
-    run_p.add_argument("scenario", help="path to a scenario markdown file")
-    run_p.add_argument("--json", action="store_true", help="emit machine-readable JSON")
+    run_p.add_argument("scenario")
+    run_p.add_argument("--json", action="store_true")
     run_p.set_defaults(func=cmd_run)
-
     list_p = sub.add_parser("list", help="list scenario files")
-    list_p.add_argument("directory", nargs="?", default="SCENARIOS", help="scenario directory")
+    list_p.add_argument("directory", nargs="?", default="SCENARIOS")
     list_p.set_defaults(func=cmd_list)
-
     args = parser.parse_args(argv)
     return args.func(args)
 
