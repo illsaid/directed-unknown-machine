@@ -50,9 +50,11 @@ class UsefulnessReport:
     expected_outcome: str
     actual_outcome: str
     helped: str
+    decision: str
     reasoning: List[str]
     failure_points: List[str]
     next_improvement: str
+    recommended_action: str
     hypothesis_pressure: str
 
 
@@ -111,9 +113,31 @@ def analyze_helped(value: str) -> str:
         return "yes"
     if value_norm in {"no", "not helped", "false"}:
         return "no"
-    if "partial" in value_norm or "unknown" in value_norm or "not yet" in value_norm:
+    if "partial" in value_norm:
+        return "partial"
+    if "unknown" in value_norm or "not yet" in value_norm:
         return "unknown"
     return "unknown"
+
+
+def decision_for(helped: str) -> str:
+    if helped == "yes":
+        return "candidate-strengthen"
+    if helped == "partial":
+        return "hold-but-improve"
+    if helped == "no":
+        return "weaken-or-kill"
+    return "hold-confidence"
+
+
+def action_for(scenario: Scenario, helped: str, improvement: str) -> str:
+    if helped == "yes":
+        return "Run a comparative scenario before raising confidence; a simpler checklist may still be enough."
+    if helped == "partial":
+        return f"Make one scenario-tied improvement: {improvement}"
+    if helped == "no":
+        return "Fix exactly one recorded failure, or lower the tested hypothesis confidence."
+    return f"Record a yes/partial/no outcome in {scenario.path}, then run a hostile or comparative scenario before adding unrelated features."
 
 
 def build_report(scenario: Scenario) -> UsefulnessReport:
@@ -122,25 +146,31 @@ def build_report(scenario: Scenario) -> UsefulnessReport:
     what_broke = compact(fields.get("what broke", ""), "nothing recorded yet")
     improvement = compact(fields.get("what would make the result more useful", ""), "run the scenario and record a concrete failure")
     scenario_type = compact(fields.get("type", ""), "unknown")
+    decision = decision_for(helped)
 
     reasoning = [
         f"Scenario type is {scenario_type}.",
         f"Useful output is defined by the scenario, not by feature count.",
         f"The current system should be judged against: {compact(fields.get('expected useful outcome', ''))}",
+        f"Scenario outcome currently maps to decision: {decision}.",
     ]
 
     failure_points = []
     if helped == "unknown":
         failure_points.append("The scenario has not yet produced a yes/no usefulness result.")
+    if helped == "partial":
+        failure_points.append("The scenario helped partially; the next step must target the recorded gap, not add a new mode.")
     if "unspecified" in compact(fields.get("input", ""), "unspecified").lower():
         failure_points.append("The input is underspecified; a real tool would need to recover or constrain it.")
-    if what_broke.lower() not in {"none", "nothing", "nothing recorded yet"}:
+    if what_broke.lower() not in {"none", "nothing", "nothing recorded yet", "not yet tested"}:
         failure_points.append(what_broke)
     if not failure_points:
         failure_points.append("No failure recorded; add a hostile or comparative scenario before increasing confidence.")
 
     if helped == "yes":
         pressure = "strengthen the tested hypothesis, but only if a simpler baseline would not do as well"
+    elif helped == "partial":
+        pressure = "keep the hypothesis alive but do not raise confidence until the recorded gap is fixed"
     elif helped == "no":
         pressure = "weaken or kill the tested hypothesis unless one small change directly fixes the failure"
     else:
@@ -154,9 +184,11 @@ def build_report(scenario: Scenario) -> UsefulnessReport:
         expected_outcome=compact(fields.get("expected useful outcome", "")),
         actual_outcome=compact(fields.get("actual outcome", ""), "not yet recorded"),
         helped=helped,
+        decision=decision,
         reasoning=reasoning,
         failure_points=failure_points,
         next_improvement=improvement,
+        recommended_action=action_for(scenario, helped, improvement),
         hypothesis_pressure=pressure,
     )
 
@@ -176,6 +208,7 @@ def print_text(report: UsefulnessReport) -> None:
     print(f"- {report.actual_outcome}")
     print()
     print(f"Helped: {report.helped}")
+    print(f"Decision: {report.decision}")
     print()
     print("Reasoning:")
     for item in report.reasoning:
@@ -187,6 +220,9 @@ def print_text(report: UsefulnessReport) -> None:
     print()
     print("Next improvement:")
     print(f"- {report.next_improvement}")
+    print()
+    print("Recommended action:")
+    print(f"- {report.recommended_action}")
     print()
     print("Hypothesis pressure:")
     print(f"- {report.hypothesis_pressure}")
