@@ -84,3 +84,21 @@ python machine.py run SCENARIOS/001-friendly.md
 **What was learned:** The decision-brief transformation does not transfer to a collaboration problem. It creates apparent specificity by changing the user's problem. The evidence supports a narrower purpose: shaping messy decision-support requests into bounded decision briefs, not shaping arbitrary vague tasks.
 
 **Hypothesis movement:** H2 survives but weakens and narrows from 0.30 to 0.27. Its next test must use a real decision-support input and verify that the bounded task preserves the actual decision and domain constraints.
+
+## Run 5 — Preserve decision constraints instead of inventing structure
+
+**What changed:** Added the executable `decision_brief.py` and `SCENARIOS/005-decision-support.md`. The new command reads a labeled messy-note input and emits the named decision, evidence requirements, constraints, success condition, and one fixed deliverable:
+
+```bash
+python decision_brief.py SCENARIOS/005-decision-support.md
+```
+
+**Why it changed:** Run 4 narrowed H2 and required a real decision-support test. The existing `machine.py` path always invented a generic three-option brief, which would discard the scenario's anti-causal, non-invention, and editorial constraints.
+
+**Scenario tested:** `SCENARIOS/005-decision-support.md`. The original demo command was mentally simulated first and remains unchanged: `python machine.py run SCENARIOS/001-friendly.md` still emits the partial usefulness report and says the concrete input needs no reshaping. The new decision-brief command was then mentally simulated; its observable output preserves all four labeled parts and requests a one-page recommendation separating facts, assumptions, and unresolved gaps.
+
+**What was removed or rejected:** Rejected a general natural-language extractor, task-type router, configurable templates, automatic option generation, and changes to the old scenario harness. The labeled note-set contract is narrower and directly testable.
+
+**What was learned:** H2 works better when its purpose is not “make vague requests specific,” but “preserve the decision contract while turning messy labeled notes into a bounded brief assignment.” The constraints are not metadata; they are the core value. H1 and H3 both weakened because this useful output does not depend on a broad usefulness report or a generic failure explainer.
+
+**Hypothesis movement:** H2 strengthens from 0.27 to 0.34 and narrows to a constraint-preserving decision-brief shaper. H1 falls from 0.25 to 0.20. H3 falls from 0.15 to 0.12. The next test should use unlabeled decision-support prose; failure should narrow the input contract rather than trigger a generic parser.
