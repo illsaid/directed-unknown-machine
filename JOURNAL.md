@@ -42,3 +42,17 @@ python machine.py run SCENARIOS/001-friendly.md
 **What was learned:** H1 is alive but not proven. The system is useful as a pressure chamber only if it makes hypothesis movement explicit. The next test should be comparative: can this beat a plain checklist?
 
 **Hypothesis movement:** H1 strengthened slightly from 0.30 to 0.32 because the scenario produced a concrete, fixable improvement. Confidence remains low because the output has not yet beaten a simpler baseline.
+
+## Run 2 — Comparative baseline check
+
+**What changed:** Recorded the outcome of `SCENARIOS/003-comparative.md`, updated H1 evidence, and added a compact run record.
+
+**Why it changed:** H1 needed a baseline check before confidence could rise.
+
+**Scenario tested:** `SCENARIOS/003-comparative.md`
+
+**What was removed or rejected:** Rejected adding a new mode before proving the existing report is clearly better than a simple checklist.
+
+**What was learned:** The report is somewhat useful because it produces a decision and recommended action, but the advantage is thin. The system needs a vague-input test to see whether task shaping is actually the stronger purpose.
+
+**Hypothesis movement:** H1 remains alive at 0.32 but does not strengthen.
