@@ -18,11 +18,21 @@ We need to decide whether to publish the approval forecast this week or hold it 
 
 ## Expected useful outcome
 
-The system should refuse to generate a bounded brief from this unlabeled prose and state exactly which explicit fields are required. It should not add a generic natural-language extractor or silently emit missing values.
+The system should refuse to generate a bounded brief from this unlabeled prose and provide a minimal copyable repair skeleton containing only the missing contract labels. It should not infer fields, rewrite the notes, or add a generic extractor.
 
 ## Actual outcome
 
-Run 6 makes the contract explicit. The command exits with: `cannot preserve the decision contract from unlabeled prose; add these explicit fields: Decision:, Evidence:, Constraints:, Success:`.
+Run 7 exits with a four-line repair skeleton:
+
+```text
+cannot preserve the decision contract from unlabeled prose; add these explicit fields without rewriting the notes:
+Decision:
+Evidence:
+Constraints:
+Success:
+```
+
+The operator can now place the existing clauses under the four labels without changing their substance.
 
 ## Whether the system helped
 
@@ -30,8 +40,8 @@ yes
 
 ## What broke
 
-The Run 5 executable previously emitted a plausible-looking brief with all four fields set to `not stated`. That hid the fact that preservation had failed.
+Run 6 named the missing labels in one sentence, but the operator still had to reconstruct the required format before retrying.
 
 ## What would make the result more useful
 
-Keep the labeled note-set requirement. Next, test whether a user can repair a rejected input quickly by adding the four labels without rewriting the underlying notes.
+Next, test one repaired version of these same notes and verify that the output preserves every clause without adding interpretation.
