@@ -35,17 +35,17 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 ## H2 — Labeled decision-contract shaper
 
 **Status:** alive  
-**Confidence:** 0.39
+**Confidence:** 0.42
 
 **Problem statement:** People with messy labeled decision-support notes need help turning them into one bounded decision-brief task while preserving the actual decision, evidence requirements, domain constraints, and observable success condition.
 
 **Specific user:** A nontechnical operator trying to give an agent or contractor a bounded decision-analysis task without losing important caveats or accidentally requesting a dashboard or generic information system.
 
-**Evidence for:** Run 3 showed that vague decision-support input becomes more useful when converted into one bounded brief. Run 5 on `SCENARIOS/005-decision-support.md` showed a narrow executable can preserve a named publishing decision, evidence categories, anti-causal constraint, non-invention rule, and success condition. Run 6 on `SCENARIOS/006-unlabeled-decision-notes.md` showed that explicit rejection is more trustworthy than silently emitting plausible-looking missing fields when the contract cannot be preserved.
+**Evidence for:** Run 3 showed that vague decision-support input becomes more useful when converted into one bounded brief. Run 5 on `SCENARIOS/005-decision-support.md` showed a narrow executable can preserve a named publishing decision, evidence categories, anti-causal constraint, non-invention rule, and success condition. Run 6 on `SCENARIOS/006-unlabeled-decision-notes.md` showed that explicit rejection is more trustworthy than silently emitting plausible-looking missing fields when the contract cannot be preserved. Run 7 showed that the rejected note set can be made repairable without inference: the tool now emits a copyable four-label skeleton while explicitly telling the operator not to rewrite the notes.
 
-**Evidence against:** Run 4 showed the transformation does not apply to coordination problems. Run 6 showed that unlabeled prose is outside the current use case; the system cannot reliably recover the decision contract without explicit labels.
+**Evidence against:** Run 4 showed the transformation does not apply to coordination problems. Run 6 showed that unlabeled prose is outside the current use case; the system cannot reliably recover the decision contract without explicit labels. Run 7 has not yet demonstrated that a repaired version preserves every original clause.
 
-**Next test:** Test whether a rejected unlabeled note set can be repaired quickly by adding `Decision`, `Evidence`, `Constraints`, and `Success` labels without rewriting the notes.
+**Next test:** Add the four labels to the Run 6 note set without changing its wording, then verify that the generated assignment preserves every decision, evidence, constraint, and success clause without interpretation.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the actual decision, evidence, constraints, or success condition, or if repairing an unlabeled note set requires substantial rewriting.
 
@@ -60,7 +60,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests from the start. Run 4 exposed a concrete category error: the fixed task shaper changed a coordination problem into a decision-support problem.
 
-**Evidence against:** The current repo has no real external tool under test except itself. Runs 5 and 6 produced their useful result by shaping or rejecting decision notes, not by offering a general failure explanation.
+**Evidence against:** The current repo has no real external tool under test except itself. Runs 5 through 7 produced their useful result by shaping, rejecting, or repairing decision notes, not by offering a general failure explanation.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a specific correction the decision-contract shaper could not derive directly.
 
