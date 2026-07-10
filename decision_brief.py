@@ -48,9 +48,9 @@ def main() -> int:
     print("Bounded decision brief task")
     print(f"Contract check: complete — {len(LABELS)}/{len(LABELS)} explicit fields; no content inferred.")
     print(f"Decision: {values['Decision']}")
-    print(f"Evidence required: {values['Evidence']}")
-    print(f"Constraints to preserve: {values['Constraints']}")
-    print(f"Success condition: {values['Success']}")
+    print(f"Evidence: {values['Evidence']}")
+    print(f"Constraints: {values['Constraints']}")
+    print(f"Success: {values['Success']}")
     print("Deliverable: a one-page brief that recommends one action and separates known facts, assumptions, and unresolved gaps.")
     return 0
 
