@@ -28,26 +28,26 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 **Evidence against:** Run 2 showed only a thin advantage over a disciplined checklist. Run 3 on `SCENARIOS/002-hostile.md` showed that evaluation alone could identify vagueness but could not turn it into useful work. The executable became more useful only when it started shaping a bounded task, which is H2 rather than H1.
 
-**Next test:** Do not lead the next implementation cycle. Keep only as supporting infrastructure while H2 is tested on a transfer scenario.
+**Next test:** Do not lead the next implementation cycle. Keep only as supporting infrastructure while the narrowed H2 is tested against a concrete decision-support input.
 
-**Kill criterion:** Kill if the next transfer test shows the usefulness report adds no value beyond the bounded task itself.
+**Kill criterion:** Kill if the next decision-support test shows the usefulness report adds no value beyond the bounded task itself.
 
-## H2 — Narrow task-shaping assistant
+## H2 — Decision-brief task shaper
 
 **Status:** alive  
-**Confidence:** 0.30
+**Confidence:** 0.27
 
-**Problem statement:** People with messy inputs need help turning them into a precise, testable task with an expected useful outcome.
+**Problem statement:** People with messy decision-support inputs need help turning them into one bounded decision-brief task with a named decision, evidence requirements, a recommendation, and an observable success condition.
 
-**Specific user:** A nontechnical operator trying to give an agent or contractor a bounded task without accidentally requesting a vague dashboard or generic system.
+**Specific user:** A nontechnical operator trying to give an agent or contractor a bounded decision-analysis task without accidentally requesting a vague dashboard or generic information system.
 
-**Evidence for:** The required scenario format forces user, situation, input, expected outcome, actual outcome, and what broke. Run 3 added executable vague-input detection and a `Bounded task` output. On the hostile scenario it converted a broad request for a flexible information platform into one observable decision-brief test without asking the human for direction.
+**Evidence for:** Run 3 added executable vague-input detection and a `Bounded task` output. On `SCENARIOS/002-hostile.md`, it converted a broad request for organizing messy information and making better decisions into one observable decision-brief test without asking the human for direction.
 
-**Evidence against:** The current bounded task is a fixed decision-brief default. It may fail outside messy-information and decision-support contexts, and it has not yet demonstrated transfer.
+**Evidence against:** Run 4 on `SCENARIOS/004-transfer-collaboration.md` showed that the same transformation is inappropriate for a coordination problem. The system gained specificity by changing the problem into a decision brief. H2 does not transfer as a general task-shaping assistant.
 
-**Next test:** Create a transfer scenario in a different domain and test whether the bounded task remains useful. If not, narrow H2 specifically to shaping messy information into decision briefs.
+**Next test:** Use a concrete messy decision-support input and test whether the generated brief names the actual decision and preserves domain-specific constraints instead of emitting the same generic three-option structure.
 
-**Kill criterion:** Kill if the system repeatedly asks for more detail, or if its bounded tasks remain generic or inappropriate across two transfer scenarios.
+**Kill criterion:** Kill if two decision-support scenarios produce generic briefs that fail to preserve the actual decision, evidence, or success condition.
 
 ## H3 — Failure-mode explainer for small tools
 
@@ -58,11 +58,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 **Specific user:** A builder with a tiny CLI or script who wants to know why it will break before sharing it.
 
-**Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests from the start.
+**Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests from the start. Run 4 exposed a concrete category error: the fixed task shaper changed a coordination problem into a decision-support problem.
 
-**Evidence against:** The current repo has no real external tool under test except itself.
+**Evidence against:** The current repo has no real external tool under test except itself, and the failure explanation still depends on manually authored scenario outcomes.
 
-**Next test:** Wait until H2 has a transfer scenario; then judge whether the failure analysis contributes anything beyond task shaping.
+**Next test:** Wait until the narrowed H2 has a concrete decision-support scenario; then judge whether the failure analysis contributes anything beyond the bounded task itself.
 
 **Kill criterion:** Kill if the system cannot produce failure insights more specific than obvious checklist items.
 
