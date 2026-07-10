@@ -116,3 +116,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** Unlabeled prose is outside the proven use case. The useful system is becoming a labeled decision-contract shaper, not a universal note interpreter. Refusal is a useful output when it prevents a false claim that constraints were preserved.
 
 **Hypothesis movement:** H2 strengthens from 0.34 to 0.39 while narrowing to labeled decision notes. H1 is killed because its own criterion was met: this run was judged directly from executable output and scenario success conditions without the usefulness-report layer. H3 weakens from 0.12 to 0.09.
+
+## Run 7 — Make rejected notes directly repairable
+
+**What changed:** Changed `decision_brief.py` so a rejected unlabeled note set emits a copyable skeleton containing only the missing `Decision`, `Evidence`, `Constraints`, and `Success` labels. Updated `SCENARIOS/006-unlabeled-decision-notes.md` with the observable output.
+
+**Why it changed:** Run 6 proved that refusal is safer than inference, but its one-line error still made the operator reconstruct the required format. The smallest useful improvement was to make the boundary actionable without interpreting or rewriting the notes.
+
+**Scenario tested:** `SCENARIOS/006-unlabeled-decision-notes.md`. The historical command `python machine.py run SCENARIOS/001-friendly.md` remains unchanged and runnable by inspection. The best-use command `python decision_brief.py SCENARIOS/005-decision-support.md` is unaffected because all four fields are present. Against scenario 006, the executable now exits with a four-line repair skeleton.
+
+**What was removed or rejected:** Rejected automatic field inference, suggested rewritten content, a repair mode, interactive prompts, and configuration. The tool supplies structure only; the operator retains control of meaning.
+
+**What was learned:** The labeled input contract can be made low-friction without broadening the system. A useful boundary is not merely a refusal; it should make the compliant retry obvious while preserving the original notes.
+
+**Hypothesis movement:** H2 strengthens from 0.39 to 0.42. It survives as the primary emerging use case. The next test is a repaired version of the same notes with wording unchanged, verifying exact clause preservation.
