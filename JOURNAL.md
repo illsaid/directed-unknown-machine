@@ -70,3 +70,17 @@ python machine.py run SCENARIOS/001-friendly.md
 **What was learned:** The system became materially more useful only when it stopped merely evaluating and started producing a bounded task. The decision-brief default works for this hostile scenario but may be too narrow or too opinionated elsewhere.
 
 **Hypothesis movement:** H1 is weakened from 0.32 to 0.25. H2 strengthens from 0.20 to 0.30 and becomes the leading live hypothesis. The next run must test transfer before adding another template.
+
+## Run 4 — Transfer exposes category error
+
+**What changed:** Added `SCENARIOS/004-transfer-collaboration.md` and mentally simulated the current executable against it. Narrowed H2 from a general task-shaping assistant to a decision-brief task shaper; confidence fell from 0.30 to 0.27.
+
+**Why it changed:** Run 3 explicitly required a different-domain transfer test before adding another template. The collaboration scenario tests whether the fixed bounded-task transformation preserves the user's problem or merely forces every vague request into the same shape.
+
+**Scenario tested:** `SCENARIOS/004-transfer-collaboration.md`. Before the test, the current demo command was mentally simulated: `python machine.py run SCENARIOS/001-friendly.md` still emits the existing partial usefulness report and correctly says the concrete friendly input needs no reshaping.
+
+**What was removed or rejected:** Rejected adding a coordination template, task-type router, broader vague-term list, or configurable output modes. Those changes would turn one failed transfer into a generic framework.
+
+**What was learned:** The decision-brief transformation does not transfer to a collaboration problem. It creates apparent specificity by changing the user's problem. The evidence supports a narrower purpose: shaping messy decision-support requests into bounded decision briefs, not shaping arbitrary vague tasks.
+
+**Hypothesis movement:** H2 survives but weakens and narrows from 0.30 to 0.27. Its next test must use a real decision-support input and verify that the bounded task preserves the actual decision and domain constraints.
