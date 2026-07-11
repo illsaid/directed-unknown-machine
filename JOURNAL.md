@@ -242,3 +242,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** The four-field contract can carry a small explicit disagreement without losing its trust boundary. The tool is becoming good at constraining delegated reasoning: it preserves operator claims while preventing the analyst from resolving disagreement by plausibility alone.
 
 **Hypothesis movement:** H2 strengthens from 0.65 to 0.67 and remains primary. The next test is a denser Evidence field with three interpretations to determine where inspectability breaks.
+
+## Run 17 — Make dense reasoning obligations inspectable
+
+**What changed:** Added `SCENARIOS/016-three-conflicting-interpretations.md` and replaced the accumulated one-sentence deliverable in `decision_brief.py` with five explicit brief requirements.
+
+**Why it changed:** The Run 16 semantic boundary still held with three interpretations, but the downstream obligations had become difficult to verify because they were buried in one long sentence. The smallest useful improvement was to expose the existing fixed obligations separately rather than add classification or another schema.
+
+**Scenario tested:** `SCENARIOS/016-three-conflicting-interpretations.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains runnable and unchanged. Against scenario 016, the best-use command preserves all four fields and prints five separate requirements, including evidence-only comparison of conflicting interpretations and explicit unresolved conflict.
+
+**What was removed or rejected:** Removed the dense accumulated deliverable sentence. Rejected sentence-level interpretation detection, a maximum-interpretation rule, automatic causal ranking, an Interpretation field, and a new evidence mode.
+
+**What was learned:** Three interpretations do not by themselves break the four-field contract. The actual failure was inspectability of the generated assignment, not semantic capacity. Fixed reasoning obligations should remain individually auditable as the contract becomes denser.
+
+**Hypothesis movement:** H2 strengthens from 0.67 to 0.69 and remains primary. The next test is a contract where Constraints and Success appear to conflict, to determine whether structural preservation without consistency checking is still trustworthy.
