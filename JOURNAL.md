@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–31 — Evidence provenance and source applicability
+## Runs 22–32 — Evidence provenance and source applicability
 
 - **Run 22:** Kept independent constraint judgments separate.
 - **Run 23:** Exposed shared provenance across multiple gate judgments.
@@ -32,17 +32,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 29:** Required direct observations rather than downstream interpretations.
 - **Run 30:** Required evidence that an observed difference actually changes applicability to the target population.
 - **Run 31:** Preserved original measurements and the supplied method behind a target-population reweighting.
+- **Run 32:** Rejected adjusted estimates whose supplied notes omitted an auditable method.
 
-## Run 32 — Reject opaque adjusted estimates
+## Run 33 — Keep transparent adjustments conditional on supported assumptions
 
-**What changed:** Added `SCENARIOS/031-opaque-adjusted-estimate.md` and tightened the fixed constraint requirement so a supplied adjusted numeric result cannot resolve a gate unless the notes also supply an auditable adjustment method.
+**What changed:** Added `SCENARIOS/032-transparent-adjustment-disputed-assumption.md` and tightened the fixed constraint requirement so an auditable adjustment must name its governing assumptions and the supplied support for them. If support is absent, the calculated result remains conditional and cannot resolve the gate.
 
-**Scenario tested:** A production-shadow test measured p95 latency at 430 milliseconds. A canary measured 560 milliseconds and had a different Safari mix. The notes reported a favorable 493-millisecond target-population estimate but omitted the browser-segment measurements, weights, calculation, and adjustment procedure. Paid conversion was 23%.
+**Scenario tested:** A production-shadow test measured p95 latency at 430 milliseconds. A canary measured 560 milliseconds and supplied Safari and non-Safari segment measurements. The notes showed the complete calculation producing a 493.2-millisecond estimate, but the calculation depended on an unevidenced assumption that Monday's rollout population would be 24% Safari. Paid conversion was 23%.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario remains valid, maps `partial` to `hold-but-improve`, and recommends addressing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/031-opaque-adjusted-estimate.md` preserves all four fields and now explicitly requires the opaque 493-millisecond estimate to remain unresolved rather than treating it as sufficient evidence for rollout.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario remains valid, maps `partial` to `hold-but-improve`, and recommends addressing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/032-transparent-adjustment-disputed-assumption.md` preserves all four fields and now explicitly requires the 493.2-millisecond result to remain conditional because the supplied notes do not support the 24% target-mix assumption.
 
-**What was removed or rejected:** No adjustment engine, source-ranking system, applicability classifier, traffic parser, threshold calculator, fifth field, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** No sensitivity engine, assumption classifier, source-ranking system, adjustment calculator, fifth field, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Preserving the original and adjusted values is not enough. A polished numeric transformation is still only a claim when the supplied notes omit the method needed to reproduce or inspect it. Transparency of the result does not substitute for transparency of the transformation.
+**What was learned:** Reproducibility of arithmetic is not the same as evidentiary support for its inputs. A transparent calculation can establish what follows if an assumption is true, but it cannot convert that assumption into an observation or confirm a decision gate.
 
-**Hypothesis movement:** H2 strengthens from 0.95 to 0.96 and remains primary. The next test is a fully supplied adjustment method that depends on a disputed assumption, checking that auditable arithmetic does not promote an unsupported assumption to fact.
+**Hypothesis movement:** H2 strengthens from 0.96 to 0.97 and remains primary. The next test is a supplied assumption with an explicit sensitivity range that crosses the decision threshold, checking that the brief exposes the boundary rather than selecting a convenient point estimate.
