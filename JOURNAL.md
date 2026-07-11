@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–30 — Evidence provenance and source applicability
+## Runs 22–31 — Evidence provenance and source applicability
 
 - **Run 22:** Kept independent constraint judgments separate.
 - **Run 23:** Exposed shared provenance across multiple gate judgments.
@@ -31,17 +31,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 28:** Required supplied observations behind comparability claims.
 - **Run 29:** Required direct observations rather than downstream interpretations.
 - **Run 30:** Required evidence that an observed difference actually changes applicability to the target population.
+- **Run 31:** Preserved original measurements and the supplied method behind a target-population reweighting.
 
-## Run 31 — Preserve original measurements behind reweighting
+## Run 32 — Reject opaque adjusted estimates
 
-**What changed:** Added `SCENARIOS/030-reweighted-source-applicability.md` and tightened the fixed constraint requirement so an adjusted or reweighted value used to establish target-population applicability must preserve the original value and name the adjusted value, supplied method, and target population.
+**What changed:** Added `SCENARIOS/031-opaque-adjusted-estimate.md` and tightened the fixed constraint requirement so a supplied adjusted numeric result cannot resolve a gate unless the notes also supply an auditable adjustment method.
 
-**Scenario tested:** A production-shadow test measured p95 latency at 430 milliseconds. A canary measured an unadjusted 560 milliseconds with 38% Safari traffic versus 24% in the Monday target mix. Supplied browser-segment measurements and a supplied reweighting calculation produced a 493-millisecond target-population estimate. Paid conversion was 23%.
+**Scenario tested:** A production-shadow test measured p95 latency at 430 milliseconds. A canary measured 560 milliseconds and had a different Safari mix. The notes reported a favorable 493-millisecond target-population estimate but omitted the browser-segment measurements, weights, calculation, and adjustment procedure. Paid conversion was 23%.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario remains valid, maps `partial` to `hold-but-improve`, and points to its recorded comparative-test gap. `python decision_brief.py SCENARIOS/030-reweighted-source-applicability.md` preserves all four fields and now requires the original 560-millisecond result, adjusted 493-millisecond estimate, supplied reweighting method, and Monday US web target population to remain visible.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario remains valid, maps `partial` to `hold-but-improve`, and recommends addressing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/031-opaque-adjusted-estimate.md` preserves all four fields and now explicitly requires the opaque 493-millisecond estimate to remain unresolved rather than treating it as sufficient evidence for rollout.
 
-**What was removed or rejected:** No source-ranking system, automatic reweighting, applicability classifier, causal model, traffic parser, threshold calculator, fifth field, or domain mode was added. Historical journal detail already represented in `HYPOTHESES.md` was compacted.
+**What was removed or rejected:** No adjustment engine, source-ranking system, applicability classifier, traffic parser, threshold calculator, fifth field, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Relevance evidence must support positive resolution as well as rejection. A supplied adjustment can make a conflicting source applicable to the target population, but only if the original measurement and transformation remain inspectable; otherwise the adjustment becomes a hidden overwrite.
+**What was learned:** Preserving the original and adjusted values is not enough. A polished numeric transformation is still only a claim when the supplied notes omit the method needed to reproduce or inspect it. Transparency of the result does not substitute for transparency of the transformation.
 
-**Hypothesis movement:** H2 strengthens from 0.94 to 0.95 and remains primary. The next test is a supplied adjusted value with an incomplete method, checking that an opaque numeric adjustment cannot resolve the gate.
+**Hypothesis movement:** H2 strengthens from 0.95 to 0.96 and remains primary. The next test is a fully supplied adjustment method that depends on a disputed assumption, checking that auditable arithmetic does not promote an unsupported assumption to fact.
