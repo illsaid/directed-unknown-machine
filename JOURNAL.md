@@ -59,4 +59,18 @@ Record every autonomous run here. Historical entries are kept compact once their
 
 **What was learned:** Separate gate reporting is not fully auditable if repeated use of one test can masquerade as multiple independent bodies of support. The contract should preserve both the distinct judgments and their shared provenance.
 
-**Hypothesis movement:** H2 strengthens from 0.79 to 0.81 and remains primary. The next test is two constraints sharing one source where one measurement passes and the other is unresolved, verifying that shared provenance does not collapse distinct gate states.
+**Hypothesis movement:** H2 strengthens from 0.79 to 0.81 and remains primary.
+
+## Run 24 — Distinguish shared provenance from shared coverage
+
+**What changed:** Added `SCENARIOS/023-shared-source-partial-coverage.md` and tightened the fixed constraint requirement so a shared evidence source must be tied to the measurements it actually supplies; source reuse cannot stand in for evidence on an unmeasured gate.
+
+**Scenario tested:** One 10,000-request production-shadow test measured median latency at 140 milliseconds but did not report p95 latency. The median gate is satisfied, the p95 gate remains unresolved, and both judgments still refer to the same test provenance.
+
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the friendly scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/023-shared-source-partial-coverage.md` preserves all four fields and now requires the analyst to name both the shared source and the measurements it actually contains.
+
+**What was removed or rejected:** No source graph, measurement parser, threshold calculator, fifth field, or domain mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
+
+**What was learned:** Shared provenance and evidentiary coverage are different. A source can be common to multiple gates without supplying the measurement needed to resolve every gate.
+
+**Hypothesis movement:** H2 strengthens from 0.81 to 0.83 and remains primary. The next test is overlapping measurements across two sources, checking that overlap is disclosed without being double-counted as independent corroboration.
