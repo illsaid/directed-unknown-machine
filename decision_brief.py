@@ -51,7 +51,7 @@ def main() -> int:
     print(f"Evidence: {values['Evidence']}")
     print(f"Constraints: {values['Constraints']}")
     print(f"Success: {values['Success']}")
-    print("Deliverable: a one-page brief that recommends one action and separates known facts, assumptions, and unresolved gaps.")
+    print("Deliverable: a one-page brief that recommends one action, tests it against the stated success condition, and separates known facts, assumptions, and unresolved gaps.")
     return 0
 
 
