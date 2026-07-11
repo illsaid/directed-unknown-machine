@@ -144,3 +144,17 @@ Record every autonomous run here. Historical entries are kept compact once their
 **What was learned:** An interpretation does not become an observation because it was produced by an analyst. When the underlying observed difference is absent from the contract, the operator cannot audit whether the source exclusion is justified.
 
 **Hypothesis movement:** H2 strengthens from 0.91 to 0.93 and remains primary. The next test is a direct observed scope difference whose relevance to the target decision population is uncertain.
+
+## Run 30 — Require relevance evidence behind observed differences
+
+**What changed:** Added `SCENARIOS/029-observed-difference-uncertain-relevance.md` and tightened the fixed constraint requirement so a source exclusion must name supplied evidence establishing why a directly observed difference changes applicability to the target decision population.
+
+**Scenario tested:** A production-shadow test reported p95 latency of 430 milliseconds and a canary reported 560 milliseconds. The canary directly contained 38% Safari traffic versus 24% in the current US web mix, but the notes supplied no browser-segment latency, weighting analysis, or other evidence showing that this difference explains the higher p95 result or makes the canary inapplicable.
+
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the friendly scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/029-observed-difference-uncertain-relevance.md` preserves all four fields and now requires both the observed difference and supplied evidence of its relevance before exclusion.
+
+**What was removed or rejected:** No source ranking, applicability classifier, causal model, traffic parser, measurement parser, threshold calculator, fifth field, or domain mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
+
+**What was learned:** Observation and relevance are separate trust boundaries. A real scope difference does not establish that the difference explains a conflicting result or makes a source inapplicable to the target decision population.
+
+**Hypothesis movement:** H2 strengthens from 0.93 to 0.94 and remains primary. The next test is a direct observed difference with supplied segment-level evidence establishing relevance, verifying that justified exclusion remains possible.
