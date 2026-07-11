@@ -186,3 +186,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** Rejecting unsupported structure is not sufficient if the repair instruction itself misclassifies meaning. The four-field contract remains viable, but its boundary guidance must remain semantically neutral unless a scenario proves an automatic mapping is safe.
 
 **Hypothesis movement:** H2 strengthens from 0.57 to 0.59 and survives. The next test is a repaired version of the same threshold scenario with the wording moved under Success unchanged.
+
+## Run 13 — Make a repaired stopping rule govern the recommendation
+
+**What changed:** Added `SCENARIOS/012-repaired-decision-threshold.md` and changed the fixed deliverable in `decision_brief.py` so the brief must state how the supplied success or reversal rule governs the recommended action.
+
+**Why it changed:** Moving the Threshold wording under Success preserved the text, but the prior deliverable only required testing against the success condition. It did not require the analyst to expose how the stopping rule controls continuation or reversal.
+
+**Scenario tested:** `SCENARIOS/012-repaired-decision-threshold.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged and runnable. The current best-use command accepts all four fields, preserves the 18% threshold exactly under Success, and asks for one action governed by that supplied rule.
+
+**What was removed or rejected:** Rejected adding a Threshold field, alias map, campaign mode, conversion calculator, or automatic interpretation. The repair uses the existing Success field and keeps the operator's wording.
+
+**What was learned:** An unsupported stopping-rule field can be repaired into the four-field contract without semantic loss, but preservation alone is not enough: the generated assignment should make the supplied rule operational in the recommendation.
+
+**Hypothesis movement:** H2 strengthens from 0.59 to 0.61 and survives. The next test is a repaired unsupported field whose meaning belongs under Evidence rather than Success, verifying that an observation is not recast as a requirement.
