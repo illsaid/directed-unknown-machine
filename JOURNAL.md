@@ -130,3 +130,17 @@ Record every autonomous run here. Historical entries are kept compact once their
 **What was learned:** A rationale written inside Evidence is not automatically evidence for itself. Excluding a conflicting source requires a supplied observation that establishes the claimed mismatch; otherwise the disagreement remains unresolved.
 
 **Hypothesis movement:** H2 strengthens from 0.89 to 0.91 and remains primary. The next test is a comparability reason supported only by a downstream interpretation rather than a direct supplied observation.
+
+## Run 29 — Require direct observations behind exclusions
+
+**What changed:** Added `SCENARIOS/028-interpreted-comparability-reason.md` and tightened the fixed constraint requirement so a source exclusion must name a direct supplied observation establishing the mismatch; a downstream conclusion derived from unavailable observations is insufficient.
+
+**Scenario tested:** A production-shadow test reported p95 latency of 430 milliseconds and a canary reported 560 milliseconds. A downstream analyst concluded that the canary traffic mix differed from the planned rollout population, but the notes supplied no traffic counts, client breakdown, geography breakdown, or other observed difference behind that conclusion. The assignment now preserves both values and leaves the performance gate unresolved.
+
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the friendly scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/028-interpreted-comparability-reason.md` preserves all four fields and emits the direct-observation exclusion requirement.
+
+**What was removed or rejected:** No source ranking, applicability classifier, traffic parser, evidence classifier, measurement parser, threshold calculator, fifth field, or domain mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
+
+**What was learned:** An interpretation does not become an observation because it was produced by an analyst. When the underlying observed difference is absent from the contract, the operator cannot audit whether the source exclusion is justified.
+
+**Hypothesis movement:** H2 strengthens from 0.91 to 0.93 and remains primary. The next test is a direct observed scope difference whose relevance to the target decision population is uncertain.
