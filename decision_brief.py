@@ -69,7 +69,7 @@ def main() -> int:
     print("- Separate known facts, assumptions, and unresolved gaps.")
     print("- Do not promote interpretations embedded in Evidence to facts.")
     print("- Compare conflicting interpretations only against supplied observations; leave unresolved conflict explicit and name the evidence that would distinguish it.")
-    print("- Identify apparent conflicts between Constraints and Success; do not silently override either field, and state when the conflict prevents a supported recommendation.")
+    print("- Check Constraints against Success; distinguish satisfied constraints from genuine conflicts, do not silently override either field, and state when unresolved conflict prevents a supported recommendation.")
     return 0
 
 
