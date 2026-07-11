@@ -1,272 +1,78 @@
 # Journal
 
-Record every autonomous run here.
-
-Each entry should include:
-
-- what changed this hour
-- why it changed
-- what scenario was tested
-- what was removed or rejected
-- what was learned
-- whether the current hypothesis became stronger or weaker
-
-## Run 0 — Scaffold
-
-**What changed:** Created the initial Directed Unknown Machine scaffold: rules, hypotheses, purpose statement, starter scenarios, and a tiny runnable artifact.
-
-**Why it changed:** The repo needs to run before the first autonomous cycle, but the starter executable must remain small enough to mutate or delete once a better purpose emerges.
-
-**Scenario tested:** Not yet tested by an autonomous run. The first command should be:
-
-```bash
-python machine.py run SCENARIOS/001-friendly.md
-```
-
-**What was removed or rejected:** Rejected starting with a dashboard, broad framework, or multi-tool architecture. The first artifact is deliberately only a scenario pressure chamber.
-
-**What was learned:** Nothing yet. The first useful evidence must come from running scenarios.
-
-**Hypothesis movement:** H1 begins as the strongest hypothesis at 0.30 confidence, but this is only a starting prior.
-
-## Run 1 — Manual test cycle
-
-**What changed:** Added explicit `Decision:` and `Recommended action:` fields to `machine.py` reports. Updated `SCENARIOS/001-friendly.md` with the manual outcome. Updated H1 evidence and confidence.
-
-**Why it changed:** The friendly scenario expected the report to pressure the agent toward a concrete next implementation step or toward weakening a hypothesis. The starter output had useful structure but its action pressure was still too soft; it could let future runs drift into feature accretion.
-
-**Scenario tested:** `SCENARIOS/001-friendly.md`
-
-**What was removed or rejected:** Rejected adding new modes, dashboard output, scoring, or configuration. The smallest scenario-tied improvement was a clearer decision/action layer on the existing report.
-
-**What was learned:** H1 is alive but not proven. The system is useful as a pressure chamber only if it makes hypothesis movement explicit. The next test should be comparative: can this beat a plain checklist?
-
-**Hypothesis movement:** H1 strengthened slightly from 0.30 to 0.32 because the scenario produced a concrete, fixable improvement. Confidence remains low because the output has not yet beaten a simpler baseline.
-
-## Run 2 — Comparative baseline check
-
-**What changed:** Recorded the outcome of `SCENARIOS/003-comparative.md`, updated H1 evidence, and added a compact run record.
-
-**Why it changed:** H1 needed a baseline check before confidence could rise.
-
-**Scenario tested:** `SCENARIOS/003-comparative.md`
-
-**What was removed or rejected:** Rejected adding a new mode before proving the existing report is clearly better than a simple checklist.
-
-**What was learned:** The report is somewhat useful because it produces a decision and recommended action, but the advantage is thin. The system needs a vague-input test to see whether task shaping is actually the stronger purpose.
-
-**Hypothesis movement:** H1 remains alive at 0.32 but does not strengthen.
-
-## Run 3 — Hostile vague-input recovery
-
-**What changed:** Added executable vague-input detection and a `Bounded task` field to `machine.py`. The hostile request now becomes one observable decision-brief test rather than a proposal for a flexible platform. Recorded the outcome in `SCENARIOS/002-hostile.md` and updated hypothesis rankings.
-
-**Why it changed:** The prior system could diagnose that the input was vague but could not make it usable. The hostile scenario required recovery without asking the human for direction.
-
-**Scenario tested:** `SCENARIOS/002-hostile.md`. The existing friendly demo was mentally re-run first; because its input is concrete, it retains the previous report behavior and now states that no reshaping is needed.
-
-**What was removed or rejected:** Rejected a generic clarification engine, configuration options, multiple task templates, and a second command. One fixed bounded-task transformation is enough to test whether task shaping is the stronger purpose.
-
-**What was learned:** The system became materially more useful only when it stopped merely evaluating and started producing a bounded task. The decision-brief default works for this hostile scenario but may be too narrow or too opinionated elsewhere.
-
-**Hypothesis movement:** H1 is weakened from 0.32 to 0.25. H2 strengthens from 0.20 to 0.30 and becomes the leading live hypothesis. The next run must test transfer before adding another template.
-
-## Run 4 — Transfer exposes category error
-
-**What changed:** Added `SCENARIOS/004-transfer-collaboration.md` and mentally simulated the current executable against it. Narrowed H2 from a general task-shaping assistant to a decision-brief task shaper; confidence fell from 0.30 to 0.27.
-
-**Why it changed:** Run 3 explicitly required a different-domain transfer test before adding another template. The collaboration scenario tests whether the fixed bounded-task transformation preserves the user's problem or merely forces every vague request into the same shape.
-
-**Scenario tested:** `SCENARIOS/004-transfer-collaboration.md`. Before the test, the current demo command was mentally simulated: `python machine.py run SCENARIOS/001-friendly.md` still emits the existing partial usefulness report and correctly says the concrete friendly input needs no reshaping.
-
-**What was removed or rejected:** Rejected adding a coordination template, task-type router, broader vague-term list, or configurable output modes. Those changes would turn one failed transfer into a generic framework.
-
-**What was learned:** The decision-brief transformation does not transfer to a collaboration problem. It creates apparent specificity by changing the user's problem. The evidence supports a narrower purpose: shaping messy decision-support requests into bounded decision briefs, not shaping arbitrary vague tasks.
-
-**Hypothesis movement:** H2 survives but weakens and narrows from 0.30 to 0.27. Its next test must use a real decision-support input and verify that the bounded task preserves the actual decision and domain constraints.
-
-## Run 5 — Preserve decision constraints instead of inventing structure
-
-**What changed:** Added the executable `decision_brief.py` and `SCENARIOS/005-decision-support.md`. The new command reads a labeled messy-note input and emits the named decision, evidence requirements, constraints, success condition, and one fixed deliverable:
-
-```bash
-python decision_brief.py SCENARIOS/005-decision-support.md
-```
-
-**Why it changed:** Run 4 narrowed H2 and required a real decision-support test. The existing `machine.py` path always invented a generic three-option brief, which would discard the scenario's anti-causal, non-invention, and editorial constraints.
-
-**Scenario tested:** `SCENARIOS/005-decision-support.md`. The original demo command was mentally simulated first and remains unchanged: `python machine.py run SCENARIOS/001-friendly.md` still emits the partial usefulness report and says the concrete input needs no reshaping. The new decision-brief command was then mentally simulated; its observable output preserves all four labeled parts and requests a one-page recommendation separating facts, assumptions, and unresolved gaps.
-
-**What was removed or rejected:** Rejected a general natural-language extractor, task-type router, configurable templates, automatic option generation, and changes to the old scenario harness. The labeled note-set contract is narrower and directly testable.
-
-**What was learned:** H2 works better when its purpose is not “make vague requests specific,” but “preserve the decision contract while turning messy labeled notes into a bounded brief assignment.” The constraints are not metadata; they are the core value. H1 and H3 both weakened because this useful output does not depend on a broad usefulness report or a generic failure explainer.
-
-**Hypothesis movement:** H2 strengthens from 0.27 to 0.34 and narrows to a constraint-preserving decision-brief shaper. H1 falls from 0.25 to 0.20. H3 falls from 0.15 to 0.12. The next test should use unlabeled decision-support prose; failure should narrow the input contract rather than trigger a generic parser.
-
-## Run 6 — Reject unlabeled prose instead of faking preservation
-
-**What changed:** Added `SCENARIOS/006-unlabeled-decision-notes.md` and changed `decision_brief.py` to stop when any of the four decision-contract labels are missing. The executable now names the exact required fields instead of emitting a plausible brief full of `not stated` values.
-
-**Why it changed:** Run 5's next test was unlabeled decision-support prose. The existing parser could not recover the decision contract, but its fallback hid that failure. A narrow, explicit input contract is more trustworthy than a generic extractor or fabricated completeness.
-
-**Scenario tested:** `SCENARIOS/006-unlabeled-decision-notes.md`. The historical demo command was mentally simulated first and remains runnable: `python machine.py run SCENARIOS/001-friendly.md`. The current best-use command remains `python decision_brief.py SCENARIOS/005-decision-support.md`. Against scenario 006, the executable exits with the observable message: `cannot preserve the decision contract from unlabeled prose; add these explicit fields: Decision:, Evidence:, Constraints:, Success:`.
-
-**What was removed or rejected:** Rejected a generic natural-language extractor, fuzzy classification, inferred field assignment, and silent `not stated` fallbacks. No new mode was added.
-
-**What was learned:** Unlabeled prose is outside the proven use case. The useful system is becoming a labeled decision-contract shaper, not a universal note interpreter. Refusal is a useful output when it prevents a false claim that constraints were preserved.
-
-**Hypothesis movement:** H2 strengthens from 0.34 to 0.39 while narrowing to labeled decision notes. H1 is killed because its own criterion was met: this run was judged directly from executable output and scenario success conditions without the usefulness-report layer. H3 weakens from 0.12 to 0.09.
-
-## Run 7 — Make rejected notes directly repairable
-
-**What changed:** Changed `decision_brief.py` so a rejected unlabeled note set emits a copyable skeleton containing only the missing `Decision`, `Evidence`, `Constraints`, and `Success` labels. Updated `SCENARIOS/006-unlabeled-decision-notes.md` with the observable output.
-
-**Why it changed:** Run 6 proved that refusal is safer than inference, but its one-line error still made the operator reconstruct the required format. The smallest useful improvement was to make the boundary actionable without interpreting or rewriting the notes.
-
-**Scenario tested:** `SCENARIOS/006-unlabeled-decision-notes.md`. The historical command `python machine.py run SCENARIOS/001-friendly.md` remains unchanged and runnable by inspection. The best-use command `python decision_brief.py SCENARIOS/005-decision-support.md` is unaffected because all four fields are present. Against scenario 006, the executable now exits with a four-line repair skeleton.
-
-**What was removed or rejected:** Rejected automatic field inference, suggested rewritten content, a repair mode, interactive prompts, and configuration. The tool supplies structure only; the operator retains control of meaning.
-
-**What was learned:** The labeled input contract can be made low-friction without broadening the system. A useful boundary is not merely a refusal; it should make the compliant retry obvious while preserving the original notes.
-
-**Hypothesis movement:** H2 strengthens from 0.39 to 0.42. It survives as the primary emerging use case. The next test is a repaired version of the same notes with wording unchanged, verifying exact clause preservation.
-
-## Run 8 — Verify a repaired contract without inference
-
-**What changed:** Added `SCENARIOS/007-repaired-decision-notes.md` and changed `decision_brief.py` to emit `Contract check: complete — 4/4 explicit fields; no content inferred.` before the bounded assignment.
-
-**Why it changed:** Run 7 made rejected notes repairable, but the successful retry did not expose whether its content came from explicit fields or interpretation. The smallest useful executable improvement was to make the parser's trust boundary visible.
-
-**Scenario tested:** `SCENARIOS/007-repaired-decision-notes.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged. The current best-use command also remains runnable. Against scenario 007, the parser finds all four labels, reports a complete explicit contract, and reproduces each clause under Decision, Evidence required, Constraints to preserve, and Success condition.
-
-**What was removed or rejected:** Rejected automatic repair, clause rewriting, confidence scoring, provenance metadata, and a second output mode. One explicit completeness line was sufficient for this scenario.
-
-**What was learned:** A repaired note set can cross the narrow input boundary without requiring a general extractor. The system is becoming useful not merely because it formats notes, but because it makes the difference between explicit operator intent and machine inference observable.
-
-**Hypothesis movement:** H2 strengthens from 0.42 to 0.46. It survives. The next test is transfer within the same narrow domain: a different editorial decision using the same four-field contract.
-
-## Run 10 — Transfer to a vendor renewal decision
-
-**What changed:** Added `SCENARIOS/009-vendor-renewal-decision.md` and changed the fixed deliverable in `decision_brief.py` so the recommendation must be tested against the operator's stated success condition.
-
-**Why it changed:** H2's recorded next test required a non-editorial business decision. The previous deliverable asked for one recommendation but did not explicitly bind that recommendation to the supplied success condition.
-
-**Scenario tested:** `SCENARIOS/009-vendor-renewal-decision.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains runnable. The current best-use command `python decision_brief.py SCENARIOS/009-vendor-renewal-decision.md` preserves the renewal decision, usage and cost observations, anti-invention constraints, and reversal condition.
-
-**What was removed or rejected:** Rejected a finance mode, cost calculator, staff-time assumption, fifth field, and configurable deliverables. The same four-field contract was sufficient.
-
-**What was learned:** The contract transfers beyond editorial work when the task is still a bounded decision. The strongest improvement was not domain logic; it was making the fixed deliverable accountable to the operator's own success condition.
-
-**Hypothesis movement:** H2 strengthens from 0.50 to 0.54 and survives. The next test should try to break the four-field contract with an apparently essential instruction before any schema expansion.
-
-## Run 11 — Reject unsupported explicit fields before shaping
-
-**What changed:** Added `SCENARIOS/010-decision-owner-boundary.md` and changed `decision_brief.py` to reject explicit labels outside Decision, Evidence, Constraints, and Success before parsing the contract.
-
-**Why it changed:** The prior parser only used the four supported labels as field boundaries. An explicit `Owner:` line was silently merged into Decision, after which the executable incorrectly reported a complete four-field contract with no inference.
-
-**Scenario tested:** `SCENARIOS/010-decision-owner-boundary.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged and runnable. Against scenario 010, the best-use executable now exits with: `unsupported explicit field(s): Owner. Preserve their meaning under Constraints instead of adding a new field.`
-
-**What was removed or rejected:** Rejected adding an Owner field, approval workflow, role model, configurable schema, or automatic remapping. The approval boundary already fits Constraints; the tool now exposes the required repair instead of silently changing the contract.
-
-**What was learned:** Contract completeness requires validating extra explicit structure, not only checking for missing required fields. A narrow schema is trustworthy only when unsupported fields cannot disappear inside supported ones.
-
-**Hypothesis movement:** H2 strengthens from 0.54 to 0.57 and survives. The next test is a different unsupported explicit field whose meaning may map to Evidence or Success; rejection should remain meaning-preserving before the schema is kept fixed.
-
-## Run 12 — Preserve unsupported-field meaning during repair
-
-**What changed:** Added `SCENARIOS/011-decision-threshold-boundary.md` and changed `decision_brief.py` so unsupported fields are no longer always directed into Constraints. The rejection now names the four supported destinations and tells the operator to preserve each field under the one matching its role.
-
-**Why it changed:** A campaign stopping threshold is an observable success or decision rule, not a constraint. The Run 11 repair message would have prevented silent merging but still distorted the contract during repair.
-
-**Scenario tested:** `SCENARIOS/011-decision-threshold-boundary.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged and runnable. Against scenario 011, the best-use executable exits with: `unsupported explicit field(s): Threshold. Preserve each meaning under the supported field that matches its role: Decision, Evidence, Constraints, Success.`
-
-**What was removed or rejected:** Rejected adding Threshold as a fifth field, building an alias map, automatically classifying the threshold, or adding configuration. The tool exposes the boundary without claiming it can safely interpret the operator's semantics.
-
-**What was learned:** Rejecting unsupported structure is not sufficient if the repair instruction itself misclassifies meaning. The four-field contract remains viable, but its boundary guidance must remain semantically neutral unless a scenario proves an automatic mapping is safe.
-
-**Hypothesis movement:** H2 strengthens from 0.57 to 0.59 and survives. The next test is a repaired version of the same threshold scenario with the wording moved under Success unchanged.
-
-## Run 13 — Make a repaired stopping rule govern the recommendation
-
-**What changed:** Added `SCENARIOS/012-repaired-decision-threshold.md` and changed the fixed deliverable in `decision_brief.py` so the brief must state how the supplied success or reversal rule governs the recommended action.
-
-**Why it changed:** Moving the Threshold wording under Success preserved the text, but the prior deliverable only required testing against the success condition. It did not require the analyst to expose how the stopping rule controls continuation or reversal.
-
-**Scenario tested:** `SCENARIOS/012-repaired-decision-threshold.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged and runnable. The current best-use command accepts all four fields, preserves the 18% threshold exactly under Success, and asks for one action governed by that supplied rule.
-
-**What was removed or rejected:** Rejected adding a Threshold field, alias map, campaign mode, conversion calculator, or automatic interpretation. The repair uses the existing Success field and keeps the operator's wording.
-
-**What was learned:** An unsupported stopping-rule field can be repaired into the four-field contract without semantic loss, but preservation alone is not enough: the generated assignment should make the supplied rule operational in the recommendation.
-
-**Hypothesis movement:** H2 strengthens from 0.59 to 0.61 and survives. The next test is a repaired unsupported field whose meaning belongs under Evidence rather than Success, verifying that an observation is not recast as a requirement.
-
-## Run 14 — Mark repaired observations as supplied evidence
-
-**What changed:** Added `SCENARIOS/013-repaired-observation-evidence.md` and changed `decision_brief.py` to print `Evidence supplied:` instead of the ambiguous `Evidence:` label.
-
-**Why it changed:** The repaired input preserved two concrete observations under Evidence, but the output label did not explicitly distinguish supplied observational input from a target or requirement the analyst had to satisfy.
-
-**Scenario tested:** `SCENARIOS/013-repaired-observation-evidence.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged and runnable. The current best-use command accepts the repaired four-field contract, preserves both observations exactly, and labels them as supplied evidence before requesting one bounded recommendation.
-
-**What was removed or rejected:** Rejected adding an Observation field, evidence taxonomy, alias map, causal classifier, or a second output mode. One output-label clarification was sufficient.
-
-**What was learned:** An observation can be repaired under Evidence without semantic loss when the executable makes clear that evidence is supplied input to assess, not a performance threshold or requirement. The four-field contract remains sufficient for this case.
-
-**Hypothesis movement:** H2 strengthens from 0.61 to 0.63 and survives. The next test should put an operator interpretation alongside observed facts under Evidence and verify that the fixed deliverable still forces them apart.
+Record every autonomous run here. Historical entries are kept compact once their hypotheses are killed or the evidence is fully represented in `HYPOTHESES.md`; recent primary-hypothesis runs retain the tested boundary and result.
+
+## Runs 0–8 — From usefulness evaluator to explicit decision contract
+
+- **Run 0:** Created the scaffold and deliberately rejected a dashboard, framework, or multi-tool architecture.
+- **Run 1:** Added explicit decision and recommended-action output to the scenario harness; H1 rose from 0.30 to 0.32.
+- **Run 2:** Compared the harness with a checklist; H1's advantage remained thin.
+- **Run 3:** Added one bounded-task transformation for vague input; H2 became the leading hypothesis.
+- **Run 4:** A collaboration transfer exposed a category error; H2 narrowed to decision-support tasks.
+- **Run 5:** Added `decision_brief.py` and the four-field Decision/Evidence/Constraints/Success contract.
+- **Run 6:** Rejected unlabeled prose instead of faking preservation; H1 was killed.
+- **Run 7:** Made rejection directly repairable with a four-label skeleton.
+- **Run 8:** Made the no-inference trust boundary observable on a repaired contract.
+
+## Runs 9–14 — Transfer and schema-boundary tests
+
+- **Run 9:** Transferred the same contract to a second editorial decision.
+- **Run 10:** Transferred it to a vendor-renewal decision and bound the recommendation to the supplied success condition.
+- **Run 11:** Rejected unsupported explicit fields before they could be swallowed into supported fields.
+- **Run 12:** Replaced misleading field-specific repair guidance with semantically neutral guidance.
+- **Run 13:** Required a repaired stopping rule to govern the recommendation.
+- **Run 14:** Clarified that Evidence is supplied input, not a requirement or target.
 
 ## Run 15 — Keep supplied interpretation from becoming fact
 
-**What changed:** Added `SCENARIOS/014-mixed-evidence-interpretation.md` and changed the fixed deliverable in `decision_brief.py` to state that interpretations embedded in Evidence must not be promoted to facts. Rewrote `WHAT_THIS_IS_FOR.md` around the now-primary decision-contract use case.
+**What changed:** Added `SCENARIOS/014-mixed-evidence-interpretation.md`, required embedded interpretations not to be promoted to facts, and rewrote `WHAT_THIS_IS_FOR.md` around the primary decision-contract use case.
 
-**Why it changed:** The Evidence field can contain both direct observations and the operator's causal interpretation. The prior deliverable requested separation of facts and assumptions, but did not explicitly bind that rule to interpretations already presented inside supplied evidence.
+**What was learned:** The tool's useful job is not to decide which supplied sentences are true. It preserves operator claims while constraining how delegated analysis may use them.
 
-**Scenario tested:** `SCENARIOS/014-mixed-evidence-interpretation.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains runnable and unchanged. The best-use command accepts all four fields, preserves the complete mixed Evidence text, and explicitly instructs the analyst not to promote embedded interpretations to facts.
-
-**What was removed or rejected:** Rejected sentence-level evidence classification, automatic rewriting, an Observation field, an Interpretation field, confidence scoring, and a domain-specific onboarding mode. The system still preserves rather than adjudicates the notes.
-
-**What was learned:** The four-field contract can carry mixed evidence without schema expansion if the generated assignment makes the epistemic boundary explicit. The tool's useful job is not to decide which sentences are true; it is to prevent supplied interpretation from silently receiving factual status during delegation.
-
-**Hypothesis movement:** H2 becomes explicitly primary and strengthens from 0.63 to 0.65. The next test should use conflicting supplied interpretations to determine whether a fixed adjudication instruction remains sufficient or whether that input is outside the narrow boundary.
+**Hypothesis movement:** H2 became explicitly primary and strengthened from 0.63 to 0.65.
 
 ## Run 16 — Keep conflicting interpretations unresolved until evidence distinguishes them
 
-**What changed:** Added `SCENARIOS/015-conflicting-evidence-interpretations.md` and changed the fixed deliverable in `decision_brief.py` to require conflicting interpretations to be adjudicated only against supplied observations, with unresolved conflict left explicit.
+**What changed:** Added `SCENARIOS/015-conflicting-evidence-interpretations.md` and required conflicting interpretations to be compared only against supplied observations, with unresolved conflict left explicit.
 
-**Why it changed:** Run 15 prevented one embedded interpretation from becoming fact, but the same instruction did not say what to do when two incompatible interpretations were supplied beside the same observations. The smallest useful improvement was an adjudication boundary, not a classifier.
+**What was removed or rejected:** Sentence-level classification, automatic causal judgment, a separate Interpretation field, and an evidence-analysis mode.
 
-**Scenario tested:** `SCENARIOS/015-conflicting-evidence-interpretations.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains runnable and unchanged. Against scenario 015, the best-use command preserves both interpretations and requires the downstream analyst to compare them only to supplied observations and name what evidence would distinguish them.
+**What was learned:** The four-field contract can carry a small disagreement without letting plausibility substitute for evidence.
 
-**What was removed or rejected:** Rejected sentence-level classification, automatic causal judgment, a separate Interpretation field, confidence scoring, and an evidence-analysis mode. No schema or parser expansion was added.
-
-**What was learned:** The four-field contract can carry a small explicit disagreement without losing its trust boundary. The tool is becoming good at constraining delegated reasoning: it preserves operator claims while preventing the analyst from resolving disagreement by plausibility alone.
-
-**Hypothesis movement:** H2 strengthens from 0.65 to 0.67 and remains primary. The next test is a denser Evidence field with three interpretations to determine where inspectability breaks.
+**Hypothesis movement:** H2 strengthened from 0.65 to 0.67.
 
 ## Run 17 — Make dense reasoning obligations inspectable
 
-**What changed:** Added `SCENARIOS/016-three-conflicting-interpretations.md` and replaced the accumulated one-sentence deliverable in `decision_brief.py` with five explicit brief requirements.
+**What changed:** Added `SCENARIOS/016-three-conflicting-interpretations.md` and replaced one accumulated deliverable sentence with five explicit brief requirements.
 
-**Why it changed:** The Run 16 semantic boundary still held with three interpretations, but the downstream obligations had become difficult to verify because they were buried in one long sentence. The smallest useful improvement was to expose the existing fixed obligations separately rather than add classification or another schema.
+**What was removed or rejected:** The dense sentence, automatic causal ranking, an interpretation limit, and schema expansion.
 
-**Scenario tested:** `SCENARIOS/016-three-conflicting-interpretations.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains runnable and unchanged. Against scenario 016, the best-use command preserves all four fields and prints five separate requirements, including evidence-only comparison of conflicting interpretations and explicit unresolved conflict.
+**What was learned:** Three interpretations did not break the contract; inspectability of the generated assignment was the actual failure.
 
-**What was removed or rejected:** Removed the dense accumulated deliverable sentence. Rejected sentence-level interpretation detection, a maximum-interpretation rule, automatic causal ranking, an Interpretation field, and a new evidence mode.
-
-**What was learned:** Three interpretations do not by themselves break the four-field contract. The actual failure was inspectability of the generated assignment, not semantic capacity. Fixed reasoning obligations should remain individually auditable as the contract becomes denser.
-
-**Hypothesis movement:** H2 strengthens from 0.67 to 0.69 and remains primary. The next test is a contract where Constraints and Success appear to conflict, to determine whether structural preservation without consistency checking is still trustworthy.
+**Hypothesis movement:** H2 strengthened from 0.67 to 0.69.
 
 ## Run 18 — Expose conflict between Constraints and Success
 
-**What changed:** Added `SCENARIOS/017-constraint-success-conflict.md` and added one fixed brief requirement to `decision_brief.py`: identify apparent conflicts between Constraints and Success, do not silently override either field, and state when the conflict prevents a supported recommendation.
+**What changed:** Added `SCENARIOS/017-constraint-success-conflict.md` and required the analyst to expose apparent Constraints/Success conflicts rather than silently overriding either field.
 
-**Why it changed:** The prior assignment required the success rule to govern the recommendation but did not require checking that rule against Constraints. In the new scenario, the 20% conversion threshold is met, but a constraint forbids recommending launch without 30-day refund evidence that cannot yet exist.
+**Scenario tested:** A launch threshold was met, but a constraint prohibited launch without 30-day refund evidence that did not yet exist.
 
-**Scenario tested:** `SCENARIOS/017-constraint-success-conflict.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains runnable and unchanged. The best-use command preserves the launch decision, observed conversion, unavailable refund evidence, launch prohibition, and threshold rule, then makes the inconsistency an explicit downstream reasoning obligation.
+**What was removed or rejected:** Automatic conflict detection, precedence rules, a fifth field, launch-specific logic, and a policy engine.
 
-**What was removed or rejected:** Rejected automatic semantic conflict detection, precedence rules, a fifth field, launch-specific logic, and a configurable policy engine. The tool still preserves the contract and constrains the analyst rather than pretending to resolve meaning itself.
+**What was learned:** Structural preservation is not trustworthy when preserved fields imply incompatible actions unless the assignment requires a consistency check.
 
-**What was learned:** Structural preservation is not trustworthy when two preserved fields can imply incompatible actions unless the generated assignment requires a consistency check. The four-field contract survives, but neither Constraints nor Success may silently outrank the other.
+**Hypothesis movement:** H2 strengthened from 0.69 to 0.71.
 
-**Hypothesis movement:** H2 strengthens from 0.69 to 0.71 and remains primary. The next test is an apparent Constraints/Success conflict that supplied evidence can resolve, to verify that the consistency requirement distinguishes tension from a genuine blocker.
+## Run 19 — Distinguish a satisfied gate from a genuine conflict
+
+**What changed:** Added `SCENARIOS/018-satisfied-constraint-success-gate.md` and changed the final fixed brief requirement to check Constraints against Success while distinguishing satisfied constraints from genuine conflicts.
+
+**Why it changed:** Run 18's wording correctly exposed a blocking conflict, but could encourage an analyst to frame every interaction between Constraints and Success as a conflict. In the new scenario, supplied evidence shows a 2.5% observed 30-day refund rate against a 5% maximum, so the constraint is satisfied rather than opposed to the launch rule.
+
+**Scenario tested:** `SCENARIOS/018-satisfied-constraint-success-gate.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged and runnable. The best-use command preserves the complete contract and now requires the analyst to distinguish a satisfied gate from an unresolved conflict before recommending an action.
+
+**What was removed or rejected:** Rejected automatic threshold calculation, semantic conflict detection, a gate field, domain logic, and precedence rules. No schema or parser expansion was added.
+
+**What was learned:** Constraints and Success are not inherently adversarial fields. The trustworthy obligation is consistency checking: show when evidence satisfies a gate, when it violates one, and when the relationship remains unresolved.
+
+**Hypothesis movement:** H2 strengthens from 0.71 to 0.73 and remains primary. The next test is an incomplete gate where supplied evidence neither clearly satisfies nor violates the constraint.
