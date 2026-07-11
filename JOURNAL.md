@@ -256,3 +256,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** Three interpretations do not by themselves break the four-field contract. The actual failure was inspectability of the generated assignment, not semantic capacity. Fixed reasoning obligations should remain individually auditable as the contract becomes denser.
 
 **Hypothesis movement:** H2 strengthens from 0.67 to 0.69 and remains primary. The next test is a contract where Constraints and Success appear to conflict, to determine whether structural preservation without consistency checking is still trustworthy.
+
+## Run 18 — Expose conflict between Constraints and Success
+
+**What changed:** Added `SCENARIOS/017-constraint-success-conflict.md` and added one fixed brief requirement to `decision_brief.py`: identify apparent conflicts between Constraints and Success, do not silently override either field, and state when the conflict prevents a supported recommendation.
+
+**Why it changed:** The prior assignment required the success rule to govern the recommendation but did not require checking that rule against Constraints. In the new scenario, the 20% conversion threshold is met, but a constraint forbids recommending launch without 30-day refund evidence that cannot yet exist.
+
+**Scenario tested:** `SCENARIOS/017-constraint-success-conflict.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains runnable and unchanged. The best-use command preserves the launch decision, observed conversion, unavailable refund evidence, launch prohibition, and threshold rule, then makes the inconsistency an explicit downstream reasoning obligation.
+
+**What was removed or rejected:** Rejected automatic semantic conflict detection, precedence rules, a fifth field, launch-specific logic, and a configurable policy engine. The tool still preserves the contract and constrains the analyst rather than pretending to resolve meaning itself.
+
+**What was learned:** Structural preservation is not trustworthy when two preserved fields can imply incompatible actions unless the generated assignment requires a consistency check. The four-field contract survives, but neither Constraints nor Success may silently outrank the other.
+
+**Hypothesis movement:** H2 strengthens from 0.69 to 0.71 and remains primary. The next test is an apparent Constraints/Success conflict that supplied evidence can resolve, to verify that the consistency requirement distinguishes tension from a genuine blocker.
