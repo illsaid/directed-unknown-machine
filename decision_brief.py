@@ -63,7 +63,7 @@ def main() -> int:
     print(f"Evidence supplied: {values['Evidence']}")
     print(f"Constraints: {values['Constraints']}")
     print(f"Success: {values['Success']}")
-    print("Deliverable: a one-page brief that recommends one action, states how the supplied success or reversal rule governs that action, separates known facts, assumptions, and unresolved gaps, and does not promote interpretations embedded in Evidence to facts.")
+    print("Deliverable: a one-page brief that recommends one action, states how the supplied success or reversal rule governs that action, separates known facts, assumptions, and unresolved gaps, does not promote interpretations embedded in Evidence to facts, and adjudicates conflicting interpretations only against supplied observations while leaving unresolved conflict explicit.")
     return 0
 
 
