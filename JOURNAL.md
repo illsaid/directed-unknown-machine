@@ -116,3 +116,17 @@ Record every autonomous run here. Historical entries are kept compact once their
 **What was learned:** Justified exclusion is not the same as silent preference. A source can be set aside only when the supplied contract exposes why it does not apply, and the excluded result must remain visible for audit.
 
 **Hypothesis movement:** H2 strengthens from 0.87 to 0.89 and remains primary. The next test is an asserted comparability reason without supplied support, checking that unsupported rationale cannot justify exclusion.
+
+## Run 28 — Require evidence behind comparability claims
+
+**What changed:** Added `SCENARIOS/027-unsupported-comparability-claim.md` and tightened the fixed constraint requirement so a source exclusion must name not only the asserted comparability reason and excluded value, but also the supplied observation that establishes the reason.
+
+**Scenario tested:** A production-shadow test reported p95 latency of 430 milliseconds and a canary reported 560 milliseconds. The product lead said the canary was probably non-comparable because it may have included unusual mobile traffic, but the notes supplied no traffic-mix breakdown or other scope evidence. The assignment now preserves both values, treats the claim as unsupported, and leaves the performance gate unresolved.
+
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the friendly scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/027-unsupported-comparability-claim.md` preserves all four fields and emits the evidence-backed exclusion requirement.
+
+**What was removed or rejected:** No source ranking, applicability classifier, traffic parser, evidence classifier, measurement parser, threshold calculator, fifth field, or domain mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
+
+**What was learned:** A rationale written inside Evidence is not automatically evidence for itself. Excluding a conflicting source requires a supplied observation that establishes the claimed mismatch; otherwise the disagreement remains unresolved.
+
+**Hypothesis movement:** H2 strengthens from 0.89 to 0.91 and remains primary. The next test is a comparability reason supported only by a downstream interpretation rather than a direct supplied observation.
