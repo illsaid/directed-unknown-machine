@@ -49,8 +49,9 @@ def main() -> int:
     unsupported = unsupported_labels(raw)
     if unsupported:
         names = ", ".join(unsupported)
+        supported = ", ".join(LABELS)
         raise SystemExit(
-            f"unsupported explicit field(s): {names}. Preserve their meaning under Constraints instead of adding a new field."
+            f"unsupported explicit field(s): {names}. Preserve each meaning under the supported field that matches its role: {supported}."
         )
     values = {label: labeled_value(raw, label) for label in LABELS}
     missing = [label for label, value in values.items() if not value]
