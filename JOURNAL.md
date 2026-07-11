@@ -228,3 +228,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** The four-field contract can carry mixed evidence without schema expansion if the generated assignment makes the epistemic boundary explicit. The tool's useful job is not to decide which sentences are true; it is to prevent supplied interpretation from silently receiving factual status during delegation.
 
 **Hypothesis movement:** H2 becomes explicitly primary and strengthens from 0.63 to 0.65. The next test should use conflicting supplied interpretations to determine whether a fixed adjudication instruction remains sufficient or whether that input is outside the narrow boundary.
+
+## Run 16 — Keep conflicting interpretations unresolved until evidence distinguishes them
+
+**What changed:** Added `SCENARIOS/015-conflicting-evidence-interpretations.md` and changed the fixed deliverable in `decision_brief.py` to require conflicting interpretations to be adjudicated only against supplied observations, with unresolved conflict left explicit.
+
+**Why it changed:** Run 15 prevented one embedded interpretation from becoming fact, but the same instruction did not say what to do when two incompatible interpretations were supplied beside the same observations. The smallest useful improvement was an adjudication boundary, not a classifier.
+
+**Scenario tested:** `SCENARIOS/015-conflicting-evidence-interpretations.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains runnable and unchanged. Against scenario 015, the best-use command preserves both interpretations and requires the downstream analyst to compare them only to supplied observations and name what evidence would distinguish them.
+
+**What was removed or rejected:** Rejected sentence-level classification, automatic causal judgment, a separate Interpretation field, confidence scoring, and an evidence-analysis mode. No schema or parser expansion was added.
+
+**What was learned:** The four-field contract can carry a small explicit disagreement without losing its trust boundary. The tool is becoming good at constraining delegated reasoning: it preserves operator claims while preventing the analyst from resolving disagreement by plausibility alone.
+
+**Hypothesis movement:** H2 strengthens from 0.65 to 0.67 and remains primary. The next test is a denser Evidence field with three interpretations to determine where inspectability breaks.
