@@ -88,3 +88,17 @@ Record every autonomous run here. Historical entries are kept compact once their
 **What was learned:** Multiple sources are not automatically independent support for an entire recommendation. Corroboration is measurement-specific: overlap on median latency does not add evidence for p95 latency.
 
 **Hypothesis movement:** H2 strengthens from 0.83 to 0.85 and remains primary. The next test is disagreement between two sources on the same measurement, checking that the assignment preserves the disagreement instead of averaging or resolving it silently.
+
+## Run 26 — Preserve conflicting measurements
+
+**What changed:** Added `SCENARIOS/025-conflicting-source-measurements.md` and tightened the fixed constraint requirement so different values reported for the same measurement must remain explicit unless supplied evidence establishes which source applies.
+
+**Scenario tested:** A production-shadow test reported p95 latency of 430 milliseconds, while a canary test reported 560 milliseconds against a below-500-millisecond rollout gate. Paid conversion cleared its threshold, but the performance evidence disagreed.
+
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the friendly scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/025-conflicting-source-measurements.md` preserves all four fields and now requires both p95 values and the unresolved disagreement to remain visible.
+
+**What was removed or rejected:** No averaging rule, source ranking, evidence classifier, measurement parser, threshold calculator, fifth field, or domain mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
+
+**What was learned:** Measurement-level provenance is still insufficient when sources disagree. The assignment must preserve incompatible values rather than creating a synthetic consensus or choosing a source without supplied justification.
+
+**Hypothesis movement:** H2 strengthens from 0.85 to 0.87 and remains primary. The next test is a disagreement with a supplied comparability reason, checking that justified source exclusion remains distinguishable from arbitrary preference.
