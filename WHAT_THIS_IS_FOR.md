@@ -1,35 +1,31 @@
 # What This Is For
 
-_Last rewritten: 2026-07-10 initial scaffold_
-
-For the first 24 hours, this file is provisional. After the first 24 hours, rewrite it from scratch every 24 hours.
+_Last rewritten: 2026-07-10 after Run 15_
 
 ## 1. What problem is this system currently the best solution to?
 
-Currently: testing whether a tool-in-progress is becoming useful for a concrete scenario, rather than accumulating generic features.
+Turning a small set of explicitly labeled decision notes into a bounded assignment for an analyst or agent without losing the operator's decision, supplied evidence, constraints, or success rule.
 
 ## 2. Who has this problem? Be specific.
 
-A solo builder running autonomous agents or rapid prototypes who needs to know whether a small system is converging on a real use case or drifting into a vague toolkit.
+A nontechnical operator delegating a consequential but narrow decision analysis to an agent, contractor, or colleague. The operator has the relevant context but needs confidence that observations, interpretations, prohibitions, and reversal conditions will not be blurred during handoff.
 
 ## 3. What is the narrowest version of this problem that the system already solves well?
 
-Given a scenario file with a user, situation, input, and expected outcome, the system can produce a structured usefulness report.
+Given exactly four labeled fields — `Decision`, `Evidence`, `Constraints`, and `Success` — the tool checks that the contract is explicit, rejects unsupported structure instead of silently absorbing it, preserves the supplied wording, and emits one fixed decision-brief assignment.
 
 ## 4. What is the most ambitious version it could solve if we stay disciplined?
 
-It could become a purpose-discovery harness that turns vague prototypes into narrow, tested, trustworthy tools — killing weak directions before they bloat.
+A trustworthy preflight step for agent delegation: small enough to inspect, strict enough to expose missing or unsupported decision structure, and opinionated enough to prevent supplied interpretations from quietly becoming facts.
 
-## 5. Why would someone use this instead of a spreadsheet, grep, a notebook, ChatGPT, or a 30-line script?
+## 5. Why would someone use this instead of a spreadsheet, notebook, ChatGPT prompt, or 30-line script?
 
-They would only use it if it becomes more disciplined than those alternatives: scenario-driven, evidence-preserving, ruthless about killing weak hypotheses, and runnable with one command.
-
-That is not yet proven.
+Because the value is the narrow trust boundary, not formatting. The tool makes explicit what came from the operator, refuses to infer missing contract fields, rejects extra labels rather than hiding them, and produces the same bounded deliverable every time.
 
 ## 6. What is the biggest threat to usefulness?
 
-False generality. The system could easily become a generic scenario runner whose usefulness exists only in prose.
+Becoming a semantic classifier for arbitrary notes. If the tool starts guessing field destinations, judging every sentence, supporting aliases, or adding domain modes, it loses the inspectable boundary that currently makes it trustworthy.
 
 ## 7. What should be removed today?
 
-Nothing yet. This is the initial scaffold. After the first few scenarios, remove any hypothesis that merely describes the harness instead of a real user problem.
+Do not expand `machine.py`; it survives only as the historical required demo command. New work should strengthen `decision_brief.py` or falsify H2. Remove the old harness only when the repository rules no longer require the historical command.
