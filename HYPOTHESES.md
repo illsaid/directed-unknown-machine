@@ -35,17 +35,17 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 ## H2 — Labeled decision-contract shaper
 
 **Status:** primary  
-**Confidence:** 0.79
+**Confidence:** 0.81
 
 **Problem statement:** People with messy labeled decision-support notes need help turning them into one bounded decision-brief task while preserving the actual decision, supplied evidence, domain constraints, and observable success condition.
 
 **Specific user:** A nontechnical operator trying to give an agent or contractor a bounded decision-analysis task without losing important caveats, confusing interpretation with observation, or accidentally requesting a dashboard or generic information system.
 
-**Evidence for:** Runs 3–5 showed that the system becomes useful when it stops evaluating vague requests and instead preserves one explicit decision contract. Run 6 established a trustworthy refusal boundary for unlabeled prose; Runs 7–8 made that boundary repairable and observable without inference. Runs 9–10 transferred the unchanged four-field contract across editorial and commercial decisions. Runs 11–13 showed that unsupported structure can be rejected and repaired under the correct existing field without schema expansion. Run 14 showed that observations can live under Evidence without becoming requirements. Run 15 showed that a mixed Evidence field can preserve operator interpretation without promoting it to fact. Run 16 showed that incompatible interpretations can remain preserved and unresolved while being tested only against supplied observations. Run 17 restored inspectability by splitting accumulated reasoning obligations into explicit requirements. Runs 18–21 established auditable satisfied, violated, and unresolved constraint gates tied to supplied evidence. Run 22 on `SCENARIOS/021-mixed-independent-constraint-gates.md` showed that one satisfied and one violated constraint can coexist without being collapsed into one opaque overall verdict when each gate receives a separate evidence-backed judgment.
+**Evidence for:** Runs 3–5 showed that the system becomes useful when it stops evaluating vague requests and instead preserves one explicit decision contract. Run 6 established a trustworthy refusal boundary for unlabeled prose; Runs 7–8 made that boundary repairable and observable without inference. Runs 9–10 transferred the unchanged four-field contract across editorial and commercial decisions. Runs 11–13 showed that unsupported structure can be rejected and repaired under the correct existing field without schema expansion. Run 14 showed that observations can live under Evidence without becoming requirements. Run 15 showed that a mixed Evidence field can preserve operator interpretation without promoting it to fact. Run 16 showed that incompatible interpretations can remain preserved and unresolved while being tested only against supplied observations. Run 17 restored inspectability by splitting accumulated reasoning obligations into explicit requirements. Runs 18–21 established auditable satisfied, violated, and unresolved constraint gates tied to supplied evidence. Run 22 on `SCENARIOS/021-mixed-independent-constraint-gates.md` showed that one satisfied and one violated constraint can coexist without being collapsed into one opaque overall verdict when each gate receives a separate evidence-backed judgment. Run 23 on `SCENARIOS/022-shared-evidence-constraint-gates.md` showed that separate gate judgments can preserve shared evidence provenance without presenting one repeated test as independent corroboration.
 
 **Evidence against:** Run 4 showed the transformation does not apply to coordination problems. Run 6 showed that unlabeled prose is outside the current use case. Unsupported fields still require the operator to choose the correct destination. The executable does not classify evidence sentence by sentence or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on the operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test two constraints that depend on the same supplied evidence but use different thresholds, verifying that separate reporting does not falsely imply independent evidence.
+**Next test:** Test two constraints that share one evidence source where one measurement passes and the other is unresolved, verifying that shared provenance does not collapse distinct gate states.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the actual decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification of the notes.
 
@@ -60,7 +60,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests from the start. Run 4 exposed a concrete category error: the fixed task shaper changed a coordination problem into a decision-support problem.
 
-**Evidence against:** The current repo has no real external tool under test except itself. Runs 5 through 22 produced their useful result by shaping, rejecting, repairing, preserving, bounding, clarifying, consistency-checking, or evidence-binding decision notes, not by offering a general failure explanation.
+**Evidence against:** The current repo has no real external tool under test except itself. Runs 5 through 23 produced their useful result by shaping, rejecting, repairing, preserving, bounding, clarifying, consistency-checking, evidence-binding, or provenance-preserving decision notes, not by offering a general failure explanation.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a specific correction the decision-contract shaper could not derive directly.
 
