@@ -34,20 +34,20 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 ## H2 — Labeled decision-contract shaper
 
-**Status:** alive  
-**Confidence:** 0.63
+**Status:** primary  
+**Confidence:** 0.65
 
-**Problem statement:** People with messy labeled decision-support notes need help turning them into one bounded decision-brief task while preserving the actual decision, evidence, domain constraints, and observable success condition.
+**Problem statement:** People with messy labeled decision-support notes need help turning them into one bounded decision-brief task while preserving the actual decision, supplied evidence, domain constraints, and observable success condition.
 
-**Specific user:** A nontechnical operator trying to give an agent or contractor a bounded decision-analysis task without losing important caveats or accidentally requesting a dashboard or generic information system.
+**Specific user:** A nontechnical operator trying to give an agent or contractor a bounded decision-analysis task without losing important caveats, confusing interpretation with observation, or accidentally requesting a dashboard or generic information system.
 
-**Evidence for:** Run 3 showed that vague decision-support input becomes more useful when converted into one bounded brief. Run 5 on `SCENARIOS/005-decision-support.md` showed a narrow executable can preserve a named publishing decision, evidence categories, anti-causal constraint, non-invention rule, and success condition. Run 6 on `SCENARIOS/006-unlabeled-decision-notes.md` showed that explicit rejection is more trustworthy than silently emitting plausible-looking missing fields when the contract cannot be preserved. Run 7 showed that the rejected note set can be made repairable without inference. Run 8 on `SCENARIOS/007-repaired-decision-notes.md` showed that a repaired four-label retry is accepted, all four clauses survive, and the executable now explicitly states that the contract is complete and no content was inferred. Run 9 on `SCENARIOS/008-social-post-reuse-decision.md` transferred the contract to a second editorial decision and showed that neutral output labels preserve supplied observations without recasting them as future requirements. Run 10 on `SCENARIOS/009-vendor-renewal-decision.md` transferred the unchanged four-field contract to a non-editorial commercial decision; the fixed brief still fit, and binding the recommendation to the stated success condition made the output more accountable without adding a field. Run 11 on `SCENARIOS/010-decision-owner-boundary.md` exposed that an explicit unsupported field was silently merged into Decision; rejecting it preserved the four-field contract without pretending the input was clean. Run 12 on `SCENARIOS/011-decision-threshold-boundary.md` showed that unsupported-field repair must preserve semantic role: a stopping threshold may belong under Success rather than Constraints, so the executable now names all four supported destinations instead of forcing every extra field into one category. Run 13 on `SCENARIOS/012-repaired-decision-threshold.md` showed that the threshold can be moved under Success without changing its wording or adding a fifth field; the fixed deliverable now requires the recommendation to state how the supplied success or reversal rule governs the action. Run 14 on `SCENARIOS/013-repaired-observation-evidence.md` showed that an unsupported observation can be repaired under Evidence without changing its wording; labeling the output `Evidence supplied` makes its role as input to assess explicit rather than allowing it to read like a target to satisfy.
+**Evidence for:** Runs 3–5 showed that the system becomes useful when it stops evaluating vague requests and instead preserves one explicit decision contract. Run 6 established a trustworthy refusal boundary for unlabeled prose; Runs 7–8 made that boundary repairable and observable without inference. Runs 9–10 transferred the unchanged four-field contract across editorial and commercial decisions. Runs 11–13 showed that unsupported structure can be rejected and repaired under the correct existing field without schema expansion. Run 14 showed that observations can live under Evidence without becoming requirements. Run 15 on `SCENARIOS/014-mixed-evidence-interpretation.md` showed that the contract can preserve a mixed Evidence field while the fixed deliverable explicitly prevents an embedded operator interpretation from being promoted to fact.
 
-**Evidence against:** Run 4 showed the transformation does not apply to coordination problems. Run 6 showed that unlabeled prose is outside the current use case; the system cannot reliably recover the decision contract without explicit labels. Unsupported fields are now rejected safely, but the repair still requires the operator to choose the correct supported destination; repeated aliases may eventually show that the four labels impose avoidable friction.
+**Evidence against:** Run 4 showed the transformation does not apply to coordination problems. Run 6 showed that unlabeled prose is outside the current use case. Unsupported fields still require the operator to choose the correct destination. The executable does not classify evidence sentence by sentence; it only gives the downstream analyst a stricter instruction, so conflicting or densely mixed interpretations may still exceed the useful boundary.
 
-**Next test:** Put an operator interpretation alongside observed facts under Evidence and verify that the fixed brief still requires the analyst to separate the observation from the interpretation without adding another field.
+**Next test:** Put two conflicting operator interpretations beside the same observations under Evidence and verify that the fixed assignment can require adjudication without adding an evidence classifier or another field.
 
-**Kill criterion:** Kill if two labeled decision-support scenarios still lose the actual decision, evidence, constraints, or success condition, or if repairing an unlabeled note set requires substantial rewriting.
+**Kill criterion:** Kill if two labeled decision-support scenarios still lose the actual decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification of the notes.
 
 ## H3 — Failure-mode explainer for small tools
 
@@ -60,7 +60,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Evidence from a scenario be
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests from the start. Run 4 exposed a concrete category error: the fixed task shaper changed a coordination problem into a decision-support problem.
 
-**Evidence against:** The current repo has no real external tool under test except itself. Runs 5 through 14 produced their useful result by shaping, rejecting, repairing, verifying, preserving, or validating decision notes, not by offering a general failure explanation.
+**Evidence against:** The current repo has no real external tool under test except itself. Runs 5 through 15 produced their useful result by shaping, rejecting, repairing, preserving, or bounding decision notes, not by offering a general failure explanation.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a specific correction the decision-contract shaper could not derive directly.
 
