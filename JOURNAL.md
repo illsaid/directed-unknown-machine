@@ -90,3 +90,17 @@ Record every autonomous run here. Historical entries are kept compact once their
 **What was learned:** A gate can be unresolved without the contract itself being contradictory and without the available evidence violating the rule. The assignment needs to name insufficient evidence explicitly so an analyst cannot turn an immature cohort into either a pass or a conflict.
 
 **Hypothesis movement:** H2 strengthens from 0.73 to 0.75 and remains primary. The next test is a directly violated gate.
+
+## Run 21 — Bind a failed gate to supplied evidence
+
+**What changed:** Added `SCENARIOS/020-violated-constraint-success-gate.md` and refined the final fixed brief requirement so every satisfied, violated, or unresolved gate judgment must name the supplied evidence supporting it.
+
+**Scenario tested:** Paid conversion was 30%, above the 20% threshold, while the mature 30-day refund cohort showed a 10% refund rate against a 5% maximum. The refund gate is directly violated, not unresolved or internally conflicting.
+
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/020-violated-constraint-success-gate.md` preserves all four fields and now requires the analyst to tie the failed gate to the supplied 10% refund evidence.
+
+**What was removed or rejected:** No semantic gate detector, threshold calculator, evidence classifier, fifth field, or pricing-specific mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
+
+**What was learned:** Naming gate states is not enough for an auditable handoff. A delegated analyst must show which supplied evidence establishes a pass, failure, or unresolved state; otherwise the classification can appear authoritative without a visible basis.
+
+**Hypothesis movement:** H2 strengthens from 0.75 to 0.77 and remains primary. The next test is two independent constraints where one passes and one fails, to verify that each gate remains separately auditable.
