@@ -23,84 +23,26 @@ Record every autonomous run here. Historical entries are kept compact once their
 - **Run 13:** Required a repaired stopping rule to govern the recommendation.
 - **Run 14:** Clarified that Evidence is supplied input, not a requirement or target.
 
-## Run 15 — Keep supplied interpretation from becoming fact
+## Runs 15–21 — Interpretation and gate boundaries
 
-**What changed:** Added `SCENARIOS/014-mixed-evidence-interpretation.md`, required embedded interpretations not to be promoted to facts, and rewrote `WHAT_THIS_IS_FOR.md` around the primary decision-contract use case.
+- **Run 15:** Kept supplied interpretation from becoming fact and made H2 primary.
+- **Run 16:** Kept conflicting interpretations unresolved until evidence distinguishes them.
+- **Run 17:** Made dense reasoning obligations inspectable.
+- **Run 18:** Exposed conflict between Constraints and Success.
+- **Run 19:** Distinguished a satisfied gate from a genuine conflict.
+- **Run 20:** Distinguished insufficient evidence from a failed gate.
+- **Run 21:** Required every gate judgment to name its supporting evidence.
 
-**What was learned:** The tool's useful job is not to decide which supplied sentences are true. It preserves operator claims while constraining how delegated analysis may use them.
+## Run 22 — Keep independent gate judgments separate
 
-**Hypothesis movement:** H2 became explicitly primary and strengthened from 0.63 to 0.65.
+**What changed:** Added `SCENARIOS/021-mixed-independent-constraint-gates.md` and changed the fixed consistency requirement so each constraint must receive its own satisfied, violated, or unresolved judgment with supporting supplied evidence.
 
-## Run 16 — Keep conflicting interpretations unresolved until evidence distinguishes them
+**Scenario tested:** Paid conversion reached 30%. Existing support capacity handled the observed volume, satisfying one constraint, while a mature 10% refund rate violated a separate 5% maximum. The assignment now preserves both judgments instead of collapsing them into one overall failure.
 
-**What changed:** Added `SCENARIOS/015-conflicting-evidence-interpretations.md` and required conflicting interpretations to be compared only against supplied observations, with unresolved conflict left explicit.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the friendly scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/021-mixed-independent-constraint-gates.md` preserves all four fields and emits the separate-gate requirement.
 
-**What was removed or rejected:** Sentence-level classification, automatic causal judgment, a separate Interpretation field, and an evidence-analysis mode.
+**What was removed or rejected:** No gate parser, threshold calculator, evidence classifier, fifth field, or domain mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
 
-**What was learned:** The four-field contract can carry a small disagreement without letting plausibility substitute for evidence.
+**What was learned:** A correct overall recommendation can still be unauditable when it hides which independent conditions passed and which failed. The useful boundary is not merely “show the blocker”; it is “account for every supplied constraint separately.”
 
-**Hypothesis movement:** H2 strengthened from 0.65 to 0.67.
-
-## Run 17 — Make dense reasoning obligations inspectable
-
-**What changed:** Added `SCENARIOS/016-three-conflicting-interpretations.md` and replaced one accumulated deliverable sentence with five explicit brief requirements.
-
-**What was removed or rejected:** The dense sentence, automatic causal ranking, an interpretation limit, and schema expansion.
-
-**What was learned:** Three interpretations did not break the contract; inspectability of the generated assignment was the actual failure.
-
-**Hypothesis movement:** H2 strengthened from 0.67 to 0.69.
-
-## Run 18 — Expose conflict between Constraints and Success
-
-**What changed:** Added `SCENARIOS/017-constraint-success-conflict.md` and required the analyst to expose apparent Constraints/Success conflicts rather than silently overriding either field.
-
-**Scenario tested:** A launch threshold was met, but a constraint prohibited launch without 30-day refund evidence that did not yet exist.
-
-**What was removed or rejected:** Automatic conflict detection, precedence rules, a fifth field, launch-specific logic, and a policy engine.
-
-**What was learned:** Structural preservation is not trustworthy when preserved fields imply incompatible actions unless the assignment requires a consistency check.
-
-**Hypothesis movement:** H2 strengthened from 0.69 to 0.71.
-
-## Run 19 — Distinguish a satisfied gate from a genuine conflict
-
-**What changed:** Added `SCENARIOS/018-satisfied-constraint-success-gate.md` and changed the final fixed brief requirement to check Constraints against Success while distinguishing satisfied constraints from genuine conflicts.
-
-**Why it changed:** Run 18's wording correctly exposed a blocking conflict, but could encourage an analyst to frame every interaction between Constraints and Success as a conflict. In the new scenario, supplied evidence shows a 2.5% observed 30-day refund rate against a 5% maximum, so the constraint is satisfied rather than opposed to the launch rule.
-
-**Scenario tested:** `SCENARIOS/018-satisfied-constraint-success-gate.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged and runnable. The best-use command preserves the complete contract and now requires the analyst to distinguish a satisfied gate from an unresolved conflict before recommending an action.
-
-**What was removed or rejected:** Rejected automatic threshold calculation, semantic conflict detection, a gate field, domain logic, and precedence rules. No schema or parser expansion was added.
-
-**What was learned:** Constraints and Success are not inherently adversarial fields. The trustworthy obligation is consistency checking: show when evidence satisfies a gate, when it violates one, and when the relationship remains unresolved.
-
-**Hypothesis movement:** H2 strengthens from 0.71 to 0.73 and remains primary. The next test is an incomplete gate where supplied evidence neither clearly satisfies nor violates the constraint.
-
-## Run 20 — Distinguish insufficient evidence from a failed gate
-
-**What changed:** Added `SCENARIOS/019-incomplete-constraint-success-gate.md` and refined the final fixed brief requirement to distinguish satisfied constraints, violated constraints, and unresolved gates caused by insufficient evidence.
-
-**Scenario tested:** Paid conversion was 30%, above the 20% threshold, but only eight purchasers had reached the required 30-day observation window against a minimum cohort of 15. The zero observed refunds therefore could not support a launch recommendation.
-
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. It still parses the friendly scenario, reports `hold-but-improve`, and points to the recorded comparative-test gap. `python decision_brief.py SCENARIOS/019-incomplete-constraint-success-gate.md` preserves all four fields and emits the revised consistency obligation.
-
-**What was removed or rejected:** No semantic gate detector, threshold calculator, confidence score, fifth field, or pricing-specific mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
-
-**What was learned:** A gate can be unresolved without the contract itself being contradictory and without the available evidence violating the rule. The assignment needs to name insufficient evidence explicitly so an analyst cannot turn an immature cohort into either a pass or a conflict.
-
-**Hypothesis movement:** H2 strengthens from 0.73 to 0.75 and remains primary. The next test is a directly violated gate.
-
-## Run 21 — Bind a failed gate to supplied evidence
-
-**What changed:** Added `SCENARIOS/020-violated-constraint-success-gate.md` and refined the final fixed brief requirement so every satisfied, violated, or unresolved gate judgment must name the supplied evidence supporting it.
-
-**Scenario tested:** Paid conversion was 30%, above the 20% threshold, while the mature 30-day refund cohort showed a 10% refund rate against a 5% maximum. The refund gate is directly violated, not unresolved or internally conflicting.
-
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/020-violated-constraint-success-gate.md` preserves all four fields and now requires the analyst to tie the failed gate to the supplied 10% refund evidence.
-
-**What was removed or rejected:** No semantic gate detector, threshold calculator, evidence classifier, fifth field, or pricing-specific mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
-
-**What was learned:** Naming gate states is not enough for an auditable handoff. A delegated analyst must show which supplied evidence establishes a pass, failure, or unresolved state; otherwise the classification can appear authoritative without a visible basis.
-
-**Hypothesis movement:** H2 strengthens from 0.75 to 0.77 and remains primary. The next test is two independent constraints where one passes and one fails, to verify that each gate remains separately auditable.
+**Hypothesis movement:** H2 strengthens from 0.77 to 0.79 and remains primary. The next test is two constraints that share the same evidence but apply different thresholds, to ensure separate reporting does not imply false evidentiary independence.
