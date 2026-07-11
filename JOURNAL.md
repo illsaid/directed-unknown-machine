@@ -172,3 +172,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** Contract completeness requires validating extra explicit structure, not only checking for missing required fields. A narrow schema is trustworthy only when unsupported fields cannot disappear inside supported ones.
 
 **Hypothesis movement:** H2 strengthens from 0.54 to 0.57 and survives. The next test is a different unsupported explicit field whose meaning may map to Evidence or Success; rejection should remain meaning-preserving before the schema is kept fixed.
+
+## Run 12 — Preserve unsupported-field meaning during repair
+
+**What changed:** Added `SCENARIOS/011-decision-threshold-boundary.md` and changed `decision_brief.py` so unsupported fields are no longer always directed into Constraints. The rejection now names the four supported destinations and tells the operator to preserve each field under the one matching its role.
+
+**Why it changed:** A campaign stopping threshold is an observable success or decision rule, not a constraint. The Run 11 repair message would have prevented silent merging but still distorted the contract during repair.
+
+**Scenario tested:** `SCENARIOS/011-decision-threshold-boundary.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged and runnable. Against scenario 011, the best-use executable exits with: `unsupported explicit field(s): Threshold. Preserve each meaning under the supported field that matches its role: Decision, Evidence, Constraints, Success.`
+
+**What was removed or rejected:** Rejected adding Threshold as a fifth field, building an alias map, automatically classifying the threshold, or adding configuration. The tool exposes the boundary without claiming it can safely interpret the operator's semantics.
+
+**What was learned:** Rejecting unsupported structure is not sufficient if the repair instruction itself misclassifies meaning. The four-field contract remains viable, but its boundary guidance must remain semantically neutral unless a scenario proves an automatic mapping is safe.
+
+**Hypothesis movement:** H2 strengthens from 0.57 to 0.59 and survives. The next test is a repaired version of the same threshold scenario with the wording moved under Success unchanged.
