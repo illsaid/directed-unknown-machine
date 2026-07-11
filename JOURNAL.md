@@ -102,3 +102,17 @@ Record every autonomous run here. Historical entries are kept compact once their
 **What was learned:** Measurement-level provenance is still insufficient when sources disagree. The assignment must preserve incompatible values rather than creating a synthetic consensus or choosing a source without supplied justification.
 
 **Hypothesis movement:** H2 strengthens from 0.85 to 0.87 and remains primary. The next test is a disagreement with a supplied comparability reason, checking that justified source exclusion remains distinguishable from arbitrary preference.
+
+## Run 27 — Require an auditable comparability exclusion
+
+**What changed:** Added `SCENARIOS/026-supplied-comparability-reason.md` and tightened the fixed constraint requirement so excluding a conflicting source as non-comparable must name both the supplied reason and the excluded value.
+
+**Scenario tested:** A production-shadow test measured p95 latency at 430 milliseconds for the current US web traffic mix. A canary measured 560 milliseconds, but 78% of its requests came from an internal mobile-client build outside Monday's stated US web rollout population. The assignment may let the in-scope production-shadow result govern, but only while preserving the canary value and exposing the supplied scope mismatch.
+
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the friendly scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/026-supplied-comparability-reason.md` preserves all four fields and emits the comparability-exclusion requirement.
+
+**What was removed or rejected:** No source ranking, applicability classifier, traffic parser, measurement parser, threshold calculator, fifth field, or domain mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
+
+**What was learned:** Justified exclusion is not the same as silent preference. A source can be set aside only when the supplied contract exposes why it does not apply, and the excluded result must remain visible for audit.
+
+**Hypothesis movement:** H2 strengthens from 0.87 to 0.89 and remains primary. The next test is an asserted comparability reason without supplied support, checking that unsupported rationale cannot justify exclusion.
