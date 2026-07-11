@@ -73,4 +73,18 @@ Record every autonomous run here. Historical entries are kept compact once their
 
 **What was learned:** Shared provenance and evidentiary coverage are different. A source can be common to multiple gates without supplying the measurement needed to resolve every gate.
 
-**Hypothesis movement:** H2 strengthens from 0.81 to 0.83 and remains primary. The next test is overlapping measurements across two sources, checking that overlap is disclosed without being double-counted as independent corroboration.
+**Hypothesis movement:** H2 strengthens from 0.81 to 0.83 and remains primary.
+
+## Run 25 — Separate overlapping measurements across sources
+
+**What changed:** Added `SCENARIOS/024-overlapping-source-measurements.md` and tightened the fixed constraint requirement so overlap is disclosed at the measurement level rather than allowing repeated evidence for one metric to imply broader corroboration.
+
+**Scenario tested:** A production-shadow test measured median latency at 140 milliseconds and p95 at 430 milliseconds. A separate canary test measured median at 150 milliseconds but did not report p95. Both median measurements support the median gate; only the production-shadow test supports the p95 gate.
+
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the friendly scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/024-overlapping-source-measurements.md` preserves all four fields and now requires overlapping measurements to remain tied to the measurement they actually corroborate.
+
+**What was removed or rejected:** No evidence graph, source weighting, measurement parser, threshold calculator, fifth field, or domain mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
+
+**What was learned:** Multiple sources are not automatically independent support for an entire recommendation. Corroboration is measurement-specific: overlap on median latency does not add evidence for p95 latency.
+
+**Hypothesis movement:** H2 strengthens from 0.83 to 0.85 and remains primary. The next test is disagreement between two sources on the same measurement, checking that the assignment preserves the disagreement instead of averaging or resolving it silently.
