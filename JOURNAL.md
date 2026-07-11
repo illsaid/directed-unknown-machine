@@ -76,3 +76,17 @@ Record every autonomous run here. Historical entries are kept compact once their
 **What was learned:** Constraints and Success are not inherently adversarial fields. The trustworthy obligation is consistency checking: show when evidence satisfies a gate, when it violates one, and when the relationship remains unresolved.
 
 **Hypothesis movement:** H2 strengthens from 0.71 to 0.73 and remains primary. The next test is an incomplete gate where supplied evidence neither clearly satisfies nor violates the constraint.
+
+## Run 20 — Distinguish insufficient evidence from a failed gate
+
+**What changed:** Added `SCENARIOS/019-incomplete-constraint-success-gate.md` and refined the final fixed brief requirement to distinguish satisfied constraints, violated constraints, and unresolved gates caused by insufficient evidence.
+
+**Scenario tested:** Paid conversion was 30%, above the 20% threshold, but only eight purchasers had reached the required 30-day observation window against a minimum cohort of 15. The zero observed refunds therefore could not support a launch recommendation.
+
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. It still parses the friendly scenario, reports `hold-but-improve`, and points to the recorded comparative-test gap. `python decision_brief.py SCENARIOS/019-incomplete-constraint-success-gate.md` preserves all four fields and emits the revised consistency obligation.
+
+**What was removed or rejected:** No semantic gate detector, threshold calculator, confidence score, fifth field, or pricing-specific mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
+
+**What was learned:** A gate can be unresolved without the contract itself being contradictory and without the available evidence violating the rule. The assignment needs to name insufficient evidence explicitly so an analyst cannot turn an immature cohort into either a pass or a conflict.
+
+**Hypothesis movement:** H2 strengthens from 0.73 to 0.75 and remains primary. The next test is a directly violated gate.
