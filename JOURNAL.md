@@ -158,3 +158,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** The contract transfers beyond editorial work when the task is still a bounded decision. The strongest improvement was not domain logic; it was making the fixed deliverable accountable to the operator's own success condition.
 
 **Hypothesis movement:** H2 strengthens from 0.50 to 0.54 and survives. The next test should try to break the four-field contract with an apparently essential instruction before any schema expansion.
+
+## Run 11 — Reject unsupported explicit fields before shaping
+
+**What changed:** Added `SCENARIOS/010-decision-owner-boundary.md` and changed `decision_brief.py` to reject explicit labels outside Decision, Evidence, Constraints, and Success before parsing the contract.
+
+**Why it changed:** The prior parser only used the four supported labels as field boundaries. An explicit `Owner:` line was silently merged into Decision, after which the executable incorrectly reported a complete four-field contract with no inference.
+
+**Scenario tested:** `SCENARIOS/010-decision-owner-boundary.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged and runnable. Against scenario 010, the best-use executable now exits with: `unsupported explicit field(s): Owner. Preserve their meaning under Constraints instead of adding a new field.`
+
+**What was removed or rejected:** Rejected adding an Owner field, approval workflow, role model, configurable schema, or automatic remapping. The approval boundary already fits Constraints; the tool now exposes the required repair instead of silently changing the contract.
+
+**What was learned:** Contract completeness requires validating extra explicit structure, not only checking for missing required fields. A narrow schema is trustworthy only when unsupported fields cannot disappear inside supported ones.
+
+**Hypothesis movement:** H2 strengthens from 0.54 to 0.57 and survives. The next test is a different unsupported explicit field whose meaning may map to Evidence or Success; rejection should remain meaning-preserving before the schema is kept fixed.
