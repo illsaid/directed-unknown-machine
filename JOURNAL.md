@@ -144,3 +144,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** A repaired note set can cross the narrow input boundary without requiring a general extractor. The system is becoming useful not merely because it formats notes, but because it makes the difference between explicit operator intent and machine inference observable.
 
 **Hypothesis movement:** H2 strengthens from 0.42 to 0.46. It survives. The next test is transfer within the same narrow domain: a different editorial decision using the same four-field contract.
+
+## Run 10 — Transfer to a vendor renewal decision
+
+**What changed:** Added `SCENARIOS/009-vendor-renewal-decision.md` and changed the fixed deliverable in `decision_brief.py` so the recommendation must be tested against the operator's stated success condition.
+
+**Why it changed:** H2's recorded next test required a non-editorial business decision. The previous deliverable asked for one recommendation but did not explicitly bind that recommendation to the supplied success condition.
+
+**Scenario tested:** `SCENARIOS/009-vendor-renewal-decision.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains runnable. The current best-use command `python decision_brief.py SCENARIOS/009-vendor-renewal-decision.md` preserves the renewal decision, usage and cost observations, anti-invention constraints, and reversal condition.
+
+**What was removed or rejected:** Rejected a finance mode, cost calculator, staff-time assumption, fifth field, and configurable deliverables. The same four-field contract was sufficient.
+
+**What was learned:** The contract transfers beyond editorial work when the task is still a bounded decision. The strongest improvement was not domain logic; it was making the fixed deliverable accountable to the operator's own success condition.
+
+**Hypothesis movement:** H2 strengthens from 0.50 to 0.54 and survives. The next test should try to break the four-field contract with an apparently essential instruction before any schema expansion.
