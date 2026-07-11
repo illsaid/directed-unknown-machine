@@ -17,6 +17,11 @@ def scenario_input(text: str) -> str:
     return match.group(1).strip().strip('"')
 
 
+def unsupported_labels(raw: str) -> list[str]:
+    explicit = re.findall(r"^([A-Za-z][A-Za-z ]*):", raw, re.MULTILINE)
+    return [label for label in explicit if label.lower() not in {item.lower() for item in LABELS}]
+
+
 def labeled_value(raw: str, label: str) -> str | None:
     next_labels = "|".join(LABELS)
     match = re.search(
@@ -41,6 +46,12 @@ def main() -> int:
         raise SystemExit("usage: python decision_brief.py SCENARIOS/005-decision-support.md")
     path = Path(sys.argv[1])
     raw = scenario_input(path.read_text(encoding="utf-8"))
+    unsupported = unsupported_labels(raw)
+    if unsupported:
+        names = ", ".join(unsupported)
+        raise SystemExit(
+            f"unsupported explicit field(s): {names}. Preserve their meaning under Constraints instead of adding a new field."
+        )
     values = {label: labeled_value(raw, label) for label in LABELS}
     missing = [label for label, value in values.items() if not value]
     if missing:
