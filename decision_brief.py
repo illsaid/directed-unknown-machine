@@ -69,7 +69,7 @@ def main() -> int:
     print("- Separate known facts, assumptions, and unresolved gaps.")
     print("- Do not promote interpretations embedded in Evidence to facts.")
     print("- Compare conflicting interpretations only against supplied observations; leave unresolved conflict explicit and name the evidence that would distinguish it.")
-    print("- Check each constraint separately against Success; for every constraint, state whether it is satisfied, violated, or unresolved and name the supplied evidence supporting that judgment; do not collapse independent gates into one overall pass or fail, do not silently override either field, and state when any failed or unresolved gate prevents a supported recommendation.")
+    print("- Check each constraint separately against Success; for every constraint, state whether it is satisfied, violated, or unresolved and name the supplied evidence supporting that judgment; when multiple judgments rely on the same evidence source, identify the shared source and do not present repeated citation as independent corroboration; do not collapse independent gates into one overall pass or fail, do not silently override either field, and state when any failed or unresolved gate prevents a supported recommendation.")
     return 0
 
 
