@@ -45,4 +45,18 @@ Record every autonomous run here. Historical entries are kept compact once their
 
 **What was learned:** A correct overall recommendation can still be unauditable when it hides which independent conditions passed and which failed. The useful boundary is not merely “show the blocker”; it is “account for every supplied constraint separately.”
 
-**Hypothesis movement:** H2 strengthens from 0.77 to 0.79 and remains primary. The next test is two constraints that share the same evidence but apply different thresholds, to ensure separate reporting does not imply false evidentiary independence.
+**Hypothesis movement:** H2 strengthens from 0.77 to 0.79 and remains primary.
+
+## Run 23 — Preserve shared evidence provenance
+
+**What changed:** Added `SCENARIOS/022-shared-evidence-constraint-gates.md` and changed the fixed constraint requirement so multiple gate judgments must identify when they rely on the same evidence source rather than presenting repeated citation as independent corroboration.
+
+**Scenario tested:** One 10,000-request production-shadow test supplied both median and p95 latency measurements. Each measurement satisfied a different rollout constraint, but both judgments came from the same test.
+
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes and remains unchanged: it parses the friendly scenario, reports `hold-but-improve`, and identifies the existing comparative-test gap. `python decision_brief.py SCENARIOS/022-shared-evidence-constraint-gates.md` preserves all four fields and emits the shared-provenance requirement.
+
+**What was removed or rejected:** No evidence graph, source identifier, gate parser, threshold calculator, fifth field, or domain mode was added. Nothing serving a dead hypothesis remained in the changed executable path.
+
+**What was learned:** Separate gate reporting is not fully auditable if repeated use of one test can masquerade as multiple independent bodies of support. The contract should preserve both the distinct judgments and their shared provenance.
+
+**Hypothesis movement:** H2 strengthens from 0.79 to 0.81 and remains primary. The next test is two constraints sharing one source where one measurement passes and the other is unresolved, verifying that shared provenance does not collapse distinct gate states.
