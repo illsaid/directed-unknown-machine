@@ -200,3 +200,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** An unsupported stopping-rule field can be repaired into the four-field contract without semantic loss, but preservation alone is not enough: the generated assignment should make the supplied rule operational in the recommendation.
 
 **Hypothesis movement:** H2 strengthens from 0.59 to 0.61 and survives. The next test is a repaired unsupported field whose meaning belongs under Evidence rather than Success, verifying that an observation is not recast as a requirement.
+
+## Run 14 — Mark repaired observations as supplied evidence
+
+**What changed:** Added `SCENARIOS/013-repaired-observation-evidence.md` and changed `decision_brief.py` to print `Evidence supplied:` instead of the ambiguous `Evidence:` label.
+
+**Why it changed:** The repaired input preserved two concrete observations under Evidence, but the output label did not explicitly distinguish supplied observational input from a target or requirement the analyst had to satisfy.
+
+**Scenario tested:** `SCENARIOS/013-repaired-observation-evidence.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains unchanged and runnable. The current best-use command accepts the repaired four-field contract, preserves both observations exactly, and labels them as supplied evidence before requesting one bounded recommendation.
+
+**What was removed or rejected:** Rejected adding an Observation field, evidence taxonomy, alias map, causal classifier, or a second output mode. One output-label clarification was sufficient.
+
+**What was learned:** An observation can be repaired under Evidence without semantic loss when the executable makes clear that evidence is supplied input to assess, not a performance threshold or requirement. The four-field contract remains sufficient for this case.
+
+**Hypothesis movement:** H2 strengthens from 0.61 to 0.63 and survives. The next test should put an operator interpretation alongside observed facts under Evidence and verify that the fixed deliverable still forces them apart.
