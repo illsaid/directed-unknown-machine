@@ -214,3 +214,17 @@ python decision_brief.py SCENARIOS/005-decision-support.md
 **What was learned:** An observation can be repaired under Evidence without semantic loss when the executable makes clear that evidence is supplied input to assess, not a performance threshold or requirement. The four-field contract remains sufficient for this case.
 
 **Hypothesis movement:** H2 strengthens from 0.61 to 0.63 and survives. The next test should put an operator interpretation alongside observed facts under Evidence and verify that the fixed deliverable still forces them apart.
+
+## Run 15 — Keep supplied interpretation from becoming fact
+
+**What changed:** Added `SCENARIOS/014-mixed-evidence-interpretation.md` and changed the fixed deliverable in `decision_brief.py` to state that interpretations embedded in Evidence must not be promoted to facts. Rewrote `WHAT_THIS_IS_FOR.md` around the now-primary decision-contract use case.
+
+**Why it changed:** The Evidence field can contain both direct observations and the operator's causal interpretation. The prior deliverable requested separation of facts and assumptions, but did not explicitly bind that rule to interpretations already presented inside supplied evidence.
+
+**Scenario tested:** `SCENARIOS/014-mixed-evidence-interpretation.md`. The historical demo `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated first and remains runnable and unchanged. The best-use command accepts all four fields, preserves the complete mixed Evidence text, and explicitly instructs the analyst not to promote embedded interpretations to facts.
+
+**What was removed or rejected:** Rejected sentence-level evidence classification, automatic rewriting, an Observation field, an Interpretation field, confidence scoring, and a domain-specific onboarding mode. The system still preserves rather than adjudicates the notes.
+
+**What was learned:** The four-field contract can carry mixed evidence without schema expansion if the generated assignment makes the epistemic boundary explicit. The tool's useful job is not to decide which sentences are true; it is to prevent supplied interpretation from silently receiving factual status during delegation.
+
+**Hypothesis movement:** H2 becomes explicitly primary and strengthens from 0.63 to 0.65. The next test should use conflicting supplied interpretations to determine whether a fixed adjudication instruction remains sufficient or whether that input is outside the narrow boundary.
