@@ -30,8 +30,7 @@ REQUIREMENT_GROUPS = (
     (
         "Evidence provenance",
         (
-            "Identify shared sources and the measurements each source actually supplies.",
-            "When different sources overlap on the same measurement, disclose the overlap without counting it as support for a different measurement or as additional independent evidence beyond that shared measurement.",
+            "Map each source to the measurements it actually supplies; when sources overlap on a measurement, disclose the overlap without counting it as support for a different measurement or as additional independent evidence beyond that shared measurement.",
             "When sources report different values for the same measurement, preserve each value and leave the disagreement explicit unless supplied evidence establishes which source applies.",
         ),
     ),
