@@ -1,31 +1,31 @@
 # What This Is For
 
-_Last rewritten: 2026-07-11 after Run 22_
+_Last rewritten: 2026-07-12 after Run 44_
 
 ## 1. What problem is this system currently the best solution to?
 
-Turning four explicitly labeled decision notes into an auditable assignment for an analyst or agent, with every supplied constraint preserved and separately accounted for before a recommendation is made.
+Turning four explicitly labeled decision notes into an auditable assignment that preserves the operator's exact evidence, thresholds, caveats, and fallback rule without silently normalizing or reconciling contradictions.
 
 ## 2. Who has this problem? Be specific.
 
-A nontechnical operator delegating a narrow consequential decision to an agent, contractor, or colleague. The operator already has the relevant evidence and rules but needs confidence that the handoff will not blur observations with interpretations, hide missing evidence, or collapse multiple gates into one unexplained verdict.
+A nontechnical operator handing a consequential decision to an analyst, agent, or contractor. The operator has already stated the decision and evidence but needs the handoff to expose missing support, conflicting gates, incompatible measurements, and hidden assumptions before anyone produces a recommendation.
 
 ## 3. What is the narrowest version of this problem that the system already solves well?
 
-Given exactly `Decision`, `Evidence`, `Constraints`, and `Success`, the tool checks that the contract is explicit, rejects unsupported structure, preserves the supplied wording, and emits one fixed brief requiring a separate evidence-backed judgment for every constraint.
+Given exactly `Decision`, `Evidence`, `Constraints`, and `Success`, the tool emits one fixed brief that preserves every supplied statement and requires each gate to be judged separately from named evidence. It refuses to infer missing fields, precedence, comparability, adjustment methods, threshold semantics, or cross-unit equivalence.
 
 ## 4. What is the most ambitious version it could solve if we stay disciplined?
 
-A trustworthy preflight step for delegated decision analysis: strict enough to expose missing structure and unsupported conclusions, but small enough that an operator can inspect the entire contract and every reasoning obligation before handing it off.
+A small preflight compiler for delegated decision analysis: the operator can inspect the complete contract and every reasoning obligation before the work leaves their hands, while the downstream analyst remains responsible for judgment rather than the tool becoming a semantic decision engine.
 
 ## 5. Why would someone use this instead of a spreadsheet, notebook, ChatGPT prompt, or 30-line script?
 
-Because the value is a repeatable trust boundary rather than formatting. The tool distinguishes operator input from analyst judgment, refuses to infer missing fields, prevents interpretations from becoming facts, and requires every supplied gate to remain visible in the final reasoning.
+Because its value is the refusal boundary. It preserves source wording, distinguishes supplied evidence from analyst inference, keeps independent gates visible, and prevents convenient transformations from becoming invisible facts. A generic prompt can ask for rigor; this executable makes the required rigor repeatable and inspectable.
 
 ## 6. What is the biggest threat to usefulness?
 
-Becoming a semantic decision engine. Automatic field classification, threshold calculation, domain modes, or hidden precedence rules would replace the inspectable contract with judgments the operator can no longer audit easily.
+The requirements line is accumulating too many narrow obligations. If the tool keeps adding prose rules without consolidating them into a smaller inspectable structure, it will become difficult to audit even though each individual rule is defensible.
 
 ## 7. What should be removed today?
 
-Do not expand `machine.py`; it remains only because the repository requires the historical demo command. New work should strengthen or falsify the four-field decision-contract boundary in `decision_brief.py`.
+Do not expand `machine.py`; it remains only for the required historical demo. Do not add a unit converter, threshold parser, classifier, domain mode, or dashboard. The next useful simplification should reduce the growing requirement text without weakening the four-field trust boundary.
