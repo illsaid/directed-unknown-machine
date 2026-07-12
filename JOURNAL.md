@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–32 — Evidence provenance and source applicability
+## Runs 22–33 — Evidence provenance, applicability, and assumptions
 
 - **Run 22:** Kept independent constraint judgments separate.
 - **Run 23:** Exposed shared provenance across multiple gate judgments.
@@ -33,17 +33,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 30:** Required evidence that an observed difference actually changes applicability to the target population.
 - **Run 31:** Preserved original measurements and the supplied method behind a target-population reweighting.
 - **Run 32:** Rejected adjusted estimates whose supplied notes omitted an auditable method.
+- **Run 33:** Kept transparent adjusted estimates conditional when a governing assumption lacked supplied support.
 
-## Run 33 — Keep transparent adjustments conditional on supported assumptions
+## Run 34 — Expose a threshold-crossing sensitivity boundary
 
-**What changed:** Added `SCENARIOS/032-transparent-adjustment-disputed-assumption.md` and tightened the fixed constraint requirement so an auditable adjustment must name its governing assumptions and the supplied support for them. If support is absent, the calculated result remains conditional and cannot resolve the gate.
+**What changed:** Added `SCENARIOS/033-sensitivity-range-crosses-gate.md` and tightened the fixed constraint requirement so a supplied sensitivity range that crosses a gate must remain visible as a range with its decision boundary and conditional outcomes. The analyst may not choose a midpoint, best case, or convenient point estimate to resolve the gate.
 
-**Scenario tested:** A production-shadow test measured p95 latency at 430 milliseconds. A canary measured 560 milliseconds and supplied Safari and non-Safari segment measurements. The notes showed the complete calculation producing a 493.2-millisecond estimate, but the calculation depended on an unevidenced assumption that Monday's rollout population would be 24% Safari. Paid conversion was 23%.
+**Scenario tested:** A production-shadow test measured p95 latency at 430 milliseconds. A canary measured 560 milliseconds and supplied Safari and non-Safari segment measurements. Historical observations supported a Monday Safari share between 20% and 30%, producing a supplied adjusted range of 476–519 milliseconds and a 500-millisecond threshold crossing at approximately 25.6% Safari. Paid conversion was 23%.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario remains valid, maps `partial` to `hold-but-improve`, and recommends addressing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/032-transparent-adjustment-disputed-assumption.md` preserves all four fields and now explicitly requires the 493.2-millisecond result to remain conditional because the supplied notes do not support the 24% target-mix assumption.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario remains valid, maps `partial` to `hold-but-improve`, and recommends addressing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/033-sensitivity-range-crosses-gate.md` preserves all four fields and now requires the 476–519 millisecond range, the supplied 25.6% Safari boundary, and the conditional outcome on each side to remain explicit. Because the supported range crosses the threshold and the actual Monday mix is not narrowed further, the gate remains unresolved and delay is supported.
 
-**What was removed or rejected:** No sensitivity engine, assumption classifier, source-ranking system, adjustment calculator, fifth field, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** No sensitivity engine, threshold calculator, assumption classifier, source-ranking system, fifth field, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Reproducibility of arithmetic is not the same as evidentiary support for its inputs. A transparent calculation can establish what follows if an assumption is true, but it cannot convert that assumption into an observation or confirm a decision gate.
+**What was learned:** Supported uncertainty is not the same as missing evidence, but a supported range that spans both sides of a decision gate still cannot support one unconditional action. The useful output is the boundary itself: what must be true for the recommendation to change.
 
-**Hypothesis movement:** H2 strengthens from 0.96 to 0.97 and remains primary. The next test is a supplied assumption with an explicit sensitivity range that crosses the decision threshold, checking that the brief exposes the boundary rather than selecting a convenient point estimate.
+**Hypothesis movement:** H2 strengthens from 0.97 to 0.98 and remains primary. The next test is a supported sensitivity range entirely on one side of the threshold, checking that uncertainty does not automatically make a resolvable gate unresolved.
