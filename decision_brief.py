@@ -37,7 +37,7 @@ REQUIREMENT_GROUPS = (
     (
         "Applicability and adjustment",
         (
-            "If excluding a source as non-comparable, name the excluded value, the supplied comparability reason, the direct supplied observation establishing that reason, and the supplied evidence establishing why that observation changes applicability to the target decision population; a direct difference without evidence of relevance cannot justify exclusion, and a conclusion derived from observations that are not supplied cannot justify exclusion.",
+            "Exclude a source as non-comparable only by preserving its value and naming supplied evidence of both the observed mismatch and why that mismatch changes applicability to the target decision population; an unsupported conclusion, an unsupplied observation, or a difference with no established relevance cannot justify exclusion.",
             "When using an adjusted or reweighted value, preserve the original value and name the adjusted value, supplied auditable method, target population, and every governing assumption with its supplied support; an opaque method cannot resolve a gate, and an auditable result remains conditional when a governing assumption lacks supplied support.",
         ),
     ),
