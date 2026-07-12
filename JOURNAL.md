@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–54 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
+## Runs 22–55 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -40,17 +40,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 52:** Consolidated source exclusion into one observed-mismatch-plus-relevance rule.
 - **Run 53:** Consolidated sensitivity handling into one full-range rule covering crossing and same-side ranges.
 - **Run 54:** Consolidated evidence status and interpretation conflict handling without weakening the no-promotion boundary.
+- **Run 55:** Consolidated gate judgments without weakening independent-gate visibility or recommendation blocking.
 
-## Run 55 — Consolidate gate judgments without weakening independent-gate visibility
+## Run 56 — Consolidate provenance without weakening disagreement visibility
 
-**What changed:** Added `SCENARIOS/054-consolidated-gate-judgments.md`. In `decision_brief.py`, replaced two overlapping Gate judgments requirements with one rule requiring each constraint to receive a separate satisfied, violated, or unresolved status, named supplied evidence, preserved independent visibility, and explicit recommendation blocking from any violated or unresolved gate.
+**What changed:** Added `SCENARIOS/055-consolidated-provenance-disagreement.md`. In `decision_brief.py`, replaced the two Evidence provenance requirements with one rule that maps every source to its supplied measurements and values, discloses overlap without evidence spill or double-counting, and preserves conflicting values unless supplied applicability evidence resolves them.
 
-**Scenario tested:** Paid conversion was 23% against an inclusive 20% minimum, p95 latency was 540 milliseconds against a strict 500-millisecond maximum, and no fraud-loss measurement was supplied against a 0.5% maximum. Rollout required every gate to be satisfied.
+**Scenario tested:** Report A and Export B both measured paid conversion at 23%. Report A measured p95 latency at 480 milliseconds while Export B measured it at 540 milliseconds. No supplied evidence established that either latency source applied better. Rollout required conversion of at least 20% and latency below 500 milliseconds.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/054-consolidated-gate-judgments.md` was mentally simulated after the change: all four labels parse unchanged; conversion is separately satisfied by 23%; latency is separately violated by 540 milliseconds; fraud loss is separately unresolved because no measurement was supplied; the three gates remain visible; and both the violated and unresolved gates block rollout, making delay the supported recommendation.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and recorded scenario behavior. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/055-consolidated-provenance-disagreement.md` was mentally simulated after the change: all four labels parse unchanged; the shared 23% conversion measurement is mapped to both sources without becoming extra independent evidence; the 480- and 540-millisecond latency values remain attached to their sources and in explicit conflict; latency remains unresolved; and delay is the supported recommendation.
 
-**What was removed or rejected:** Removed one duplicated Gate judgments bullet by folding per-gate status, evidence binding, anti-collapse behavior, and recommendation blocking into one invariant. No gate evaluator, threshold parser, semantic classifier, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed one duplicated Evidence provenance bullet by folding source-to-measurement mapping, overlap handling, and disagreement preservation into one invariant. No source selector, averaging rule, semantic classifier, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** A gate judgment is one auditable unit: constraint, status, supplied evidence, and effect on the recommendation. Independent-gate visibility and recommendation blocking are not separate features; they are consequences of preserving that unit for every constraint.
+**What was learned:** Provenance is one mapping invariant: retain every source-measurement-value link, disclose shared coverage without inflating it, and preserve disagreement until supplied evidence establishes applicability. Conflict preservation is not a separate feature from provenance; it is what correct provenance requires when values differ.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect the Evidence provenance requirements for whether source-to-measurement mapping and conflicting-value preservation can be expressed more compactly without weakening disagreement visibility.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect the Decision requirements for whether recommendation and supplied success-or-reversal governance can be expressed more compactly without weakening the operator's fallback rule.
