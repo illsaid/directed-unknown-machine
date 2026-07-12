@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–51 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
+## Runs 22–52 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -37,17 +37,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 49:** Consolidated comparator and numeric threshold conflicts into one preservation-and-no-inference rule.
 - **Run 50:** Consolidated source identification and overlapping coverage into one source-to-measurement provenance rule.
 - **Run 51:** Consolidated adjustment context, method auditability, and assumption support into one adjustment-auditability rule.
+- **Run 52:** Consolidated source exclusion into one observed-mismatch-plus-relevance rule.
 
-## Run 52 — Consolidate source exclusion without weakening observation and relevance boundaries
+## Run 53 — Consolidate sensitivity ranges without weakening the crossing boundary
 
-**What changed:** Added `SCENARIOS/051-consolidated-source-exclusion.md`. In `decision_brief.py`, replaced the long source-exclusion clause with one shorter two-part rule: preserve the excluded value and require supplied evidence of both the observed mismatch and why it changes applicability to the target decision population.
+**What changed:** Added `SCENARIOS/052-consolidated-sensitivity-range.md`. In `decision_brief.py`, replaced separate threshold-crossing and same-side sensitivity bullets with one full-range rule: preserve conditional outcomes when a supported range crosses the boundary, resolve the gate from the complete range when it does not, and never select a convenient representative point.
 
-**Scenario tested:** A production-shadow test measured 430-millisecond p95 latency. Canary A measured 560 milliseconds but consisted mostly of an internal mobile-client build explicitly outside the Monday US web rollout. Canary B measured 540 milliseconds and directly showed a Safari-mix difference, but no supplied segment results or analysis established that the difference changes applicability. Paid conversion was 23%; rollout requires conversion of at least 20% and p95 latency below 500 milliseconds.
+**Scenario tested:** Paid conversion was 23%. A supported Monday latency sensitivity range was 480–520 milliseconds against a strict 500-millisecond maximum, so that gate remains conditional across the boundary. A supported refund-rate range was 1.4%–1.8% against a strict 2% maximum, so that gate is satisfied from the whole range. Rollout requires every gate to clear.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/051-consolidated-source-exclusion.md` was mentally simulated after the change: all four labels parse unchanged; Canary A can be excluded only with its preserved value, direct out-of-scope observation, and explicit target-population relevance; Canary B cannot be excluded because relevance is unsupported; the remaining 430- and 540-millisecond measurements conflict; the latency gate remains unresolved; and delay is supported.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/052-consolidated-sensitivity-range.md` was mentally simulated after the change: all four labels parse unchanged; conversion and refunds satisfy their gates; the latency range crosses 500 milliseconds and remains conditional with outcomes required on each side; rollout is unsupported; and delay is supported.
 
-**What was removed or rejected:** Removed duplicated negative formulations from the source-exclusion requirement and folded them into one evidence test. No comparability classifier, source ranker, semantic parser, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed one duplicated sensitivity bullet by folding crossing and same-side range behavior into one invariant. No range calculator, threshold evaluator, semantic parser, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Source exclusion is valid only when the contract supplies both halves of the argument: an observed mismatch and evidence that the mismatch matters to the target population. Naming many forbidden inference paths is less inspectable than enforcing that single two-part burden.
+**What was learned:** Sensitivity handling is one geometric rule, not separate positive and negative cases: compare the entire supported range with the supplied boundary. Crossing preserves conditionality; non-crossing resolves the gate. Point selection is unnecessary in both cases.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect the sensitivity requirements for duplicated positive and negative wording that can be consolidated without losing the threshold-crossing boundary.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect the Decision requirements for duplicated wording around separating facts, interpretations, assumptions, and unresolved conflicts without weakening the no-promotion boundary.
