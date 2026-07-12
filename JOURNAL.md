@@ -20,33 +20,23 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–35 — Evidence provenance, applicability, assumptions, and sensitivity
+## Runs 22–36 — Evidence provenance, applicability, assumptions, and sensitivity
 
-- **Run 22:** Kept independent constraint judgments separate.
-- **Run 23:** Exposed shared provenance across multiple gate judgments.
-- **Run 24:** Distinguished shared provenance from actual measurement coverage.
-- **Run 25:** Kept overlapping measurements tied to the measurements they corroborate.
-- **Run 26:** Preserved incompatible values instead of averaging them.
-- **Run 27:** Allowed source exclusion only with an auditable comparability reason and visible excluded value.
-- **Run 28:** Required supplied observations behind comparability claims.
-- **Run 29:** Required direct observations rather than downstream interpretations.
-- **Run 30:** Required evidence that an observed difference actually changes applicability to the target population.
-- **Run 31:** Preserved original measurements and the supplied method behind a target-population reweighting.
-- **Run 32:** Rejected adjusted estimates whose supplied notes omitted an auditable method.
-- **Run 33:** Kept transparent adjusted estimates conditional when a governing assumption lacked supplied support.
-- **Run 34:** Preserved threshold-crossing sensitivity ranges as explicit conditional boundaries.
-- **Run 35:** Allowed a supported range wholly below a maximum threshold to satisfy the gate from the full range.
+- **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
+- **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
+- **Runs 31–33:** Made adjusted values auditable and conditional when their method or assumptions lacked support.
+- **Runs 34–36:** Distinguished threshold-crossing ranges from ranges wholly satisfying or wholly violating a maximum.
 
-## Run 36 — Resolve a threshold-violating sensitivity range
+## Run 37 — Honor an explicitly inclusive threshold
 
-**What changed:** Added `SCENARIOS/035-sensitivity-range-violates-gate.md` and made the existing same-side range rule explicit for maximum thresholds: a supported range wholly below the maximum satisfies the gate, while a supported range wholly above it violates the gate.
+**What changed:** Added `SCENARIOS/036-inclusive-threshold-touch.md` and added one requirement to `decision_brief.py`: when a supported range touches a threshold exactly, equality must be judged from the comparison wording supplied in the contract rather than from an assumed strict or inclusive boundary.
 
-**Scenario tested:** Historical observations supported a Monday Safari share between 30% and 35%. Combined with supplied Safari and non-Safari p95 measurements, the supplied adjustment produced a latency range of 519–540.5 milliseconds. The rollout limit was below 500 milliseconds and paid conversion was 23%.
+**Scenario tested:** An auditable adjustment produced a supported p95 latency range of 480–500 milliseconds. The constraint required performance “at or below 500 milliseconds,” and paid conversion was 23% against a 20% minimum.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario remains valid, maps `partial` to `hold-but-improve`, and recommends addressing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/035-sensitivity-range-violates-gate.md` preserves all four fields and now requires the full 519–540.5 millisecond range to govern the judgment. Every supported value is above 500 milliseconds, so the performance gate is violated and delay is supported.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario still maps `partial` to `hold-but-improve` and recommends fixing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/036-inclusive-threshold-touch.md` preserves all four fields and now requires the explicit inclusive wording to govern equality. Because the full range is at or below 500 milliseconds and conversion is 23%, rollout is supported.
 
-**What was removed or rejected:** No sensitivity engine, threshold calculator, range parser, source-ranking system, fifth field, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** No threshold parser, comparator, calculator, fifth field, configuration, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** A supported range can establish failure as cleanly as success. When every supported value exceeds a supplied maximum, the gate is violated; treating it as unresolved would hide decisive evidence.
+**What was learned:** Boundary equality is not intrinsically passing or failing. The operator’s supplied comparison rule is part of the decision contract and must remain authoritative.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence did not increase because it is already near saturation; the evidence broadened the tested boundary instead. The next test is a supported range that touches an inclusive threshold exactly, checking that equality follows the supplied comparison rule rather than an assumed boundary convention.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The next test is the strict counterpart: a range ending exactly at 500 milliseconds under a requirement strictly below 500.
