@@ -20,24 +20,24 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–37 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
+## Runs 22–38 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
 - **Runs 31–33:** Made adjusted values auditable and conditional when their method or assumptions lacked support.
 - **Runs 34–36:** Distinguished threshold-crossing ranges from ranges wholly satisfying or wholly violating a maximum.
-- **Run 37:** Required equality at a threshold to follow the contract's explicit inclusive or strict comparison wording.
+- **Runs 37–38:** Required equality at a threshold to follow the contract's explicit inclusive or strict comparison wording, including strict-maximum equality as a violation.
 
-## Run 38 — Treat equality as failure under a strict maximum
+## Run 39 — Treat equality as success under an inclusive minimum
 
-**What changed:** Added `SCENARIOS/037-strict-threshold-touch.md` and added one executable brief requirement: under a strict maximum such as “below” or “strictly below,” equality violates the gate rather than leaving it unresolved.
+**What changed:** Added `SCENARIOS/038-inclusive-minimum-touch.md` and added one executable brief requirement: under an inclusive minimum such as “at least,” equality satisfies the gate rather than leaving it unresolved.
 
-**Scenario tested:** An auditable adjustment produced a supported p95 latency range of 480–500 milliseconds. The constraint required performance strictly below 500 milliseconds, and paid conversion was 23% against a 20% minimum.
+**Scenario tested:** An auditable estimate produced a supported paid-conversion range of 20%–24%, whose lower bound exactly equals the required minimum of at least 20%. The supported p95 latency range was 460–490 milliseconds against an inclusive maximum of 500 milliseconds.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario still maps `partial` to `hold-but-improve` and recommends fixing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/037-strict-threshold-touch.md` preserves all four fields and now explicitly requires equality under the strict maximum to count as a violation. Because the supported range includes 500 milliseconds, the performance gate fails and delay is supported despite conversion clearing its gate.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario still maps `partial` to `hold-but-improve` and recommends fixing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/038-inclusive-minimum-touch.md` preserves all four fields and now explicitly requires equality under the inclusive minimum to count as satisfying the gate. Because the full conversion range is at least 20% and the latency range clears its maximum, rollout is supported.
 
 **What was removed or rejected:** No threshold parser, comparator, calculator, fifth field, configuration, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The contract's comparison operator determines the boundary result. A value equal to a strict maximum is decisive contrary evidence, not an unresolved edge case.
+**What was learned:** Inclusive minimum wording is decisive at the lower boundary. A supported value equal to “at least” the threshold is confirming evidence, not an unresolved edge case.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The next test is the mirrored minimum boundary: a supported range whose lower bound equals a threshold stated as “at least.”
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The next test is the strict minimum counterpart: a supported range whose lower bound equals a threshold stated as “above.”
