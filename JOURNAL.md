@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–55 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
+## Runs 22–56 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -41,17 +41,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 53:** Consolidated sensitivity handling into one full-range rule covering crossing and same-side ranges.
 - **Run 54:** Consolidated evidence status and interpretation conflict handling without weakening the no-promotion boundary.
 - **Run 55:** Consolidated gate judgments without weakening independent-gate visibility or recommendation blocking.
+- **Run 56:** Consolidated evidence provenance without weakening overlap handling or disagreement visibility.
 
-## Run 56 — Consolidate provenance without weakening disagreement visibility
+## Run 57 — Consolidate recommendation and fallback governance
 
-**What changed:** Added `SCENARIOS/055-consolidated-provenance-disagreement.md`. In `decision_brief.py`, replaced the two Evidence provenance requirements with one rule that maps every source to its supplied measurements and values, discloses overlap without evidence spill or double-counting, and preserves conflicting values unless supplied applicability evidence resolves them.
+**What changed:** Added `SCENARIOS/056-consolidated-decision-governance.md`. In `decision_brief.py`, replaced the separate “Recommend one action” and “State how the supplied success or reversal rule governs that action” bullets with one requirement: recommend one action and state how the supplied success or reversal rule governs it.
 
-**Scenario tested:** Report A and Export B both measured paid conversion at 23%. Report A measured p95 latency at 480 milliseconds while Export B measured it at 540 milliseconds. No supplied evidence established that either latency source applied better. Rollout required conversion of at least 20% and latency below 500 milliseconds.
+**Scenario tested:** Paid conversion was 23% against an inclusive 20% minimum. P95 latency was 540 milliseconds against a strict 500-millisecond maximum. The operator supplied rollout only when every gate is satisfied and delay otherwise.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and recorded scenario behavior. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/055-consolidated-provenance-disagreement.md` was mentally simulated after the change: all four labels parse unchanged; the shared 23% conversion measurement is mapped to both sources without becoming extra independent evidence; the 480- and 540-millisecond latency values remain attached to their sources and in explicit conflict; latency remains unresolved; and delay is the supported recommendation.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and recorded scenario behavior. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/056-consolidated-decision-governance.md` was mentally simulated after the change: all four labels parse unchanged; conversion is satisfied; latency is violated; the consolidated Decision requirement still requires exactly one recommendation and explicitly binds it to the supplied fallback; delay remains the supported recommendation.
 
-**What was removed or rejected:** Removed one duplicated Evidence provenance bullet by folding source-to-measurement mapping, overlap handling, and disagreement preservation into one invariant. No source selector, averaging rule, semantic classifier, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed one duplicated Decision bullet by folding action selection and fallback governance into one invariant. No recommender, policy engine, semantic classifier, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Provenance is one mapping invariant: retain every source-measurement-value link, disclose shared coverage without inflating it, and preserve disagreement until supplied evidence establishes applicability. Conflict preservation is not a separate feature from provenance; it is what correct provenance requires when values differ.
+**What was learned:** A recommendation is not separate from its governance rule. In a bounded delegated decision, “choose one action” is only trustworthy when the same requirement shows how the operator-supplied success or reversal rule controls that action.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect the Decision requirements for whether recommendation and supplied success-or-reversal governance can be expressed more compactly without weakening the operator's fallback rule.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect whether the two remaining Decision requirements can be consolidated without weakening the distinction between evidence status and conflicting interpretations.
