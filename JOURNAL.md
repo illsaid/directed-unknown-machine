@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–46 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
+## Runs 22–47 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement grouping
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -32,17 +32,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 43:** Preserved conflicting numeric thresholds for the same metric without choosing the stricter, looser, or later value.
 - **Runs 44–45:** Preserved cross-unit statements when equivalence was absent and accepted reconciliation only when the contract explicitly supplied equivalence.
 - **Run 46:** Accepted explicit threshold precedence while preserving the displaced threshold and its separate result.
+- **Run 47:** Grouped the accumulated obligations under seven inspectable requirement labels without weakening the precedence boundary.
 
-## Run 47 — Group requirements without weakening precedence
+## Run 48 — Consolidate equality semantics without weakening boundaries
 
-**What changed:** Added `SCENARIOS/046-grouped-requirements-preserve-precedence.md`. Replaced the single dense gate-requirements paragraph in `decision_brief.py` with seven named groups: Decision, Gate judgments, Evidence provenance, Applicability and adjustment, Sensitivity, Threshold semantics, and Threshold conflict. The requirements remain fixed executable output rather than documentation.
+**What changed:** Added `SCENARIOS/047-consolidated-equality-semantics.md`. In `decision_brief.py`, replaced four overlapping equality requirements with one comparison rule: supplied inclusive wording makes equality satisfy a gate, while supplied strict wording makes equality violate it. The separate no-comparator requirement remains unchanged.
 
-**Scenario tested:** The Run 46 checkout contract was reused as a structural regression: conversion is 21%, `Constraints` requires at least 20%, `Success` requires at least 22%, and Evidence explicitly says the Success threshold governs while the contextual threshold remains reportable. Latency is 460–490 milliseconds against an inclusive 500 millisecond maximum.
+**Scenario tested:** One rollout contract supplies four ranges that touch their thresholds exactly: latency 480–500 milliseconds against `at or below 500`; conversion 20%–24% against `at least 20%`; completion 80%–84% against `above 80%`; and refunds 2%–3% against `strictly below 3%`. The observable judgments are satisfied, satisfied, violated, and violated respectively, so the supported fallback remains delay.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/046-grouped-requirements-preserve-precedence.md` was mentally simulated after the change: all four fields parse unchanged, the output now exposes named requirement groups, and `Threshold conflict` still requires the governing 22% threshold, the displaced 20% threshold, and the result under each. The supported recommendation remains delay because conversion violates the governing threshold while latency is satisfied.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/047-consolidated-equality-semantics.md` was mentally simulated after the change: all four labels parse unchanged, the Threshold semantics group prints two bullets instead of five, and the consolidated rule preserves all four supplied equality outcomes.
 
-**What was removed or rejected:** Removed the one-line requirements wall; no requirement, boundary, schema field, mode, parser, classifier, calculator, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed three duplicated equality bullets and folded their distinct examples into one rule. No threshold parser, comparator, calculator, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The system can become easier to audit without becoming more semantic. Named requirement groups are a better architecture for the current purpose than one accumulating prose clause because an operator can locate the relevant trust boundary before delegation while the executable still performs no hidden interpretation.
+**What was learned:** The useful invariant is not a separate rule for each direction and operator. It is one inspectable principle: equality follows the operator's supplied strictness. Consolidating by invariant reduces audit cost without turning the tool into a semantic engine.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is whether duplicated equality clauses inside `Threshold semantics` can be consolidated without weakening the strict-maximum, inclusive-minimum, or strict-minimum boundaries.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect another requirement group for one duplicated obligation that can be removed while preserving its named scenario boundary.
