@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–43 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
+## Runs 22–44 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -30,17 +30,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 41:** Left equality unresolved when a numeric threshold lacked explicit strict or inclusive comparison semantics.
 - **Run 42:** Preserved conflicting strict and inclusive comparison rules for the same threshold without manufacturing precedence.
 - **Run 43:** Preserved conflicting numeric thresholds for the same metric without choosing the stricter, looser, or later value.
+- **Run 44:** Preserved cross-unit threshold statements as unresolved when the contract supplied no conversion or equivalence.
 
-## Run 44 — Preserve cross-unit threshold ambiguity
+## Run 45 — Accept explicit cross-unit equivalence
 
-**What changed:** Added `SCENARIOS/043-equivalent-thresholds-different-units.md` and one executable brief requirement: when threshold statements for the same metric use different units or representations, preserve each statement and leave equivalence unresolved unless the contract supplies the conversion rule or explicitly states equivalence.
+**What changed:** Added `SCENARIOS/044-explicit-cross-unit-equivalence.md` and tightened the cross-unit brief requirement into one two-sided rule: preserve both representations, reconcile them only when the contract explicitly supplies the conversion or equivalence, and otherwise leave the gate unresolved.
 
-**Scenario tested:** `Constraints` requires p95 latency at or below 500 milliseconds. `Success` requires p95 latency at or below 0.5 seconds. Evidence supplies a 460–490 millisecond range and paid conversion of 23%, but the contract supplies neither a milliseconds-to-seconds conversion rule nor an explicit statement that the thresholds are equivalent.
+**Scenario tested:** `Constraints` requires p95 latency at or below 500 milliseconds. `Success` requires p95 latency at or below 0.5 seconds. Evidence supplies a 460–490 millisecond range, paid conversion of 23%, and an explicit statement that 500 milliseconds and 0.5 seconds are equivalent representations of the same threshold.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario still maps `partial` to `hold-but-improve` and recommends fixing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/043-equivalent-thresholds-different-units.md` preserves all four fields and now forbids a hidden normalization step. Paid conversion is satisfied, but the latency gate remains unresolved because equivalence between the two supplied threshold representations was not part of the contract, so rollout is unsupported and delay follows from the supplied fallback.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario still maps `partial` to `hold-but-improve` and recommends fixing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/044-explicit-cross-unit-equivalence.md` preserves all four fields and now explicitly permits reconciliation from the supplied equivalence statement. The conversion and latency gates are satisfied, so rollout follows from the supplied success rule.
 
-**What was removed or rejected:** No unit converter, numeric normalizer, threshold parser, semantic equivalence detector, calculator, fifth field, configuration, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command. `WHAT_THIS_IS_FOR.md` was rewritten from scratch because its prior rewrite was more than 24 hours old.
+**What was removed or rejected:** The prior cross-unit requirement was replaced rather than supplemented, avoiding another accumulated prose rule. No unit converter, numeric normalizer, threshold parser, semantic equivalence detector, calculator, fifth field, configuration, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Even a familiar conversion can become an invisible policy decision when the tool performs it outside the supplied contract. The system is most trustworthy when it preserves representations and requires reconciliation to be explicit rather than merely obvious to the analyst.
+**What was learned:** The trust boundary is not “never reconcile.” It is “never reconcile invisibly.” Operator-supplied equivalence is sufficient because it makes the transformation inspectable while leaving the executable free of domain conversion logic.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is the positive boundary: a contract that explicitly supplies the unit conversion or equivalence statement, verifying that reconciliation can occur without adding an automatic conversion engine.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is an explicit precedence rule between genuinely different numeric thresholds.
