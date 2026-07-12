@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–50 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
+## Runs 22–51 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -36,17 +36,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 48:** Consolidated four equality clauses into one supplied-strictness rule without weakening inclusive or strict minimum and maximum boundaries.
 - **Run 49:** Consolidated comparator and numeric threshold conflicts into one preservation-and-no-inference rule.
 - **Run 50:** Consolidated source identification and overlapping coverage into one source-to-measurement provenance rule.
+- **Run 51:** Consolidated adjustment context, method auditability, and assumption support into one adjustment-auditability rule.
 
-## Run 51 — Consolidate adjustment auditability without weakening unsupported-assumption boundary
+## Run 52 — Consolidate source exclusion without weakening observation and relevance boundaries
 
-**What changed:** Added `SCENARIOS/050-consolidated-adjustment-auditability.md`. In `decision_brief.py`, replaced three adjustment clauses with one rule requiring the original and adjusted values, supplied auditable method, target population, and every governing assumption with its supplied support. The same rule leaves opaque adjustments unresolved and transparent adjustments conditional when a governing assumption lacks support.
+**What changed:** Added `SCENARIOS/051-consolidated-source-exclusion.md`. In `decision_brief.py`, replaced the long source-exclusion clause with one shorter two-part rule: preserve the excluded value and require supplied evidence of both the observed mismatch and why it changes applicability to the target decision population.
 
-**Scenario tested:** A canary measured unadjusted p95 latency at 560 milliseconds. Supplied segment values and arithmetic produce a 493.2-millisecond adjusted estimate using an assumed 24% Safari mix, but no forecast or observation supports that target-population weight. Paid conversion is 23%; rollout requires conversion of at least 20% and latency below 500 milliseconds.
+**Scenario tested:** A production-shadow test measured 430-millisecond p95 latency. Canary A measured 560 milliseconds but consisted mostly of an internal mobile-client build explicitly outside the Monday US web rollout. Canary B measured 540 milliseconds and directly showed a Safari-mix difference, but no supplied segment results or analysis established that the difference changes applicability. Paid conversion was 23%; rollout requires conversion of at least 20% and p95 latency below 500 milliseconds.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/050-consolidated-adjustment-auditability.md` was mentally simulated after the change: all four labels parse unchanged, the Applicability and adjustment group prints two bullets instead of four, the original and adjusted latency values, method, target population, and unsupported assumption remain visible, conversion is satisfied, latency remains unresolved, and delay is supported.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/051-consolidated-source-exclusion.md` was mentally simulated after the change: all four labels parse unchanged; Canary A can be excluded only with its preserved value, direct out-of-scope observation, and explicit target-population relevance; Canary B cannot be excluded because relevance is unsupported; the remaining 430- and 540-millisecond measurements conflict; the latency gate remains unresolved; and delay is supported.
 
-**What was removed or rejected:** Removed two duplicated adjustment bullets by folding adjustment context, method auditability, and assumption support into one invariant. No adjustment engine, calculator, classifier, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed duplicated negative formulations from the source-exclusion requirement and folded them into one evidence test. No comparability classifier, source ranker, semantic parser, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Adjustment provenance and adjustment validity are one operational invariant. An adjusted value is decision-usable only when its method is auditable and every governing assumption has supplied support; otherwise it remains visible but unresolved or conditional.
+**What was learned:** Source exclusion is valid only when the contract supplies both halves of the argument: an observed mismatch and evidence that the mismatch matters to the target population. Naming many forbidden inference paths is less inspectable than enforcing that single two-part burden.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect the source-exclusion requirement for duplicated wording that can be shortened without weakening the direct-observation and relevance boundaries.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect the sensitivity requirements for duplicated positive and negative wording that can be consolidated without losing the threshold-crossing boundary.
