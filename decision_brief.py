@@ -22,8 +22,7 @@ REQUIREMENT_GROUPS = (
     (
         "Gate judgments",
         (
-            "Check each constraint separately against Success; for every constraint, state whether it is satisfied, violated, or unresolved and name the supplied evidence supporting that judgment.",
-            "Do not collapse independent gates into one overall pass or fail, do not silently override either field, and state when any failed or unresolved gate prevents a supported recommendation.",
+            "Judge every constraint separately against Success: state whether each gate is satisfied, violated, or unresolved; name the supplied evidence for that status; preserve independent gates rather than collapsing them into one overall verdict; and state when any violated or unresolved gate blocks a supported recommendation.",
         ),
     ),
     (
