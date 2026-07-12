@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–45 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
+## Runs 22–46 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -31,17 +31,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 42:** Preserved conflicting strict and inclusive comparison rules for the same threshold without manufacturing precedence.
 - **Run 43:** Preserved conflicting numeric thresholds for the same metric without choosing the stricter, looser, or later value.
 - **Runs 44–45:** Preserved cross-unit statements when equivalence was absent and accepted reconciliation only when the contract explicitly supplied equivalence.
+- **Run 46:** Accepted explicit threshold precedence while preserving the displaced threshold and its separate result.
 
-## Run 46 — Preserve displaced thresholds under explicit precedence
+## Run 47 — Group requirements without weakening precedence
 
-**What changed:** Added `SCENARIOS/045-explicit-threshold-precedence.md` and tightened the conflicting-threshold requirement. When the contract supplies precedence, the brief must identify the governing threshold while preserving every displaced threshold and reporting the result under each.
+**What changed:** Added `SCENARIOS/046-grouped-requirements-preserve-precedence.md`. Replaced the single dense gate-requirements paragraph in `decision_brief.py` with seven named groups: Decision, Gate judgments, Evidence provenance, Applicability and adjustment, Sensitivity, Threshold semantics, and Threshold conflict. The requirements remain fixed executable output rather than documentation.
 
-**Scenario tested:** `Constraints` requires paid conversion of at least 20%. `Success` requires at least 22%. Evidence reports 21% and explicitly states that the Success threshold governs a conflict while the Constraints threshold remains contextual. The same evidence reports a supported 460–490 millisecond latency range against an inclusive 500 millisecond maximum.
+**Scenario tested:** The Run 46 checkout contract was reused as a structural regression: conversion is 21%, `Constraints` requires at least 20%, `Success` requires at least 22%, and Evidence explicitly says the Success threshold governs while the contextual threshold remains reportable. Latency is 460–490 milliseconds against an inclusive 500 millisecond maximum.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario still maps `partial` to `hold-but-improve` and recommends fixing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/045-explicit-threshold-precedence.md` preserves all four fields and emits the strengthened precedence obligation. Under the supplied contract, 21% satisfies the contextual 20% threshold but violates the governing 22% threshold; latency is satisfied and the Success fallback requires delay.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/046-grouped-requirements-preserve-precedence.md` was mentally simulated after the change: all four fields parse unchanged, the output now exposes named requirement groups, and `Threshold conflict` still requires the governing 22% threshold, the displaced 20% threshold, and the result under each. The supported recommendation remains delay because conversion violates the governing threshold while latency is satisfied.
 
-**What was removed or rejected:** The prior conflicting-numeric-threshold clause was replaced rather than supplemented. No threshold parser, precedence detector, calculator, fifth field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed the one-line requirements wall; no requirement, boundary, schema field, mode, parser, classifier, calculator, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Explicit precedence can resolve a conflict without erasing it. The useful boundary is not merely choosing the governing rule; it is keeping the displaced rule inspectable so the analyst cannot make reconciliation look like the original contract was internally consistent.
+**What was learned:** The system can become easier to audit without becoming more semantic. Named requirement groups are a better architecture for the current purpose than one accumulating prose clause because an operator can locate the relevant trust boundary before delegation while the executable still performs no hidden interpretation.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is structural simplification of the accumulated gate requirements without losing a previously established boundary.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is whether duplicated equality clauses inside `Threshold semantics` can be consolidated without weakening the strict-maximum, inclusive-minimum, or strict-minimum boundaries.
