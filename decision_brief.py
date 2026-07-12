@@ -61,10 +61,8 @@ REQUIREMENT_GROUPS = (
     (
         "Threshold conflict",
         (
-            "When the same threshold is supplied with conflicting strict and inclusive comparison wording, preserve both rules and leave the gate unresolved unless the contract supplies an explicit precedence or reconciliation rule; do not select a rule based on field order.",
-            "When the same metric is supplied with conflicting numeric thresholds, preserve every threshold value and leave the gate unresolved unless the contract supplies an explicit precedence or reconciliation rule.",
+            "When the same metric has conflicting threshold statements—whether the comparison wording or numeric value differs—preserve every supplied rule and leave the gate unresolved unless the contract supplies explicit precedence or reconciliation; do not choose by strictness, looseness, field order, or which value appears later.",
             "When precedence is supplied, identify the governing threshold, preserve every displaced threshold, and report the result under each rather than silently deleting or rewriting the non-governing rule.",
-            "Do not silently choose the stricter threshold, the looser threshold, or the value appearing later.",
             "For threshold statements in different units or representations, preserve both statements. Reconcile them only when the contract explicitly supplies the conversion or equivalence; otherwise leave the gate unresolved. Never introduce an unsupplied conversion.",
         ),
     ),
