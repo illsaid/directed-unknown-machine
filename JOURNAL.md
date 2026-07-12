@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–53 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
+## Runs 22–54 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -39,17 +39,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 51:** Consolidated adjustment context, method auditability, and assumption support into one adjustment-auditability rule.
 - **Run 52:** Consolidated source exclusion into one observed-mismatch-plus-relevance rule.
 - **Run 53:** Consolidated sensitivity handling into one full-range rule covering crossing and same-side ranges.
+- **Run 54:** Consolidated evidence status and interpretation conflict handling without weakening the no-promotion boundary.
 
-## Run 54 — Consolidate evidence status without weakening the no-promotion boundary
+## Run 55 — Consolidate gate judgments without weakening independent-gate visibility
 
-**What changed:** Added `SCENARIOS/053-consolidated-evidence-status.md`. In `decision_brief.py`, replaced three overlapping Decision requirements with two: one rule keeps supplied observations, interpretations, assumptions, and unresolved gaps distinct without promoting interpretation or assumption to fact; the second compares conflicting interpretations only against supplied observations and requires unresolved conflict plus distinguishing evidence to remain explicit.
+**What changed:** Added `SCENARIOS/054-consolidated-gate-judgments.md`. In `decision_brief.py`, replaced two overlapping Gate judgments requirements with one rule requiring each constraint to receive a separate satisfied, violated, or unresolved status, named supplied evidence, preserved independent visibility, and explicit recommendation blocking from any violated or unresolved gate.
 
-**Scenario tested:** Production logs directly showed 12% checkout abandonment. The support lead interpreted the cause as confusing payment copy; the product manager interpreted it as latency. The launch owner assumed returning users would adapt, but supplied no cohort evidence. No step-level abandonment, response-time, or user-research evidence distinguished the competing causal interpretations.
+**Scenario tested:** Paid conversion was 23% against an inclusive 20% minimum, p95 latency was 540 milliseconds against a strict 500-millisecond maximum, and no fraud-loss measurement was supplied against a 0.5% maximum. Rollout required every gate to be satisfied.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/053-consolidated-evidence-status.md` was mentally simulated after the change: all four labels parse unchanged; the measured abandonment, two interpretations, unsupported assumption, and missing evidence remain separately visible; neither interpretation becomes a fact; the causal conflict remains unresolved; and the assignment requires the smallest distinguishing evidence to be named.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/054-consolidated-gate-judgments.md` was mentally simulated after the change: all four labels parse unchanged; conversion is separately satisfied by 23%; latency is separately violated by 540 milliseconds; fraud loss is separately unresolved because no measurement was supplied; the three gates remain visible; and both the violated and unresolved gates block rollout, making delay the supported recommendation.
 
-**What was removed or rejected:** Removed one duplicated Decision bullet by folding evidence-type separation and the no-promotion prohibition into one invariant. No semantic classifier, causal model, evidence extractor, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed one duplicated Gate judgments bullet by folding per-gate status, evidence binding, anti-collapse behavior, and recommendation blocking into one invariant. No gate evaluator, threshold parser, semantic classifier, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Evidence status is one preservation rule: retain what was observed, what was interpreted, what was assumed, and what remains missing without silently changing category. Conflicting interpretations need a separate comparison rule because their useful output is not merely preservation but an explicit unresolved boundary and a named discriminating test.
+**What was learned:** A gate judgment is one auditable unit: constraint, status, supplied evidence, and effect on the recommendation. Independent-gate visibility and recommendation blocking are not separate features; they are consequences of preserving that unit for every constraint.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect the Gate judgments requirements for duplicated wording around separate gate status, evidence binding, and recommendation blocking without weakening independent-gate visibility.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect the Evidence provenance requirements for whether source-to-measurement mapping and conflicting-value preservation can be expressed more compactly without weakening disagreement visibility.
