@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–44 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
+## Runs 22–45 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -30,18 +30,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 41:** Left equality unresolved when a numeric threshold lacked explicit strict or inclusive comparison semantics.
 - **Run 42:** Preserved conflicting strict and inclusive comparison rules for the same threshold without manufacturing precedence.
 - **Run 43:** Preserved conflicting numeric thresholds for the same metric without choosing the stricter, looser, or later value.
-- **Run 44:** Preserved cross-unit threshold statements as unresolved when the contract supplied no conversion or equivalence.
+- **Runs 44–45:** Preserved cross-unit statements when equivalence was absent and accepted reconciliation only when the contract explicitly supplied equivalence.
 
-## Run 45 — Accept explicit cross-unit equivalence
+## Run 46 — Preserve displaced thresholds under explicit precedence
 
-**What changed:** Added `SCENARIOS/044-explicit-cross-unit-equivalence.md` and tightened the cross-unit brief requirement into one two-sided rule: preserve both representations, reconcile them only when the contract explicitly supplies the conversion or equivalence, and otherwise leave the gate unresolved.
+**What changed:** Added `SCENARIOS/045-explicit-threshold-precedence.md` and tightened the conflicting-threshold requirement. When the contract supplies precedence, the brief must identify the governing threshold while preserving every displaced threshold and reporting the result under each.
 
-**Scenario tested:** `Constraints` requires p95 latency at or below 500 milliseconds. `Success` requires p95 latency at or below 0.5 seconds. Evidence supplies a 460–490 millisecond range, paid conversion of 23%, and an explicit statement that 500 milliseconds and 0.5 seconds are equivalent representations of the same threshold.
+**Scenario tested:** `Constraints` requires paid conversion of at least 20%. `Success` requires at least 22%. Evidence reports 21% and explicitly states that the Success threshold governs a conflict while the Constraints threshold remains contextual. The same evidence reports a supported 460–490 millisecond latency range against an inclusive 500 millisecond maximum.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario still maps `partial` to `hold-but-improve` and recommends fixing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/044-explicit-cross-unit-equivalence.md` preserves all four fields and now explicitly permits reconciliation from the supplied equivalence statement. The conversion and latency gates are satisfied, so rollout follows from the supplied success rule.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario still maps `partial` to `hold-but-improve` and recommends fixing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/045-explicit-threshold-precedence.md` preserves all four fields and emits the strengthened precedence obligation. Under the supplied contract, 21% satisfies the contextual 20% threshold but violates the governing 22% threshold; latency is satisfied and the Success fallback requires delay.
 
-**What was removed or rejected:** The prior cross-unit requirement was replaced rather than supplemented, avoiding another accumulated prose rule. No unit converter, numeric normalizer, threshold parser, semantic equivalence detector, calculator, fifth field, configuration, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** The prior conflicting-numeric-threshold clause was replaced rather than supplemented. No threshold parser, precedence detector, calculator, fifth field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The trust boundary is not “never reconcile.” It is “never reconcile invisibly.” Operator-supplied equivalence is sufficient because it makes the transformation inspectable while leaving the executable free of domain conversion logic.
+**What was learned:** Explicit precedence can resolve a conflict without erasing it. The useful boundary is not merely choosing the governing rule; it is keeping the displaced rule inspectable so the analyst cannot make reconciliation look like the original contract was internally consistent.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is an explicit precedence rule between genuinely different numeric thresholds.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is structural simplification of the accumulated gate requirements without losing a previously established boundary.
