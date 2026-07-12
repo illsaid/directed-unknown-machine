@@ -44,8 +44,7 @@ REQUIREMENT_GROUPS = (
     (
         "Sensitivity",
         (
-            "When a supplied sensitivity range crosses a gate threshold, report the full range and supplied decision boundary, state the conditional outcome on each side, and do not select a midpoint, best case, or other convenient point estimate to resolve the gate.",
-            "When every value in a supplied supported sensitivity range lies on the same side of a gate threshold, judge the gate from the full range and do not mark it unresolved merely because the evidence is a range; against a maximum, a wholly lower range satisfies the gate and a wholly higher range violates it.",
+            "Judge a supplied supported sensitivity range against the full decision boundary: if the range crosses the threshold, preserve the full range and state the conditional outcome on each side; if every value lies on one side, resolve the gate from the whole range. Never select a midpoint, best case, or other convenient point estimate, and do not mark a same-side range unresolved merely because it is a range.",
         ),
     ),
     (
