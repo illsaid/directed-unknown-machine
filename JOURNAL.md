@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–41 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
+## Runs 22–42 — Evidence provenance, applicability, assumptions, sensitivity, and threshold boundaries
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -28,17 +28,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 34–36:** Distinguished threshold-crossing ranges from ranges wholly satisfying or wholly violating a maximum.
 - **Runs 37–40:** Required equality at a threshold to follow the contract's explicit inclusive or strict comparison wording across maximum and minimum gates.
 - **Run 41:** Left equality unresolved when a numeric threshold lacked explicit strict or inclusive comparison semantics.
+- **Run 42:** Preserved conflicting strict and inclusive comparison rules for the same threshold without manufacturing precedence.
 
-## Run 42 — Preserve conflicting comparison rules for the same threshold
+## Run 43 — Preserve conflicting numeric thresholds for the same metric
 
-**What changed:** Added `SCENARIOS/041-conflicting-threshold-comparators.md` and one executable brief requirement: when the same threshold is supplied with conflicting strict and inclusive comparison wording, preserve both rules and leave the gate unresolved unless the contract supplies an explicit precedence or reconciliation rule.
+**What changed:** Added `SCENARIOS/042-conflicting-numeric-thresholds.md` and one executable brief requirement: when the same metric is supplied with different numeric thresholds, preserve every value and leave the gate unresolved unless the contract supplies an explicit precedence or reconciliation rule.
 
-**Scenario tested:** An auditable estimate produced a supported paid-conversion range of 20%–24%. `Constraints` requires conversion to be at least 20%, while `Success` requires conversion to be above 20%. The same threshold therefore treats equality as both acceptable and unacceptable. The supported p95 latency range was 460–490 milliseconds against an inclusive maximum of 500 milliseconds.
+**Scenario tested:** The supported paid-conversion result is 21%. `Constraints` requires at least 20%, while `Success` requires at least 22%. The same observation therefore satisfies one supplied threshold and violates the other. The supported p95 latency range is 460–490 milliseconds against an inclusive maximum of 500 milliseconds.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario still maps `partial` to `hold-but-improve` and recommends fixing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/041-conflicting-threshold-comparators.md` preserves all four fields and now explicitly forbids choosing a comparator based on field order. The latency gate is satisfied, but the conversion gate remains unresolved because the contract supplies contradictory boundary semantics, so rollout is unsupported and delay follows from the supplied fallback.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes. The friendly scenario still maps `partial` to `hold-but-improve` and recommends fixing its recorded comparative-test gap. `python decision_brief.py SCENARIOS/042-conflicting-numeric-thresholds.md` preserves all four fields and now explicitly forbids choosing the stricter threshold, the looser threshold, or the value appearing later. The latency gate is satisfied, but the conversion gate remains unresolved because the contract supplies contradictory numeric boundaries, so rollout is unsupported and delay follows from the supplied fallback.
 
-**What was removed or rejected:** No comparator parser, conflict detector, precedence hierarchy, calculator, fifth field, configuration, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** No threshold parser, conflict detector, numeric normalizer, precedence hierarchy, calculator, fifth field, configuration, or domain mode was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Explicit wording is not sufficient when the wording conflicts. An auditable decision contract must preserve the contradiction and refuse to manufacture precedence; field order is not a decision rule.
+**What was learned:** A contract can be explicit and still be internally inconsistent. Preserving both threshold values is safer than treating “stricter wins,” “later wins,” or “constraints beat success” as an unstated decision rule.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is contradictory numeric thresholds for the same metric, verifying that both values remain explicit and the gate stays unresolved rather than selecting one threshold.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is two threshold statements that may be numerically equivalent but use different units or representations, verifying that equivalence is not inferred without a supplied conversion rule.
