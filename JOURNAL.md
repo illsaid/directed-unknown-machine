@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–64 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–65 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -36,17 +36,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 62:** Merged sensitivity and threshold semantics into one Boundary evaluation group while retaining full-range and equality rules.
 - **Run 63:** Kept Boundary evaluation and Boundary reconciliation separate and renamed the latter to identify the audit operation rather than the input condition.
 - **Run 64:** Kept Governed recommendation and Gate judgments separate and renamed the former to identify action selection under the supplied success rule.
+- **Run 65:** Kept Evidence provenance and Evidence transformation separate and renamed the latter to identify the operation that changes how preserved evidence applies.
 
-## Run 65 — Distinguish source record from evidence transformation
+## Run 66 — Order the six audit operations as a visible reasoning sequence
 
-**What changed:** Added `SCENARIOS/064-source-record-versus-evidence-transformation.md`. Renamed the executable audit group `Applicability and adjustment` to `Evidence transformation`. No requirement text, parser behavior, field, or decision rule changed.
+**What changed:** Added `SCENARIOS/065-visible-reasoning-sequence.md`. Reordered the unchanged `REQUIREMENT_GROUPS` in `decision_brief.py` to print Evidence provenance, Evidence transformation, Boundary reconciliation, Boundary evaluation, Gate judgments, and Governed recommendation. No requirement text, parser behavior, field, or decision rule changed.
 
-**Scenario tested:** Report A supplies conversion at 23% and latency at 540 milliseconds. Canary B supplies latency at 560 milliseconds plus an explicit target-population mismatch. A browser-segment table supplies the target mix and arithmetic yielding an adjusted 480 millisecond estimate. Evidence provenance must preserve all source claims and values. Evidence transformation must separately validate the canary exclusion and report adjustment before they affect gate judgments. With both transformations supported, conversion and latency clear their gates and the governed recommendation is rollout.
+**Scenario tested:** Production report A supplies conversion at 23% and latency at 540 milliseconds. A browser-segment table preserves the original latency and supplies the target mix plus arithmetic yielding an adjusted 480 millisecond estimate. The success contract explicitly requires source recording, transformation audit, boundary handling, gate judgments, and only then the final recommendation. The supported adjustment leaves conversion and latency satisfied, so the governed recommendation is rollout.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the unchanged parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still points to the comparative-test gap. `python decision_brief.py SCENARIOS/064-source-record-versus-evidence-transformation.md` was mentally simulated after the change: all four labels parse unchanged and six audit groups print, with separate `Evidence provenance` and `Evidence transformation` headings.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the unchanged historical harness: `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/065-visible-reasoning-sequence.md` was mentally simulated after the change: all four labels parse unchanged and the six existing groups print in the scenario's required dependency order.
 
-**What was removed or rejected:** Rejected merging the two groups. Recording what a source says cannot authorize excluding or adjusting it; validating a transformation cannot rewrite the original source record. No source classifier, adjustment engine, converter, mode, configuration, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed no obligation and added no feature. Rejected merging any groups because Runs 63–65 established that boundary application versus reconciliation, gate judgment versus recommendation, and source record versus transformation are distinct operations. No classifier, decision engine, converter, mode, configuration, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The two groups are not redundant. Provenance is an immutable source-accounting obligation. Transformation is a permission check for a specific exclusion or adjustment that changes how preserved evidence applies. The previous label named two topics; `Evidence transformation` names the downstream audit operation.
+**What was learned:** Ordering alone materially improves specificity. The output now reads as an audit trail: preserve the record, authorize transformations, determine the governing boundary, apply evidence to it, judge each gate, and select the governed action. The remaining structural defect is that evidence-status handling still sits inside the final recommendation group even though it may belong nearer the source record.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the six groups can be ordered into one visible reasoning sequence without merging distinct obligations or implying that later operations may rewrite earlier records.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether observation, interpretation, assumption, and unresolved-gap statuses should move from Governed recommendation to Evidence provenance without broadening provenance beyond the supplied record.
