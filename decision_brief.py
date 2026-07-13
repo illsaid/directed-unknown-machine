@@ -14,6 +14,7 @@ REQUIREMENT_GROUPS = (
         "Evidence provenance",
         (
             "Map every source to the measurements and values it actually supplies; disclose overlapping coverage without counting it as support for a different measurement or as additional independent evidence, and when sources disagree on the same measurement, preserve every value and leave the conflict explicit unless supplied evidence establishes which source applies.",
+            "Preserve supplied observations, interpretations, assumptions, and unresolved gaps as distinct statuses; compare conflicting interpretations only against supplied observations, never promote an interpretation or assumption to fact, leave unsupported conflict explicit, and name the evidence that would distinguish it.",
         ),
     ),
     (
@@ -45,7 +46,6 @@ REQUIREMENT_GROUPS = (
         "Governed recommendation",
         (
             "Recommend one action and state how the supplied success or reversal rule governs it.",
-            "Preserve supplied observations, interpretations, assumptions, and unresolved gaps as distinct statuses; compare conflicting interpretations only against supplied observations, never promote an interpretation or assumption to fact, leave unsupported conflict explicit, and name the evidence that would distinguish it.",
         ),
     ),
 )
