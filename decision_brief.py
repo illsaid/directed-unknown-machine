@@ -43,7 +43,7 @@ REQUIREMENT_GROUPS = (
         ),
     ),
     (
-        "Threshold conflict",
+        "Boundary reconciliation",
         (
             "Preserve every conflicting threshold statement and leave the gate unresolved unless the contract supplies support for the exact reconciliation used: precedence may select a governing same-metric rule only while preserving displaced rules and reporting each result; cross-unit or cross-representation statements may be reconciled only by a supplied conversion or equivalence. Do not choose by strictness, looseness, field order, or recency, introduce an unsupplied conversion, or let evidence sufficient for precedence substitute for equivalence or vice versa.",
         ),
