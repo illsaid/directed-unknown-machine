@@ -37,7 +37,7 @@ REQUIREMENT_GROUPS = (
     (
         "Decision: judge gates",
         (
-            "Judge every constraint separately against Success: state whether each gate is satisfied, violated, or unresolved; name the supplied evidence for that status; preserve independent gates rather than collapsing them into one overall verdict; and state when any violated or unresolved gate blocks a supported recommendation.",
+            "Judge each constraint independently against Success. For every gate, report satisfied, violated, or unresolved; cite the supplied evidence; and state its effect on the recommendation. Do not replace gate-level results with an overall verdict: each violated or unresolved gate retains its blocking effect under the supplied rule.",
         ),
     ),
     (
