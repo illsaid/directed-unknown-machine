@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–74 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–75 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -46,17 +46,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 72:** Renamed the two final stages to `Decision: judge gates` and `Decision: recommend`, completing three visibly ordered pairs.
 - **Run 73:** Printed the complete six-stage reasoning sequence once before the detailed requirements.
 - **Run 74:** Shortened the Evidence: preserve invariant while retaining all tested source-record refusal boundaries.
+- **Run 75:** Shortened the Evidence: transform invariant while retaining operation-specific support and non-substitution.
 
-## Run 75 — Tighten evidence transformation without cross-authorizing operations
+## Run 76 — Tighten boundary reconciliation without cross-authorizing support
 
-**What changed:** Added `SCENARIOS/074-tightened-evidence-transformation.md`. Shortened only the `Evidence: transform` requirement in `decision_brief.py`. The replacement states the shared rule once—support must match the exact transformation—then keeps separate minimum evidence for source exclusion and value adjustment, preservation of originals, the non-substitution rule, and conditional treatment of unsupported assumptions.
+**What changed:** Added `SCENARIOS/075-tightened-boundary-reconciliation.md`. Shortened only the `Boundary: reconcile` requirement in `decision_brief.py`. The replacement states one exact-operation support rule, then keeps separate authorization tests for same-metric precedence and cross-unit or cross-representation equivalence, preservation of displaced rules, unresolved treatment without support, and the non-substitution rule.
 
-**Scenario tested:** Production report A supplies 23% conversion and 540 millisecond latency for the target customer population. Canary B supplies 410 milliseconds for employees, with supplied environment evidence showing that an employee-only authentication cache makes it non-applicable to customers. A browser table supports the arithmetic behind a proposed 480 millisecond adjustment, but no supplied source supports the governing 60/40 desktop-mobile traffic mix. The valid exclusion evidence must not authorize the adjustment.
+**Scenario tested:** Conversion has conflicting same-metric minimums of 20% and 22%, with supplied charter precedence selecting 22%; observed conversion is 21%. Latency has boundaries of below 500 milliseconds and below 0.5 seconds, but no supplied source connects those representations for the contract. Retention has minimums of 70% and 72% with no supplied precedence. Precedence evidence from conversion must not authorize latency equivalence, and infrastructure equivalence evidence must not choose a retention rule.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/074-tightened-evidence-transformation.md` was mentally simulated: all four labels parse unchanged; the contract and six-stage sequence print intact; Canary B has operation-specific support for exclusion; the 480 millisecond adjustment remains conditional because its traffic-share assumption is unsupported; the latency gate therefore does not clear; and the supplied success rule supports delay plus collection of production traffic-share evidence.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/075-tightened-boundary-reconciliation.md` was mentally simulated: all four labels parse unchanged; the contract and six-stage sequence print intact; the revised conversion rule governs and is violated; latency and retention remain unresolved for different missing operation-specific support; and the supplied success rule supports delay.
 
-**What was removed or rejected:** Removed repeated transformation phrasing only. Rejected combining exclusion and adjustment into one generic applicability test, allowing one operation's support to authorize the other, adding a weighting calculator, inferring production mix, changing parser behavior, or adding another mode. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed repeated reconciliation phrasing only. Rejected a generic conflict resolver, automatic unit conversion, choosing the strictest rule, using recency or field order as precedence, and allowing one reconciliation operation's evidence to authorize another. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The transformation boundary remains intact when expressed as one exact-operation support rule followed by two compact operation-specific tests. The key refusal is not verbosity; it is preventing applicability evidence from laundering an unsupported adjusted value, and preventing adjustment arithmetic from erasing a source without applicability evidence.
+**What was learned:** Reconciliation remains safe when expressed as one exact-operation rule followed by distinct precedence and equivalence tests. The essential boundary is not a long list of conflict types; it is that authority to choose a rule and authority to connect representations are separate and non-transferable.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is `Boundary: reconcile`, specifically whether it can be shortened without allowing precedence support to substitute for equivalence support or vice versa.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is `Boundary: apply`, specifically whether it can be shortened without weakening complete-range handling, supplied equality semantics, or the no-comparator refusal boundary.
