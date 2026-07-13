@@ -81,7 +81,6 @@ def repair_template(missing: list[str]) -> str:
 
 
 def print_requirements() -> None:
-    print("Brief requirements:")
     for group, requirements in REQUIREMENT_GROUPS:
         print(f"{group}:")
         for requirement in requirements:
