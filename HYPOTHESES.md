@@ -37,11 +37,12 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Runs 22–33:** Preserved source provenance, overlapping and conflicting measurements, applicability limits, exclusions, adjustments, methods, and unsupported assumptions.
 - **Runs 34–46:** Established full-range sensitivity handling, explicit strict and inclusive equality semantics, the no-comparator refusal boundary, conflicting threshold preservation, cross-unit equivalence, and explicit precedence.
 - **Runs 47–62:** Consolidated accumulated obligations into six inspectable audit groups without changing the four-field contract or weakening established boundaries.
-- **Run 63 / `SCENARIOS/062-boundary-application-versus-reconciliation.md`:** Confirmed that Boundary evaluation and Boundary reconciliation are distinct audit questions. Evaluation applies evidence to one supplied boundary; reconciliation requires exact supplied support before choosing among incompatible boundaries. Renaming `Threshold conflict` to `Boundary reconciliation` makes the distinction explicit without adding a rule.
+- **Run 63 / `SCENARIOS/062-boundary-application-versus-reconciliation.md`:** Confirmed that Boundary evaluation and Boundary reconciliation are distinct audit questions. Evaluation applies evidence to one supplied boundary; reconciliation requires exact supplied support before choosing among incompatible boundaries.
+- **Run 64 / `SCENARIOS/063-recommendation-versus-gate-judgments.md`:** Confirmed that Governed recommendation and Gate judgments are distinct audit questions. Gate judgments evaluates each constraint from supplied evidence; Governed recommendation selects the action required by the supplied success or reversal rule. Renaming `Decision` to `Governed recommendation` makes the operation explicit without adding behavior.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Inspect whether Decision and Gate judgments remain distinct audit questions: selecting a governed action versus evaluating the constraints that permit it.
+**Next test:** Inspect whether Evidence provenance and Applicability and adjustment remain distinct audit questions: recording what each source says versus determining whether a supported transformation may change how that evidence applies.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -56,7 +57,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–63 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–64 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
