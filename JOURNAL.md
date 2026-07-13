@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–66 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–67 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -38,17 +38,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 64:** Kept Governed recommendation and Gate judgments separate and renamed the former to identify action selection under the supplied success rule.
 - **Run 65:** Kept Evidence provenance and Evidence transformation separate and renamed the latter to identify the operation that changes how preserved evidence applies.
 - **Run 66:** Ordered the six unchanged audit groups into dependency order from source record through governed action.
+- **Run 67:** Moved evidence-status preservation from Governed recommendation to Evidence provenance so supplied claim status is fixed before downstream reasoning.
 
-## Run 67 — Move evidence-status preservation to the source-record stage
+## Run 68 — Consolidate evidence provenance into one immutable-record invariant
 
-**What changed:** Added `SCENARIOS/066-evidence-status-versus-recommendation.md`. Moved the unchanged observation, interpretation, assumption, and unresolved-gap requirement from Governed recommendation to Evidence provenance in `decision_brief.py`. No requirement wording, parser behavior, field, group count, or decision rule changed.
+**What changed:** Added `SCENARIOS/067-consolidated-evidence-provenance.md`. Replaced the two adjacent Evidence provenance requirements in `decision_brief.py` with one requirement covering source-to-measurement mapping, overlap disclosure, conflicting-value preservation, observation/interpretation/assumption/gap separation, the no-promotion boundary, and distinguishing evidence. No parser behavior, field, group, decision rule, classifier, transformation, or mode changed.
 
-**Scenario tested:** Checkout abandonment is observed at 12%. Confusing copy and latency are competing interpretations; returning-user adaptation is an assumption; step-level abandonment and response-time correlation are missing. The supplied success rule requires preserving those statuses before selecting an action. Because observations do not distinguish the causes, the supported recommendation is another diagnostic rather than a copy or latency remedy.
+**Scenario tested:** Funnel report A observes 12% abandonment and 540 millisecond p95 latency. Export B also observes 12% abandonment but no latency. Interview summary C interprets confusing copy as the cause; trace review D interprets latency as the cause; returning-user adaptation is an assumption; step-level abandonment and response-time correlation are missing. The combined invariant must preserve source scope and claim status while refusing to treat the duplicate 12% as independent causal support.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the unchanged historical harness: `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/066-evidence-status-versus-recommendation.md` was mentally simulated after the change: all four labels parse unchanged; Evidence provenance prints both source mapping and claim-status preservation; Governed recommendation prints only action selection under the supplied rule.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/067-consolidated-evidence-provenance.md` was mentally simulated: all four labels parse unchanged; Evidence provenance prints one combined requirement; the remaining five groups retain their order and wording; the supported recommendation remains another diagnostic because the observations do not distinguish the causes.
 
-**What was removed or rejected:** Removed the evidence-status obligation from Governed recommendation rather than duplicating it. Added no classifier, field, mode, transformation, decision engine, configuration, or dashboard. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed one duplicate requirement boundary rather than adding another audit operation. Added no automatic source classification, semantic conflict detector, adjustment engine, threshold parser, configuration, or dashboard. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Evidence status is part of the immutable supplied record. A downstream recommendation may depend on whether a statement is an observation, interpretation, assumption, or gap, but it should not be the stage that first assigns or preserves that status. Moving the obligation earlier makes the six-step sequence causally coherent and narrows the recommendation group to its single purpose.
+**What was learned:** Source identity and claim status are two properties of the same immutable evidence record. They can be expressed as one audit invariant as long as the wording still separately protects measurement scope, overlap, conflicting values, evidentiary status, and the evidence needed to resolve conflict. The consolidation makes the first audit stage easier to scan without weakening its refusal boundaries.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the two Evidence provenance requirements can be consolidated without weakening source-to-measurement mapping, conflicting-value preservation, or claim-status separation.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the two Boundary evaluation requirements can be consolidated without weakening full-range handling, explicit equality semantics, or the no-comparator refusal boundary.
