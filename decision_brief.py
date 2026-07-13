@@ -19,7 +19,7 @@ REQUIREMENT_GROUPS = (
     (
         "Evidence: transform",
         (
-            "For any source-exclusion or value-adjustment step, preserve every original value and require supplied support for the specific transformation used: exclusion requires both an observed mismatch and why it changes applicability to the target decision population, while adjustment requires the adjusted value, an auditable method, the target population, and every governing assumption with its supplied support. Evidence sufficient for one transformation cannot substitute for the other; unsupported exclusion is invalid, opaque adjustment cannot resolve a gate, and an auditable adjustment remains conditional when a governing assumption lacks support.",
+            "Transform preserved evidence only with support for the exact operation. Exclude a source only when supplied evidence shows an observed mismatch and why it changes applicability to the target population. Adjust a value only when supplied evidence provides the adjusted value, an auditable method, the target population, and support for every governing assumption. Preserve original values; do not let exclusion support authorize adjustment or adjustment support authorize exclusion. Unsupported exclusion is invalid, opaque adjustment cannot resolve a gate, and an auditable adjustment remains conditional while any governing assumption is unsupported.",
         ),
     ),
     (
