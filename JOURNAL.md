@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–79 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–80 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -51,17 +51,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 77:** Shortened the Boundary: apply invariant while retaining whole-range handling, explicit equality semantics, and the no-comparator refusal boundary.
 - **Run 78:** Shortened Decision: judge gates while preserving independent statuses, supplied evidence, and blocking effects.
 - **Run 79:** Shortened Decision: recommend while preserving one authorized action and explicit identification of the governing rule branch.
+- **Run 80:** Named the `Success` field directly in the recommendation invariant while preserving one-action and branch-traceability boundaries.
 
-## Run 80 — Name the Success branch directly
+## Run 81 — Let the ordered headings carry the sequence
 
-**What changed:** Added `SCENARIOS/079-minimal-governed-recommendation.md`. Changed only the `Decision: recommend` requirement in `decision_brief.py` from `Recommend exactly one action authorized by the supplied success or reversal rule, and name the rule branch that authorizes it.` to `Recommend one authorized action and name the governing Success branch.`
+**What changed:** Added `SCENARIOS/080-ordered-headings-without-sequence-line.md`. Removed only the standalone `Reasoning sequence: preserve evidence -> transform evidence -> reconcile boundaries -> apply boundaries -> judge gates -> recommend` line from `decision_brief.py`.
 
-**Scenario tested:** Conversion is 23% against an inclusive 20% minimum; latency is 540 milliseconds against a strict 500 millisecond maximum; retention equals a bare 70% threshold with no comparator. Success orders the branches: any violation means delay; otherwise any unresolved gate means diagnostic; only all-satisfied permits rollout.
+**Scenario tested:** Conversion is 23% against an inclusive 20% minimum and latency is 480 milliseconds against a strict 500 millisecond maximum. Success permits rollout only if every gate is satisfied. The presentation test asks whether the six adjacent headings remain an obvious audit path without a sentence that repeats their exact order.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/079-minimal-governed-recommendation.md` was mentally simulated: all four labels parse; the contract and six-stage sequence print intact; conversion is satisfied, latency is violated, retention is unresolved, and delay remains the only authorized action under the first Success branch.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/080-ordered-headings-without-sequence-line.md` was mentally simulated: all four labels parse; the contract prints intact; the six headings remain ordered as Evidence preserve, Evidence transform, Boundary reconcile, Boundary apply, Decision judge gates, and Decision recommend; both gates are satisfied; rollout is the authorized action.
 
-**What was removed or rejected:** Removed `exactly`, the repeated phrase `supplied success or reversal rule`, and the second use of `authorize`. Rejected removing `authorized`, removing the branch requirement, deriving an action automatically, adding precedence parsing, or merging gate judgment with recommendation. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed one presentation-only sentence that duplicated the headings and carried no independent refusal boundary. Rejected merging headings, renaming another operation, adding numbering, adding indentation, or changing any requirement. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The recommendation boundary is clearer when it names the schema field rather than redescribing it. `One authorized action` preserves exclusivity, and `governing Success branch` preserves both traceability and branch precedence in fewer words.
+**What was learned:** The paired headings now carry the sequence on their own. Shared prefixes expose the three domains, imperative verbs expose the operation, and adjacency exposes order. Repeating the same path in a sentence adds density rather than orientation.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the literal reasoning-sequence line duplicates the six ordered headings or still improves first-scan comprehension.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the `Brief requirements` line adds orientation or merely labels the six self-describing headings.
