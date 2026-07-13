@@ -14,8 +14,7 @@ REQUIREMENT_GROUPS = (
         "Decision",
         (
             "Recommend one action and state how the supplied success or reversal rule governs it.",
-            "Keep supplied observations, interpretations, assumptions, and unresolved gaps distinct; do not promote an interpretation or assumption to fact.",
-            "When interpretations conflict, compare each only against supplied observations, leave unresolved conflict explicit, and name the evidence that would distinguish it.",
+            "Preserve supplied observations, interpretations, assumptions, and unresolved gaps as distinct statuses; compare conflicting interpretations only against supplied observations, never promote an interpretation or assumption to fact, leave unsupported conflict explicit, and name the evidence that would distinguish it.",
         ),
     ),
     (
