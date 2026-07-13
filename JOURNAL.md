@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–73 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–74 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -45,17 +45,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 71:** Renamed the two evidence stages to `Evidence: preserve` and `Evidence: transform` so preservation visibly precedes any supported transformation.
 - **Run 72:** Renamed the two final stages to `Decision: judge gates` and `Decision: recommend`, completing three visibly ordered pairs.
 - **Run 73:** Printed the complete six-stage reasoning sequence once before the detailed requirements.
+- **Run 74:** Shortened the Evidence: preserve invariant while retaining all tested source-record refusal boundaries.
 
-## Run 74 — Tighten evidence preservation without weakening it
+## Run 75 — Tighten evidence transformation without cross-authorizing operations
 
-**What changed:** Added `SCENARIOS/073-tightened-evidence-preservation.md`. Shortened only the `Evidence: preserve` requirement in `decision_brief.py`. The replacement removes repeated wording but retains source-to-measurement scope, overlap disclosure without double-counting or spill, conflicting-value retention, distinct evidence statuses, the no-promotion rule, explicit unresolved conflict, and the obligation to name distinguishing evidence.
+**What changed:** Added `SCENARIOS/074-tightened-evidence-transformation.md`. Shortened only the `Evidence: transform` requirement in `decision_brief.py`. The replacement states the shared rule once—support must match the exact transformation—then keeps separate minimum evidence for source exclusion and value adjustment, preservation of originals, the non-substitution rule, and conditional treatment of unsupported assumptions.
 
-**Scenario tested:** Funnel report A records 12% abandonment and 540 millisecond latency; Export B repeats the same abandonment population but supplies no latency; Monitor C records 560 millisecond latency; two sources offer competing causal interpretations; the team supplies an adaptation assumption; and joined step-level abandonment and response-time evidence is absent. The contract must not count Export B as independent support or latency evidence, erase either latency value, promote either interpretation or the assumption to fact, or prescribe a remedy before the missing discriminator is collected.
+**Scenario tested:** Production report A supplies 23% conversion and 540 millisecond latency for the target customer population. Canary B supplies 410 milliseconds for employees, with supplied environment evidence showing that an employee-only authentication cache makes it non-applicable to customers. A browser table supports the arithmetic behind a proposed 480 millisecond adjustment, but no supplied source supports the governing 60/40 desktop-mobile traffic mix. The valid exclusion evidence must not authorize the adjustment.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/073-tightened-evidence-preservation.md` was mentally simulated: all four labels parse unchanged; the contract and six-stage sequence print intact; the shorter preservation invariant still covers every scenario refusal boundary; and the supplied success condition supports another diagnostic rather than a copy or latency remedy.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/074-tightened-evidence-transformation.md` was mentally simulated: all four labels parse unchanged; the contract and six-stage sequence print intact; Canary B has operation-specific support for exclusion; the 480 millisecond adjustment remains conditional because its traffic-share assumption is unsupported; the latency gate therefore does not clear; and the supplied success rule supports delay plus collection of production traffic-share evidence.
 
-**What was removed or rejected:** Removed redundant preservation phrasing only. Rejected splitting the invariant again, adding a summary mode, implementing source classification, inferring causal status, or changing any other requirement. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed repeated transformation phrasing only. Rejected combining exclusion and adjustment into one generic applicability test, allowing one operation's support to authorize the other, adding a weighting calculator, inferring production mix, changing parser behavior, or adding another mode. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The preservation boundary does not require a catalogue-style sentence. A shorter operation-and-prohibition form remains specific enough to protect the source record while making the audit contract easier to scan.
+**What was learned:** The transformation boundary remains intact when expressed as one exact-operation support rule followed by two compact operation-specific tests. The key refusal is not verbosity; it is preventing applicability evidence from laundering an unsupported adjusted value, and preventing adjustment arithmetic from erasing a source without applicability evidence.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is the adjacent `Evidence: transform` requirement, specifically whether it can be shortened without allowing exclusion evidence to authorize adjustment or adjustment evidence to authorize exclusion.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is `Boundary: reconcile`, specifically whether it can be shortened without allowing precedence support to substitute for equivalence support or vice versa.
