@@ -31,7 +31,7 @@ REQUIREMENT_GROUPS = (
     (
         "Boundary: apply",
         (
-            "Evaluate all supplied evidence against the governing boundary exactly as written: apply a supported sensitivity range in full, preserving conditional outcomes when it crosses the threshold and resolving the gate from the whole range when every value lies on one side; never select a midpoint, best case, or other convenient point, or mark a same-side range unresolved merely because it is a range. Resolve equality only from supplied comparison wording: equality satisfies an inclusive boundary such as ‘at or below’ or ‘at least,’ violates a strict boundary such as ‘below,’ ‘strictly below,’ ‘above,’ or ‘strictly above,’ and remains unresolved when a numeric threshold has no explicit strict or inclusive wording rather than inheriting an unstated convention.",
+            "Apply preserved evidence to the governing boundary exactly as written. For ranges, evaluate the whole supplied range: mark threshold-crossing ranges conditional and resolve same-side ranges from the whole range; never choose a midpoint, best case, or convenient point, or leave a same-side range unresolved merely because it is a range. For equality, use only supplied comparison wording: equality satisfies inclusive boundaries such as ‘at or below’ and ‘at least,’ violates strict boundaries such as ‘below’ and ‘above,’ and remains unresolved when a numeric threshold lacks an explicit comparator rather than inheriting a convention.",
         ),
     ),
     (
