@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–59 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
+## Runs 22–60 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -45,17 +45,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 57:** Consolidated recommendation selection and supplied fallback governance into one Decision invariant.
 - **Run 58:** Consolidated evidence-status preservation and observation-only interpretation handling into one Decision invariant.
 - **Run 59:** Consolidated source exclusion and value adjustment into one applicability-transformation invariant while preserving their distinct support requirements.
+- **Run 60:** Consolidated explicit threshold semantics and the no-comparator refusal boundary into one supplied-wording invariant.
 
-## Run 60 — Consolidate threshold semantics
+## Run 61 — Consolidate threshold-conflict governance
 
-**What changed:** Added `SCENARIOS/059-consolidated-threshold-semantics.md`. In `decision_brief.py`, replaced the separate explicit-equality and missing-comparator bullets with one supplied-wording invariant: equality resolves only from comparison wording present in the contract and remains unresolved when that wording is absent.
+**What changed:** Added `SCENARIOS/060-consolidated-threshold-conflict-governance.md`. In `decision_brief.py`, replaced three Threshold conflict bullets with one exact-reconciliation-support invariant. It preserves every conflicting rule, permits precedence only while preserving displaced rules and separate results, permits cross-unit reconciliation only from supplied conversion or equivalence, and forbids support for one path from substituting for the other.
 
-**Scenario tested:** Paid conversion was exactly 20% against an inclusive minimum of at least 20%; p95 latency was exactly 500 milliseconds against a strict maximum below 500 milliseconds; seven-day retention was exactly 70% against a bare numeric threshold of 70% with no comparator.
+**Scenario tested:** Paid conversion was 21% against a contextual minimum of 20% and a governing minimum of 22%, with explicit precedence supplied for the 22% rule. P95 latency was 480 milliseconds against thresholds written as below 500 milliseconds and below 0.5 seconds, with no supplied equivalence or conversion.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and recorded scenario behavior. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/059-consolidated-threshold-semantics.md` was mentally simulated after the change: all four labels parse unchanged; conversion is satisfied by explicit inclusive wording; latency is violated by explicit strict wording; retention remains unresolved because no comparison wording was supplied; delay remains the governed recommendation.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and recorded scenario behavior. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/060-consolidated-threshold-conflict-governance.md` was mentally simulated after the change: all four labels parse unchanged; the supplied precedence governs conversion while both thresholds and outcomes remain visible; 21% violates the governing 22% rule; latency remains unresolved because precedence does not supply cross-unit equivalence; delay remains the governed recommendation.
 
-**What was removed or rejected:** Removed one duplicated Threshold semantics bullet by folding explicit and absent comparator handling into one supplied-wording rule. No threshold parser, comparator classifier, automatic decision engine, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed two Threshold conflict bullets by folding unresolved conflict, explicit precedence, and cross-unit equivalence into one preservation-and-exact-support rule with distinct branches. No threshold parser, unit converter, precedence engine, semantic classifier, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Explicit strictness and missing strictness are not separate mechanisms. Both are governed by one refusal boundary: equality may be resolved only from comparison semantics actually supplied by the operator. Consolidation is safe when the no-comparator outcome remains explicitly unresolved.
+**What was learned:** Precedence and equivalence are not interchangeable mechanisms, but both are instances of one stricter boundary: conflict resolution is valid only when the contract supplies support for the exact reconciliation applied. Consolidation is safe only when displaced same-metric rules remain visible and cross-unit statements still refuse unsupplied normalization.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect whether the three Threshold conflict requirements can be reduced without allowing precedence, reconciliation, and cross-unit equivalence to substitute for one another.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect whether the seven requirement-group labels still represent distinct audit questions or whether any adjacent groups can be merged without hiding a decision boundary.
