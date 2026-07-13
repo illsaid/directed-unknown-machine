@@ -25,7 +25,7 @@ REQUIREMENT_GROUPS = (
     (
         "Boundary: reconcile",
         (
-            "Preserve every conflicting threshold statement and leave the gate unresolved unless the contract supplies support for the exact reconciliation used: precedence may select a governing same-metric rule only while preserving displaced rules and reporting each result; cross-unit or cross-representation statements may be reconciled only by a supplied conversion or equivalence. Do not choose by strictness, looseness, field order, or recency, introduce an unsupplied conversion, or let evidence sufficient for precedence substitute for equivalence or vice versa.",
+            "Reconcile conflicting boundaries only with support for the exact operation. For same-metric rules, supplied precedence may select one governing rule only while preserving displaced rules and reporting each result. For cross-unit or cross-representation statements, require a supplied conversion or equivalence. Otherwise leave the gate unresolved. Do not choose by strictness, looseness, field order, or recency, introduce an unsupplied conversion, or let precedence support authorize equivalence or equivalence support authorize precedence.",
         ),
     ),
     (
