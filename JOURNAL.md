@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–71 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–72 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -43,17 +43,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 69:** Consolidated full-range and equality handling into one Boundary evaluation invariant.
 - **Run 70:** Renamed the two boundary stages to `Boundary: reconcile` and `Boundary: apply` so their dependency is visible without merging them.
 - **Run 71:** Renamed the two evidence stages to `Evidence: preserve` and `Evidence: transform` so preservation visibly precedes any supported transformation.
+- **Run 72:** Renamed the two final stages to `Decision: judge gates` and `Decision: recommend`, completing three visibly ordered pairs.
 
-## Run 72 — Make the two decision stages visibly sequential
+## Run 73 — Print the complete reasoning sequence once
 
-**What changed:** Added `SCENARIOS/071-judge-gates-then-recommend.md`. Renamed only the executable headings `Gate judgments` and `Governed recommendation` to `Decision: judge gates` and `Decision: recommend`. Requirement text, group order, parser behavior, fields, and decision rules are unchanged.
+**What changed:** Added `SCENARIOS/072-visible-sequence-summary.md`. Added one literal `Reasoning sequence` line before the six detailed requirement groups in `decision_brief.py`: preserve evidence, transform evidence, reconcile boundaries, apply boundaries, judge gates, recommend. No requirement text, parser behavior, fields, group order, or decision rules changed.
 
-**Scenario tested:** Paid conversion is 23% against an inclusive 20% minimum, while p95 latency is 540 milliseconds against a strict 500 millisecond maximum. The first decision stage must preserve the independent results—conversion satisfied, latency violated—and state that the violated latency gate blocks rollout. The second must apply the supplied rule that every gate must clear and recommend delay.
+**Scenario tested:** Paid conversion is 23% against an inclusive 20% minimum, and p95 latency is 480 milliseconds against a strict 500 millisecond maximum. Both gates satisfy their supplied boundaries, so the all-gates rule supports rollout. The executable must expose the full six-stage workflow before the dense audit requirements while preserving those requirements unchanged.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/071-judge-gates-then-recommend.md` was mentally simulated: all four labels parse unchanged; the six groups retain their dependency order; the final headings print as `Decision: judge gates` followed by `Decision: recommend`; their unchanged requirements keep the gate outcomes separate and tie delay to the supplied all-gates rule.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/072-visible-sequence-summary.md` was mentally simulated: all four labels parse unchanged; the contract prints intact; the new sequence line appears once before `Brief requirements`; all six existing groups then print in their prior order; the supplied evidence resolves both gates as satisfied and the success rule supports rollout.
 
-**What was removed or rejected:** Rejected merging gate judgment with recommendation and rejected adding a verdict engine, threshold parser, classifier, new mode, configuration, or dashboard. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected a second output mode, abbreviated duplicate requirements, configurable verbosity, another heading rename, a verdict engine, threshold parser, classifier, or dashboard. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The six audit groups now read as three ordered pairs: preserve then transform evidence, reconcile then apply boundaries, judge gates then recommend an action. Shared operation-first grammar improves scanability without changing a refusal boundary or adding a new obligation.
+**What was learned:** The six operations were already correct but still required readers to reconstruct the workflow from dense headings. One orientation line makes the process legible as a single delegated-analysis path without becoming another source of truth; the detailed requirements remain authoritative.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. Heading work is now complete unless a concrete scenario exposes a new sequencing failure. The next test should seek a smaller executable presentation without weakening the six operations.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test should reduce wording inside one existing requirement, not add another presentation layer.
