@@ -32,8 +32,7 @@ REQUIREMENT_GROUPS = (
     (
         "Applicability and adjustment",
         (
-            "Exclude a source as non-comparable only by preserving its value and naming supplied evidence of both the observed mismatch and why that mismatch changes applicability to the target decision population; an unsupported conclusion, an unsupplied observation, or a difference with no established relevance cannot justify exclusion.",
-            "When using an adjusted or reweighted value, preserve the original value and name the adjusted value, supplied auditable method, target population, and every governing assumption with its supplied support; an opaque method cannot resolve a gate, and an auditable result remains conditional when a governing assumption lacks supplied support.",
+            "For any source-exclusion or value-adjustment step, preserve every original value and require supplied support for the specific transformation used: exclusion requires both an observed mismatch and why it changes applicability to the target decision population, while adjustment requires the adjusted value, an auditable method, the target population, and every governing assumption with its supplied support. Evidence sufficient for one transformation cannot substitute for the other; unsupported exclusion is invalid, opaque adjustment cannot resolve a gate, and an auditable adjustment remains conditional when a governing assumption lacks support.",
         ),
     ),
     (
