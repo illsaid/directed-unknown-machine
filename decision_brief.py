@@ -23,13 +23,13 @@ REQUIREMENT_GROUPS = (
         ),
     ),
     (
-        "Boundary reconciliation",
+        "Boundary: reconcile",
         (
             "Preserve every conflicting threshold statement and leave the gate unresolved unless the contract supplies support for the exact reconciliation used: precedence may select a governing same-metric rule only while preserving displaced rules and reporting each result; cross-unit or cross-representation statements may be reconciled only by a supplied conversion or equivalence. Do not choose by strictness, looseness, field order, or recency, introduce an unsupplied conversion, or let evidence sufficient for precedence substitute for equivalence or vice versa.",
         ),
     ),
     (
-        "Boundary evaluation",
+        "Boundary: apply",
         (
             "Evaluate all supplied evidence against the governing boundary exactly as written: apply a supported sensitivity range in full, preserving conditional outcomes when it crosses the threshold and resolving the gate from the whole range when every value lies on one side; never select a midpoint, best case, or other convenient point, or mark a same-side range unresolved merely because it is a range. Resolve equality only from supplied comparison wording: equality satisfies an inclusive boundary such as ‘at or below’ or ‘at least,’ violates a strict boundary such as ‘below,’ ‘strictly below,’ ‘above,’ or ‘strictly above,’ and remains unresolved when a numeric threshold has no explicit strict or inclusive wording rather than inheriting an unstated convention.",
         ),
