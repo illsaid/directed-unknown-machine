@@ -52,10 +52,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 75 / `SCENARIOS/074-tightened-evidence-transformation.md`:** Shortened the transformation invariant while preserving operation-specific support. A supplied applicability mismatch can authorize source exclusion but cannot authorize a value adjustment; an auditable adjusted value remains conditional while its traffic-share assumption is unsupported.
 - **Run 76 / `SCENARIOS/075-tightened-boundary-reconciliation.md`:** Shortened the reconciliation invariant around one exact-operation support rule. Supplied same-metric precedence may select a governing rule while preserving displaced results, but cannot authorize cross-unit equivalence; supplied equivalence may connect representations, but cannot choose among competing same-metric rules.
 - **Run 77 / `SCENARIOS/076-tightened-boundary-application.md`:** Shortened the application invariant around one rule: apply the complete preserved evidence using only the supplied boundary semantics. A threshold-crossing range remains conditional, a same-side range resolves from the whole range, explicit inclusive and strict equality wording governs equality, and a bare numeric threshold remains unresolved.
+- **Run 78 / `SCENARIOS/077-tightened-gate-judgment.md`:** Shortened the gate-judgment invariant around independent per-gate reporting. Each gate still requires a satisfied, violated, or unresolved status, its supplied evidence, and its effect on the recommendation; an overall verdict cannot erase violated or unresolved blockers.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test whether `Decision: judge gates` can be shortened without allowing an overall verdict to erase independent gate statuses, supplied evidence, or blocking effects.
+**Next test:** Test whether `Decision: recommend` can be tightened while still requiring one action and explicit traceability to the supplied success or reversal rule.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -70,7 +71,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–77 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–78 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
