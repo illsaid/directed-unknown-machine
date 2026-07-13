@@ -36,14 +36,9 @@ REQUIREMENT_GROUPS = (
         ),
     ),
     (
-        "Sensitivity",
+        "Boundary evaluation",
         (
             "Judge a supplied supported sensitivity range against the full decision boundary: if the range crosses the threshold, preserve the full range and state the conditional outcome on each side; if every value lies on one side, resolve the gate from the whole range. Never select a midpoint, best case, or other convenient point estimate, and do not mark a same-side range unresolved merely because it is a range.",
-        ),
-    ),
-    (
-        "Threshold semantics",
-        (
             "Resolve equality only from comparison wording supplied by the contract: equality satisfies an inclusive boundary such as ‘at or below’ or ‘at least,’ violates a strict boundary such as ‘below,’ ‘strictly below,’ ‘above,’ or ‘strictly above,’ and remains unresolved when a numeric threshold has no explicit strict or inclusive wording rather than inheriting an unstated convention.",
         ),
     ),
