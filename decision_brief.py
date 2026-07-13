@@ -81,7 +81,6 @@ def repair_template(missing: list[str]) -> str:
 
 
 def print_requirements() -> None:
-    print("Reasoning sequence: preserve evidence -> transform evidence -> reconcile boundaries -> apply boundaries -> judge gates -> recommend")
     print("Brief requirements:")
     for group, requirements in REQUIREMENT_GROUPS:
         print(f"{group}:")
