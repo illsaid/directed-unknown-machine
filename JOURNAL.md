@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–62 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
+## Runs 22–63 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -34,17 +34,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 60:** Consolidated explicit threshold semantics and the no-comparator refusal boundary into one supplied-wording invariant.
 - **Run 61:** Consolidated unresolved threshold conflicts, explicit precedence, and cross-unit equivalence into one exact-reconciliation-support invariant.
 - **Run 62:** Merged sensitivity and threshold semantics into one Boundary evaluation group while retaining full-range and equality rules.
+- **Run 63:** Kept Boundary evaluation and Boundary reconciliation separate and renamed the latter to identify the audit operation rather than the input condition.
 
-## Run 63 — Distinguish boundary evaluation from boundary reconciliation
+## Run 64 — Distinguish governed recommendation from gate judgments
 
-**What changed:** Added `SCENARIOS/062-boundary-application-versus-reconciliation.md`. Renamed the executable audit group `Threshold conflict` to `Boundary reconciliation`. No requirement text, parser behavior, field, or decision rule changed. `HYPOTHESES.md` was compacted while preserving the live statuses, confidence values, decisive evidence, next tests, and kill criteria.
+**What changed:** Added `SCENARIOS/063-recommendation-versus-gate-judgments.md`. Renamed the executable audit group `Decision` to `Governed recommendation`. No requirement text, parser behavior, field, or decision rule changed.
 
-**Scenario tested:** Paid conversion was exactly 20% against one inclusive minimum, while p95 latency was 480 milliseconds against incompatible 500 millisecond and 450 millisecond strict maxima with no supplied precedence. Conversion can be evaluated directly and is satisfied. Latency requires reconciliation support and remains unresolved. The governed recommendation is delay.
+**Scenario tested:** Paid conversion was 23% against an inclusive 20% minimum, while p95 latency was 540 milliseconds against a strict 500 millisecond maximum. Gate judgments marks conversion satisfied and latency violated from supplied evidence. The supplied success rule requires every gate to clear and otherwise selects delay, so Governed recommendation selects delay after the gate evaluation.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the unchanged parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still points to the recorded comparative-test gap. `python decision_brief.py SCENARIOS/062-boundary-application-versus-reconciliation.md` was mentally simulated after the change: all four labels parse unchanged and the six audit groups print, with separate `Boundary evaluation` and `Boundary reconciliation` headings.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the unchanged parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still points to the recorded comparative-test gap. `python decision_brief.py SCENARIOS/063-recommendation-versus-gate-judgments.md` was mentally simulated after the change: all four labels parse unchanged and the six audit groups print, with separate `Governed recommendation` and `Gate judgments` headings.
 
-**What was removed or rejected:** Rejected merging the two groups. Applying evidence to one supplied boundary and choosing among incompatible boundaries require different supplied support. No threshold parser, automatic conflict detector, unit converter, mode, configuration, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected merging the two groups. Evaluating each constraint and selecting the action governed by the success or reversal rule are sequential but distinct obligations. No decision engine, gate parser, mode, configuration, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The two groups are structurally adjacent but not redundant. The previous `Threshold conflict` label named the input condition; `Boundary reconciliation` names the audit operation and makes the distinction from ordinary Boundary evaluation inspectable.
+**What was learned:** The two groups are not redundant. `Gate judgments` establishes whether each condition is satisfied, violated, or unresolved. `Governed recommendation` applies the supplied governance rule to those results and selects one action. The previous `Decision` label duplicated an input field; the new label makes the downstream audit operation inspectable.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether Decision and Gate judgments remain distinct: selecting the governed action versus evaluating the constraints that permit it.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether Evidence provenance and Applicability and adjustment remain distinct: recording source claims versus validating transformations that change how those claims apply.
