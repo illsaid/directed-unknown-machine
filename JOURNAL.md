@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–63 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–64 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -35,17 +35,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 61:** Consolidated unresolved threshold conflicts, explicit precedence, and cross-unit equivalence into one exact-reconciliation-support invariant.
 - **Run 62:** Merged sensitivity and threshold semantics into one Boundary evaluation group while retaining full-range and equality rules.
 - **Run 63:** Kept Boundary evaluation and Boundary reconciliation separate and renamed the latter to identify the audit operation rather than the input condition.
+- **Run 64:** Kept Governed recommendation and Gate judgments separate and renamed the former to identify action selection under the supplied success rule.
 
-## Run 64 — Distinguish governed recommendation from gate judgments
+## Run 65 — Distinguish source record from evidence transformation
 
-**What changed:** Added `SCENARIOS/063-recommendation-versus-gate-judgments.md`. Renamed the executable audit group `Decision` to `Governed recommendation`. No requirement text, parser behavior, field, or decision rule changed.
+**What changed:** Added `SCENARIOS/064-source-record-versus-evidence-transformation.md`. Renamed the executable audit group `Applicability and adjustment` to `Evidence transformation`. No requirement text, parser behavior, field, or decision rule changed.
 
-**Scenario tested:** Paid conversion was 23% against an inclusive 20% minimum, while p95 latency was 540 milliseconds against a strict 500 millisecond maximum. Gate judgments marks conversion satisfied and latency violated from supplied evidence. The supplied success rule requires every gate to clear and otherwise selects delay, so Governed recommendation selects delay after the gate evaluation.
+**Scenario tested:** Report A supplies conversion at 23% and latency at 540 milliseconds. Canary B supplies latency at 560 milliseconds plus an explicit target-population mismatch. A browser-segment table supplies the target mix and arithmetic yielding an adjusted 480 millisecond estimate. Evidence provenance must preserve all source claims and values. Evidence transformation must separately validate the canary exclusion and report adjustment before they affect gate judgments. With both transformations supported, conversion and latency clear their gates and the governed recommendation is rollout.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the unchanged parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still points to the recorded comparative-test gap. `python decision_brief.py SCENARIOS/063-recommendation-versus-gate-judgments.md` was mentally simulated after the change: all four labels parse unchanged and the six audit groups print, with separate `Governed recommendation` and `Gate judgments` headings.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the unchanged parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still points to the comparative-test gap. `python decision_brief.py SCENARIOS/064-source-record-versus-evidence-transformation.md` was mentally simulated after the change: all four labels parse unchanged and six audit groups print, with separate `Evidence provenance` and `Evidence transformation` headings.
 
-**What was removed or rejected:** Rejected merging the two groups. Evaluating each constraint and selecting the action governed by the success or reversal rule are sequential but distinct obligations. No decision engine, gate parser, mode, configuration, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected merging the two groups. Recording what a source says cannot authorize excluding or adjusting it; validating a transformation cannot rewrite the original source record. No source classifier, adjustment engine, converter, mode, configuration, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The two groups are not redundant. `Gate judgments` establishes whether each condition is satisfied, violated, or unresolved. `Governed recommendation` applies the supplied governance rule to those results and selects one action. The previous `Decision` label duplicated an input field; the new label makes the downstream audit operation inspectable.
+**What was learned:** The two groups are not redundant. Provenance is an immutable source-accounting obligation. Transformation is a permission check for a specific exclusion or adjustment that changes how preserved evidence applies. The previous label named two topics; `Evidence transformation` names the downstream audit operation.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether Evidence provenance and Applicability and adjustment remain distinct: recording source claims versus validating transformations that change how those claims apply.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the six groups can be ordered into one visible reasoning sequence without merging distinct obligations or implying that later operations may rewrite earlier records.
