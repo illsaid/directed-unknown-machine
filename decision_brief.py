@@ -35,13 +35,13 @@ REQUIREMENT_GROUPS = (
         ),
     ),
     (
-        "Gate judgments",
+        "Decision: judge gates",
         (
             "Judge every constraint separately against Success: state whether each gate is satisfied, violated, or unresolved; name the supplied evidence for that status; preserve independent gates rather than collapsing them into one overall verdict; and state when any violated or unresolved gate blocks a supported recommendation.",
         ),
     ),
     (
-        "Governed recommendation",
+        "Decision: recommend",
         (
             "Recommend one action and state how the supplied success or reversal rule governs it.",
         ),
