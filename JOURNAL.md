@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–61 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
+## Runs 22–62 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -28,36 +28,23 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 34–36:** Distinguished threshold-crossing ranges from ranges wholly satisfying or wholly violating a maximum.
 - **Runs 37–40:** Required equality at a threshold to follow the contract's explicit inclusive or strict comparison wording across maximum and minimum gates.
 - **Run 41:** Left equality unresolved when a numeric threshold lacked explicit strict or inclusive comparison semantics.
-- **Run 42:** Preserved conflicting strict and inclusive comparison rules for the same threshold without manufacturing precedence.
-- **Run 43:** Preserved conflicting numeric thresholds for the same metric without choosing the stricter, looser, or later value.
-- **Runs 44–45:** Preserved cross-unit statements when equivalence was absent and accepted reconciliation only when the contract explicitly supplied equivalence.
-- **Run 46:** Accepted explicit threshold precedence while preserving the displaced threshold and its separate result.
-- **Run 47:** Grouped the accumulated obligations under seven inspectable requirement labels without weakening the precedence boundary.
-- **Run 48:** Consolidated four equality clauses into one supplied-strictness rule without weakening inclusive or strict minimum and maximum boundaries.
-- **Run 49:** Consolidated comparator and numeric threshold conflicts into one preservation-and-no-inference rule.
-- **Run 50:** Consolidated source identification and overlapping coverage into one source-to-measurement provenance rule.
-- **Run 51:** Consolidated adjustment context, method auditability, and assumption support into one adjustment-auditability rule.
-- **Run 52:** Consolidated source exclusion into one observed-mismatch-plus-relevance rule.
-- **Run 53:** Consolidated sensitivity handling into one full-range rule covering crossing and same-side ranges.
-- **Run 54:** Consolidated evidence status and interpretation conflict handling without weakening the no-promotion boundary.
-- **Run 55:** Consolidated gate judgments without weakening independent-gate visibility or recommendation blocking.
-- **Run 56:** Consolidated evidence provenance without weakening overlap handling or disagreement visibility.
-- **Run 57:** Consolidated recommendation selection and supplied fallback governance into one Decision invariant.
-- **Run 58:** Consolidated evidence-status preservation and observation-only interpretation handling into one Decision invariant.
-- **Run 59:** Consolidated source exclusion and value adjustment into one applicability-transformation invariant while preserving their distinct support requirements.
+- **Runs 42–46:** Preserved conflicting comparators, numeric thresholds, and cross-unit statements; accepted reconciliation only when explicit equivalence or precedence was supplied.
+- **Runs 47–58:** Grouped and consolidated accumulated decision, gate, provenance, applicability, sensitivity, equality, and interpretation obligations without weakening established boundaries.
+- **Run 59:** Consolidated source exclusion and value adjustment into one applicability-transformation invariant while preserving distinct support requirements.
 - **Run 60:** Consolidated explicit threshold semantics and the no-comparator refusal boundary into one supplied-wording invariant.
 - **Run 61:** Consolidated unresolved threshold conflicts, explicit precedence, and cross-unit equivalence into one exact-reconciliation-support invariant.
+- **Run 62:** Merged sensitivity and threshold semantics into one Boundary evaluation group while retaining full-range and equality rules.
 
-## Run 62 — Merge sensitivity and threshold semantics into boundary evaluation
+## Run 63 — Distinguish boundary evaluation from boundary reconciliation
 
-**What changed:** Added `SCENARIOS/061-consolidated-boundary-evaluation.md`. In `decision_brief.py`, merged the adjacent Sensitivity and Threshold semantics groups into one Boundary evaluation group. The output now has six top-level audit groups instead of seven while retaining separate full-range and equality requirements inside the merged group.
+**What changed:** Added `SCENARIOS/062-boundary-application-versus-reconciliation.md`. Renamed the executable audit group `Threshold conflict` to `Boundary reconciliation`. No requirement text, parser behavior, field, or decision rule changed. `HYPOTHESES.md` was compacted while preserving the live statuses, confidence values, decisive evidence, next tests, and kill criteria.
 
-**Scenario tested:** Paid conversion was exactly 20% against an inclusive minimum of at least 20%; p95 latency had a supported 480–520 millisecond range against a strict maximum below 500 milliseconds; seven-day retention was exactly 70% against a bare 70% threshold with no comparator.
+**Scenario tested:** Paid conversion was exactly 20% against one inclusive minimum, while p95 latency was 480 milliseconds against incompatible 500 millisecond and 450 millisecond strict maxima with no supplied precedence. Conversion can be evaluated directly and is satisfied. Latency requires reconciliation support and remains unresolved. The governed recommendation is delay.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and recorded scenario behavior. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/061-consolidated-boundary-evaluation.md` was mentally simulated after the change: all four labels parse unchanged; conversion equality satisfies the supplied inclusive boundary; the complete latency range crosses the strict boundary and remains conditional; retention equality remains unresolved because no comparator was supplied; delay remains the governed recommendation.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the unchanged parser and scenario. `partial` still maps to `hold-but-improve`, and the recommended action still points to the recorded comparative-test gap. `python decision_brief.py SCENARIOS/062-boundary-application-versus-reconciliation.md` was mentally simulated after the change: all four labels parse unchanged and the six audit groups print, with separate `Boundary evaluation` and `Boundary reconciliation` headings.
 
-**What was removed or rejected:** Removed one top-level audit label by treating sensitivity and equality as branches of ordinary boundary application. No range parser, comparator classifier, threshold engine, new field, mode, configuration, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected merging the two groups. Applying evidence to one supplied boundary and choosing among incompatible boundaries require different supplied support. No threshold parser, automatic conflict detector, unit converter, mode, configuration, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Sensitivity and threshold semantics are not distinct top-level audit questions. Both ask whether the supplied evidence shape—range or exact value—satisfies the supplied boundary wording. They can share one group without losing the crossing-range, strict/inclusive equality, or no-comparator boundaries.
+**What was learned:** The two groups are structurally adjacent but not redundant. The previous `Threshold conflict` label named the input condition; `Boundary reconciliation` names the audit operation and makes the distinction from ordinary Boundary evaluation inspectable.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is whether Boundary evaluation and Threshold conflict remain distinct: applying one supplied boundary versus reconciling incompatible supplied boundaries.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether Decision and Gate judgments remain distinct: selecting the governed action versus evaluating the constraints that permit it.
