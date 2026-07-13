@@ -11,19 +11,6 @@ LABELS = ("Decision", "Evidence", "Constraints", "Success")
 
 REQUIREMENT_GROUPS = (
     (
-        "Governed recommendation",
-        (
-            "Recommend one action and state how the supplied success or reversal rule governs it.",
-            "Preserve supplied observations, interpretations, assumptions, and unresolved gaps as distinct statuses; compare conflicting interpretations only against supplied observations, never promote an interpretation or assumption to fact, leave unsupported conflict explicit, and name the evidence that would distinguish it.",
-        ),
-    ),
-    (
-        "Gate judgments",
-        (
-            "Judge every constraint separately against Success: state whether each gate is satisfied, violated, or unresolved; name the supplied evidence for that status; preserve independent gates rather than collapsing them into one overall verdict; and state when any violated or unresolved gate blocks a supported recommendation.",
-        ),
-    ),
-    (
         "Evidence provenance",
         (
             "Map every source to the measurements and values it actually supplies; disclose overlapping coverage without counting it as support for a different measurement or as additional independent evidence, and when sources disagree on the same measurement, preserve every value and leave the conflict explicit unless supplied evidence establishes which source applies.",
@@ -36,6 +23,12 @@ REQUIREMENT_GROUPS = (
         ),
     ),
     (
+        "Boundary reconciliation",
+        (
+            "Preserve every conflicting threshold statement and leave the gate unresolved unless the contract supplies support for the exact reconciliation used: precedence may select a governing same-metric rule only while preserving displaced rules and reporting each result; cross-unit or cross-representation statements may be reconciled only by a supplied conversion or equivalence. Do not choose by strictness, looseness, field order, or recency, introduce an unsupplied conversion, or let evidence sufficient for precedence substitute for equivalence or vice versa.",
+        ),
+    ),
+    (
         "Boundary evaluation",
         (
             "Judge a supplied supported sensitivity range against the full decision boundary: if the range crosses the threshold, preserve the full range and state the conditional outcome on each side; if every value lies on one side, resolve the gate from the whole range. Never select a midpoint, best case, or other convenient point estimate, and do not mark a same-side range unresolved merely because it is a range.",
@@ -43,9 +36,16 @@ REQUIREMENT_GROUPS = (
         ),
     ),
     (
-        "Boundary reconciliation",
+        "Gate judgments",
         (
-            "Preserve every conflicting threshold statement and leave the gate unresolved unless the contract supplies support for the exact reconciliation used: precedence may select a governing same-metric rule only while preserving displaced rules and reporting each result; cross-unit or cross-representation statements may be reconciled only by a supplied conversion or equivalence. Do not choose by strictness, looseness, field order, or recency, introduce an unsupplied conversion, or let evidence sufficient for precedence substitute for equivalence or vice versa.",
+            "Judge every constraint separately against Success: state whether each gate is satisfied, violated, or unresolved; name the supplied evidence for that status; preserve independent gates rather than collapsing them into one overall verdict; and state when any violated or unresolved gate blocks a supported recommendation.",
+        ),
+    ),
+    (
+        "Governed recommendation",
+        (
+            "Recommend one action and state how the supplied success or reversal rule governs it.",
+            "Preserve supplied observations, interpretations, assumptions, and unresolved gaps as distinct statuses; compare conflicting interpretations only against supplied observations, never promote an interpretation or assumption to fact, leave unsupported conflict explicit, and name the evidence that would distinguish it.",
         ),
     ),
 )
