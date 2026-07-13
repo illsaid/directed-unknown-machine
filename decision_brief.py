@@ -43,7 +43,7 @@ REQUIREMENT_GROUPS = (
     (
         "Decision: recommend",
         (
-            "Recommend exactly one action authorized by the supplied success or reversal rule, and name the rule branch that authorizes it.",
+            "Recommend one authorized action and name the governing Success branch.",
         ),
     ),
 )
