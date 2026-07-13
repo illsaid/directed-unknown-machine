@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–72 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–73 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -44,17 +44,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 70:** Renamed the two boundary stages to `Boundary: reconcile` and `Boundary: apply` so their dependency is visible without merging them.
 - **Run 71:** Renamed the two evidence stages to `Evidence: preserve` and `Evidence: transform` so preservation visibly precedes any supported transformation.
 - **Run 72:** Renamed the two final stages to `Decision: judge gates` and `Decision: recommend`, completing three visibly ordered pairs.
+- **Run 73:** Printed the complete six-stage reasoning sequence once before the detailed requirements.
 
-## Run 73 — Print the complete reasoning sequence once
+## Run 74 — Tighten evidence preservation without weakening it
 
-**What changed:** Added `SCENARIOS/072-visible-sequence-summary.md`. Added one literal `Reasoning sequence` line before the six detailed requirement groups in `decision_brief.py`: preserve evidence, transform evidence, reconcile boundaries, apply boundaries, judge gates, recommend. No requirement text, parser behavior, fields, group order, or decision rules changed.
+**What changed:** Added `SCENARIOS/073-tightened-evidence-preservation.md`. Shortened only the `Evidence: preserve` requirement in `decision_brief.py`. The replacement removes repeated wording but retains source-to-measurement scope, overlap disclosure without double-counting or spill, conflicting-value retention, distinct evidence statuses, the no-promotion rule, explicit unresolved conflict, and the obligation to name distinguishing evidence.
 
-**Scenario tested:** Paid conversion is 23% against an inclusive 20% minimum, and p95 latency is 480 milliseconds against a strict 500 millisecond maximum. Both gates satisfy their supplied boundaries, so the all-gates rule supports rollout. The executable must expose the full six-stage workflow before the dense audit requirements while preserving those requirements unchanged.
+**Scenario tested:** Funnel report A records 12% abandonment and 540 millisecond latency; Export B repeats the same abandonment population but supplies no latency; Monitor C records 560 millisecond latency; two sources offer competing causal interpretations; the team supplies an adaptation assumption; and joined step-level abandonment and response-time evidence is absent. The contract must not count Export B as independent support or latency evidence, erase either latency value, promote either interpretation or the assumption to fact, or prescribe a remedy before the missing discriminator is collected.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/072-visible-sequence-summary.md` was mentally simulated: all four labels parse unchanged; the contract prints intact; the new sequence line appears once before `Brief requirements`; all six existing groups then print in their prior order; the supplied evidence resolves both gates as satisfied and the success rule supports rollout.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/073-tightened-evidence-preservation.md` was mentally simulated: all four labels parse unchanged; the contract and six-stage sequence print intact; the shorter preservation invariant still covers every scenario refusal boundary; and the supplied success condition supports another diagnostic rather than a copy or latency remedy.
 
-**What was removed or rejected:** Rejected a second output mode, abbreviated duplicate requirements, configurable verbosity, another heading rename, a verdict engine, threshold parser, classifier, or dashboard. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed redundant preservation phrasing only. Rejected splitting the invariant again, adding a summary mode, implementing source classification, inferring causal status, or changing any other requirement. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The six operations were already correct but still required readers to reconstruct the workflow from dense headings. One orientation line makes the process legible as a single delegated-analysis path without becoming another source of truth; the detailed requirements remain authoritative.
+**What was learned:** The preservation boundary does not require a catalogue-style sentence. A shorter operation-and-prohibition form remains specific enough to protect the source record while making the audit contract easier to scan.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test should reduce wording inside one existing requirement, not add another presentation layer.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is the adjacent `Evidence: transform` requirement, specifically whether it can be shortened without allowing exclusion evidence to authorize adjustment or adjustment evidence to authorize exclusion.
