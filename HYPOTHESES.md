@@ -50,10 +50,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 73 / `SCENARIOS/072-visible-sequence-summary.md`:** Added one literal sequence line before the detailed requirements: preserve evidence, transform evidence, reconcile boundaries, apply boundaries, judge gates, recommend. The line makes the complete workflow visible on first scan while leaving all six detailed obligations and refusal boundaries unchanged.
 - **Run 74 / `SCENARIOS/073-tightened-evidence-preservation.md`:** Shortened the longest requirement while preserving its tested refusal boundaries. The evidence record still forbids source-to-measurement spill, overlapping-evidence double-counting, silent removal of conflicting values, collapse of observations and non-factual claims, unsupported promotion, and unresolved conflict without a named discriminator.
 - **Run 75 / `SCENARIOS/074-tightened-evidence-transformation.md`:** Shortened the transformation invariant while preserving operation-specific support. A supplied applicability mismatch can authorize source exclusion but cannot authorize a value adjustment; an auditable adjusted value remains conditional while its traffic-share assumption is unsupported.
+- **Run 76 / `SCENARIOS/075-tightened-boundary-reconciliation.md`:** Shortened the reconciliation invariant around one exact-operation support rule. Supplied same-metric precedence may select a governing rule while preserving displaced results, but cannot authorize cross-unit equivalence; supplied equivalence may connect representations, but cannot choose among competing same-metric rules.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test whether `Boundary: reconcile` can be shortened without allowing precedence support to substitute for equivalence support, or vice versa.
+**Next test:** Test whether `Boundary: apply` can be shortened without weakening complete-range handling, strict and inclusive equality semantics, or the no-comparator refusal boundary.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -68,7 +69,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–75 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–76 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
