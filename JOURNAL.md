@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–75 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–76 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -47,17 +47,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 73:** Printed the complete six-stage reasoning sequence once before the detailed requirements.
 - **Run 74:** Shortened the Evidence: preserve invariant while retaining all tested source-record refusal boundaries.
 - **Run 75:** Shortened the Evidence: transform invariant while retaining operation-specific support and non-substitution.
+- **Run 76:** Shortened the Boundary: reconcile invariant while retaining precedence, equivalence, preservation, and non-substitution boundaries.
 
-## Run 76 — Tighten boundary reconciliation without cross-authorizing support
+## Run 77 — Tighten boundary application without weakening range or equality semantics
 
-**What changed:** Added `SCENARIOS/075-tightened-boundary-reconciliation.md`. Shortened only the `Boundary: reconcile` requirement in `decision_brief.py`. The replacement states one exact-operation support rule, then keeps separate authorization tests for same-metric precedence and cross-unit or cross-representation equivalence, preservation of displaced rules, unresolved treatment without support, and the non-substitution rule.
+**What changed:** Added `SCENARIOS/076-tightened-boundary-application.md`. Shortened only the `Boundary: apply` requirement in `decision_brief.py`. The replacement states one application rule—use the complete preserved evidence and only the supplied boundary semantics—then keeps separate compact handling for ranges and equality.
 
-**Scenario tested:** Conversion has conflicting same-metric minimums of 20% and 22%, with supplied charter precedence selecting 22%; observed conversion is 21%. Latency has boundaries of below 500 milliseconds and below 0.5 seconds, but no supplied source connects those representations for the contract. Retention has minimums of 70% and 72% with no supplied precedence. Precedence evidence from conversion must not authorize latency equivalence, and infrastructure equivalence evidence must not choose a retention rule.
+**Scenario tested:** Conversion sensitivity is 19% to 21% against an inclusive 20% minimum; latency sensitivity is 480 to 490 milliseconds against a strict 500 millisecond maximum; error rate equals an inclusive 2% maximum; churn equals a strict 5% maximum; retention equals a bare 70% threshold with no comparator. Every range must be evaluated in full, and equality must follow only explicit comparison wording.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/075-tightened-boundary-reconciliation.md` was mentally simulated: all four labels parse unchanged; the contract and six-stage sequence print intact; the revised conversion rule governs and is violated; latency and retention remain unresolved for different missing operation-specific support; and the supplied success rule supports delay.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/076-tightened-boundary-application.md` was mentally simulated: all four labels parse unchanged; the contract and six-stage sequence print intact; conversion is conditional, latency and error rate are satisfied, churn is violated, retention is unresolved, and the supplied all-gates success rule supports delay.
 
-**What was removed or rejected:** Removed repeated reconciliation phrasing only. Rejected a generic conflict resolver, automatic unit conversion, choosing the strictest rule, using recency or field order as precedence, and allowing one reconciliation operation's evidence to authorize another. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed repeated application phrasing only. Rejected midpoint selection, best-case selection, treating every range as unresolved, inferring equality semantics from a bare threshold, adding a threshold parser, or adding a calculator. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Reconciliation remains safe when expressed as one exact-operation rule followed by distinct precedence and equivalence tests. The essential boundary is not a long list of conflict types; it is that authority to choose a rule and authority to connect representations are separate and non-transferable.
+**What was learned:** Boundary application stays safe when compressed into two non-transferable instructions: evaluate the whole supplied range, and resolve equality only from supplied comparison wording. The refusal boundary is not the length of the requirement; it is refusing to select a convenient point or invent comparator semantics.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is `Boundary: apply`, specifically whether it can be shortened without weakening complete-range handling, supplied equality semantics, or the no-comparator refusal boundary.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is `Decision: judge gates`, specifically whether it can be shortened without allowing an overall verdict to erase independent gate statuses, their supplied evidence, or their blocking effects.
