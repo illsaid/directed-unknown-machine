@@ -11,13 +11,13 @@ LABELS = ("Decision", "Evidence", "Constraints", "Success")
 
 REQUIREMENT_GROUPS = (
     (
-        "Evidence provenance",
+        "Evidence: preserve",
         (
             "Preserve the supplied evidence record without spill, double-counting, or promotion: map every source to the measurements and values it actually supplies; disclose overlapping coverage without treating it as support for another measurement or as additional independent evidence; preserve every conflicting value for the same measurement unless supplied applicability evidence resolves which source applies; and keep observations, interpretations, assumptions, and unresolved gaps as distinct statuses, comparing conflicting interpretations only against supplied observations, never promoting an interpretation or assumption to fact, leaving unsupported conflict explicit, and naming the evidence that would distinguish it.",
         ),
     ),
     (
-        "Evidence transformation",
+        "Evidence: transform",
         (
             "For any source-exclusion or value-adjustment step, preserve every original value and require supplied support for the specific transformation used: exclusion requires both an observed mismatch and why it changes applicability to the target decision population, while adjustment requires the adjusted value, an auditable method, the target population, and every governing assumption with its supplied support. Evidence sufficient for one transformation cannot substitute for the other; unsupported exclusion is invalid, opaque adjustment cannot resolve a gate, and an auditable adjustment remains conditional when a governing assumption lacks support.",
         ),
