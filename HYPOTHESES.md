@@ -40,10 +40,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 63 / `SCENARIOS/062-boundary-application-versus-reconciliation.md`:** Confirmed that Boundary evaluation and Boundary reconciliation are distinct audit questions. Evaluation applies evidence to one supplied boundary; reconciliation requires exact supplied support before choosing among incompatible boundaries.
 - **Run 64 / `SCENARIOS/063-recommendation-versus-gate-judgments.md`:** Confirmed that Governed recommendation and Gate judgments are distinct audit questions. Gate judgments evaluates each constraint from supplied evidence; Governed recommendation selects the action required by the supplied success or reversal rule.
 - **Run 65 / `SCENARIOS/064-source-record-versus-evidence-transformation.md`:** Confirmed that Evidence provenance and Evidence transformation are distinct audit questions. Provenance preserves what each source reports; transformation validates supplied support before exclusion or adjustment changes how a value applies. Renaming `Applicability and adjustment` to `Evidence transformation` makes the operation explicit without changing behavior.
+- **Run 66 / `SCENARIOS/065-visible-reasoning-sequence.md`:** Reordered the unchanged six audit groups into dependency order: Evidence provenance, Evidence transformation, Boundary reconciliation, Boundary evaluation, Gate judgments, and Governed recommendation. The output now exposes the audit trail before the conclusion instead of presenting the recommendation first.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Inspect whether the six audit groups can be ordered as one visible reasoning sequence without merging distinct obligations or implying that later operations may rewrite earlier records.
+**Next test:** Inspect whether the observation, interpretation, assumption, and unresolved-gap status obligation belongs in Evidence provenance rather than Governed recommendation, without broadening provenance beyond the supplied record.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -58,7 +59,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–65 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–66 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
