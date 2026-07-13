@@ -46,10 +46,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 69 / `SCENARIOS/068-consolidated-boundary-evaluation.md`:** Consolidated full-range handling and supplied equality semantics into one boundary-application invariant. The combined requirement still resolves same-side ranges from the whole range, preserves conditional outcomes for threshold-crossing ranges, honors explicit inclusive and strict equality wording, and refuses to invent semantics for a bare numeric threshold.
 - **Run 70 / `SCENARIOS/069-boundary-reconcile-then-apply.md`:** Renamed the two unchanged boundary stages to `Boundary: reconcile` and `Boundary: apply`. The shared prefix and imperative verbs expose their dependency—establish the governing boundary before applying evidence—without merging conflict resolution with threshold application or changing either refusal boundary.
 - **Run 71 / `SCENARIOS/070-evidence-preserve-then-transform.md`:** Renamed the two unchanged evidence stages to `Evidence: preserve` and `Evidence: transform`. The shared prefix and imperative verbs expose that the source record must be fixed before any supported exclusion or adjustment changes how it applies, without merging provenance with transformation or weakening either support boundary.
+- **Run 72 / `SCENARIOS/071-judge-gates-then-recommend.md`:** Renamed the two unchanged final stages to `Decision: judge gates` and `Decision: recommend`. The shared prefix and imperative verbs expose that independent gate results must be established before the supplied success rule selects an action, without collapsing gate judgment into recommendation.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test whether `Gate judgments` and `Governed recommendation` create a concrete sequencing ambiguity. Change their headings only if a named scenario shows that shared operation-first grammar improves the visible reasoning path without collapsing judgment into action selection.
+**Next test:** Stop heading work unless a concrete scenario exposes a new sequencing failure. Test whether the six visible operations can be described more compactly in the executable without weakening any requirement or adding a new abstraction.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -64,7 +65,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–71 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–72 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
