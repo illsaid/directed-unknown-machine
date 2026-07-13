@@ -11,7 +11,7 @@ LABELS = ("Decision", "Evidence", "Constraints", "Success")
 
 REQUIREMENT_GROUPS = (
     (
-        "Decision",
+        "Governed recommendation",
         (
             "Recommend one action and state how the supplied success or reversal rule governs it.",
             "Preserve supplied observations, interpretations, assumptions, and unresolved gaps as distinct statuses; compare conflicting interpretations only against supplied observations, never promote an interpretation or assumption to fact, leave unsupported conflict explicit, and name the evidence that would distinguish it.",
