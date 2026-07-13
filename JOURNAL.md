@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–56 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
+## Runs 22–57 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -42,17 +42,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 54:** Consolidated evidence status and interpretation conflict handling without weakening the no-promotion boundary.
 - **Run 55:** Consolidated gate judgments without weakening independent-gate visibility or recommendation blocking.
 - **Run 56:** Consolidated evidence provenance without weakening overlap handling or disagreement visibility.
+- **Run 57:** Consolidated recommendation selection and supplied fallback governance into one Decision invariant.
 
-## Run 57 — Consolidate recommendation and fallback governance
+## Run 58 — Consolidate evidence status and interpretation conflict
 
-**What changed:** Added `SCENARIOS/056-consolidated-decision-governance.md`. In `decision_brief.py`, replaced the separate “Recommend one action” and “State how the supplied success or reversal rule governs that action” bullets with one requirement: recommend one action and state how the supplied success or reversal rule governs it.
+**What changed:** Added `SCENARIOS/057-consolidated-evidence-interpretation.md`. In `decision_brief.py`, replaced the separate evidence-status and conflicting-interpretation bullets with one requirement that preserves observations, interpretations, assumptions, and gaps as distinct statuses; compares rival interpretations only against supplied observations; leaves unsupported conflict explicit; and names the evidence that would distinguish it.
 
-**Scenario tested:** Paid conversion was 23% against an inclusive 20% minimum. P95 latency was 540 milliseconds against a strict 500-millisecond maximum. The operator supplied rollout only when every gate is satisfied and delay otherwise.
+**Scenario tested:** Checkout abandonment was observed at 12%. The growth lead interpreted confusing copy as the cause; the engineering lead interpreted latency as the cause; the operator assumed returning users would adapt. No step-level abandonment breakdown or response-time correlation was supplied. The decision was whether to rewrite copy, prioritize latency work, or run another diagnostic.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and recorded scenario behavior. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/056-consolidated-decision-governance.md` was mentally simulated after the change: all four labels parse unchanged; conversion is satisfied; latency is violated; the consolidated Decision requirement still requires exactly one recommendation and explicitly binds it to the supplied fallback; delay remains the supported recommendation.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and recorded scenario behavior. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/057-consolidated-evidence-interpretation.md` was mentally simulated after the change: all four labels parse unchanged; the 12% abandonment remains an observation; confusing copy and latency remain rival interpretations; adaptation remains an assumption; the causal gap remains unresolved; the requirement names step-level abandonment and response-time correlation as distinguishing evidence; and another diagnostic remains the supported recommendation.
 
-**What was removed or rejected:** Removed one duplicated Decision bullet by folding action selection and fallback governance into one invariant. No recommender, policy engine, semantic classifier, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed one duplicated Decision bullet by folding statement-status preservation and conflicting-interpretation handling into one observation-governed invariant. No classifier, causal model, recommender, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** A recommendation is not separate from its governance rule. In a bounded delegated decision, “choose one action” is only trustworthy when the same requirement shows how the operator-supplied success or reversal rule controls that action.
+**What was learned:** Evidence status and interpretation conflict are not separate concerns. Both enforce the same trust boundary: a supplied claim may gain decision weight only through supplied observations, while unsupported interpretations and assumptions remain visible but unresolved.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect whether the two remaining Decision requirements can be consolidated without weakening the distinction between evidence status and conflicting interpretations.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect whether the two Applicability and adjustment requirements are genuinely separate invariants or can be consolidated without allowing source exclusion and value adjustment to blur together.
