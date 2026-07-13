@@ -55,10 +55,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 78 / `SCENARIOS/077-tightened-gate-judgment.md`:** Shortened the gate-judgment invariant around independent per-gate reporting. Each gate still requires a satisfied, violated, or unresolved status, its supplied evidence, and its effect on the recommendation; an overall verdict cannot erase violated or unresolved blockers.
 - **Run 79 / `SCENARIOS/078-tightened-governed-recommendation.md`:** Tightened the recommendation invariant around one authorized action and one named governing branch. When a violated-gate branch precedes an unresolved-gate branch, the output must recommend delay alone and identify the violated-gate branch rather than blending delay with a lower-priority diagnostic action.
 - **Run 80 / `SCENARIOS/079-minimal-governed-recommendation.md`:** Removed duplicated recommendation wording by naming the schema field directly: `Recommend one authorized action and name the governing Success branch.` The same mixed violated/unresolved scenario still yields delay alone under the first Success branch, preserving single-action and branch-traceability boundaries.
+- **Run 81 / `SCENARIOS/080-ordered-headings-without-sequence-line.md`:** Removed the standalone reasoning-sequence sentence after confirming that the six adjacent headings already expose the same dependency order through shared category prefixes and imperative verbs. The audit path remains visible while presentation density falls and no refusal boundary changes.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test whether the literal reasoning-sequence line duplicates the six ordered headings or still improves first-scan comprehension.
+**Next test:** Test whether the `Brief requirements` line adds orientation or merely labels the six self-describing headings.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -73,7 +74,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–80 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–81 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
