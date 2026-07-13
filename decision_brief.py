@@ -13,7 +13,7 @@ REQUIREMENT_GROUPS = (
     (
         "Evidence: preserve",
         (
-            "Preserve the supplied evidence record without spill, double-counting, or promotion: map every source to the measurements and values it actually supplies; disclose overlapping coverage without treating it as support for another measurement or as additional independent evidence; preserve every conflicting value for the same measurement unless supplied applicability evidence resolves which source applies; and keep observations, interpretations, assumptions, and unresolved gaps as distinct statuses, comparing conflicting interpretations only against supplied observations, never promoting an interpretation or assumption to fact, leaving unsupported conflict explicit, and naming the evidence that would distinguish it.",
+            "Preserve the supplied evidence record: map each source only to the measurements and values it supplies; disclose overlap without double-counting or measurement spill; retain conflicting values unless supplied applicability evidence resolves which source applies; and keep observations, interpretations, assumptions, and unresolved gaps distinct. Compare interpretations only with supplied observations, never promote interpretations or assumptions to fact, leave unsupported conflicts explicit, and name the evidence that would distinguish them.",
         ),
     ),
     (
