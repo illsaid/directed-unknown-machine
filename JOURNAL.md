@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–68 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–69 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -40,17 +40,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 66:** Ordered the six unchanged audit groups into dependency order from source record through governed action.
 - **Run 67:** Moved evidence-status preservation from Governed recommendation to Evidence provenance so supplied claim status is fixed before downstream reasoning.
 - **Run 68:** Consolidated source mapping and claim-status preservation into one immutable Evidence provenance invariant.
+- **Run 69:** Consolidated full-range and equality handling into one Boundary evaluation invariant.
 
-## Run 69 — Consolidate boundary evaluation into one application invariant
+## Run 70 — Make the two boundary stages visibly sequential
 
-**What changed:** Added `SCENARIOS/068-consolidated-boundary-evaluation.md`. Replaced the two adjacent Boundary evaluation requirements in `decision_brief.py` with one requirement covering complete-range application, threshold-crossing conditionality, same-side range resolution, explicit strict and inclusive equality semantics, and the no-comparator refusal boundary. No parser behavior, field, group, decision rule, classifier, transformation, or mode changed.
+**What changed:** Added `SCENARIOS/069-boundary-reconcile-then-apply.md`. Renamed only the executable headings `Boundary reconciliation` and `Boundary evaluation` to `Boundary: reconcile` and `Boundary: apply`. Requirement text, group order, parser behavior, fields, and decision rules are unchanged.
 
-**Scenario tested:** Paid conversion is exactly 20% against an inclusive minimum of at least 20%; p95 latency is estimated at 480–520 milliseconds against a strict maximum below 500 milliseconds; retention is exactly 70% against a bare 70% threshold with no comparator. The combined invariant must satisfy conversion, preserve a conditional latency result across the range, leave retention unresolved, and support delay because not every gate clears.
+**Scenario tested:** Paid conversion is 21% against two conflicting inclusive minimums, 20% and 22%, with explicit charter precedence for 22%. P95 latency is 480 milliseconds against a strict maximum below 500 milliseconds. The first boundary stage must preserve both conversion rules and reconcile the governing boundary to 22%; the second must apply the supplied evidence, producing violated conversion and satisfied latency gates; the governed recommendation must be delay because every gate must clear.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/068-consolidated-boundary-evaluation.md` was mentally simulated: all four labels parse unchanged; Boundary evaluation prints one combined requirement; the other five groups retain their order and wording; conversion equality satisfies the inclusive boundary, the latency range remains conditional across the strict threshold, retention equality remains unresolved without comparator wording, and the governed recommendation remains delay.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/069-boundary-reconcile-then-apply.md` was mentally simulated: all four labels parse unchanged; the six groups retain their dependency order; the two boundary headings print as `Boundary: reconcile` followed by `Boundary: apply`; their unchanged requirements preserve the supplied precedence, displaced threshold, and separate gate results; the supported recommendation remains delay.
 
-**What was removed or rejected:** Removed one duplicate requirement boundary rather than adding a new audit operation. Added no threshold parser, range calculator, semantic classifier, unit converter, configuration, or dashboard. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected merging the two boundary stages and rejected broad operation-first renaming across all six groups. The scenario demonstrated one local sequencing ambiguity, so only the two implicated headings changed. Added no parser, classifier, calculator, unit converter, mode, configuration, or dashboard. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Range position and equality are both cases of one operation: apply all supplied evidence to the governing boundary exactly as written. They can share one invariant as long as the wording preserves complete-range evaluation, conditional outcomes at crossings, explicit comparator semantics, and refusal to infer equality behavior from a bare number.
+**What was learned:** A shared noun prefix plus distinct imperative verbs makes the dependency visible without collapsing the operations. `Boundary: reconcile` establishes which supplied rule governs; `Boundary: apply` evaluates evidence against that rule. The shorter vocabulary improves scanability while preserving the refusal to infer either reconciliation support or comparison semantics.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether Boundary reconciliation and Boundary evaluation can use a shorter shared vocabulary without merging their distinct operations or weakening either refusal boundary.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether any remaining audit heading creates a concrete sequencing ambiguity; no further renaming is justified without a named scenario.
