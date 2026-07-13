@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–58 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
+## Runs 22–59 — Evidence provenance, applicability, assumptions, sensitivity, threshold boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -44,17 +44,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 56:** Consolidated evidence provenance without weakening overlap handling or disagreement visibility.
 - **Run 57:** Consolidated recommendation selection and supplied fallback governance into one Decision invariant.
 - **Run 58:** Consolidated evidence-status preservation and observation-only interpretation handling into one Decision invariant.
+- **Run 59:** Consolidated source exclusion and value adjustment into one applicability-transformation invariant while preserving their distinct support requirements.
 
-## Run 59 — Consolidate applicability transformations
+## Run 60 — Consolidate threshold semantics
 
-**What changed:** Added `SCENARIOS/058-consolidated-applicability-transforms.md`. In `decision_brief.py`, replaced the separate source-exclusion and value-adjustment bullets with one applicability-transformation requirement. It preserves every original value, requires supplied support specific to the transformation used, and explicitly prevents evidence sufficient for exclusion from substituting for adjustment support or vice versa.
+**What changed:** Added `SCENARIOS/059-consolidated-threshold-semantics.md`. In `decision_brief.py`, replaced the separate explicit-equality and missing-comparator bullets with one supplied-wording invariant: equality resolves only from comparison wording present in the contract and remains unresolved when that wording is absent.
 
-**Scenario tested:** Paid conversion was 23%. Mobile Canary A reported 560 milliseconds from traffic that was 95% native-app, and the contract explicitly placed native-app telemetry outside the target US web population. Web Canary B reported 540 milliseconds from a 70% Safari and 30% Chrome sample, supplied 600/400-millisecond segment values, and supplied a production target mix of 40% Safari and 60% Chrome, producing an auditable 480-millisecond reweighted estimate.
+**Scenario tested:** Paid conversion was exactly 20% against an inclusive minimum of at least 20%; p95 latency was exactly 500 milliseconds against a strict maximum below 500 milliseconds; seven-day retention was exactly 70% against a bare numeric threshold of 70% with no comparator.
 
-**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and recorded scenario behavior. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/058-consolidated-applicability-transforms.md` was mentally simulated after the change: all four labels parse unchanged; Canary A's original value remains visible and exclusion is supported by both mismatch and relevance; Canary B's original and adjusted values remain visible and the supplied segment arithmetic resolves the target-population estimate; conversion and latency gates are satisfied; rollout remains the governed recommendation.
+**Demo check:** `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated before changes from the current parser and recorded scenario behavior. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `python decision_brief.py SCENARIOS/059-consolidated-threshold-semantics.md` was mentally simulated after the change: all four labels parse unchanged; conversion is satisfied by explicit inclusive wording; latency is violated by explicit strict wording; retention remains unresolved because no comparison wording was supplied; delay remains the governed recommendation.
 
-**What was removed or rejected:** Removed one duplicated Applicability and adjustment bullet by folding exclusion and adjustment into one preservation-and-transformation-support invariant with distinct branches. No source classifier, reweighting engine, applicability model, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed one duplicated Threshold semantics bullet by folding explicit and absent comparator handling into one supplied-wording rule. No threshold parser, comparator classifier, automatic decision engine, schema field, configuration, domain mode, or dashboard was added. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Source exclusion and value adjustment are not interchangeable, but they do share one governing boundary: preserve the original evidence and require supplied support for the exact transformation applied. A single invariant can express that boundary only when it keeps the two support tests explicit.
+**What was learned:** Explicit strictness and missing strictness are not separate mechanisms. Both are governed by one refusal boundary: equality may be resolved only from comparison semantics actually supplied by the operator. Consolidation is safe when the no-comparator outcome remains explicitly unresolved.
 
-**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect whether the two Threshold semantics requirements can be consolidated without letting a numeric threshold with no comparator inherit strict or inclusive meaning.
+**Hypothesis movement:** H2 remains primary at 0.99. Confidence stayed unchanged near saturation. The hypothesis survived. The next test is to inspect whether the three Threshold conflict requirements can be reduced without allowing precedence, reconciliation, and cross-unit equivalence to substitute for one another.
