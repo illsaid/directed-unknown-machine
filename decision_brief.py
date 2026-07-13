@@ -44,8 +44,7 @@ REQUIREMENT_GROUPS = (
     (
         "Threshold semantics",
         (
-            "When a supported range touches a threshold exactly, apply the supplied comparison wording: equality satisfies an inclusive boundary such as ‘at or below’ or ‘at least,’ and violates a strict boundary such as ‘below,’ ‘strictly below,’ ‘above,’ or ‘strictly above.’",
-            "When a numeric threshold is supplied without explicit strict or inclusive comparison wording, equality cannot resolve the gate and must remain unresolved rather than inheriting an unstated convention.",
+            "Resolve equality only from comparison wording supplied by the contract: equality satisfies an inclusive boundary such as ‘at or below’ or ‘at least,’ violates a strict boundary such as ‘below,’ ‘strictly below,’ ‘above,’ or ‘strictly above,’ and remains unresolved when a numeric threshold has no explicit strict or inclusive wording rather than inheriting an unstated convention.",
         ),
     ),
     (
