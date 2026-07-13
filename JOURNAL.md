@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–77 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–79 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -49,17 +49,19 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 75:** Shortened the Evidence: transform invariant while retaining operation-specific support and non-substitution.
 - **Run 76:** Shortened the Boundary: reconcile invariant while retaining precedence, equivalence, preservation, and non-substitution boundaries.
 - **Run 77:** Shortened the Boundary: apply invariant while retaining whole-range handling, explicit equality semantics, and the no-comparator refusal boundary.
+- **Run 78:** Shortened Decision: judge gates while preserving independent statuses, supplied evidence, and blocking effects.
+- **Run 79:** Shortened Decision: recommend while preserving one authorized action and explicit identification of the governing rule branch.
 
-## Run 78 — Tighten gate judgment without erasing independent results
+## Run 80 — Name the Success branch directly
 
-**What changed:** Added `SCENARIOS/077-tightened-gate-judgment.md`. Shortened only the `Decision: judge gates` requirement in `decision_brief.py`. The replacement states one per-gate rule—report each status, its supplied evidence, and its recommendation effect—then explicitly forbids an overall verdict from erasing violated or unresolved blockers.
+**What changed:** Added `SCENARIOS/079-minimal-governed-recommendation.md`. Changed only the `Decision: recommend` requirement in `decision_brief.py` from `Recommend exactly one action authorized by the supplied success or reversal rule, and name the rule branch that authorizes it.` to `Recommend one authorized action and name the governing Success branch.`
 
-**Scenario tested:** Conversion is 23% against an inclusive 20% minimum; latency is 540 milliseconds against a strict 500 millisecond maximum; retention equals a bare 70% threshold with no comparator. The supplied rule permits rollout only when every gate is supported as satisfied.
+**Scenario tested:** Conversion is 23% against an inclusive 20% minimum; latency is 540 milliseconds against a strict 500 millisecond maximum; retention equals a bare 70% threshold with no comparator. Success orders the branches: any violation means delay; otherwise any unresolved gate means diagnostic; only all-satisfied permits rollout.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/077-tightened-gate-judgment.md` was mentally simulated: all four labels parse unchanged; the contract and six-stage sequence print intact; conversion is satisfied, latency is violated, retention is unresolved, and the supplied all-gates rule supports delay while preserving both blocking gates.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/079-minimal-governed-recommendation.md` was mentally simulated: all four labels parse; the contract and six-stage sequence print intact; conversion is satisfied, latency is violated, retention is unresolved, and delay remains the only authorized action under the first Success branch.
 
-**What was removed or rejected:** Removed repeated language about preserving independent gates and blocking a recommendation. Rejected collapsing all gates into `delay`, listing only failed gates, omitting supplied evidence from satisfied gates, adding a gate evaluator, or adding an overall-status field. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed `exactly`, the repeated phrase `supplied success or reversal rule`, and the second use of `authorize`. Rejected removing `authorized`, removing the branch requirement, deriving an action automatically, adding precedence parsing, or merging gate judgment with recommendation. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Gate judgment stays safe when compressed around the unit that matters: one independently reported gate. The overall verdict is downstream and cannot substitute for gate-level status, evidence, or blocking effect.
+**What was learned:** The recommendation boundary is clearer when it names the schema field rather than redescribing it. `One authorized action` preserves exclusivity, and `governing Success branch` preserves both traceability and branch precedence in fewer words.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether `Decision: recommend` can be tightened while still requiring one action and explicit traceability to the supplied success or reversal rule.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the literal reasoning-sequence line duplicates the six ordered headings or still improves first-scan comprehension.
