@@ -42,10 +42,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 65 / `SCENARIOS/064-source-record-versus-evidence-transformation.md`:** Confirmed that Evidence provenance and Evidence transformation are distinct audit questions. Provenance preserves what each source reports; transformation validates supplied support before exclusion or adjustment changes how a value applies. Renaming `Applicability and adjustment` to `Evidence transformation` makes the operation explicit without changing behavior.
 - **Run 66 / `SCENARIOS/065-visible-reasoning-sequence.md`:** Reordered the unchanged six audit groups into dependency order: Evidence provenance, Evidence transformation, Boundary reconciliation, Boundary evaluation, Gate judgments, and Governed recommendation. The output now exposes the audit trail before the conclusion instead of presenting the recommendation first.
 - **Run 67 / `SCENARIOS/066-evidence-status-versus-recommendation.md`:** Moved the unchanged observation, interpretation, assumption, and unresolved-gap status obligation from Governed recommendation to Evidence provenance. Claim status is now preserved at the source-record stage before transformations or downstream judgments use it; Governed recommendation is narrowed to action selection under the supplied rule.
+- **Run 68 / `SCENARIOS/067-consolidated-evidence-provenance.md`:** Consolidated source mapping and claim-status preservation into one immutable-record invariant. The combined requirement still prevents measurement spill, duplicate-evidence inflation, conflicting-value erasure, and promotion of interpretations or assumptions to fact.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Inspect whether the two Evidence provenance obligations can be consolidated without weakening source-to-measurement mapping, conflicting-value preservation, or claim-status separation.
+**Next test:** Inspect whether the two Boundary evaluation requirements can be consolidated without weakening full-range handling, explicit equality semantics, or the no-comparator refusal boundary.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -60,7 +61,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–67 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–68 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
