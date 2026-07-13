@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–69 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–70 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -41,17 +41,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 67:** Moved evidence-status preservation from Governed recommendation to Evidence provenance so supplied claim status is fixed before downstream reasoning.
 - **Run 68:** Consolidated source mapping and claim-status preservation into one immutable Evidence provenance invariant.
 - **Run 69:** Consolidated full-range and equality handling into one Boundary evaluation invariant.
+- **Run 70:** Renamed the two boundary stages to `Boundary: reconcile` and `Boundary: apply` so their dependency is visible without merging them.
 
-## Run 70 — Make the two boundary stages visibly sequential
+## Run 71 — Make the two evidence stages visibly sequential
 
-**What changed:** Added `SCENARIOS/069-boundary-reconcile-then-apply.md`. Renamed only the executable headings `Boundary reconciliation` and `Boundary evaluation` to `Boundary: reconcile` and `Boundary: apply`. Requirement text, group order, parser behavior, fields, and decision rules are unchanged.
+**What changed:** Added `SCENARIOS/070-evidence-preserve-then-transform.md`. Renamed only the executable headings `Evidence provenance` and `Evidence transformation` to `Evidence: preserve` and `Evidence: transform`. Requirement text, group order, parser behavior, fields, and decision rules are unchanged.
 
-**Scenario tested:** Paid conversion is 21% against two conflicting inclusive minimums, 20% and 22%, with explicit charter precedence for 22%. P95 latency is 480 milliseconds against a strict maximum below 500 milliseconds. The first boundary stage must preserve both conversion rules and reconcile the governing boundary to 22%; the second must apply the supplied evidence, producing violated conversion and satisfied latency gates; the governed recommendation must be delay because every gate must clear.
+**Scenario tested:** Report A records paid conversion at 23% and p95 latency at 540 milliseconds. A supplied browser-segment table records 60% desktop traffic at 450 milliseconds and 40% mobile-web traffic at 525 milliseconds, with an explicitly matching production mix and auditable weighted estimate of 480 milliseconds. The first evidence stage must preserve every original source and value; the second may apply only the supported adjustment. Conversion and adjusted latency both satisfy their gates, so the governed recommendation is rollout.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/069-boundary-reconcile-then-apply.md` was mentally simulated: all four labels parse unchanged; the six groups retain their dependency order; the two boundary headings print as `Boundary: reconcile` followed by `Boundary: apply`; their unchanged requirements preserve the supplied precedence, displaced threshold, and separate gate results; the supported recommendation remains delay.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/070-evidence-preserve-then-transform.md` was mentally simulated: all four labels parse unchanged; the six groups retain their dependency order; the evidence headings print as `Evidence: preserve` followed by `Evidence: transform`; their unchanged requirements retain every original value and authorize the 480 millisecond adjustment only from the supplied method, target population, weights, and assumption support; the supported recommendation is rollout.
 
-**What was removed or rejected:** Rejected merging the two boundary stages and rejected broad operation-first renaming across all six groups. The scenario demonstrated one local sequencing ambiguity, so only the two implicated headings changed. Added no parser, classifier, calculator, unit converter, mode, configuration, or dashboard. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected merging evidence preservation with transformation and rejected renaming the remaining recommendation stages without scenario evidence. Added no parser, classifier, calculator, adjustment engine, mode, configuration, or dashboard. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** A shared noun prefix plus distinct imperative verbs makes the dependency visible without collapsing the operations. `Boundary: reconcile` establishes which supplied rule governs; `Boundary: apply` evaluates evidence against that rule. The shorter vocabulary improves scanability while preserving the refusal to infer either reconciliation support or comparison semantics.
+**What was learned:** The same shared-prefix grammar that clarified boundary handling also clarifies evidence handling. `Evidence: preserve` fixes the immutable source record; `Evidence: transform` permits only supported changes in how that record applies. The sequence is easier to scan while the prohibition on unsupported exclusion or opaque adjustment remains intact.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether any remaining audit heading creates a concrete sequencing ambiguity; no further renaming is justified without a named scenario.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether `Gate judgments` and `Governed recommendation` create a comparable sequencing ambiguity; no further heading change is justified without a named scenario.
