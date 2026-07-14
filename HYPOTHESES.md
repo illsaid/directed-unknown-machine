@@ -60,10 +60,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 83 / `SCENARIOS/082-contract-without-generic-title.md`:** Removed the opening `Bounded decision brief task` title after confirming that the immediately following contract check, four explicit fields, and six audit headings already identify the artifact and its purpose. The executable now begins with the enforceable contract rather than presentation-only framing.
 - **Run 84 / `SCENARIOS/083-incomplete-contract-check.md`:** Pressured the complete-state line with a contract missing `Success`. Validation refused before printing any completeness claim and named only the missing field. This showed that the refusal boundary lives in validation and repair, allowing the valid-contract line to tighten to `Contract: complete — 4/4 fields explicit; nothing inferred.` without weakening completeness or no-inference evidence.
 - **Run 85 / `SCENARIOS/084-partially-labeled-repair.md`:** Corrected the repair diagnosis for a contract with three valid labels and one missing field. The executable now requests only the missing explicit field without falsely calling the existing notes unlabeled; validation, the four-field schema, and the no-inference boundary are unchanged.
+- **Run 86 / `SCENARIOS/085-unlabeled-contract-repair.md`:** Confirmed that the same missing-field path handles wholly unlabeled prose without classification or a second repair mode. Replacing the indirect consequence statement `cannot preserve the decision contract` with the directly validated state `contract incomplete` keeps the partial-contract behavior intact while making the zero-label repair more exact.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test whether the neutral repair line remains accurate when all four contract labels are absent, without introducing separate repair modes.
+**Next test:** Test whether repair output can lead directly with the missing labels and remove the remaining generic diagnosis without making the refusal less clear.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -78,7 +79,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–85 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–86 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
