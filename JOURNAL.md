@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–104 — Evidence, boundaries, sequencing, and repair grammar
+## Runs 22–105 — Evidence, boundaries, sequencing, and repair grammar
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -31,19 +31,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 100:** Exposed malformed-label contamination and weakened H2.
 - **Run 101:** Added a narrow malformed unsupported-label refusal and restored H2.
 - **Runs 102–104:** Verified allowed-label exclusion, first-location reporting, and repeated-label collapse.
+- **Run 105:** Verified distinct malformed labels and clarified that reported locations are Input-relative.
 
-## Run 105 — Clarify distinct malformed-field locations
+## Run 106 — Compose repeated and distinct malformed-label handling
 
-**What changed:** Added `SCENARIOS/103-distinct-line-broken-unsupported-labels.md`. Changed malformed-field repair items from `(line N)` to `(input line N)`.
+**What changed:** Added `SCENARIOS/104-repeated-and-distinct-line-broken-labels.md`. No executable change was made because the existing preflight already passed the combined boundary.
 
-**Scenario tested:** A complete checkout rollout contract contains two different malformed unsupported fields: `Owner\n:` beginning on Input line 2 and `Deadline\n:` beginning on Input line 5. The tool must refuse before extraction, preserve source order, and report both locations without implying that the numbers refer to whole-file lines.
+**Scenario tested:** A complete checkout rollout contract contains malformed `Owner` beginning on Input line 2, malformed `Deadline` beginning on Input line 5, and a later case-variant `owner` beginning on Input line 7. The tool must retain the first `Owner` occurrence, preserve `Deadline` separately, and refuse before extraction.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the scenario's recorded comparative-test gap.
 
-**Observable output:** `Malformed explicit fields:\n- Owner (input line 2)\n- Deadline (input line 5)\nKeep each field label and colon on the same line.` The output contains two distinct repair items in source order, no merging, no schema expansion, no normalization of either split label, no field contamination, and no complete-contract result.
+**Observable output:** `Malformed explicit fields:\n- Owner (input line 2)\n- Deadline (input line 5)\nKeep each field label and colon on the same line.` The later `owner` occurrence is omitted, the first spelling and location are retained, the distinct defect remains visible in source order, and no allowed field is extracted or contaminated.
 
-**What was removed or rejected:** Rejected whole-file line-number calculation, a generic source-location abstraction, semantic classification of `Owner` or `Deadline`, and changes to allowed-label parsing. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected another deduplication layer, a generic defect collection abstraction, and any change to field parsing. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Distinct malformed schema defects were already preserved correctly. The useful executable improvement was precision: location scope must match the parser's actual coordinate system. A repair that says only `line N` is misleading when numbering begins inside an extracted block.
+**What was learned:** The existing narrow preflight composes correctly across repeated and distinct malformed labels. Further permutations of this same deduplication behavior would be polish drift rather than purpose discovery.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether one repeated malformed label retains only its first Input-relative location while another distinct malformed label remains separately visible.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test moves away from deduplication permutations and asks whether ordinary wrapped field prose can be falsely classified as a malformed unsupported field.
