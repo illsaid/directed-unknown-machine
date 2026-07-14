@@ -103,7 +103,6 @@ def main() -> int:
     missing = [label for label, value in values.items() if not value]
     if missing:
         raise SystemExit(repair_template(missing))
-    print("Bounded decision brief task")
     print(f"Contract check: complete — {len(LABELS)}/{len(LABELS)} explicit fields; no content inferred.")
     print(f"Decision: {values['Decision']}")
     print(f"Evidence supplied: {values['Evidence']}")
