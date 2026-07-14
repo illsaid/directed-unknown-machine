@@ -70,6 +70,20 @@ def unsupported_labels(raw: str) -> list[str]:
     return unsupported
 
 
+def malformed_unsupported_labels(raw: str) -> list[str]:
+    split = re.findall(r"^([A-Za-z][A-Za-z \t]*)\n[ \t]*:", raw, re.MULTILINE)
+    allowed = {item.lower() for item in LABELS}
+    seen: set[str] = set()
+    malformed: list[str] = []
+    for label in split:
+        label = label.strip()
+        key = label.lower()
+        if key not in allowed and key not in seen:
+            seen.add(key)
+            malformed.append(label)
+    return malformed
+
+
 def labeled_value(raw: str, label: str) -> str | None:
     next_labels = "|".join(LABELS)
     match = re.search(
@@ -83,6 +97,11 @@ def labeled_value(raw: str, label: str) -> str | None:
 def repair_template(missing: list[str]) -> str:
     fields = "\n".join(f"{label}:" for label in missing)
     return f"Missing explicit fields:\n{fields}"
+
+
+def malformed_template(malformed: list[str]) -> str:
+    fields = "\n".join(f"- {label}" for label in malformed)
+    return f"Malformed explicit fields:\n{fields}\nKeep each field label and colon on the same line."
 
 
 def unsupported_template(unsupported: list[str]) -> str:
@@ -107,6 +126,9 @@ def main() -> int:
         raise SystemExit("usage: python decision_brief.py SCENARIOS/005-decision-support.md")
     path = Path(sys.argv[1])
     raw = scenario_input(path.read_text(encoding="utf-8"))
+    malformed = malformed_unsupported_labels(raw)
+    if malformed:
+        raise SystemExit(malformed_template(malformed))
     unsupported = unsupported_labels(raw)
     if unsupported:
         raise SystemExit(unsupported_template(unsupported))
