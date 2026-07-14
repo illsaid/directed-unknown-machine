@@ -74,8 +74,8 @@ def labeled_value(raw: str, label: str) -> str | None:
 def repair_template(missing: list[str]) -> str:
     fields = "\n".join(f"{label}:" for label in missing)
     return (
-        "cannot preserve the decision contract from unlabeled prose; "
-        "add these explicit fields without rewriting the notes:\n"
+        "cannot preserve the decision contract; "
+        "add these missing explicit fields without rewriting the notes:\n"
         f"{fields}"
     )
 
