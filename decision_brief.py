@@ -62,6 +62,7 @@ def unsupported_labels(raw: str) -> list[str]:
     seen: set[str] = set()
     unsupported: list[str] = []
     for label in explicit:
+        label = label.strip()
         key = label.lower()
         if key not in allowed and key not in seen:
             seen.add(key)
