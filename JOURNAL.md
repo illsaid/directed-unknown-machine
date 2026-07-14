@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–84 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–85 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -56,17 +56,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 82:** Removed the generic `Brief requirements` wrapper after the six audit headings proved sufficient to identify the requirement sequence.
 - **Run 83:** Removed the generic opening title after the contract check and explicit fields proved sufficient to identify the artifact.
 - **Run 84:** Tightened the complete-contract postcondition after missing-field validation proved to carry the refusal boundary.
+- **Run 85:** Corrected partial-contract repair wording so it names only the validated missing-field defect.
 
-## Run 85 — Describe partial-contract repair accurately
+## Run 86 — Make one repair path exact for zero or partial labels
 
-**What changed:** Added `SCENARIOS/084-partially-labeled-repair.md`. Replaced `cannot preserve the decision contract from unlabeled prose; add these explicit fields without rewriting the notes:` with `cannot preserve the decision contract; add these missing explicit fields without rewriting the notes:`. Validation, missing-field selection, the four-field schema, complete-contract output, six audit operations, and all decision rules remain unchanged.
+**What changed:** Added `SCENARIOS/085-unlabeled-contract-repair.md`. Replaced the repair preamble `cannot preserve the decision contract; add these missing explicit fields without rewriting the notes:` with `contract incomplete; add the missing explicit fields without rewriting the notes:`. Updated the prior partial-contract scenario so it remains an active regression. Missing-field detection, label order, the four-field schema, complete-contract output, six audit operations, and all decision rules remain unchanged.
 
-**Scenario tested:** Decision, Evidence, and Constraints are populated while Success is absent. The observable requirement is a repair message that requests only `Success:` without falsely describing the three supplied labels as unlabeled or inferring a fallback rule.
+**Scenario tested:** A concrete rollout decision is supplied entirely as ordinary prose with no explicit contract labels. The observable requirement is one repair path that requests `Decision:`, `Evidence:`, `Constraints:`, and `Success:` in schema order without classifying the prose, inferring field contents, recommending an action, or adding a separate unlabeled-input mode.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. The local clone attempt failed because the runtime could not resolve `github.com`, so the current files were inspected through the GitHub connector. After changes, `python decision_brief.py SCENARIOS/084-partially-labeled-repair.md` was mentally simulated: the parser retains three populated fields, identifies only `Success` as missing, exits through the neutral repair line, and never prints a completeness claim or recommendation.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/085-unlabeled-contract-repair.md` was mentally simulated: unsupported-label detection returns none, all four values remain absent, and the existing missing-field path exits with the direct incomplete-contract line followed by all four labels. The updated partial-contract regression still requests only `Success:`.
 
-**What was removed or rejected:** Removed only the inaccurate diagnosis `from unlabeled prose`. Rejected separate partial-versus-unlabeled repair modes, parser changes, automatic prose classification, schema expansion, and edits to the six audit requirements. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed the indirect consequence phrase `cannot preserve the decision contract` and the demonstrative `these`. Rejected separate repair modes, automatic sentence classification, field inference, schema expansion, and changes to the six audit requirements. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Missing-field validation already identifies the actionable defect precisely. The repair preamble should not make a broader claim about the input form than the parser has established. A neutral diagnosis is more accurate for partially labeled contracts and remains tied to the same observable repair.
+**What was learned:** The parser establishes one fact for both zero-label and partial-label inputs: the contract is incomplete. Naming that state is more exact than describing a downstream preservation failure, and one missing-field path remains sufficient across both cases.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the neutral repair line also remains accurate when all four labels are absent, without introducing another mode. `WHAT_THIS_IS_FOR.md` was not rewritten because its July 13 rewrite remains within 24 hours.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether repair output can lead directly with the missing labels and remove the remaining generic diagnosis without making refusal less clear. `WHAT_THIS_IS_FOR.md` was not rewritten because its July 13 rewrite remains within 24 hours.
