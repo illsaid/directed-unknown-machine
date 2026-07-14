@@ -73,7 +73,7 @@ def unsupported_labels(raw: str) -> list[str]:
 def labeled_value(raw: str, label: str) -> str | None:
     next_labels = "|".join(LABELS)
     match = re.search(
-        rf"(?:^|\n){label}\s*:\s*(.*?)(?=\n(?:{next_labels})\s*:|\Z)",
+        rf"(?:^|\n){label}[ \t]*:[ \t]*(.*?)(?=\n(?:{next_labels})[ \t]*:|\Z)",
         raw,
         re.IGNORECASE | re.DOTALL,
     )
