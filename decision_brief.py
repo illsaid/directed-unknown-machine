@@ -70,17 +70,21 @@ def unsupported_labels(raw: str) -> list[str]:
     return unsupported
 
 
-def malformed_unsupported_labels(raw: str) -> list[str]:
-    split = re.findall(r"^([A-Za-z][A-Za-z \t]*)\n[ \t]*:", raw, re.MULTILINE)
+def malformed_unsupported_labels(raw: str) -> list[tuple[str, int]]:
     allowed = {item.lower() for item in LABELS}
     seen: set[str] = set()
-    malformed: list[str] = []
-    for label in split:
-        label = label.strip()
+    malformed: list[tuple[str, int]] = []
+    lines = raw.splitlines()
+    for index, line in enumerate(lines[:-1]):
+        if not re.fullmatch(r"[A-Za-z][A-Za-z \t]*", line):
+            continue
+        if not re.match(r"^[ \t]*:", lines[index + 1]):
+            continue
+        label = line.strip()
         key = label.lower()
         if key not in allowed and key not in seen:
             seen.add(key)
-            malformed.append(label)
+            malformed.append((label, index + 1))
     return malformed
 
 
@@ -99,8 +103,8 @@ def repair_template(missing: list[str]) -> str:
     return f"Missing explicit fields:\n{fields}"
 
 
-def malformed_template(malformed: list[str]) -> str:
-    fields = "\n".join(f"- {label}" for label in malformed)
+def malformed_template(malformed: list[tuple[str, int]]) -> str:
+    fields = "\n".join(f"- {label} (line {line_number})" for label, line_number in malformed)
     return f"Malformed explicit fields:\n{fields}\nKeep each field label and colon on the same line."
 
 
