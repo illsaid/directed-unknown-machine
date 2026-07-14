@@ -43,10 +43,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 90 / `SCENARIOS/089-matching-field-remap.md`:** Shortened the remapping instruction to `Place each extra meaning under its matching allowed field.` The repair still preserves the unsupported meaning, leaves field selection to the operator, and refuses schema expansion or automatic classification.
 - **Run 91 / `SCENARIOS/090-no-repeated-allowed.md`:** Removed the repeated word `allowed` from the remapping instruction. The schema line establishes the fixed fields once, while `Place each extra meaning under its matching field.` keeps remapping operator-directed.
 - **Run 92 / `SCENARIOS/091-multiple-unsupported-fields.md`:** Replaced singular-sounding `matching field` guidance with `Remap each extra meaning to one of those fields.` Two unsupported labels remain separately visible, the preceding schema list is the only destination set, and field choice remains with the operator rather than the executable.
+- **Run 93 / `SCENARIOS/092-repeated-unsupported-label.md`:** Collapsed repeated case-insensitive occurrences of the same unsupported label into one repair item while preserving first-seen spelling and leaving every distinct source meaning untouched for operator-directed remapping.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test whether repeated unsupported labels should remain repeated to preserve distinct extra meanings or be collapsed for concision.
+**Next test:** Test whether unsupported labels that differ only by case should preserve first-seen spelling while collapsing to one repair item.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -61,7 +62,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–92 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–93 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
