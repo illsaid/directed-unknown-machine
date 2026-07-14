@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–81 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–82 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -53,17 +53,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 79:** Shortened Decision: recommend while preserving one authorized action and explicit identification of the governing rule branch.
 - **Run 80:** Named the `Success` field directly in the recommendation invariant while preserving one-action and branch-traceability boundaries.
 - **Run 81:** Removed the standalone reasoning-sequence line after the six ordered headings proved sufficient to carry the audit path.
+- **Run 82:** Removed the generic `Brief requirements` wrapper after the six audit headings proved sufficient to identify the requirement sequence.
 
-## Run 82 — Let the audit headings stand without a wrapper
+## Run 83 — Let the contract identify itself
 
-**What changed:** Added `SCENARIOS/081-headings-without-requirements-wrapper.md`. Removed only the generic `Brief requirements:` line from `decision_brief.py`; all six headings and their requirements remain unchanged.
+**What changed:** Added `SCENARIOS/082-contract-without-generic-title.md`. Removed only the opening `Bounded decision brief task` line from `decision_brief.py`; the contract check, four supplied fields, six audit headings, and all requirements remain unchanged.
 
-**Scenario tested:** Conversion is 23% against an inclusive 20% minimum and latency is 480 milliseconds against a strict 500 millisecond maximum. Success permits rollout only if every gate is satisfied. The presentation test asks whether the six self-describing headings remain clear when they follow the four-field contract directly.
+**Scenario tested:** Conversion is 23% against an inclusive 20% minimum and latency is 480 milliseconds against a strict 500 millisecond maximum. Success permits rollout only if every gate is satisfied. The presentation test asks whether the enforceable contract can identify the artifact without a generic title.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/081-headings-without-requirements-wrapper.md` was mentally simulated: all four labels parse; the contract prints intact; `Evidence: preserve` follows it directly; all six headings remain ordered; conversion and latency both satisfy their gates; rollout is the authorized action.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/082-contract-without-generic-title.md` was mentally simulated: all four labels parse; output begins with `Contract check: complete — 4/4 explicit fields; no content inferred`; the four fields and six ordered audit operations print intact; conversion and latency both satisfy their gates; rollout is the authorized action.
 
-**What was removed or rejected:** Removed one generic presentation label that named no operation, invariant, or refusal boundary. Rejected changing any heading, requirement, parser behavior, decision rule, or output field. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed one presentation-only title that named no contract field, audit operation, decision rule, or refusal boundary. Rejected changing the contract-check line, parser behavior, any requirement, or any decision rule. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** `Brief requirements` was scaffolding left over from when the obligations were less structured. Once every group has a domain prefix and imperative operation, the wrapper adds hierarchy without meaning. The contract now flows directly into its audit sequence.
+**What was learned:** The contract is more legible when the first line states its enforceable property rather than its generic document type. `Contract check` immediately exposes completeness and the no-inference boundary; the deleted title added hierarchy but no operational meaning.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the opening `Bounded decision brief task` title adds orientation or duplicates the immediately following contract check and fields. `WHAT_THIS_IS_FOR.md` was not rewritten because its July 13 rewrite remains within 24 hours.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is to pressure the `Contract check` wording with an incomplete-field scenario before simplifying it, because that line may carry a real refusal boundary. `WHAT_THIS_IS_FOR.md` was not rewritten because its July 13 rewrite remains within 24 hours.
