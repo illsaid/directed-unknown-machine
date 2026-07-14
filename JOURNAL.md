@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–99 — Evidence, boundaries, sequencing, and simplification
+## Runs 22–100 — Evidence, boundaries, sequencing, and simplification
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -36,17 +36,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 97:** Restricted colon padding to spaces and tabs, so `Decision\n:` is refused as a missing explicit field while same-line spacing remains accepted.
 - **Run 98:** Verified that an allowed label followed by a tab and colon remains accepted without reopening the multiline-label boundary.
 - **Run 99:** Applied the same horizontal-spacing grammar to unsupported labels, so `Owner\t:` is refused instead of being absorbed into Success.
+- **Run 100:** Exposed that `Owner\n:` stayed outside explicit-label detection but was then absorbed into Success; H2 confidence dropped to 0.98 pending a narrow refusal.
 
-## Run 100 — Expose malformed unsupported-label contamination
+## Run 101 — Refuse malformed unsupported labels before extraction
 
-**What changed:** Added `SCENARIOS/099-line-broken-unsupported-label.md`. No executable change was made. H2 confidence was reduced from 0.99 to 0.98 because the test exposed a concrete contract-preservation failure rather than a harmless formatting variation.
+**What changed:** Added `malformed_unsupported_labels()` and a compact malformed-field refusal to `decision_brief.py`. The check matches only an unsupported label-only line immediately followed by a colon-start line. Updated `SCENARIOS/099-line-broken-unsupported-label.md` with the passing observable result.
 
-**Scenario tested:** A complete checkout rollout contract supplies all four allowed fields, followed by `Owner` on one line and `: Growth team owns implementation.` on the next. The observable requirement is refusal before complete-contract output, without normalizing the split structure into a valid label or absorbing it into Success.
+**Scenario tested:** A complete checkout rollout contract supplies all four allowed fields, followed by `Owner` on one line and `: Growth team owns implementation.` on the next. The executable must refuse this structure before complete-contract output without normalizing it into a valid label, absorbing it into Success, inferring a destination, or expanding the schema.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. `decision_brief.py` was also mentally simulated against the new scenario. `unsupported_labels` does not match `Owner\n:` because its character class excludes line breaks. `labeled_value` then captures the malformed fragment as part of Success because no subsequent valid allowed label terminates that field. The executable therefore emits `Contract: complete` with contaminated Success content.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. The new decision-contract path was mentally simulated against Scenario 099: `malformed_unsupported_labels` captures `Owner`, excludes the four allowed labels, and exits with `Malformed explicit fields:\n- Owner\nKeep each field label and colon on the same line.` before unsupported-field detection or field extraction.
 
-**What was removed or rejected:** Rejected broad `\s` tolerance, treating `Owner\n:` as a valid explicit label, automatic assignment of Owner to a supported field, a fifth schema field, and a generic malformed-input parser. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected broad multiline-label normalization, a generic malformed-input parser, automatic remapping, and changes to `labeled_value`. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Keeping line breaks outside the explicit-label grammar is necessary but insufficient. A malformed label-like fragment can still bypass validation and silently alter a supported field. The next improvement must be a narrow refusal for exactly this structure, not broader label normalization.
+**What was learned:** The preservation boundary needs a small preflight for malformed unsupported field structure, separate from the valid explicit-label grammar. Keeping allowed labels out of that check closes the contamination failure while preserving the established `Decision\n:` missing-field behavior.
 
-**Hypothesis movement:** H2 remains primary but drops to 0.98. It survived only partially because the scenario exposed one preservation failure. The next test is a targeted malformed-label refusal that leaves ordinary same-line label parsing unchanged.
+**Hypothesis movement:** H2 remains primary and returns from 0.98 to 0.99 because the specific Run 100 failure is now refused without semantic classification or schema expansion. The next test is to verify that a line-broken allowed label still follows the existing missing-field refusal.
