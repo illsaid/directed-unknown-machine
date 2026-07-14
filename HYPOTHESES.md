@@ -57,10 +57,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 80 / `SCENARIOS/079-minimal-governed-recommendation.md`:** Removed duplicated recommendation wording by naming the schema field directly: `Recommend one authorized action and name the governing Success branch.` The same mixed violated/unresolved scenario still yields delay alone under the first Success branch, preserving single-action and branch-traceability boundaries.
 - **Run 81 / `SCENARIOS/080-ordered-headings-without-sequence-line.md`:** Removed the standalone reasoning-sequence sentence after confirming that the six adjacent headings already expose the same dependency order through shared category prefixes and imperative verbs. The audit path remains visible while presentation density falls and no refusal boundary changes.
 - **Run 82 / `SCENARIOS/081-headings-without-requirements-wrapper.md`:** Removed the generic `Brief requirements` wrapper after confirming that it named no operation or refusal boundary. The intact contract now flows directly into the six self-describing headings, reducing presentation density without changing their order, wording, or behavior.
+- **Run 83 / `SCENARIOS/082-contract-without-generic-title.md`:** Removed the opening `Bounded decision brief task` title after confirming that the immediately following contract check, four explicit fields, and six audit headings already identify the artifact and its purpose. The executable now begins with the enforceable contract rather than presentation-only framing.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test whether the opening `Bounded decision brief task` title adds orientation or duplicates the immediately following contract check and four fields.
+**Next test:** Test the `Contract check` line against an incomplete-field scenario before simplifying it; determine which wording carries the observable completeness and no-inference boundary.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -75,7 +76,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–82 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–83 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
