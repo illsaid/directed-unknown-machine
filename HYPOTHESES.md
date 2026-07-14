@@ -43,10 +43,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 101:** Added a narrow malformed unsupported-label preflight, closing the contamination failure and restoring confidence to 0.99.
 - **Runs 102–104:** Verified allowed-label exclusion, first-occurrence location reporting, and case-insensitive collapse of repeated malformed labels.
 - **Run 105 / `SCENARIOS/103-distinct-line-broken-unsupported-labels.md`:** Verified that two different malformed unsupported labels remain separately visible in source order with their own first occurrence locations. Changed the repair wording from ambiguous `(line N)` to `(input line N)`, accurately identifying that numbering is relative to the extracted `## Input` block rather than the full scenario file.
+- **Run 106 / `SCENARIOS/104-repeated-and-distinct-line-broken-labels.md`:** Verified that first-occurrence deduplication composes correctly with distinct-defect preservation: `Owner`, `Deadline`, and later `owner` produce exactly `Owner (input line 2)` and `Deadline (input line 5)` in source order. No executable change was justified.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Verify that when one malformed distinct label repeats later, it retains only its first Input-relative location while another distinct label remains separately visible.
+**Next test:** Stop extending malformed-label deduplication permutations. Test whether ordinary wrapped field prose can be falsely classified as a malformed unsupported field.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -61,7 +62,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–105 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–106 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
