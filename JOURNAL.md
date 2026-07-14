@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–90 — Evidence, boundaries, sequencing, and simplification
+## Runs 22–91 — Evidence, boundaries, sequencing, and simplification
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -28,18 +28,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 73–80:** Tightened each requirement while preserving its tested refusal boundaries.
 - **Runs 81–83:** Removed the duplicate sequence line, generic requirements wrapper, and generic opening title.
 - **Runs 84–87:** Made complete, partial, wholly unlabeled, and missing-field contract states direct and exact.
-- **Runs 88–90:** Split unsupported-field refusal into the unsupported label, compact allowed schema, and increasingly concise operator-directed remapping guidance.
+- **Runs 88–91:** Split unsupported-field refusal into the unsupported label, compact allowed schema, and increasingly concise operator-directed remapping guidance.
 
-## Run 91 — Remove repeated allowed wording
+## Run 92 — Clarify multiple-field remapping
 
-**What changed:** Added `SCENARIOS/090-no-repeated-allowed.md`. In `unsupported_template`, replaced `Place each extra meaning under its matching allowed field.` with `Place each extra meaning under its matching field.` Unsupported-label detection, the `Allowed:` schema line, missing-field repair, parsing, complete-contract output, the six audit operations, and all decision rules remain unchanged.
+**What changed:** Added `SCENARIOS/091-multiple-unsupported-fields.md`. In `unsupported_template`, replaced `Place each extra meaning under its matching field.` with `Remap each extra meaning to one of those fields.` Unsupported-label detection, source-order listing, the `Allowed:` schema line, missing-field repair, parsing, complete-contract output, the six audit operations, and all decision rules remain unchanged.
 
-**Scenario tested:** A concrete checkout rollout contract supplies all four allowed fields plus `Owner: Growth team.` The observable requirement is that refusal name `Owner`, state the fixed four-field schema once, preserve the ownership meaning through operator-directed remapping, emit no recommendation, add no fifth field, and perform no automatic role classification.
+**Scenario tested:** A concrete checkout rollout contract supplies all four allowed fields plus `Owner: Growth team.` and `Deadline: Decide by Friday.` The observable requirement is that refusal name both unsupported fields separately, state the fixed schema once, preserve both meanings for manual remapping, emit no recommendation, add no new fields, and perform no automatic field assignment.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/090-no-repeated-allowed.md` was mentally simulated: unsupported-label detection finds `Owner`, exits through `unsupported_template`, and emits `Unsupported explicit fields:`, `- Owner`, `Allowed: Decision, Evidence, Constraints, Success.`, and `Place each extra meaning under its matching field.` It never reaches missing-field checks, complete-contract output, audit requirements, or recommendation.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/091-multiple-unsupported-fields.md` was mentally simulated: unsupported-label detection finds `Owner` and `Deadline` in source order, exits through `unsupported_template`, and emits `Unsupported explicit fields:`, both labels, `Allowed: Decision, Evidence, Constraints, Success.`, and `Remap each extra meaning to one of those fields.` It never reaches missing-field checks, complete-contract output, audit requirements, or recommendation.
 
-**What was removed or rejected:** Removed the second use of `allowed`. Rejected automatic role classification, silently dropping ownership, schema expansion, a second repair mode, and any change to the established audit requirements. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed the implication that every extra meaning already has a uniquely determined `matching field`. Rejected automatic role classification, silently dropping either extra meaning, schema expansion, a second repair mode, and any change to the established audit requirements. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Once the preceding line explicitly defines the allowed schema, `matching field` is sufficient in the singular unsupported-field case. The shorter instruction preserves the operator's remapping responsibility without weakening the refusal boundary.
+**What was learned:** The prior singular wording was adequate for one unsupported field but became overconfident with two. Pointing back to `those fields` preserves the fixed destination set while making operator choice explicit and avoiding a false claim that the executable knows the correct mapping.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether `matching field` remains unambiguous when more than one unsupported field is supplied.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether repeated unsupported labels should remain repeated to preserve distinct meanings or be collapsed for concision.
