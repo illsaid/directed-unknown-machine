@@ -76,6 +76,16 @@ def repair_template(missing: list[str]) -> str:
     return f"Missing explicit fields:\n{fields}"
 
 
+def unsupported_template(unsupported: list[str]) -> str:
+    fields = "\n".join(f"- {label}" for label in unsupported)
+    supported = ", ".join(LABELS)
+    return (
+        f"Unsupported explicit fields:\n{fields}\n"
+        f"Supported fields: {supported}.\n"
+        "Preserve each meaning under the supported field that matches its role."
+    )
+
+
 def print_requirements() -> None:
     for group, requirements in REQUIREMENT_GROUPS:
         print(f"{group}:")
@@ -90,11 +100,7 @@ def main() -> int:
     raw = scenario_input(path.read_text(encoding="utf-8"))
     unsupported = unsupported_labels(raw)
     if unsupported:
-        names = ", ".join(unsupported)
-        supported = ", ".join(LABELS)
-        raise SystemExit(
-            f"unsupported explicit field(s): {names}. Preserve each meaning under the supported field that matches its role: {supported}."
-        )
+        raise SystemExit(unsupported_template(unsupported))
     values = {label: labeled_value(raw, label) for label in LABELS}
     missing = [label for label, value in values.items() if not value]
     if missing:
