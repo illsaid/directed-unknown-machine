@@ -82,7 +82,7 @@ def unsupported_template(unsupported: list[str]) -> str:
     return (
         f"Unsupported explicit fields:\n{fields}\n"
         f"Allowed: {allowed}.\n"
-        "Move each extra meaning under the allowed field matching its role."
+        "Place each extra meaning under its matching allowed field."
     )
 
 
