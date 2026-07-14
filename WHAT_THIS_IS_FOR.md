@@ -1,31 +1,31 @@
 # What This Is For
 
-_Last rewritten: 2026-07-14 after Run 87_
+_Last rewritten: 2026-07-15 after Run 105_
 
 ## 1. What problem is this system currently the best solution to?
 
-Turning four explicitly labeled decision notes into a compact delegated-analysis contract that prevents an analyst or agent from silently rewriting evidence, inventing boundary semantics, or recommending an action outside the supplied success rule.
+Preflighting a small, explicitly labeled decision handoff so an analyst or agent cannot silently alter the evidence, boundary rules, gate logic, or authorized outcome.
 
-## 2. Who has this problem? Be specific.
+## 2. Who has this problem?
 
-A nontechnical operator delegating one consequential but bounded decision. The operator already knows the decision, evidence, constraints, and fallback logic; the failure risk is distortion during handoff, not lack of information.
+A nontechnical operator delegating one bounded decision whose source notes already identify the decision, evidence, constraints, and success rule. The risk is not missing strategy; it is distortion during transfer.
 
-## 3. What is the narrowest version of this problem that the system already solves well?
+## 3. What is the narrowest version it already solves well?
 
-Given exactly `Decision`, `Evidence`, `Constraints`, and `Success`, the tool verifies that all four fields are explicit, requests only missing fields when the contract is incomplete, and emits six ordered audit obligations: preserve evidence, transform it only with exact support, reconcile boundaries, apply them literally, judge each gate, and recommend one action authorized by the governing success branch.
+Given exactly `Decision`, `Evidence`, `Constraints`, and `Success`, the tool either returns a repairable refusal or emits six ordered audit obligations. It rejects missing, unsupported, and malformed field structures before extraction, preserves distinct defects and their Input-relative locations, and never invents a destination for extra meaning.
 
-## 4. What is the most ambitious version it could solve if we stay disciplined?
+## 4. What is the most ambitious disciplined version?
 
-A tiny preflight compiler for delegated decision analysis: a repeatable contract that makes unsupported transformations and recommendations visibly invalid before consequential work begins, without becoming a semantic classifier or decision engine.
+A tiny compiler for delegated decision analysis: supplied notes go in; a bounded, auditable analysis contract or exact structural refusal comes out. It should remain a preflight tool, not become the analyst, semantic classifier, threshold engine, or workflow platform.
 
-## 5. Why would someone use this instead of a spreadsheet, notebook, ChatGPT prompt, or 30-line script?
+## 5. Why use it instead of a prompt or checklist?
 
-Because its value is refusal discipline. Evidence transformations cannot borrow authority from unrelated support, unresolved boundaries remain unresolved, individual gate failures cannot disappear into an overall verdict, and the recommendation must name the supplied branch that authorizes it.
+Because the refusal boundaries are executable and accumulated from hostile scenarios. Unsupported transformations cannot borrow authority from adjacent evidence, unresolved gates cannot disappear into an overall verdict, malformed extra fields cannot contaminate allowed fields, and recommendations must stay inside the supplied success branches.
 
 ## 6. What is the biggest threat to usefulness?
 
-The fixed audit requirements are still dense enough that the output may feel like policy prose rather than an immediately usable delegation contract. Simplification is useful only while every tested refusal boundary remains intact.
+Polishing edge-case grammar long after the core contract is stable. Further changes are justified only when a concrete handoff can lose meaning, misstate a repair, or weaken an established refusal boundary.
 
-## 7. What should be removed today?
+## 7. What should be removed or avoided?
 
-Remove generic framing whenever the schema labels or audit headings already communicate the same information. Do not add automatic classification, calculations, threshold parsing, unit conversion, domain modes, configuration, or a dashboard. Keep `machine.py` unchanged solely because the historical demo command is required.
+Keep `machine.py` only for the required historical demo. Do not add automatic field classification, calculations, domain modes, configuration, dashboards, or generic parsing abstractions. Prefer exact repairs for demonstrated contract failures over broader input tolerance.
