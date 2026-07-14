@@ -37,12 +37,12 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Runs 22–33:** Preserved source provenance, overlapping and conflicting measurements, applicability limits, exclusions, adjustments, methods, and unsupported assumptions.
 - **Runs 34–46:** Established full-range sensitivity handling, explicit strict and inclusive equality semantics, the no-comparator refusal boundary, conflicting threshold preservation, cross-unit equivalence, and explicit precedence.
 - **Runs 47–62:** Consolidated accumulated obligations into six inspectable audit groups without changing the four-field contract or weakening established boundaries.
-- **Runs 63–86:** Ordered and simplified the six audit operations, removed presentation-only wrappers, and made complete and incomplete contract states increasingly exact without changing the schema or refusal boundaries.
-- **Run 87 / `SCENARIOS/086-missing-fields-first.md`:** Removed the remaining generic incomplete-contract diagnosis. Repair now begins with `Missing explicit fields:` and the absent schema labels, which directly states both the validated defect and the required repair while preserving the no-inference boundary.
+- **Runs 63–87:** Ordered and simplified the six audit operations, removed presentation-only wrappers, and made complete, missing-field, and unlabeled contract states increasingly exact without changing the schema or refusal boundaries.
+- **Run 88 / `SCENARIOS/087-unsupported-fields-first.md`:** Replaced the dense unsupported-field sentence with a three-part refusal that leads with the unsupported label, restates the unchanged four-field schema, and preserves the extra meaning by remapping it under the supported field matching its role.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Pressure the unsupported-field error for the same directness without weakening its guidance to preserve meaning inside the four-field schema.
+**Next test:** Test whether the supported-schema line in the unsupported-field refusal can be shortened without making schema preservation or remapping guidance ambiguous.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -57,7 +57,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–87 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–88 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
