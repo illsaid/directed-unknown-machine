@@ -73,11 +73,7 @@ def labeled_value(raw: str, label: str) -> str | None:
 
 def repair_template(missing: list[str]) -> str:
     fields = "\n".join(f"{label}:" for label in missing)
-    return (
-        "contract incomplete; "
-        "add the missing explicit fields without rewriting the notes:\n"
-        f"{fields}"
-    )
+    return f"Missing explicit fields:\n{fields}"
 
 
 def print_requirements() -> None:
