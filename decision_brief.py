@@ -58,7 +58,15 @@ def scenario_input(text: str) -> str:
 
 def unsupported_labels(raw: str) -> list[str]:
     explicit = re.findall(r"^([A-Za-z][A-Za-z ]*):", raw, re.MULTILINE)
-    return [label for label in explicit if label.lower() not in {item.lower() for item in LABELS}]
+    allowed = {item.lower() for item in LABELS}
+    seen: set[str] = set()
+    unsupported: list[str] = []
+    for label in explicit:
+        key = label.lower()
+        if key not in allowed and key not in seen:
+            seen.add(key)
+            unsupported.append(label)
+    return unsupported
 
 
 def labeled_value(raw: str, label: str) -> str | None:
