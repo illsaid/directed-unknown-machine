@@ -51,10 +51,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 98 / `SCENARIOS/097-tabbed-allowed-label.md`:** Verified that `Decision\t:` remains accepted by the horizontal-spacing grammar, reaches complete-contract output, and preserves the full Decision value without weakening the Run 97 newline refusal. No executable change was needed.
 - **Run 99 / `SCENARIOS/098-tabbed-unsupported-label.md`:** Extended unsupported-label detection from ordinary spaces to horizontal spaces and tabs, so `Owner\t:` now produces one `- Owner` repair item instead of escaping validation and being absorbed into the Success value.
 - **Run 101 / `SCENARIOS/099-line-broken-unsupported-label.md`:** Added a narrow refusal for an unsupported label-only line immediately followed by a colon-start line. `Owner\n:` now exits as malformed before field extraction, preventing contamination of Success without normalizing multiline labels or changing the existing allowed-label grammar.
+- **Run 102 / `SCENARIOS/100-line-broken-allowed-label-regression.md`:** Verified that the Run 101 preflight excludes allowed labels. `Decision\n:` still produces the established `Missing explicit fields:\nDecision:` repair rather than being reclassified as a malformed unsupported field. No executable change was needed.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Verify that a line-broken allowed label such as `Decision\n:` still follows the existing missing-field refusal rather than being reclassified as a malformed unsupported field.
+**Next test:** Verify that a malformed unsupported label between two allowed fields is refused before it can contaminate either neighboring value.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -69,7 +70,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–101 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–102 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
