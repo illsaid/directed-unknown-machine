@@ -78,11 +78,11 @@ def repair_template(missing: list[str]) -> str:
 
 def unsupported_template(unsupported: list[str]) -> str:
     fields = "\n".join(f"- {label}" for label in unsupported)
-    supported = ", ".join(LABELS)
+    allowed = ", ".join(LABELS)
     return (
         f"Unsupported explicit fields:\n{fields}\n"
-        f"Supported fields: {supported}.\n"
-        "Preserve each meaning under the supported field that matches its role."
+        f"Allowed: {allowed}.\n"
+        "Move each extra meaning under the allowed field matching its role."
     )
 
 
