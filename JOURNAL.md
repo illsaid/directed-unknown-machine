@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–94 — Evidence, boundaries, sequencing, and simplification
+## Runs 22–95 — Evidence, boundaries, sequencing, and simplification
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -31,17 +31,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 88–92:** Split unsupported-field refusal into unsupported labels, a compact allowed schema, and concise operator-directed remapping guidance; then clarified multiple distinct unsupported labels.
 - **Run 93:** Added order-preserving, case-insensitive deduplication so repeated occurrences of one unsupported label produce one repair item while all source meanings remain untouched.
 - **Run 94:** Verified case variants collapse under that same boundary without an executable change.
+- **Run 95:** Normalized harmless pre-colon spacing during unsupported-label identity checks, so `Owner:` and `Owner :` produce one repair item without changing the schema or either source meaning.
 
-## Run 95 — Normalize spacing before an unsupported-label colon
+## Run 96 — Accept spacing before an allowed-label colon
 
-**What changed:** Added `SCENARIOS/094-spaced-unsupported-label.md` and changed `unsupported_labels()` to trim each captured label before case-insensitive comparison and repair output. This is one executable normalization step tied only to the named hostile regression.
+**What changed:** Added `SCENARIOS/095-spaced-allowed-label.md` and changed only the `labeled_value()` regex so each of the four fixed labels may have insignificant whitespace immediately before its colon. The same allowance was added to the next-label lookahead so one spaced label cannot absorb following fields.
 
-**Scenario tested:** A concrete checkout rollout contract supplies all four allowed fields plus `Owner: Growth team owns implementation.` and `Owner : Finance owns final approval.` The observable requirement is one `- Owner` repair item, no whitespace-variant duplicate, preservation of both source lines, no automatic field assignment, no recommendation, and no schema expansion.
+**Scenario tested:** A concrete checkout rollout contract supplies `Decision :` plus canonical `Evidence:`, `Constraints:`, and `Success:` fields. The observable requirement is complete-contract output with the full Decision value preserved, all four fields printed, all six audit operations retained, and no missing- or unsupported-field refusal.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. The current executable was then simulated with `python decision_brief.py SCENARIOS/094-spaced-unsupported-label.md`: the regex captures `Owner` and `Owner `; trimming makes both keys `owner`; first-seen spelling remains `Owner`; `unsupported_template` emits one repair item and the fixed allowed-field guidance; missing-field checks, complete-contract output, audit requirements, and recommendation are not reached.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. The current executable was then mentally simulated with `python decision_brief.py SCENARIOS/095-spaced-allowed-label.md`: unsupported-label detection normalizes `Decision ` to the allowed key `decision`; `labeled_value()` matches `Decision\s*:` and stops at the canonical next field; all four values are present; complete-contract output and the six audit operations are reached.
 
-**What was removed or rejected:** Removed only insignificant edge whitespace from the internal label identity. Rejected changing the four-field parser, automatically remapping ownership meaning, introducing a fifth field, adding a whitespace mode, or altering the six audit operations. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed the accidental disagreement between unsupported-label recognition and allowed-field extraction. Rejected broader label normalization, multiline labels, fuzzy matching, automatic semantic classification, a new parser mode, or any change to the four-field schema and six audit operations. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Pre-colon spacing is presentation variation, not a distinct schema meaning. Trimming at the unsupported-label boundary improves exactness without classifying content or weakening refusal discipline.
+**What was learned:** Pre-colon spacing is presentation variation for allowed and unsupported labels alike. Handling it consistently prevents a valid explicit field from falling through one validator and failing the next, while preserving the no-inference boundary.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether harmless spacing before the colon should also be accepted for an allowed label without weakening explicit-field detection.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether pre-colon tolerance should be explicitly limited to horizontal whitespace so a line break cannot blur field structure.
