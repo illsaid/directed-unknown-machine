@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–100 — Evidence, boundaries, sequencing, and simplification
+## Runs 22–101 — Evidence, boundaries, sequencing, and simplification
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -37,17 +37,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 98:** Verified that an allowed label followed by a tab and colon remains accepted without reopening the multiline-label boundary.
 - **Run 99:** Applied the same horizontal-spacing grammar to unsupported labels, so `Owner\t:` is refused instead of being absorbed into Success.
 - **Run 100:** Exposed that `Owner\n:` stayed outside explicit-label detection but was then absorbed into Success; H2 confidence dropped to 0.98 pending a narrow refusal.
+- **Run 101:** Added a narrow malformed unsupported-label preflight, closing the contamination failure and restoring H2 confidence to 0.99.
 
-## Run 101 — Refuse malformed unsupported labels before extraction
+## Run 102 — Preserve the allowed-label missing-field repair
 
-**What changed:** Added `malformed_unsupported_labels()` and a compact malformed-field refusal to `decision_brief.py`. The check matches only an unsupported label-only line immediately followed by a colon-start line. Updated `SCENARIOS/099-line-broken-unsupported-label.md` with the passing observable result.
+**What changed:** Added `SCENARIOS/100-line-broken-allowed-label-regression.md`. No executable change was made because the existing Run 101 preflight already excludes all four allowed labels and the established same-line field grammar already yields the correct repair.
 
-**Scenario tested:** A complete checkout rollout contract supplies all four allowed fields, followed by `Owner` on one line and `: Growth team owns implementation.` on the next. The executable must refuse this structure before complete-contract output without normalizing it into a valid label, absorbing it into Success, inferring a destination, or expanding the schema.
+**Scenario tested:** A checkout rollout contract supplies `Decision` on one line and begins the next line with `: Decide whether...`, followed by canonical Evidence, Constraints, and Success fields. The executable must request `Decision:` as missing rather than classify the fragment as a malformed unsupported field or normalize it into a valid label.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. The new decision-contract path was mentally simulated against Scenario 099: `malformed_unsupported_labels` captures `Owner`, excludes the four allowed labels, and exits with `Malformed explicit fields:\n- Owner\nKeep each field label and colon on the same line.` before unsupported-field detection or field extraction.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. The decision-contract path was mentally simulated against Scenario 100: `malformed_unsupported_labels()` captures the split label text but excludes it because `decision` is allowed; unsupported-label detection finds no same-line extra field; `labeled_value()` does not match `Decision\n:`; and `repair_template()` exits with `Missing explicit fields:\nDecision:`.
 
-**What was removed or rejected:** Rejected broad multiline-label normalization, a generic malformed-input parser, automatic remapping, and changes to `labeled_value`. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected changing the malformed preflight to include allowed labels, adding a generic structural-error category, or modifying field extraction. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The preservation boundary needs a small preflight for malformed unsupported field structure, separate from the valid explicit-label grammar. Keeping allowed labels out of that check closes the contamination failure while preserving the established `Decision\n:` missing-field behavior.
+**What was learned:** The malformed-input boundary now has two precise repairs: broken unsupported labels are identified as malformed before extraction, while broken allowed labels remain missing required fields. Keeping those paths separate gives the operator the narrowest actionable correction and avoids parser generalization.
 
-**Hypothesis movement:** H2 remains primary and returns from 0.98 to 0.99 because the specific Run 100 failure is now refused without semantic classification or schema expansion. The next test is to verify that a line-broken allowed label still follows the existing missing-field refusal.
+**Hypothesis movement:** H2 remains primary at 0.99. The Run 101 repair survived its immediate regression test. The next test is whether a malformed unsupported label placed between two allowed fields is refused before it can contaminate either neighboring value.
