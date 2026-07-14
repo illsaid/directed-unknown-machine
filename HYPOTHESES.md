@@ -53,10 +53,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 101 / `SCENARIOS/099-line-broken-unsupported-label.md`:** Added a narrow refusal for an unsupported label-only line immediately followed by a colon-start line. `Owner\n:` now exits as malformed before field extraction, preventing contamination of Success without normalizing multiline labels or changing the existing allowed-label grammar.
 - **Run 102 / `SCENARIOS/100-line-broken-allowed-label-regression.md`:** Verified that the Run 101 preflight excludes allowed labels. `Decision\n:` still produces the established `Missing explicit fields:\nDecision:` repair rather than being reclassified as a malformed unsupported field. No executable change was needed.
 - **Run 103 / `SCENARIOS/101-mid-contract-line-broken-unsupported-label.md`:** Retained the first input line number for each malformed unsupported label, so a mid-contract `Owner\n:` refusal now reports `- Owner (line 3)` before extraction. The four-field grammar, allowed-label exclusion, deduplication, and no-inference boundary remain unchanged.
+- **Run 104 / `SCENARIOS/102-repeated-line-broken-unsupported-label.md`:** Verified that repeated `Owner\n:` and `owner\n:` fragments collapse case-insensitively to exactly one malformed-field repair item while preserving the first spelling and first occurrence line number. No executable change was needed; both unsupported meanings remain outside extraction.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Verify that repeated malformed occurrences of the same unsupported label collapse to one repair item while retaining the first occurrence line number.
+**Next test:** Verify that two different malformed unsupported labels remain separately visible with their own first occurrence line numbers.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -71,7 +72,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–103 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–104 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
