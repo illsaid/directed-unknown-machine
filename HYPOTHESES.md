@@ -24,7 +24,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 ## H2 — Labeled decision-contract shaper
 
 **Status:** primary  
-**Confidence:** 0.98
+**Confidence:** 0.99
 
 **Problem statement:** People with messy labeled decision-support notes need help turning them into one bounded decision-brief task while preserving the actual decision, supplied evidence, constraints, and observable success condition.
 
@@ -50,10 +50,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 97 / `SCENARIOS/096-line-broken-allowed-label.md`:** Replaced broad `\s*` colon padding with horizontal spaces or tabs only, so `Decision\n:` is rejected as a missing explicit field rather than silently accepted as harmless presentation spacing. Same-line `Decision :` remains valid and the four-field grammar stays explicit.
 - **Run 98 / `SCENARIOS/097-tabbed-allowed-label.md`:** Verified that `Decision\t:` remains accepted by the horizontal-spacing grammar, reaches complete-contract output, and preserves the full Decision value without weakening the Run 97 newline refusal. No executable change was needed.
 - **Run 99 / `SCENARIOS/098-tabbed-unsupported-label.md`:** Extended unsupported-label detection from ordinary spaces to horizontal spaces and tabs, so `Owner\t:` now produces one `- Owner` repair item instead of escaping validation and being absorbed into the Success value.
+- **Run 101 / `SCENARIOS/099-line-broken-unsupported-label.md`:** Added a narrow refusal for an unsupported label-only line immediately followed by a colon-start line. `Owner\n:` now exits as malformed before field extraction, preventing contamination of Success without normalizing multiline labels or changing the existing allowed-label grammar.
 
-**Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations. **Run 100 / `SCENARIOS/099-line-broken-unsupported-label.md` exposed a preservation failure:** `Owner\n:` remains outside the explicit-label grammar as intended, but the malformed fragment is silently absorbed into Success and complete-contract output is emitted.
+**Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Add one narrow refusal for a label-only line immediately followed by a colon-start line, then verify that the malformed structure is rejected without being normalized into a valid explicit field or broadening ordinary label parsing.
+**Next test:** Verify that a line-broken allowed label such as `Decision\n:` still follows the existing missing-field refusal rather than being reclassified as a malformed unsupported field.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -68,7 +69,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–100 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–101 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
