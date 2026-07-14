@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–97 — Evidence, boundaries, sequencing, and simplification
+## Runs 22–98 — Evidence, boundaries, sequencing, and simplification
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -34,17 +34,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 95:** Normalized harmless pre-colon spacing during unsupported-label identity checks, so `Owner:` and `Owner :` produce one repair item without changing the schema or either source meaning.
 - **Run 96:** Accepted horizontal spacing before an allowed-label colon and kept next-field boundaries consistent, so `Decision :` reaches complete-contract output rather than a false missing-field refusal.
 - **Run 97:** Restricted colon padding to spaces and tabs, so `Decision\n:` is refused as a missing explicit field while same-line spacing remains accepted.
+- **Run 98:** Verified that an allowed label followed by a tab and colon remains accepted without reopening the multiline-label boundary.
 
-## Run 98 — Preserve tab tolerance without reopening multiline labels
+## Run 99 — Detect tabbed unsupported labels before field extraction
 
-**What changed:** Added `SCENARIOS/097-tabbed-allowed-label.md`. No executable change was made because the existing `[ \t]*` grammar already accepts a tab before an allowed-label colon while excluding newline characters.
+**What changed:** Added `SCENARIOS/098-tabbed-unsupported-label.md` and changed the unsupported-label regex from `[A-Za-z ]*` to `[A-Za-z \t]*`. This applies the same horizontal-spacing tolerance already used by allowed-field parsing while continuing to exclude line breaks.
 
-**Scenario tested:** A concrete checkout rollout contract supplies `Decision\t:` followed by canonical `Evidence:`, `Constraints:`, and `Success:` fields. The observable requirement is complete-contract output with all four values preserved and no missing- or unsupported-field refusal.
+**Scenario tested:** A complete checkout rollout contract supplies the four allowed fields plus `Owner\t: Growth team owns implementation.` The observable requirement is an unsupported-field refusal containing one `- Owner`, the unchanged four-field schema, and operator-directed remapping guidance. Complete-contract output must not be reached and the ownership meaning must not be absorbed into Success.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. The decision-contract executable was also mentally simulated: `Decision\t:` matches `Decision[ \t]*:`, the next canonical labels retain their boundaries, and the newline case from Run 97 remains impossible because `[ \t]` excludes line breaks.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. The decision-contract executable was also mentally simulated before and after the change. Before Run 99, `Owner\t:` did not match unsupported-label detection and remained inside the captured Success value. After Run 99, the line matches the horizontally bounded explicit-label grammar, trims to `Owner`, and exits through `unsupported_template` before field extraction.
 
-**What was removed or rejected:** Rejected an unnecessary parser change, broader whitespace tolerance, fuzzy field repair, semantic inference, and a new mode. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected broad `\s` tolerance, multiline labels, fuzzy repair, automatic assignment of Owner to another field, a fifth schema field, and a new parser mode. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The Run 97 change was correctly bounded. Horizontal presentation tolerance includes tabs without weakening the same-line structural contract, so the hypothesis gains regression evidence rather than another implementation branch.
+**What was learned:** Allowed- and unsupported-label validation must share the same same-line horizontal-spacing boundary. Otherwise an extra labeled meaning can bypass the refusal layer and silently contaminate a supported field value. One character-class change closes that gap without broadening the contract.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether an unsupported label with a tab before its colon is detected and repaired rather than escaping unsupported-field validation.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether a line break before an unsupported-label colon remains outside the explicit-field grammar rather than being normalized as horizontal spacing.
