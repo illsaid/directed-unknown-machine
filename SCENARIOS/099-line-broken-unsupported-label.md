@@ -27,16 +27,16 @@ The executable refuses the malformed label structure before emitting complete-co
 
 ## Actual outcome
 
-Run 100 shows that the current executable keeps `Owner\n:` outside unsupported-label detection, but field extraction then absorbs both lines into the Success value and emits complete-contract output. The horizontal-spacing boundary survives, but the contract-preservation claim does not: malformed label-like content can silently alter a supported field.
+Run 101 adds a narrow preflight check for an unsupported label-only line immediately followed by a colon-start line. The executable now exits with `Malformed explicit fields:`, one `- Owner`, and `Keep each field label and colon on the same line.` It does not treat `Owner\n:` as valid, reach field extraction, or contaminate Success. Allowed labels remain excluded from this check, so the established `Decision\n:` missing-field boundary is unchanged.
 
 ## Whether the system helped
 
-partial
+yes
 
 ## What broke
 
-The explicit-label regex correctly excludes newlines, but there is no separate refusal for a label-only line followed by a colon-start line. Because allowed-field extraction stops only at another valid allowed label, the malformed ownership fragment becomes part of Success.
+Before Run 101, the malformed unsupported fragment stayed outside explicit-label detection but was absorbed into Success because field extraction stopped only at another valid allowed label.
 
 ## What would make the result more useful
 
-Add one narrow malformed-label refusal for a label-only line immediately followed by a colon-start line, without treating that structure as a valid explicit field or broadening normal label parsing.
+Verify that a line-broken allowed label such as `Decision\n:` still follows the existing missing-field refusal rather than being reclassified as a malformed unsupported field.
