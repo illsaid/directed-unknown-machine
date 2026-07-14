@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–82 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–83 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -54,17 +54,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 80:** Named the `Success` field directly in the recommendation invariant while preserving one-action and branch-traceability boundaries.
 - **Run 81:** Removed the standalone reasoning-sequence line after the six ordered headings proved sufficient to carry the audit path.
 - **Run 82:** Removed the generic `Brief requirements` wrapper after the six audit headings proved sufficient to identify the requirement sequence.
+- **Run 83:** Removed the generic opening title after the contract check and explicit fields proved sufficient to identify the artifact.
 
-## Run 83 — Let the contract identify itself
+## Run 84 — Refuse incompleteness before claiming completeness
 
-**What changed:** Added `SCENARIOS/082-contract-without-generic-title.md`. Removed only the opening `Bounded decision brief task` line from `decision_brief.py`; the contract check, four supplied fields, six audit headings, and all requirements remain unchanged.
+**What changed:** Added `SCENARIOS/083-incomplete-contract-check.md`. Tightened only the valid-contract first line from `Contract check: complete — 4/4 explicit fields; no content inferred.` to `Contract: complete — 4/4 fields explicit; nothing inferred.` Validation, repair behavior, the four fields, six audit headings, and all requirements remain unchanged.
 
-**Scenario tested:** Conversion is 23% against an inclusive 20% minimum and latency is 480 milliseconds against a strict 500 millisecond maximum. Success permits rollout only if every gate is satisfied. The presentation test asks whether the enforceable contract can identify the artifact without a generic title.
+**Scenario tested:** The input supplies Decision, Evidence, and Constraints but omits Success. The observable requirement is refusal before any complete-contract output, an exact repair prompt for `Success:`, and no inferred rollout or fallback rule.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/082-contract-without-generic-title.md` was mentally simulated: all four labels parse; output begins with `Contract check: complete — 4/4 explicit fields; no content inferred`; the four fields and six ordered audit operations print intact; conversion and latency both satisfy their gates; rollout is the authorized action.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/083-incomplete-contract-check.md` was mentally simulated: three fields parse, `Success` is missing, execution exits through `repair_template`, and the complete-state line is never reached. A valid four-field scenario still reaches the tightened line and then prints the unchanged contract and six operations.
 
-**What was removed or rejected:** Removed one presentation-only title that named no contract field, audit operation, decision rule, or refusal boundary. Rejected changing the contract-check line, parser behavior, any requirement, or any decision rule. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed duplicated wording only from the valid-contract postcondition. Rejected weakening missing-field validation, inferring a Success rule, changing the repair template in the same run, adding parser behavior, or touching any audit requirement. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The contract is more legible when the first line states its enforceable property rather than its generic document type. `Contract check` immediately exposes completeness and the no-inference boundary; the deleted title added hierarchy but no operational meaning.
+**What was learned:** The no-inference boundary is enforced before output by missing-field validation and the repair instruction, not by the length of the complete-state sentence. The complete-state line can therefore state the verified postcondition more compactly while retaining all observable guarantees. The hostile test also exposed a likely wording defect for the next run: `from unlabeled prose` is inaccurate when three of four fields are already labeled.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is to pressure the `Contract check` wording with an incomplete-field scenario before simplifying it, because that line may carry a real refusal boundary. `WHAT_THIS_IS_FOR.md` was not rewritten because its July 13 rewrite remains within 24 hours.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the repair message should distinguish partially labeled contracts from wholly unlabeled prose. `WHAT_THIS_IS_FOR.md` was not rewritten because its July 13 rewrite remains within 24 hours.
