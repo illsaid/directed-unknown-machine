@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–83 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
+## Runs 22–84 — Evidence provenance, applicability, assumptions, boundaries, and requirement simplification
 
 - **Runs 22–25:** Kept constraint judgments separate and tied shared or overlapping sources to the measurements they actually supplied.
 - **Runs 26–30:** Preserved conflicting values and required direct, relevant supplied evidence before excluding a source as non-comparable.
@@ -55,17 +55,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 81:** Removed the standalone reasoning-sequence line after the six ordered headings proved sufficient to carry the audit path.
 - **Run 82:** Removed the generic `Brief requirements` wrapper after the six audit headings proved sufficient to identify the requirement sequence.
 - **Run 83:** Removed the generic opening title after the contract check and explicit fields proved sufficient to identify the artifact.
+- **Run 84:** Tightened the complete-contract postcondition after missing-field validation proved to carry the refusal boundary.
 
-## Run 84 — Refuse incompleteness before claiming completeness
+## Run 85 — Describe partial-contract repair accurately
 
-**What changed:** Added `SCENARIOS/083-incomplete-contract-check.md`. Tightened only the valid-contract first line from `Contract check: complete — 4/4 explicit fields; no content inferred.` to `Contract: complete — 4/4 fields explicit; nothing inferred.` Validation, repair behavior, the four fields, six audit headings, and all requirements remain unchanged.
+**What changed:** Added `SCENARIOS/084-partially-labeled-repair.md`. Replaced `cannot preserve the decision contract from unlabeled prose; add these explicit fields without rewriting the notes:` with `cannot preserve the decision contract; add these missing explicit fields without rewriting the notes:`. Validation, missing-field selection, the four-field schema, complete-contract output, six audit operations, and all decision rules remain unchanged.
 
-**Scenario tested:** The input supplies Decision, Evidence, and Constraints but omits Success. The observable requirement is refusal before any complete-contract output, an exact repair prompt for `Success:`, and no inferred rollout or fallback rule.
+**Scenario tested:** Decision, Evidence, and Constraints are populated while Success is absent. The observable requirement is a repair message that requests only `Success:` without falsely describing the three supplied labels as unlabeled or inferring a fallback rule.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/083-incomplete-contract-check.md` was mentally simulated: three fields parse, `Success` is missing, execution exits through `repair_template`, and the complete-state line is never reached. A valid four-field scenario still reaches the tightened line and then prints the unchanged contract and six operations.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. The local clone attempt failed because the runtime could not resolve `github.com`, so the current files were inspected through the GitHub connector. After changes, `python decision_brief.py SCENARIOS/084-partially-labeled-repair.md` was mentally simulated: the parser retains three populated fields, identifies only `Success` as missing, exits through the neutral repair line, and never prints a completeness claim or recommendation.
 
-**What was removed or rejected:** Removed duplicated wording only from the valid-contract postcondition. Rejected weakening missing-field validation, inferring a Success rule, changing the repair template in the same run, adding parser behavior, or touching any audit requirement. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Removed only the inaccurate diagnosis `from unlabeled prose`. Rejected separate partial-versus-unlabeled repair modes, parser changes, automatic prose classification, schema expansion, and edits to the six audit requirements. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The no-inference boundary is enforced before output by missing-field validation and the repair instruction, not by the length of the complete-state sentence. The complete-state line can therefore state the verified postcondition more compactly while retaining all observable guarantees. The hostile test also exposed a likely wording defect for the next run: `from unlabeled prose` is inaccurate when three of four fields are already labeled.
+**What was learned:** Missing-field validation already identifies the actionable defect precisely. The repair preamble should not make a broader claim about the input form than the parser has established. A neutral diagnosis is more accurate for partially labeled contracts and remains tied to the same observable repair.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the repair message should distinguish partially labeled contracts from wholly unlabeled prose. `WHAT_THIS_IS_FOR.md` was not rewritten because its July 13 rewrite remains within 24 hours.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether the neutral repair line also remains accurate when all four labels are absent, without introducing another mode. `WHAT_THIS_IS_FOR.md` was not rewritten because its July 13 rewrite remains within 24 hours.
