@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–92 — Evidence, boundaries, sequencing, and simplification
+## Runs 22–93 — Evidence, boundaries, sequencing, and simplification
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -29,17 +29,18 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 81–83:** Removed the duplicate sequence line, generic requirements wrapper, and generic opening title.
 - **Runs 84–87:** Made complete, partial, wholly unlabeled, and missing-field contract states direct and exact.
 - **Runs 88–92:** Split unsupported-field refusal into unsupported labels, a compact allowed schema, and concise operator-directed remapping guidance; then clarified multiple distinct unsupported labels.
+- **Run 93:** Added order-preserving, case-insensitive deduplication so repeated occurrences of one unsupported label produce one repair item while all source meanings remain untouched.
 
-## Run 93 — Collapse repeated unsupported labels
+## Run 94 — Verify case-variant unsupported labels
 
-**What changed:** Added `SCENARIOS/092-repeated-unsupported-label.md`. In `unsupported_labels`, added order-preserving, case-insensitive deduplication so repeated occurrences of the same unsupported label produce one repair item. The first supplied spelling is retained. The scenario source, allowed schema, remapping instruction, missing-field repair, parsing of supported fields, complete-contract output, six audit operations, and decision rules remain unchanged.
+**What changed:** Added `SCENARIOS/093-case-variant-unsupported-label.md` and updated hypothesis evidence. No executable change was made because the Run 93 implementation already satisfies the named hostile regression: unsupported labels are deduplicated case-insensitively, source order is retained, and the first supplied spelling is used in repair output.
 
-**Scenario tested:** A concrete checkout rollout contract supplies all four allowed fields plus `Owner: Growth team owns implementation.` and `Owner: Finance owns final approval.` The observable requirement is that refusal report `Owner` once, preserve both source meanings in the untouched notes, require manual remapping, emit no recommendation, add no fifth field, and perform no automatic assignment.
+**Scenario tested:** A concrete checkout rollout contract supplies all four allowed fields plus `Owner: Growth team owns implementation.` and `owner: Finance owns final approval.` The observable requirement is one `- Owner` repair item, no `- owner` duplicate, preservation of both source lines, no automatic field assignment, no recommendation, and no schema expansion.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. After changes, `python decision_brief.py SCENARIOS/092-repeated-unsupported-label.md` was mentally simulated: unsupported-label detection sees both `Owner` occurrences, keeps the first spelling, collapses the duplicate key, exits through `unsupported_template`, and emits one `- Owner`, the unchanged allowed-field list, and the unchanged remapping instruction. It never reaches missing-field checks, complete-contract output, audit requirements, or recommendation.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness: `partial` maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap. The current decision-contract executable was then mentally simulated with `python decision_brief.py SCENARIOS/093-case-variant-unsupported-label.md`: both unsupported labels normalize to the key `owner`; the first spelling `Owner` is retained; `unsupported_template` emits one repair item, the fixed allowed-field list, and manual remapping guidance; missing-field checks, complete-contract output, audit requirements, and recommendation are not reached.
 
-**What was removed or rejected:** Removed duplicate reporting of the same schema violation. Rejected collapsing distinct unsupported labels, deleting or rewriting either ownership meaning, automatic semantic classification, schema expansion, a second repair mode, and any change to the audit requirements. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** No code was removed because the tested path contains no duplicate behavior after Run 93. Rejected a case-sensitive repair list, rewriting either ownership note, automatic semantic classification, a fifth schema field, a new repair mode, and changes to the six audit operations. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Repeated label bullets do not preserve repeated meanings; the original notes do. Reporting the unsupported label once is therefore more exact: it identifies the schema defect without implying that identical label names are separate field types. Order-preserving deduplication retains the operator's original spelling and leaves all source meanings available for manual remapping.
+**What was learned:** Label capitalization is presentation variation, not a distinct schema meaning. Case-insensitive deduplication correctly reports one unsupported field type while first-seen spelling keeps the repair grounded in the operator's input. A new feature would have added no value, so the correct autonomous step was to preserve the executable and record the surviving boundary.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether case variants such as `Owner:` and `owner:` should collapse while preserving the first supplied spelling.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is whether harmless spacing before the colon, such as `Owner :`, should normalize to the same unsupported label without producing a duplicate repair item.
