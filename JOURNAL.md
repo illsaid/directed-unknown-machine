@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–111 — Evidence, boundaries, sequencing, and repair grammar
+## Runs 22–112 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -38,19 +38,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 109:** Verified preservation of a blank-line paragraph break inside Evidence.
 - **Run 110:** Refused duplicate allowed labels before extraction rather than silently selecting one occurrence.
 - **Run 111:** Verified that an allowed-label word without a colon remains ordinary field prose, then ended label-format permutations.
+- **Run 112:** Required every gate result to be connected to the governing Success branch before an action can be recommended.
 
-## Run 112 — Trace every gate into the authorized branch
+## Run 113 — Preserve positive branch authority
 
-**What changed:** Added `SCENARIOS/110-vendor-renewal-authority.md`. Strengthened the `Decision: recommend` obligation so the downstream analyst must connect every gate result to the named Success branch and cannot recommend an action until every branch condition is accounted for.
+**What changed:** Added `SCENARIOS/111-vendor-renewal-positive-authority.md`. Strengthened the `Decision: recommend` obligation so a downstream analyst must recommend a supplied branch when every condition of that branch is satisfied and may not invent additional gates.
 
-**Scenario tested:** A quarterly vendor-renewal handoff supplies conflicting four-hour response figures and an incomplete avoided-cost estimate. Renewal is authorized only if independent compliance is at least 90 percent and evidenced avoided backlog cost is at least the $24,000 fee. Selecting the vendor's favorable 92 percent figure or inventing an avoided-ticket count would produce a plausible but unauthorized renewal.
+**Scenario tested:** A vendor-renewal handoff supplies an independent 94 percent four-hour response rate and $32,800 in evidenced avoided cost against a $24,000 renewal fee. The supplied Success rule authorizes renewal when both gates are satisfied. A plausible but unauthorized response would be to defer anyway by inventing a confidence buffer or demanding more evidence than the operator required.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/110-vendor-renewal-authority.md` reaches complete-contract output and now emits: `Recommend one authorized action and name the governing Success branch. Connect every gate result to that branch, and do not recommend an action until every branch condition is accounted for.` The service conflict and missing avoided-ticket count therefore remain blocking rather than disappearing behind the favorable values.
+**Observable output:** `python decision_brief.py SCENARIOS/111-vendor-renewal-positive-authority.md` reaches complete-contract output and now emits: `When every condition of a supplied branch is satisfied, recommend that branch without inventing additional gates.` Both supplied gates trace to the positive branch, so renewal is authorized rather than replaced by generic caution.
 
-**What was removed or rejected:** Rejected vendor-specific calculations, automatic conflict resolution, and a domain mode. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected vendor calculations, automatic recommendation execution, confidence scoring, and a special positive-decision mode. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** Naming the governing branch is not enough to preserve delegated authority. A recommendation can cite the correct branch while silently omitting an unresolved condition. The narrow useful requirement is a complete gate-to-branch trace, not more domain analysis.
+**What was learned:** Preserving decision authority is symmetric. The compiler must block action when supplied gates are unresolved, but it must also block the analyst from weakening a fully authorized positive branch by adding unsupplied conditions.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is a contrasting real handoff with all gates satisfied, checking that the stronger traceability rule permits the authorized positive branch without expanding the compiler's role.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is an asymmetric branch where one satisfied gate authorizes a limited action rather than a binary yes/no outcome.
