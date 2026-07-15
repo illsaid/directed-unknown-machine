@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–113 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–114 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -40,19 +40,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 111:** Verified that an allowed-label word without a colon remains ordinary field prose, then ended label-format permutations.
 - **Run 112:** Required every gate result to be connected to the governing Success branch before an action can be recommended.
 - **Run 113:** Required a fully satisfied supplied branch to be recommended without invented caution gates.
+- **Run 114:** Made gate blocking branch-local so an unresolved stronger branch cannot erase a separately authorized limited action.
 
-## Run 114 — Preserve asymmetric branch authority
+## Run 115 — Prefer the fully satisfied nested branch
 
-**What changed:** Added `SCENARIOS/112-asymmetric-launch-authority.md`. Strengthened the `Decision: recommend` obligation so each gate result is connected only to branches that require it, and a violated or unresolved gate cannot block a separate branch whose supplied conditions are fully satisfied.
+**What changed:** Added `SCENARIOS/113-nested-satisfied-launch-authority.md`. Strengthened the `Decision: recommend` obligation so, when one fully satisfied branch contains every condition of another plus additional satisfied conditions, the analyst must recommend the more conditional supplied branch rather than arbitrarily choosing the weaker subset.
 
-**Scenario tested:** A staged launch handoff authorizes a 10 percent rollout when deliverability is at least 98 percent and conversion remains unresolved; full rollout additionally requires evidenced conversion of at least 5 percent. The supplied evidence establishes 99.2 percent deliverability while conversion remains inconclusive.
+**Scenario tested:** A staged launch handoff authorizes a 10 percent rollout when deliverability is at least 98 percent and full rollout when deliverability is at least 98 percent plus conversion of at least 5 percent. Supplied evidence establishes 99.2 percent deliverability and 6.1 percent conversion, so both branches are satisfied and the full branch structurally contains the limited branch's condition set.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/112-asymmetric-launch-authority.md` reaches complete-contract output and now emits: `A violated or unresolved gate blocks only branches that depend on it; it must not block a separate branch whose supplied conditions are fully satisfied.` The unresolved conversion gate blocks full rollout but not the authorized 10 percent branch.
+**Observable output:** `python decision_brief.py SCENARIOS/113-nested-satisfied-launch-authority.md` reaches complete-contract output and now emits: `When one fully satisfied branch contains every condition of another plus additional satisfied conditions, recommend the more conditional supplied branch rather than arbitrarily choosing its weaker subset.` Under the supplied rule, this requires full rollout rather than the also-satisfied 10 percent branch.
 
-**What was removed or rejected:** Rejected automatic branch parsing, launch-specific logic, and a staged-decision mode. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected automatic branch parsing, launch-specific logic, action ranking, and a generic precedence engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** Gate blocking is branch-local, not global. In an asymmetric decision rule, preserving authority requires allowing a limited branch to survive an unresolved condition that belongs only to a stronger branch.
+**What was learned:** Positive authority also has a specificity boundary. When supplied branches are nested by condition inclusion and all added conditions are satisfied, choosing the subset branch silently discards authorized evidence and weakens the operator's rule.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is a nested rule where both limited and full branches are satisfied, checking whether the compiler prevents arbitrary selection of the weaker authorized action.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is two fully satisfied branches that are not nested, checking whether the compiler reports unresolved authority unless the supplied Success rule states precedence.
