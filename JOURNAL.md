@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–109 — Evidence, boundaries, sequencing, and repair grammar
+## Runs 22–110 — Evidence, boundaries, sequencing, and repair grammar
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -36,19 +36,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 107:** Reframed an indistinguishable prose/schema break as ambiguous rather than definitely malformed.
 - **Run 108:** Preserved ordinary multiline Evidence by removing destructive internal whitespace normalization.
 - **Run 109:** Verified preservation of a blank-line paragraph break inside Evidence.
+- **Run 110:** Refused duplicate allowed labels before extraction rather than silently selecting one occurrence.
 
-## Run 110 — Refuse duplicate allowed labels
+## Run 111 — Preserve an allowed-label word in prose
 
-**What changed:** Added `SCENARIOS/108-duplicate-allowed-label.md`. Added `duplicate_allowed_labels()` and a narrow pre-extraction refusal that reports all Input-relative locations for any allowed field appearing more than once.
+**What changed:** Added `SCENARIOS/109-allowed-label-word-prose.md`. No executable code changed because the current structural grammar already passes the named regression.
 
-**Scenario tested:** Intended Evidence contains the sentence `Success: depends on support coverage after launch.`, followed later by the actual `Success: Roll out only if every gate is satisfied; otherwise delay.` Both are structurally explicit allowed labels, so semantic intent cannot be determined safely.
+**Scenario tested:** Evidence contains a continuation sentence beginning `Success depends on support coverage after launch...` without a colon, followed later by the single explicit `Success:` field. The observable requirement is that the continuation remain Evidence and not trigger duplicate-field refusal.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** The new preflight returns `Duplicate explicit fields:` followed by `- Success (input lines 3, 5)` and exits before `labeled_value()` can select the first occurrence. A direct Python simulation of the duplicate scan produced exactly `Success` at lines 3 and 5.
+**Observable output:** `duplicate_allowed_labels()` matches an allowed name only when a same-line colon follows it, so the prose continuation is not counted. `labeled_value()` keeps that line inside Evidence until the later explicit `Constraints:` label. The scenario reaches `Contract: complete — 4/4 fields explicit; nothing inferred.` with exactly one Success field.
 
-**What was removed or rejected:** Rejected first-wins, last-wins, field merging, and semantic classification of the interview sentence. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected broad matching on allowed-label words, semantic sentence classification, and another formatting-tolerance feature. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** Exact field uniqueness is part of preserving delegated authority. A duplicate allowed label is not harmless formatting: it can replace the actual success rule while still producing apparently complete output. Refusal is safer and more specific than guessing intent.
+**What was learned:** The Run 110 duplicate refusal is narrow enough to protect field uniqueness without treating ordinary prose as schema. Further label-format permutations would optimize parser polish rather than test the stated purpose.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test verifies that continuation prose beginning with an allowed-label word but lacking a colon remains inside Evidence and does not trigger the duplicate refusal.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test moves to a fresh real decision handoff and asks whether the six compiled audit obligations prevent a concrete downstream loss, rather than continuing grammar permutations.
