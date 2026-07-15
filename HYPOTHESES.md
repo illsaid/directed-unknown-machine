@@ -53,11 +53,12 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 113 / `SCENARIOS/111-vendor-renewal-positive-authority.md`:** The contrasting all-gates-satisfied handoff exposed the opposite authority risk: an analyst could account for every supplied condition yet invent an extra caution gate and withhold the authorized positive action. The final obligation now requires recommending a fully satisfied supplied branch without adding new gates.
 - **Run 114 / `SCENARIOS/112-asymmetric-launch-authority.md`:** An asymmetric launch rule exposed that a gate unresolved for full rollout could be misread as blocking a separate 10 percent rollout branch that does not require it. The recommendation obligation now maps gate results to the branches that require them and states that a violated or unresolved gate blocks only dependent branches.
 - **Run 115 / `SCENARIOS/113-nested-satisfied-launch-authority.md`:** When both limited and full rollout branches were satisfied, the prior obligation permitted arbitrary selection of the weaker branch. The recommendation rule now requires the more conditional supplied branch when its conditions contain every condition of a satisfied subset branch plus additional satisfied conditions.
-- **Run 116 / `SCENARIOS/114-nonnested-satisfied-branch-authority.md`:** Two independent, fully satisfied branches authorized mutually exclusive channel investments, but the supplied Success rule contained no precedence. The prior requirement to recommend one action allowed analyst preference to invent authority. The compiler now requires branch authority to remain unresolved when satisfied branches are non-nested and no supplied precedence or tie-breaker exists.
+- **Run 116 / `SCENARIOS/114-nonnested-satisfied-branch-authority.md`:** Two independent, fully satisfied branches authorized mutually exclusive channel investments, but the supplied Success rule contained no precedence. The compiler now requires branch authority to remain unresolved when satisfied branches are non-nested and no supplied precedence or tie-breaker exists.
+- **Run 117 / `SCENARIOS/115-nonnested-precedence-authority.md`:** The same independent satisfied branches included an explicit rule that the referral program takes precedence when both qualify. The recommendation obligation now applies that supplied precedence while preserving paid acquisition as satisfied but non-governing rather than failed or omitted.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test the same two fully satisfied, non-nested branches with explicit supplied precedence and verify that the governing branch can be recommended.
+**Next test:** Test precedence that applies only when a third supplied fact is established; absent that fact, branch authority should remain unresolved.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -72,7 +73,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–116 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–117 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
