@@ -60,10 +60,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 120 / `SCENARIOS/118-conditional-precedence-conflict.md`:** Conflicting supplied legal opinions about the precedence trigger exposed that an analyst could cite only the favorable source and activate referral precedence. The recommendation obligation now keeps conditional precedence unresolved unless supplied applicability evidence establishes which conflicting source governs.
 - **Run 121 / `SCENARIOS/119-conditional-precedence-applicability.md`:** A supplied governance policy established that internal legal controls operational applicability, resolving the trigger conflict against outside counsel. The recommendation obligation now identifies the governing source while preserving displaced trigger evidence as conflicting but non-governing rather than false or omitted.
 - **Run 122 / `SCENARIOS/120-partial-period-applicability.md`:** A governance policy made internal legal authoritative only for the first six weeks, while referral precedence required the exclusivity clause to apply for the full quarter. The recommendation obligation now limits applicability authority to its explicit scope, preserves covered and uncovered periods separately, and leaves the broader trigger unresolved unless every required period is established.
+- **Run 123 / `SCENARIOS/121-partial-population-applicability.md`:** A governance policy made internal legal authoritative only for US enterprise customers, who represented 80 percent of the target population, while referral precedence required the clause to apply to every target customer. The recommendation obligation now explicitly forbids extrapolating an uncovered population from a covered majority; the full-population trigger remains unresolved.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test a population-scoped applicability rule against a trigger requiring the full target population.
+**Next test:** Test complementary population-scoped applicability rules that jointly cover the full target population without gaps.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -78,7 +79,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–122 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–123 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
