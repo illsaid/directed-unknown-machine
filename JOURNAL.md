@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–105 — Evidence, boundaries, sequencing, and repair grammar
+## Runs 22–106 — Evidence, boundaries, sequencing, and repair grammar
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -32,19 +32,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 101:** Added a narrow malformed unsupported-label refusal and restored H2.
 - **Runs 102–104:** Verified allowed-label exclusion, first-location reporting, and repeated-label collapse.
 - **Run 105:** Verified distinct malformed labels and clarified that reported locations are Input-relative.
+- **Run 106:** Verified that repeated and distinct malformed-label handling composes correctly, then stopped extending deduplication permutations.
 
-## Run 106 — Compose repeated and distinct malformed-label handling
+## Run 107 — Describe structurally ambiguous breaks accurately
 
-**What changed:** Added `SCENARIOS/104-repeated-and-distinct-line-broken-labels.md`. No executable change was made because the existing preflight already passed the combined boundary.
+**What changed:** Added `SCENARIOS/105-ambiguous-wrapped-prose.md`. Changed the preflight heading from categorical `Malformed explicit fields:` to `Ambiguous field-like breaks:` and changed the repair to cover both possible source intentions: keep prose continuous, or keep each field label and colon on the same line.
 
-**Scenario tested:** A complete checkout rollout contract contains malformed `Owner` beginning on Input line 2, malformed `Deadline` beginning on Input line 5, and a later case-variant `owner` beginning on Input line 7. The tool must retain the first `Owner` occurrence, preserve `Deadline` separately, and refuse before extraction.
+**Scenario tested:** A complete checkout rollout contract contains interview prose wrapped as `Owner\n: unclear after launch.` The same character pattern can also represent a malformed unsupported field. The system cannot distinguish those meanings without semantic classification, which the primary hypothesis explicitly avoids.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the scenario's recorded comparative-test gap.
 
-**Observable output:** `Malformed explicit fields:\n- Owner (input line 2)\n- Deadline (input line 5)\nKeep each field label and colon on the same line.` The later `owner` occurrence is omitted, the first spelling and location are retained, the distinct defect remains visible in source order, and no allowed field is extracted or contaminated.
+**Observable output:** `Ambiguous field-like breaks:\n- Owner (input line 3)\nKeep prose continuous, or keep each field label and colon on the same line.` The refusal still occurs before field extraction, so the ambiguous text cannot contaminate Evidence or another allowed field. The output no longer asserts that the source definitely intended a malformed explicit field.
 
-**What was removed or rejected:** Rejected another deduplication layer, a generic defect collection abstraction, and any change to field parsing. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected automatic prose-versus-schema classification, accepting the ambiguous text as Evidence, and a broader parser mode. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The existing narrow preflight composes correctly across repeated and distinct malformed labels. Further permutations of this same deduplication behavior would be polish drift rather than purpose discovery.
+**What was learned:** The safe behavior was already refusal; the defect was epistemic overstatement in the repair. When syntax supports two plausible source intentions, the tool should preserve the boundary and name the ambiguity rather than invent certainty.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test moves away from deduplication permutations and asks whether ordinary wrapped field prose can be falsely classified as a malformed unsupported field.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is a normal multiline Evidence paragraph without a colon-start line; it should remain preserved and reach complete-contract output.
