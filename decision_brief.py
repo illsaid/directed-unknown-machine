@@ -43,7 +43,7 @@ REQUIREMENT_GROUPS = (
     (
         "Decision: recommend",
         (
-            "Recommend one authorized action and name the governing Success branch. Connect every gate result to the branches that require it. A violated or unresolved gate blocks only branches that depend on it; it must not block a separate branch whose supplied conditions are fully satisfied. When every condition of a supplied branch is satisfied, recommend that branch without inventing additional gates. When one fully satisfied branch contains every condition of another plus additional satisfied conditions, recommend the more conditional supplied branch rather than arbitrarily choosing its weaker subset.",
+            "Recommend one authorized action and name the governing Success branch. Connect every gate result to the branches that require it. A violated or unresolved gate blocks only branches that depend on it; it must not block a separate branch whose supplied conditions are fully satisfied. When every condition of a supplied branch is satisfied, recommend that branch without inventing additional gates. When one fully satisfied branch contains every condition of another plus additional satisfied conditions, recommend the more conditional supplied branch rather than arbitrarily choosing its weaker subset. When multiple fully satisfied branches are not nested and the supplied rule gives no precedence or tie-breaker, report branch authority unresolved and identify the missing precedence; do not choose among them.",
         ),
     ),
 )
