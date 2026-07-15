@@ -25,16 +25,16 @@ The compiled contract must apply internal legal only to the first six weeks, pre
 
 ## Actual outcome
 
-Before Run 122, the recommendation obligation said supplied applicability may resolve conflicting trigger evidence but did not require scope matching. An analyst could incorrectly extend the six-week governance rule across the full quarter and activate referral precedence.
+Run 122 strengthened the recommendation obligation so applicability evidence governs only its explicit scope. The first six weeks are resolved under internal legal, the remaining seven weeks stay unresolved, and the full-quarter precedence trigger cannot activate.
 
 ## Whether the system helped
 
-partial
+yes
 
 ## What broke
 
-Applicability authority was not explicitly limited to the period it covers, so a partial-period rule could be overextended to resolve a full-period precedence trigger.
+The prior obligation did not explicitly limit applicability authority to the period it covered, so a partial-period rule could be overextended to resolve a full-period precedence trigger.
 
 ## What would make the result more useful
 
-Require applicability evidence to govern only its explicit scope and keep uncovered trigger periods unresolved.
+Test a population-scoped applicability rule against a trigger requiring the full target population.
