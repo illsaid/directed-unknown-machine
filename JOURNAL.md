@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–114 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–115 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -41,19 +41,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 112:** Required every gate result to be connected to the governing Success branch before an action can be recommended.
 - **Run 113:** Required a fully satisfied supplied branch to be recommended without invented caution gates.
 - **Run 114:** Made gate blocking branch-local so an unresolved stronger branch cannot erase a separately authorized limited action.
+- **Run 115:** Required the more conditional supplied branch when satisfied branches are nested by condition inclusion.
 
-## Run 115 — Prefer the fully satisfied nested branch
+## Run 116 — Refuse arbitrary choice between non-nested satisfied branches
 
-**What changed:** Added `SCENARIOS/113-nested-satisfied-launch-authority.md`. Strengthened the `Decision: recommend` obligation so, when one fully satisfied branch contains every condition of another plus additional satisfied conditions, the analyst must recommend the more conditional supplied branch rather than arbitrarily choosing the weaker subset.
+**What changed:** Added `SCENARIOS/114-nonnested-satisfied-branch-authority.md`. Strengthened the `Decision: recommend` obligation so multiple fully satisfied, non-nested branches remain unresolved when the supplied Success rule provides no precedence or tie-breaker.
 
-**Scenario tested:** A staged launch handoff authorizes a 10 percent rollout when deliverability is at least 98 percent and full rollout when deliverability is at least 98 percent plus conversion of at least 5 percent. Supplied evidence establishes 99.2 percent deliverability and 6.1 percent conversion, so both branches are satisfied and the full branch structurally contains the limited branch's condition set.
+**Scenario tested:** A channel-allocation handoff authorizes paid acquisition when contribution margin is at least 30 percent and a referral program when retained-user conversion is at least 60 percent. Supplied evidence establishes 34 percent margin and 68 percent conversion, so both independent branches are satisfied. The budget permits only one program, but the Success rule does not state which branch governs.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/113-nested-satisfied-launch-authority.md` reaches complete-contract output and now emits: `When one fully satisfied branch contains every condition of another plus additional satisfied conditions, recommend the more conditional supplied branch rather than arbitrarily choosing its weaker subset.` Under the supplied rule, this requires full rollout rather than the also-satisfied 10 percent branch.
+**Observable output:** `python decision_brief.py SCENARIOS/114-nonnested-satisfied-branch-authority.md` reaches complete-contract output and now emits: `When multiple fully satisfied branches are not nested and the supplied rule gives no precedence or tie-breaker, report branch authority unresolved and identify the missing precedence; do not choose among them.`
 
-**What was removed or rejected:** Rejected automatic branch parsing, launch-specific logic, action ranking, and a generic precedence engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected automatic branch parsing, domain-specific channel logic, scoring the two programs, and an analyst-selected default. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** Positive authority also has a specificity boundary. When supplied branches are nested by condition inclusion and all added conditions are satisfied, choosing the subset branch silently discards authorized evidence and weakens the operator's rule.
+**What was learned:** Satisfaction does not create precedence. When independent supplied branches authorize mutually exclusive actions, choosing among them adds authority that the operator never supplied.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is two fully satisfied branches that are not nested, checking whether the compiler reports unresolved authority unless the supplied Success rule states precedence.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is the same two fully satisfied, non-nested branches with explicit supplied precedence, verifying that the governing branch can then be recommended.
