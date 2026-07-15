@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–117 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–118 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -44,19 +44,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 115:** Required the more conditional supplied branch when satisfied branches are nested by condition inclusion.
 - **Run 116:** Required independent satisfied branches with no supplied precedence to remain unresolved rather than authorizing an analyst-selected choice.
 - **Run 117:** Applied supplied precedence between independent satisfied branches while preserving displaced branches as satisfied but non-governing.
+- **Run 118:** Required every activating condition of conditional precedence to be established before precedence can govern.
 
-## Run 118 — Require evidence for conditional precedence
+## Run 119 — Cite evidence activating conditional precedence
 
-**What changed:** Added `SCENARIOS/116-conditional-precedence-unresolved.md`. Strengthened the `Decision: recommend` obligation so a conditional precedence rule governs only when every supplied condition activating it is established. If an activating condition is violated or unresolved, candidate branch satisfaction is preserved but precedence and branch authority remain unresolved.
+**What changed:** Added `SCENARIOS/117-conditional-precedence-established.md`. Strengthened the `Decision: recommend` obligation so an activated conditional precedence rule must cite the supplied evidence establishing every activating condition.
 
-**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Only one may be funded. Referral takes precedence only if a partner-exclusivity clause applies, but supplied legal evidence says applicability has not been established.
+**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Only one may be funded. Referral takes precedence when a partner-exclusivity clause applies, and supplied legal evidence confirms that the clause applies this quarter.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/116-conditional-precedence-unresolved.md` reaches complete-contract output and now emits: `A conditional precedence rule governs only when every supplied condition activating it is established; if any activating condition is violated or unresolved, preserve the candidate branches and report precedence unresolved.`
+**Observable output:** `python decision_brief.py SCENARIOS/117-conditional-precedence-established.md` reaches complete-contract output and now emits: `When conditional precedence governs, cite the supplied evidence that establishes every activating condition.`
 
-**What was removed or rejected:** Rejected automatic branch parsing, legal-domain logic, treating the unresolved precedence trigger as false, and selecting either satisfied program by analyst preference. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected automatic branch parsing, legal-domain logic, and treating the precedence trigger as implicit once referral is selected. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** A precedence statement is itself a gated authority rule. Evidence can satisfy every candidate action branch while still failing to authorize a choice between them.
+**What was learned:** Establishing a precedence trigger is not enough for an auditable handoff; the recommendation must preserve the evidence chain that activated the governing rule.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is the same conditional precedence with its triggering fact established; referral should govern while paid acquisition remains satisfied but non-governing.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is conflicting supplied evidence about the precedence trigger; conditional precedence should remain unresolved rather than selecting whichever source is convenient.
