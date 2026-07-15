@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–121 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–122 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -48,19 +48,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 119:** Required activated conditional precedence to cite the supplied evidence establishing its trigger.
 - **Run 120:** Kept conditional precedence unresolved when supplied trigger evidence conflicts and no applicability rule establishes which source governs.
 - **Run 121:** Applied supplied source governance while preserving displaced conflicting trigger evidence as non-governing rather than false or omitted.
+- **Run 122:** Limited applicability authority to its explicit period or population scope.
 
-## Run 122 — Limit applicability authority to its explicit scope
+## Run 123 — Prevent majority-population extrapolation
 
-**What changed:** Added `SCENARIOS/120-partial-period-applicability.md`. Strengthened the `Decision: recommend` obligation so applicability evidence governs only the period or population it explicitly covers; uncovered required scopes remain unresolved.
+**What changed:** Added `SCENARIOS/121-partial-population-applicability.md`. Strengthened the `Decision: recommend` obligation so an applicability rule covering a supplied majority cannot be extrapolated to the uncovered population.
 
-**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Internal legal governs clause applicability only for the first six weeks and says the clause does not apply then; the remaining seven weeks have no governing determination. Referral precedence requires the clause to apply for the full quarter.
+**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Internal legal governs clause applicability only for US enterprise customers, who represent 80 percent of the target population, and says the clause does not apply there. Other target customers have no governing determination. Referral precedence requires the clause to apply to every target customer.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/120-partial-period-applicability.md` reaches complete-contract output and now emits: `Applicability evidence governs only the scope it explicitly covers; when a trigger requires a broader period or population, preserve covered and uncovered scopes separately and leave the trigger unresolved unless every required scope is established.`
+**Observable output:** `python decision_brief.py SCENARIOS/121-partial-population-applicability.md` reaches complete-contract output and now emits: `Do not infer an uncovered population from a covered population, even when the covered population is a supplied majority.`
 
-**What was removed or rejected:** Rejected extending a six-week governance rule across the quarter, treating the uncovered period as false, and adding a temporal inference engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected treating 80 percent coverage as representative of the remaining 20 percent, treating uncovered customers as governed by the majority result, and adding a population inference engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** Applicability is scoped authority, not a blanket source ranking. A rule that resolves one part of a trigger cannot authorize a conclusion about the uncovered remainder.
+**What was learned:** Scope authority is categorical, not proportional. Majority coverage does not establish a universal trigger when any required population remains outside the governing applicability rule.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is a population-scoped applicability rule against a trigger requiring the full target population.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is complementary population-scoped applicability rules that jointly cover the full target population without gaps.
