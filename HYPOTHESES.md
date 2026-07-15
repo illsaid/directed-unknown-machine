@@ -64,10 +64,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 124 / `SCENARIOS/122-complementary-population-applicability.md`:** Complementary governance rules jointly covered every target customer but produced different clause-applicability results. The recommendation obligation now resolves a universal trigger across all governed scopes: every scope must support it for satisfaction, while any rejecting scope violates it; scope results cannot be averaged.
 - **Run 125 / `SCENARIOS/123-overlapping-population-applicability.md`:** Internal legal governed all US customers, regional counsel governed all enterprise customers, and US enterprise customers fell inside both scopes. A supplied policy made internal legal controlling in the overlap. The recommendation obligation now applies supplied overlap authority before evaluating a broader trigger, preserves the displaced source only within the overlap, and forbids double-counting the shared population.
 - **Run 126 / `SCENARIOS/124-overlapping-population-no-authority.md`:** The same overlapping scopes supplied no authority for the shared US-enterprise population. The recommendation obligation now preserves conflicting authority inside the overlap as unresolved, forbids inheriting either source by convenience, and leaves any broader trigger that depends on the overlap unresolved.
+- **Run 127 / `SCENARIOS/125-explicit-conflict-fallback.md`:** A refrigerated-shipment handoff exercised all six audit obligations and exposed a distinction between unresolved evidence and unresolved authority. The supplied Success rule explicitly authorized quarantine and an independent assay when temperature evidence remained conflicting or unresolved. The recommendation obligation now requires that fallback action instead of returning no authorized recommendation.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Stop population-scope permutations. Test all six audit obligations against a fresh real decision handoff from a different domain.
+**Next test:** Test an explicit unresolved-condition fallback that itself has an additional unresolved gate; the fallback must not activate until all of its supplied conditions are established.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -82,7 +83,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–126 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–127 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
