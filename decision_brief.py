@@ -43,7 +43,7 @@ REQUIREMENT_GROUPS = (
     (
         "Decision: recommend",
         (
-            "Recommend one authorized action and name the governing Success branch. Connect every gate result to that branch, and do not recommend an action until every branch condition is accounted for. When every condition of a supplied branch is satisfied, recommend that branch without inventing additional gates.",
+            "Recommend one authorized action and name the governing Success branch. Connect every gate result to the branches that require it. A violated or unresolved gate blocks only branches that depend on it; it must not block a separate branch whose supplied conditions are fully satisfied. When every condition of a supplied branch is satisfied, recommend that branch without inventing additional gates.",
         ),
     ),
 )
