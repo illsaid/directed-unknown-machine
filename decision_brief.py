@@ -105,7 +105,10 @@ def repair_template(missing: list[str]) -> str:
 
 def malformed_template(malformed: list[tuple[str, int]]) -> str:
     fields = "\n".join(f"- {label} (input line {line_number})" for label, line_number in malformed)
-    return f"Malformed explicit fields:\n{fields}\nKeep each field label and colon on the same line."
+    return (
+        f"Ambiguous field-like breaks:\n{fields}\n"
+        "Keep prose continuous, or keep each field label and colon on the same line."
+    )
 
 
 def unsupported_template(unsupported: list[str]) -> str:
