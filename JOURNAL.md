@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–122 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–123 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -49,19 +49,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 120:** Kept conditional precedence unresolved when supplied trigger evidence conflicts and no applicability rule establishes which source governs.
 - **Run 121:** Applied supplied source governance while preserving displaced conflicting trigger evidence as non-governing rather than false or omitted.
 - **Run 122:** Limited applicability authority to its explicit period or population scope.
+- **Run 123:** Prevented a supplied majority population from standing in for an uncovered remainder.
 
-## Run 123 — Prevent majority-population extrapolation
+## Run 124 — Resolve universal triggers across complementary populations
 
-**What changed:** Added `SCENARIOS/121-partial-population-applicability.md`. Strengthened the `Decision: recommend` obligation so an applicability rule covering a supplied majority cannot be extrapolated to the uncovered population.
+**What changed:** Added `SCENARIOS/122-complementary-population-applicability.md`. Strengthened the `Decision: recommend` obligation so a universal trigger is evaluated across complementary governed scopes that jointly cover every required population.
 
-**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Internal legal governs clause applicability only for US enterprise customers, who represent 80 percent of the target population, and says the clause does not apply there. Other target customers have no governing determination. Referral precedence requires the clause to apply to every target customer.
+**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Internal legal governs US enterprise customers and says the exclusivity clause does not apply there. Regional counsel governs all other target customers and says it applies there. Together the governed populations cover every target customer, while referral precedence requires the clause to apply to every target customer.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/121-partial-population-applicability.md` reaches complete-contract output and now emits: `Do not infer an uncovered population from a covered population, even when the covered population is a supplied majority.`
+**Observable output:** `python decision_brief.py SCENARIOS/122-complementary-population-applicability.md` reaches complete-contract output and now emits: `When complementary governed scopes jointly cover every required population, evaluate a universal trigger across all scopes: it is satisfied only if every scope supports it and violated if any scope rejects it; do not average scope results.`
 
-**What was removed or rejected:** Rejected treating 80 percent coverage as representative of the remaining 20 percent, treating uncovered customers as governed by the majority result, and adding a population inference engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected averaging population results, treating majority support as universal support, and adding a population aggregation engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** Scope authority is categorical, not proportional. Majority coverage does not establish a universal trigger when any required population remains outside the governing applicability rule.
+**What was learned:** Full scope coverage removes uncertainty but does not imply uniformity. A universal condition fails when any authoritative subpopulation result rejects it, even if every population is governed and most support it.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is complementary population-scoped applicability rules that jointly cover the full target population without gaps.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is complementary population scopes that overlap and include a supplied rule for which source governs the overlap.
