@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–108 — Evidence, boundaries, sequencing, and repair grammar
+## Runs 22–109 — Evidence, boundaries, sequencing, and repair grammar
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -35,19 +35,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 106:** Verified that repeated and distinct malformed-label handling composes correctly, then stopped extending deduplication permutations.
 - **Run 107:** Reframed an indistinguishable prose/schema break as ambiguous rather than definitely malformed.
 - **Run 108:** Preserved ordinary multiline Evidence by removing destructive internal whitespace normalization.
+- **Run 109:** Verified preservation of a blank-line paragraph break inside Evidence.
 
-## Run 109 — Preserve an Evidence paragraph break
+## Run 110 — Refuse duplicate allowed labels
 
-**What changed:** Added `SCENARIOS/107-evidence-paragraph-break.md`. No executable code changed.
+**What changed:** Added `SCENARIOS/108-duplicate-allowed-label.md`. Added `duplicate_allowed_labels()` and a narrow pre-extraction refusal that reports all Input-relative locations for any allowed field appearing more than once.
 
-**Scenario tested:** A complete checkout rollout contract contains two Evidence paragraphs separated by a blank line: a measured conversion statement and an interview note. The observable requirement is that the contract remain complete and the blank line survive exactly, without creating a false field boundary.
+**Scenario tested:** Intended Evidence contains the sentence `Success: depends on support coverage after launch.`, followed later by the actual `Success: Roll out only if every gate is satisfied; otherwise delay.` Both are structurally explicit allowed labels, so semantic intent cannot be determined safely.
 
-**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the scenario's recorded comparative-test gap.
+**Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `labeled_value()` matches Evidence through the next explicit allowed label and returns `match.group(1).strip()`. Therefore the internal `\n\n` remains intact, the scenario reaches `Contract: complete — 4/4 fields explicit; nothing inferred.`, and the second paragraph remains part of Evidence.
+**Observable output:** The new preflight returns `Duplicate explicit fields:` followed by `- Success (input lines 3, 5)` and exits before `labeled_value()` can select the first occurrence. A direct Python simulation of the duplicate scan produced exactly `Success` at lines 3 and 5.
 
-**What was removed or rejected:** Rejected another whitespace-normalization option, a paragraph-aware parser, and any new mode. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected first-wins, last-wins, field merging, and semantic classification of the interview sentence. No dead-hypothesis code could be removed without breaking the required historical demo command.
 
-**What was learned:** The Run 108 fix covers both wrapped lines and paragraph structure. More whitespace permutations would be edge-case polish rather than purpose discovery, so the next test moves to a genuine field-boundary ambiguity.
+**What was learned:** Exact field uniqueness is part of preserving delegated authority. A duplicate allowed label is not harmless formatting: it can replace the actual success rule while still producing apparently complete output. Refusal is safer and more specific than guessing intent.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is an Evidence continuation line beginning with an allowed-label word but functioning as ordinary prose; this may expose an over-eager explicit-label lookahead.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test verifies that continuation prose beginning with an allowed-label word but lacking a colon remains inside Evidence and does not trigger the duplicate refusal.
