@@ -43,7 +43,7 @@ REQUIREMENT_GROUPS = (
     (
         "Decision: recommend",
         (
-            "Recommend one authorized action and name the governing Success branch.",
+            "Recommend one authorized action and name the governing Success branch. Connect every gate result to that branch, and do not recommend an action until every branch condition is accounted for.",
         ),
     ),
 )
