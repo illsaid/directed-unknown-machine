@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–124 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–125 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -51,19 +51,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 122:** Limited applicability authority to its explicit period or population scope.
 - **Run 123:** Prevented a supplied majority population from standing in for an uncovered remainder.
 - **Run 124:** Evaluated universal triggers across complementary governed populations without averaging their results.
+- **Run 125:** Resolved overlapping governed populations with supplied overlap authority before evaluating a universal trigger.
 
-## Run 125 — Resolve governed overlap before evaluating a universal trigger
+## Run 126 — Preserve unresolved authority inside an overlap
 
-**What changed:** Added `SCENARIOS/123-overlapping-population-applicability.md`. Strengthened the `Decision: recommend` obligation so overlapping population scopes must be resolved by supplied overlap authority before a broader trigger is evaluated.
+**What changed:** Added `SCENARIOS/124-overlapping-population-no-authority.md`. Strengthened the `Decision: recommend` obligation so conflicting authorities inside an overlapping scope remain unresolved when no supplied rule governs that overlap.
 
-**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Internal legal governs all US customers and says the exclusivity clause does not apply. Regional counsel governs all enterprise customers and says it applies. US enterprise customers sit inside both scopes. A supplied policy says internal legal controls wherever scopes overlap. Referral precedence requires the clause to apply to every target customer.
+**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Internal legal governs all US customers and rejects clause applicability. Regional counsel governs all enterprise customers and supports it. US enterprise customers sit inside both scopes, but no supplied policy resolves authority there. Referral precedence requires the clause to apply to every target customer.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/123-overlapping-population-applicability.md` reaches complete-contract output and now emits: `When governed population scopes overlap, apply only supplied overlap authority to the overlap before evaluating any broader trigger; preserve displaced source results as conflicting but non-governing within the overlap, and do not double-count the overlap.`
+**Observable output:** `python decision_brief.py SCENARIOS/124-overlapping-population-no-authority.md` reaches complete-contract output and now emits: `When conflicting authorities overlap and no supplied rule governs the shared scope, preserve that overlap as unresolved; do not inherit either source or resolve any broader trigger that depends on the overlap.`
 
-**What was removed or rejected:** Rejected double-counting US enterprise customers, treating the whole source as displaced outside the overlap, and adding a population-partition engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected inheriting internal legal, inheriting regional counsel, majority voting, and adding a population-partition engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** Scope precedence can be local. A source displaced in an overlap may remain governing elsewhere, so overlap resolution must partition authority without rewriting either source globally.
+**What was learned:** Complete source coverage does not create authority inside a shared scope. When the overlap itself lacks governance, the correct result is local unresolvedness that propagates only to branches depending on that scope.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is overlapping population scopes with no supplied overlap authority; the overlap should remain unresolved.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. Population-scope permutations are now closed; the next test must exercise all six audit obligations in a fresh domain.
