@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–110 — Evidence, boundaries, sequencing, and repair grammar
+## Runs 22–111 — Evidence, boundaries, sequencing, and repair grammar
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -37,19 +37,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 108:** Preserved ordinary multiline Evidence by removing destructive internal whitespace normalization.
 - **Run 109:** Verified preservation of a blank-line paragraph break inside Evidence.
 - **Run 110:** Refused duplicate allowed labels before extraction rather than silently selecting one occurrence.
+- **Run 111:** Verified that an allowed-label word without a colon remains ordinary field prose, then ended label-format permutations.
 
-## Run 111 — Preserve an allowed-label word in prose
+## Run 112 — Trace every gate into the authorized branch
 
-**What changed:** Added `SCENARIOS/109-allowed-label-word-prose.md`. No executable code changed because the current structural grammar already passes the named regression.
+**What changed:** Added `SCENARIOS/110-vendor-renewal-authority.md`. Strengthened the `Decision: recommend` obligation so the downstream analyst must connect every gate result to the named Success branch and cannot recommend an action until every branch condition is accounted for.
 
-**Scenario tested:** Evidence contains a continuation sentence beginning `Success depends on support coverage after launch...` without a colon, followed later by the single explicit `Success:` field. The observable requirement is that the continuation remain Evidence and not trigger duplicate-field refusal.
+**Scenario tested:** A quarterly vendor-renewal handoff supplies conflicting four-hour response figures and an incomplete avoided-cost estimate. Renewal is authorized only if independent compliance is at least 90 percent and evidenced avoided backlog cost is at least the $24,000 fee. Selecting the vendor's favorable 92 percent figure or inventing an avoided-ticket count would produce a plausible but unauthorized renewal.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `duplicate_allowed_labels()` matches an allowed name only when a same-line colon follows it, so the prose continuation is not counted. `labeled_value()` keeps that line inside Evidence until the later explicit `Constraints:` label. The scenario reaches `Contract: complete — 4/4 fields explicit; nothing inferred.` with exactly one Success field.
+**Observable output:** `python decision_brief.py SCENARIOS/110-vendor-renewal-authority.md` reaches complete-contract output and now emits: `Recommend one authorized action and name the governing Success branch. Connect every gate result to that branch, and do not recommend an action until every branch condition is accounted for.` The service conflict and missing avoided-ticket count therefore remain blocking rather than disappearing behind the favorable values.
 
-**What was removed or rejected:** Rejected broad matching on allowed-label words, semantic sentence classification, and another formatting-tolerance feature. No dead-hypothesis code could be removed without breaking the required historical demo command.
+**What was removed or rejected:** Rejected vendor-specific calculations, automatic conflict resolution, and a domain mode. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** The Run 110 duplicate refusal is narrow enough to protect field uniqueness without treating ordinary prose as schema. Further label-format permutations would optimize parser polish rather than test the stated purpose.
+**What was learned:** Naming the governing branch is not enough to preserve delegated authority. A recommendation can cite the correct branch while silently omitting an unresolved condition. The narrow useful requirement is a complete gate-to-branch trace, not more domain analysis.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test moves to a fresh real decision handoff and asks whether the six compiled audit obligations prevent a concrete downstream loss, rather than continuing grammar permutations.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is a contrasting real handoff with all gates satisfied, checking that the stronger traceability rule permits the authorized positive branch without expanding the compiler's role.
