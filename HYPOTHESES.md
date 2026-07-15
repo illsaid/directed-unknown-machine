@@ -67,10 +67,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 127 / `SCENARIOS/125-explicit-conflict-fallback.md`:** A refrigerated-shipment handoff exercised all six audit obligations and exposed a distinction between unresolved evidence and unresolved authority. The supplied Success rule explicitly authorized quarantine and an independent assay when temperature evidence remained conflicting or unresolved. The recommendation obligation now requires that fallback action instead of returning no authorized recommendation.
 - **Run 128 / `SCENARIOS/126-conditional-conflict-fallback.md`:** A second refrigerated-shipment handoff added a fallback-specific laboratory-capacity gate. Temperature conflict established the fallback trigger, but assay availability within 48 hours remained unresolved. The recommendation obligation now activates an unresolved-condition fallback only when its trigger and every additional supplied fallback condition are established.
 - **Run 129 / `SCENARIOS/127-established-conditional-conflict-fallback.md`:** The contrasting shipment handoff established both the conflicting-temperature fallback trigger and written laboratory capacity within 48 hours. The recommendation obligation now requires an activated fallback recommendation to cite the supplied evidence establishing its trigger and every additional fallback-specific gate, making the complete authority chain inspectable.
+- **Run 130 / `SCENARIOS/128-multi-gate-conflict-fallback.md`:** A fallback requiring both assay-start capacity and qualified storage exposed that listing every gate is insufficient if one source is silently reused across distinct gates. The recommendation obligation now keeps fallback-specific gates independently evidenced and permits shared support only when the supplied evidence explicitly supports both gates.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test a fallback with two independently established operational gates and verify that each remains visible in the authorization trace.
+**Next test:** Test a fallback whose single supplied record explicitly supports two operational gates and verify that shared evidence is allowed only because its dual support is explicit.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -85,7 +86,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–129 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–130 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
