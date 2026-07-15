@@ -57,10 +57,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 117 / `SCENARIOS/115-nonnested-precedence-authority.md`:** The same independent satisfied branches included an explicit rule that the referral program takes precedence when both qualify. The recommendation obligation now applies that supplied precedence while preserving paid acquisition as satisfied but non-governing rather than failed or omitted.
 - **Run 118 / `SCENARIOS/116-conditional-precedence-unresolved.md`:** Both independent branches qualified, but referral precedence applied only if a partner-exclusivity clause applied, and the supplied evidence left that trigger unresolved. The recommendation obligation now requires every activating condition of conditional precedence to be established; otherwise precedence and branch authority remain unresolved while both candidate branches retain their satisfied status.
 - **Run 119 / `SCENARIOS/117-conditional-precedence-established.md`:** The same conditional precedence had its trigger established by supplied legal evidence. The recommendation obligation now requires the governing recommendation to cite the evidence activating conditional precedence, while preserving the displaced paid-acquisition branch as satisfied but non-governing.
+- **Run 120 / `SCENARIOS/118-conditional-precedence-conflict.md`:** Conflicting supplied legal opinions about the precedence trigger exposed that an analyst could cite only the favorable source and activate referral precedence. The recommendation obligation now keeps conditional precedence unresolved unless supplied applicability evidence establishes which conflicting source governs.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test conflicting supplied evidence about the conditional-precedence trigger; precedence should remain unresolved rather than selecting whichever source is convenient.
+**Next test:** Test the same conflicting trigger evidence with a supplied applicability rule that establishes which legal source governs.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -75,7 +76,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–119 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–120 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
