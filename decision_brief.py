@@ -88,6 +88,23 @@ def malformed_unsupported_labels(raw: str) -> list[tuple[str, int]]:
     return malformed
 
 
+def duplicate_allowed_labels(raw: str) -> list[tuple[str, list[int]]]:
+    occurrences: dict[str, list[int]] = {label.lower(): [] for label in LABELS}
+    canonical = {label.lower(): label for label in LABELS}
+    pattern = re.compile(
+        rf"^({'|'.join(LABELS)})[ \t]*:",
+        re.IGNORECASE | re.MULTILINE,
+    )
+    for match in pattern.finditer(raw):
+        line_number = raw.count("\n", 0, match.start()) + 1
+        occurrences[match.group(1).lower()].append(line_number)
+    return [
+        (canonical[key], line_numbers)
+        for key, line_numbers in occurrences.items()
+        if len(line_numbers) > 1
+    ]
+
+
 def labeled_value(raw: str, label: str) -> str | None:
     next_labels = "|".join(LABELS)
     match = re.search(
@@ -108,6 +125,17 @@ def malformed_template(malformed: list[tuple[str, int]]) -> str:
     return (
         f"Ambiguous field-like breaks:\n{fields}\n"
         "Keep prose continuous, or keep each field label and colon on the same line."
+    )
+
+
+def duplicate_template(duplicates: list[tuple[str, list[int]]]) -> str:
+    fields = "\n".join(
+        f"- {label} (input lines {', '.join(str(line) for line in line_numbers)})"
+        for label, line_numbers in duplicates
+    )
+    return (
+        f"Duplicate explicit fields:\n{fields}\n"
+        "Keep each allowed field exactly once; rewrite ordinary prose so it does not mimic a field label."
     )
 
 
@@ -139,6 +167,9 @@ def main() -> int:
     unsupported = unsupported_labels(raw)
     if unsupported:
         raise SystemExit(unsupported_template(unsupported))
+    duplicates = duplicate_allowed_labels(raw)
+    if duplicates:
+        raise SystemExit(duplicate_template(duplicates))
     values = {label: labeled_value(raw, label) for label in LABELS}
     missing = [label for label, value in values.items() if not value]
     if missing:
