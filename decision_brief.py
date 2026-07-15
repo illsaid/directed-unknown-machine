@@ -95,7 +95,7 @@ def labeled_value(raw: str, label: str) -> str | None:
         raw,
         re.IGNORECASE | re.DOTALL,
     )
-    return " ".join(match.group(1).split()) if match else None
+    return match.group(1).strip() if match else None
 
 
 def repair_template(missing: list[str]) -> str:
