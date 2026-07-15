@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–126 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–127 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -53,19 +53,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 124:** Evaluated universal triggers across complementary governed populations without averaging their results.
 - **Run 125:** Resolved overlapping governed populations with supplied overlap authority before evaluating a universal trigger.
 - **Run 126:** Preserved conflicting authority inside an overlap when no supplied rule governed the shared scope.
+- **Run 127:** Honored an explicit unresolved-condition fallback instead of confusing unresolved evidence with unresolved branch authority.
 
-## Run 127 — Honor an explicit unresolved-condition fallback
+## Run 128 — Require every fallback-specific gate
 
-**What changed:** Added `SCENARIOS/125-explicit-conflict-fallback.md`. Strengthened the `Decision: recommend` obligation so a supplied action for an unresolved or conflicting condition governs when that condition is established.
+**What changed:** Added `SCENARIOS/126-conditional-conflict-fallback.md`. Tightened the `Decision: recommend` obligation so a supplied unresolved-condition fallback activates only when its trigger and every additional condition belonging to that fallback are established.
 
-**Scenario tested:** A refrigerated shipment has two conflicting maximum-temperature records: 7.8°C from the carrier probe and 8.3°C from the receiving logger. A proposed 0.4°C correction lacks evidence that it remained valid on the shipment date. The seal is intact. Release requires a supported maximum at or below 8.0°C; the supplied Success rule explicitly requires quarantine and an independent stability assay when temperature evidence remains unresolved or conflicting.
+**Scenario tested:** Refrigerated shipment L-205 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. The supplied Success rule permits quarantine plus an independent assay for unresolved temperature evidence only if the laboratory can begin within 48 hours. The laboratory has not confirmed capacity.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/125-explicit-conflict-fallback.md` reaches complete-contract output and now emits: `When Success explicitly supplies an action for an unresolved or conflicting condition, recommend that action when the condition is established; do not confuse a resolved fallback branch with unresolved branch authority.`
+**Observable output:** `python decision_brief.py SCENARIOS/126-conditional-conflict-fallback.md` reaches complete-contract output and now emits: `When Success explicitly supplies an action for an unresolved or conflicting condition, recommend that action only when that condition and every additional condition of the fallback branch are established; do not confuse a resolved evidence condition with satisfied branch authority.`
 
-**What was removed or rejected:** Rejected inventing a temperature correction, choosing the favorable probe, returning generic branch authority unresolved, and adding temperature-domain logic. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected recommending quarantine from the temperature conflict alone, inferring laboratory capacity from prior shipments, and adding shipment- or laboratory-specific logic. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** An unresolved gate can itself be the satisfied condition of a supplied fallback branch. Evidence unresolvedness and decision-authority unresolvedness are different states; collapsing them can erase an explicitly authorized containment action.
+**What was learned:** A fallback trigger can be established while the fallback branch remains unauthorized. Trigger resolution and complete branch satisfaction must remain separate, exactly as with ordinary positive branches.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is an explicit unresolved-condition fallback with an additional unresolved gate.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is the contrasting case where laboratory capacity is established and the fallback should govern.
