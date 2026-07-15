@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–127 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–128 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -54,19 +54,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 125:** Resolved overlapping governed populations with supplied overlap authority before evaluating a universal trigger.
 - **Run 126:** Preserved conflicting authority inside an overlap when no supplied rule governed the shared scope.
 - **Run 127:** Honored an explicit unresolved-condition fallback instead of confusing unresolved evidence with unresolved branch authority.
+- **Run 128:** Required the fallback trigger and every additional fallback-specific gate to be established before the fallback can govern.
 
-## Run 128 — Require every fallback-specific gate
+## Run 129 — Trace every activated fallback gate
 
-**What changed:** Added `SCENARIOS/126-conditional-conflict-fallback.md`. Tightened the `Decision: recommend` obligation so a supplied unresolved-condition fallback activates only when its trigger and every additional condition belonging to that fallback are established.
+**What changed:** Added `SCENARIOS/127-established-conditional-conflict-fallback.md`. Tightened the `Decision: recommend` obligation so an activated unresolved-condition fallback must cite the supplied evidence establishing both its trigger and every additional fallback-specific gate.
 
-**Scenario tested:** Refrigerated shipment L-205 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. The supplied Success rule permits quarantine plus an independent assay for unresolved temperature evidence only if the laboratory can begin within 48 hours. The laboratory has not confirmed capacity.
+**Scenario tested:** Refrigerated shipment L-206 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. The named independent laboratory has confirmed in writing that it can begin the required stability assay within 48 hours. The supplied fallback therefore has both its conflict trigger and its laboratory-capacity gate established.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/126-conditional-conflict-fallback.md` reaches complete-contract output and now emits: `When Success explicitly supplies an action for an unresolved or conflicting condition, recommend that action only when that condition and every additional condition of the fallback branch are established; do not confuse a resolved evidence condition with satisfied branch authority.`
+**Observable output:** `python decision_brief.py SCENARIOS/127-established-conditional-conflict-fallback.md` reaches complete-contract output and now emits an obligation requiring the fallback recommendation to cite the evidence establishing the unresolved-or-conflicting trigger and every additional fallback-specific gate.
 
-**What was removed or rejected:** Rejected recommending quarantine from the temperature conflict alone, inferring laboratory capacity from prior shipments, and adding shipment- or laboratory-specific logic. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected citing only the temperature conflict, treating established laboratory capacity as incidental context, and adding shipment- or laboratory-specific execution logic. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** A fallback trigger can be established while the fallback branch remains unauthorized. Trigger resolution and complete branch satisfaction must remain separate, exactly as with ordinary positive branches.
+**What was learned:** Correct branch selection is not enough for an auditable handoff. When a fallback has its own operational gates, the recommendation must expose the complete evidence chain that gives the fallback authority.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is the contrasting case where laboratory capacity is established and the fallback should govern.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is a fallback with two independently established operational gates, each of which must remain visible in the authorization trace.
