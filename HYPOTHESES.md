@@ -51,10 +51,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 111 / `SCENARIOS/109-allowed-label-word-prose.md`:** Verified that the duplicate refusal remains structural: a continuation line beginning `Success depends...` without a colon remains inside Evidence, reaches complete-contract output, and does not create a second Success field. No executable change was justified.
 - **Run 112 / `SCENARIOS/110-vendor-renewal-authority.md`:** A real vendor-renewal handoff exposed a downstream authority gap: the recommendation obligation named the governing Success branch but did not require every gate result to be traced into that branch. The compiler now requires gate-to-branch accounting before any action is recommended, preventing favorable evidence selection or an unsupported economic assumption from silently authorizing renewal.
 - **Run 113 / `SCENARIOS/111-vendor-renewal-positive-authority.md`:** The contrasting all-gates-satisfied handoff exposed the opposite authority risk: an analyst could account for every supplied condition yet invent an extra caution gate and withhold the authorized positive action. The final obligation now requires recommending a fully satisfied supplied branch without adding new gates.
+- **Run 114 / `SCENARIOS/112-asymmetric-launch-authority.md`:** An asymmetric launch rule exposed that a gate unresolved for full rollout could be misread as blocking a separate 10 percent rollout branch that does not require it. The recommendation obligation now maps gate results to the branches that require them and states that a violated or unresolved gate blocks only dependent branches.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test a real handoff with asymmetric branches where one satisfied gate authorizes a limited action rather than a binary yes/no decision.
+**Next test:** Test nested satisfied branches where both a limited and a full action are authorized, and verify that the compiler requires the most specific supplied branch rather than permitting an arbitrary weaker choice.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -69,7 +70,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–113 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–114 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
