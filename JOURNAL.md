@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–116 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–117 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -43,19 +43,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 114:** Made gate blocking branch-local so an unresolved stronger branch cannot erase a separately authorized limited action.
 - **Run 115:** Required the more conditional supplied branch when satisfied branches are nested by condition inclusion.
 - **Run 116:** Required independent satisfied branches with no supplied precedence to remain unresolved rather than authorizing an analyst-selected choice.
+- **Run 117:** Applied supplied precedence between independent satisfied branches while preserving displaced branches as satisfied but non-governing.
 
-## Run 117 — Apply supplied precedence between non-nested satisfied branches
+## Run 118 — Require evidence for conditional precedence
 
-**What changed:** Added `SCENARIOS/115-nonnested-precedence-authority.md`. Strengthened the `Decision: recommend` obligation so supplied precedence selects among fully satisfied, non-nested branches while each displaced branch remains visible as satisfied but non-governing.
+**What changed:** Added `SCENARIOS/116-conditional-precedence-unresolved.md`. Strengthened the `Decision: recommend` obligation so a conditional precedence rule governs only when every supplied condition activating it is established. If an activating condition is violated or unresolved, candidate branch satisfaction is preserved but precedence and branch authority remain unresolved.
 
-**Scenario tested:** The same channel-allocation handoff authorizes paid acquisition at contribution margin of at least 30 percent and a referral program at retained-user conversion of at least 60 percent. Evidence establishes 34 percent margin and 68 percent conversion, so both independent branches qualify. The budget permits only one program, and the Success rule explicitly states that the referral program takes precedence when both qualify.
+**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Only one may be funded. Referral takes precedence only if a partner-exclusivity clause applies, but supplied legal evidence says applicability has not been established.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/115-nonnested-precedence-authority.md` reaches complete-contract output and now emits: `When supplied precedence selects among fully satisfied non-nested branches, recommend the governing branch and preserve each displaced branch as satisfied but non-governing rather than failed or omitted.`
+**Observable output:** `python decision_brief.py SCENARIOS/116-conditional-precedence-unresolved.md` reaches complete-contract output and now emits: `A conditional precedence rule governs only when every supplied condition activating it is established; if any activating condition is violated or unresolved, preserve the candidate branches and report precedence unresolved.`
 
-**What was removed or rejected:** Rejected automatic branch parsing, channel scoring, default precedence, and treating the displaced paid-acquisition branch as failed. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected automatic branch parsing, legal-domain logic, treating the unresolved precedence trigger as false, and selecting either satisfied program by analyst preference. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** Precedence determines governance, not satisfaction. A displaced branch can remain fully supported by the evidence while lacking authority to control the recommendation.
+**What was learned:** A precedence statement is itself a gated authority rule. Evidence can satisfy every candidate action branch while still failing to authorize a choice between them.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is precedence that applies only when a third supplied fact is established; without that fact, branch authority should remain unresolved.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is the same conditional precedence with its triggering fact established; referral should govern while paid acquisition remains satisfied but non-governing.
