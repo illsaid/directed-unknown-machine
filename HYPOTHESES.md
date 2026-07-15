@@ -47,10 +47,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 107 / `SCENARIOS/105-ambiguous-wrapped-prose.md`:** Showed that a standalone word followed by a colon-start line can be either malformed schema or wrapped prose. The executable still refuses before extraction, but now reports an `Ambiguous field-like break` and gives both valid repairs instead of claiming semantic certainty it does not have.
 - **Run 108 / `SCENARIOS/106-multiline-evidence-preservation.md`:** Exposed that valid multiline Evidence was accepted but flattened into one sentence. Field extraction now strips only surrounding whitespace, preserving internal line and paragraph structure without broadening the four-field grammar.
 - **Run 109 / `SCENARIOS/107-evidence-paragraph-break.md`:** Verified that a blank-line paragraph break inside Evidence survives extraction exactly and does not create a false field boundary. No executable change was needed; the Run 108 preservation fix already covered the stronger paragraph case.
+- **Run 110 / `SCENARIOS/108-duplicate-allowed-label.md`:** Exposed that an Evidence sentence formatted as `Success:` caused the first structurally explicit Success occurrence to replace the actual authorized Success rule. Added a duplicate allowed-label preflight that reports every occurrence location and refuses before extraction rather than guessing which occurrence is prose.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test a real ambiguity: an Evidence continuation line that begins with an allowed-label word but is ordinary prose, to determine whether the explicit-label lookahead terminates the field too eagerly.
+**Next test:** Verify the refusal is narrow: ordinary Evidence continuation prose beginning with an allowed-label word but without a colon must remain inside Evidence and reach complete-contract output.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -65,7 +66,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–109 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–110 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
