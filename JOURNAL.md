@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–118 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–119 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -45,19 +45,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 116:** Required independent satisfied branches with no supplied precedence to remain unresolved rather than authorizing an analyst-selected choice.
 - **Run 117:** Applied supplied precedence between independent satisfied branches while preserving displaced branches as satisfied but non-governing.
 - **Run 118:** Required every activating condition of conditional precedence to be established before precedence can govern.
+- **Run 119:** Required activated conditional precedence to cite the supplied evidence establishing its trigger.
 
-## Run 119 — Cite evidence activating conditional precedence
+## Run 120 — Preserve conflict in conditional-precedence triggers
 
-**What changed:** Added `SCENARIOS/117-conditional-precedence-established.md`. Strengthened the `Decision: recommend` obligation so an activated conditional precedence rule must cite the supplied evidence establishing every activating condition.
+**What changed:** Added `SCENARIOS/118-conditional-precedence-conflict.md`. Strengthened the `Decision: recommend` obligation so conflicting supplied evidence about a conditional-precedence trigger leaves precedence unresolved unless supplied applicability evidence establishes which source governs.
 
-**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Only one may be funded. Referral takes precedence when a partner-exclusivity clause applies, and supplied legal evidence confirms that the clause applies this quarter.
+**Scenario tested:** Paid acquisition qualifies at 34 percent contribution margin and referral qualifies at 68 percent retained-user conversion. Only one may be funded. Outside counsel says the partner-exclusivity clause applies this quarter; internal legal says it does not; no supplied rule establishes which opinion governs.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/117-conditional-precedence-established.md` reaches complete-contract output and now emits: `When conditional precedence governs, cite the supplied evidence that establishes every activating condition.`
+**Observable output:** `python decision_brief.py SCENARIOS/118-conditional-precedence-conflict.md` reaches complete-contract output and now emits: `Conflicting supplied evidence about an activating condition leaves conditional precedence unresolved unless supplied applicability evidence establishes which source governs; do not select a convenient source.`
 
-**What was removed or rejected:** Rejected automatic branch parsing, legal-domain logic, and treating the precedence trigger as implicit once referral is selected. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected automatic legal-source ranking, recency-based selection, majority voting, and treating one conflicting opinion as sufficient activation evidence. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** Establishing a precedence trigger is not enough for an auditable handoff; the recommendation must preserve the evidence chain that activated the governing rule.
+**What was learned:** A precedence trigger is not established merely because one supplied source supports it. Conflicting trigger evidence is itself an unresolved authority condition until the handoff supplies a rule for source applicability.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is conflicting supplied evidence about the precedence trigger; conditional precedence should remain unresolved rather than selecting whichever source is convenient.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is the same conflict with a supplied applicability rule that establishes which legal source governs.
