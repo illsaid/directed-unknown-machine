@@ -49,10 +49,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 109 / `SCENARIOS/107-evidence-paragraph-break.md`:** Verified that a blank-line paragraph break inside Evidence survives extraction exactly and does not create a false field boundary. No executable change was needed; the Run 108 preservation fix already covered the stronger paragraph case.
 - **Run 110 / `SCENARIOS/108-duplicate-allowed-label.md`:** Exposed that an Evidence sentence formatted as `Success:` caused the first structurally explicit Success occurrence to replace the actual authorized Success rule. Added a duplicate allowed-label preflight that reports every occurrence location and refuses before extraction rather than guessing which occurrence is prose.
 - **Run 111 / `SCENARIOS/109-allowed-label-word-prose.md`:** Verified that the duplicate refusal remains structural: a continuation line beginning `Success depends...` without a colon remains inside Evidence, reaches complete-contract output, and does not create a second Success field. No executable change was justified.
+- **Run 112 / `SCENARIOS/110-vendor-renewal-authority.md`:** A real vendor-renewal handoff exposed a downstream authority gap: the recommendation obligation named the governing Success branch but did not require every gate result to be traced into that branch. The compiler now requires gate-to-branch accounting before any action is recommended, preventing favorable evidence selection or an unsupported economic assumption from silently authorizing renewal.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Stop label-format permutations. Run the compiled contract against a fresh real decision handoff and compare the downstream result with the original notes: test whether the six audit obligations prevent a concrete loss of evidence, boundary logic, or authorized outcome.
+**Next test:** Run a contrasting real handoff in which all supplied gates are satisfied and verify that explicit gate-to-branch traceability permits the authorized positive branch without turning the compiler into an analyst or adding domain logic.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -67,7 +68,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–111 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–112 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
