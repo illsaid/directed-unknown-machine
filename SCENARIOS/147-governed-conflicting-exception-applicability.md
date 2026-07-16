@@ -25,16 +25,16 @@ The contract must mark the temperature gate violated and the seal gate satisfied
 
 ## Actual outcome
 
-Not yet tested.
+Run 149 found that no new executable rule was needed. The existing evidence-preservation obligation already allows supplied applicability evidence to resolve conflicting records while preserving displaced sources, and the governance obligation already requires positive evidence that the target is outside every exception. Applied together, AR-6 makes CR-8 governing, CH-14 remains conflicting but non-governing, QG-4 governs, DP-9 selects local reprocessing, and NT-3 plus salvage shipment remain satisfied but non-governing.
 
 ## Whether the system helped
 
-partial
+yes
 
 ## What broke
 
-The current obligation requires positive evidence that a target is outside an exception, but does not explicitly state how supplied applicability authority resolves conflicting exception-status records while preserving the displaced record.
+Nothing. The existing general applicability and governance obligations compose correctly for conflicting exception-status evidence.
 
 ## What would make the result more useful
 
-Require the governing exception-status source and its applicability authority to remain visible, while preserving displaced exception evidence as conflicting but non-governing.
+Test conflicting applicability authorities that select opposite exception-status records.
