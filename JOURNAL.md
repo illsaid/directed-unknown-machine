@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–145 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–146 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–87:** Consolidated and ordered six audit operations, then removed duplicate framing.
@@ -30,19 +30,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 141–143:** Kept fallback failures local, refused arbitrary selection between satisfied non-nested branches, and required applied precedence authority to remain visible.
 - **Run 144:** Preserved opposing precedence policies and withheld branch authority when no supplied governance rule established which policy controlled.
 - **Run 145:** Required the full governance-to-precedence authority trace when supplied governance validly resolves a policy conflict.
+- **Run 146:** Confirmed that governance authority cannot be borrowed outside its explicit scope.
 
-## Run 146 — Refuse governance authority outside its supplied scope
+## Run 147 — Honor an explicit exception inside otherwise applicable governance
 
-**What changed:** Added `SCENARIOS/144-out-of-scope-governance-precedence.md`. No executable change was justified because the existing scope-preservation obligations already prohibit applying authority beyond the scope explicitly supplied.
+**What changed:** Added `SCENARIOS/145-governance-exception-blocks-precedence.md` and tightened the recommendation obligation in `decision_brief.py`: a governance rule governs only when the target is inside its stated scope and outside every explicit exception. An applicable exception must remain visible and leaves the underlying precedence conflict unresolved.
 
-**Scenario tested:** Specimen batch B-257 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 and NT-3 supplied opposite precedence. QG-2 established that DP-9 controls NT-3 only for off-site disposition, while B-257 was being dispositioned on site.
+**Scenario tested:** Specimen batch B-261 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 and NT-3 supplied opposite precedence. QG-4 generally established that DP-9 controls NT-3 for specimen disposition but explicitly exempted contamination-hold batches; B-261 was under contamination hold CH-11.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/144-out-of-scope-governance-precedence.md` reaches complete-contract output. Applying the existing obligations, QG-2 cannot govern the on-site decision; DP-9 and NT-3 remain conflicting; both fallback branches remain satisfied candidates; branch authority remains unresolved; and the authorized action is hold pending governance authority covering on-site disposition.
+**Observable output:** `python decision_brief.py SCENARIOS/145-governance-exception-blocks-precedence.md` reaches complete-contract output. Applying the tightened obligation, QG-4 remains visible but cannot govern B-261; DP-9 and NT-3 remain conflicting; both fallback branches remain satisfied candidates; branch authority remains unresolved; and hold is authorized pending governance authority covering contamination-hold batches.
 
-**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected adding a policy-scope parser, laboratory disposition mode, policy-name ranking, or another near-duplicate recommendation rule.
+**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected adding a policy parser, exception taxonomy, contamination-hold mode, or automated rule interpretation.
 
-**What was learned:** Governance evidence is not globally portable merely because it names the same conflicting policies. Authority remains bounded by its supplied scope, just like measurements, applicability evidence, and trigger evidence. The current general scope rule survived transfer to governance without new machinery.
+**What was learned:** Scope alone is insufficient when the same authority supplies explicit carve-outs. A rule can cover the general decision class yet still lack authority over the target. Exceptions must constrain authority before precedence is applied, not be treated as commentary after a branch is selected.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies a generally applicable governance rule with an explicit exception covering the target batch.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies an exception whose applicability to the target is unresolved.
