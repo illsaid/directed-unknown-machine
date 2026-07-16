@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–136 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–137 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -63,19 +63,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 134:** Allowed complementary duration evidence to compose only when explicit scopes cover the full required period without gaps or conflicting overlap.
 - **Run 135:** Verified that a one-day gap keeps the full-duration gate unresolved and blocks the fallback.
 - **Run 136:** Preserved both claims in a conflicting duration overlap, marked the shared day unresolved, and blocked the full-duration fallback gate.
+- **Run 137:** Extended explicit fallback handling to supplied violated conditions while retaining every fallback-specific gate.
 
-## Run 137 — Honor a fallback triggered by a violated gate
+## Run 138 — Preserve an unresolved rollback-specific gate
 
-**What changed:** Added `SCENARIOS/135-violated-gate-rollback-fallback.md` and expanded one phrase in the `Decision: recommend` obligation. An explicit fallback may now be triggered by a supplied violated condition as well as an unresolved or conflicting condition, while every additional fallback-specific gate must still be established and cited.
+**What changed:** Added `SCENARIOS/136-violated-trigger-unresolved-rollback-gate.md`. No executable wording changed because the Run 137 obligation already requires every additional fallback condition to be established and cited before a violated-condition fallback can govern.
 
-**Scenario tested:** Production release R-47 has a canary error rate of 3.2 percent against an at-or-below 1.0 percent continuation boundary. A post-canary recovery snapshot passed checksum verification, the on-call SRE confirmed rollback availability within 30 minutes, and no Severity 1 incident is open. The supplied Success rule authorizes rollback when the error-rate gate is violated and both rollback-specific gates are satisfied.
+**Scenario tested:** Production release R-48 has a 2.6 percent canary error rate against an at-or-below 1.0 percent continuation boundary. Snapshot S-901 passed checksum verification and no Severity 1 incident is open. The on-call SRE was paged, but the supplied record contains no acknowledgement or evidence of availability within 30 minutes.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/135-violated-gate-rollback-fallback.md` reaches complete-contract output. Under the strengthened obligation, the error-rate gate is violated, the no-Severity-1 gate is satisfied, the violated error-rate result activates the supplied rollback branch, the snapshot and operator gates are separately established, and rollback to snapshot S-884 is the authorized recommendation.
+**Observable output:** `python decision_brief.py SCENARIOS/136-violated-trigger-unresolved-rollback-gate.md` reaches complete-contract output. Under the existing recommendation obligation, the error-rate gate is violated and activates consideration of rollback, the snapshot gate is satisfied, operator availability remains unresolved, rollback is not authorized, and operator confirmation within 30 minutes is the missing evidence.
 
-**What was removed or rejected:** Rejected a software-release mode, automatic incident classification, deployment integrations, and a generic state machine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected adding a new rule, software-release mode, paging integration, or automatic inference that a page implies availability. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** A failed primary gate does not always mean authority is exhausted. When Success explicitly maps that failure state to a bounded fallback, the violation is positive evidence for the fallback trigger, not merely a blocker. The fallback still requires its own complete authority chain.
+**What was learned:** A fallback trigger and fallback authority remain separate. A violated primary gate can make rollback relevant without making rollback authorized; every fallback-specific gate still needs its own supplied support.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test keeps the violated trigger but leaves one fallback-specific gate unresolved to verify that the broader trigger wording does not over-authorize the branch.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test keeps the violated trigger but explicitly violates one fallback-specific gate, checking that the output distinguishes a failed fallback branch from one awaiting evidence.
