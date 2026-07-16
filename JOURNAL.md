@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–131 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–132 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -58,19 +58,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 129:** Required an activated fallback recommendation to cite the evidence establishing its trigger and every additional fallback-specific gate.
 - **Run 130:** Kept distinct fallback-specific gates independently evidenced and allowed shared support only when the supplied record explicitly supported both.
 - **Run 131:** Verified that one record may support two fallback gates when it explicitly states support for each.
+- **Run 132:** Rejected implied support for a second fallback gate; explicit support for assay-start capacity did not establish storage availability.
 
-## Run 132 — Reject implied support for a second fallback gate
+## Run 133 — Preserve uncovered fallback duration
 
-**What changed:** Added `SCENARIOS/130-implied-shared-fallback-evidence.md`. Tightened the `Decision: recommend` obligation so a record that explicitly supports one gate but only implies another supports only the explicit gate; the implied gate must remain unresolved.
+**What changed:** Added `SCENARIOS/131-partial-duration-fallback-evidence.md`. Tightened the `Decision: recommend` obligation so evidence for a duration-bound gate governs only the period it explicitly covers; shorter evidence must preserve covered and uncovered periods separately and leave the full-duration gate unresolved.
 
-**Scenario tested:** Refrigerated shipment L-209 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. A signed laboratory certificate explicitly confirms assay start within 48 hours but says only that the laboratory routinely handles refrigerated stability work; it does not state that qualified 2–8°C storage is available for the full seven-day assay period.
+**Scenario tested:** Refrigerated shipment L-210 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. A signed laboratory certificate explicitly confirms assay start within 48 hours and qualified 2–8°C storage for the first five days, while the fallback requires storage for the full seven-day assay period. No evidence covers days six and seven.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/130-implied-shared-fallback-evidence.md` reaches complete-contract output and now emits an obligation requiring the implied storage gate to remain unresolved. The temperature conflict establishes the fallback trigger and assay-start capacity is satisfied, but quarantine is not authorized because the storage gate is not explicitly established.
+**Observable output:** `python decision_brief.py SCENARIOS/131-partial-duration-fallback-evidence.md` reaches complete-contract output and now emits an obligation requiring the five covered days and two uncovered days to remain separate. The temperature conflict establishes the fallback trigger; the seal and assay-start gates are satisfied; the storage gate remains unresolved; quarantine is not authorized.
 
-**What was removed or rejected:** Rejected interpreting routine refrigerated work as shipment-specific storage capacity, adding semantic classification, and creating a source-to-gate graph. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected extrapolating a five-day storage reservation across seven days, adding date arithmetic, and building a temporal evidence engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** Explicit support is relationship-specific. A source may be authoritative and concrete for one gate while remaining merely suggestive for another; confidence in the source cannot substitute for evidence of the second condition.
+**What was learned:** Explicit evidence is still scope-bound. A concrete storage commitment can be fully trustworthy for the period it states while providing no authority for an uncovered remainder.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is explicit storage capacity whose stated duration is shorter than the required assay period; the uncovered period must remain unresolved.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is two complementary records whose non-overlapping durations jointly cover the full required period.
