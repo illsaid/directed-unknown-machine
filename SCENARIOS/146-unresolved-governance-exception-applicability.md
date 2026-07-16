@@ -25,16 +25,16 @@ The contract must mark the temperature gate violated and the seal gate satisfied
 
 ## Actual outcome
 
-Run 148 exposed a remaining authority gap: the recommendation obligation blocks a governance rule when an exception is established, but does not explicitly block it when applicability of the exception is unresolved. Without that distinction, absence of a supplied hold order could be mistaken for evidence that the target is outside the exception.
+Run 148 tightened the recommendation obligation so governance may resolve precedence only when supplied evidence establishes that the target is outside every exception. MA-27 remains evidence of a pending review, not evidence of either an active contamination hold or clearance. QG-4 remains visible but cannot govern; DP-9 and NT-3 remain conflicting; both fallback branches remain satisfied candidates; and hold is authorized pending a contamination-hold order or clearance record.
 
 ## Whether the system helped
 
-partial
+yes
 
 ## What broke
 
-The compiler did not explicitly require unresolved exception applicability to leave governance authority unresolved.
+The prior obligation blocked governance when an exception was established but did not explicitly block it when exception applicability was unresolved.
 
 ## What would make the result more useful
 
-Require positive evidence that the target is outside every exception before governance can resolve precedence; when exception applicability is unresolved, preserve the uncertainty, withhold branch authority, and name the evidence needed to resolve it.
+Test conflicting evidence about exception applicability and require supplied applicability authority before either status can govern.
