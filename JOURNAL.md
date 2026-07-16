@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–141 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–142 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -68,19 +68,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 139:** Distinguished a violated fallback-specific gate from an unresolved one and prohibited requests for evidence already supplied.
 - **Run 140:** Transferred the failed-fallback distinction to cold-chain operations; the violated transfer branch correctly yielded the supplied hold action without domain-specific logic.
 - **Run 141:** Kept failure branch-local so a failed emergency-transfer fallback could not suppress an independently satisfied salvage-shipment branch.
+- **Run 142:** Verified that two fully satisfied non-nested fallback branches remain unresolved when no precedence or tie-breaker is supplied.
 
-## Run 142 — Refuse to choose between satisfied fallbacks without precedence
+## Run 143 — Keep explicit fallback precedence auditable
 
-**What changed:** Added `SCENARIOS/140-two-satisfied-fallbacks-no-precedence.md`. No executable change was made because the existing non-nested branch rule already requires governing authority to remain unresolved when multiple fully satisfied branches have no supplied precedence or tie-breaker.
+**What changed:** Added `SCENARIOS/141-two-satisfied-fallbacks-explicit-precedence.md` and strengthened the final recommendation obligation. When supplied precedence selects among fully satisfied non-nested branches, the recommendation must now cite the supplied precedence authority as well as preserve displaced branches as satisfied but non-governing.
 
-**Scenario tested:** Specimen batch B-233 violated its release-temperature gate. Local reprocessing was fully supported by a validated suite, an available qualified technician, and signed authorization. Salvage shipment was independently fully supported by a reserved validated overpack, signed authorization, and confirmed four-hour courier collection. Neither branch depended on the other, and Success supplied no precedence.
+**Scenario tested:** Specimen batch B-241 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. Disposition policy DP-9 explicitly stated that local reprocessing takes precedence when both branches qualify.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/140-two-satisfied-fallbacks-no-precedence.md` reaches complete-contract output. Under the existing recommendation obligation, both fallback branches remain fully satisfied candidate branches, but governing branch authority remains unresolved. The output must identify the missing precedence or tie-breaker and must not arbitrarily choose local reprocessing or salvage shipment.
+**Observable output:** `python decision_brief.py SCENARIOS/141-two-satisfied-fallbacks-explicit-precedence.md` reaches complete-contract output. Under the strengthened recommendation obligation, local reprocessing governs; DP-9 must be cited as the authority selecting it; and salvage shipment remains visible as satisfied but non-governing.
 
-**What was removed or rejected:** Rejected a fallback-priority parser, automatic branch ordering, laboratory-specific disposition logic, and a new executable rule duplicating the already-tested non-nested authority boundary. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected a fallback-priority parser, automatic branch ordering, a laboratory-specific mode, and a separate precedence data structure. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** The non-nested branch rule applies at the fallback level without modification. Multiple authorized alternatives do not create authority to choose; the supplied contract must provide precedence or a tie-breaker.
+**What was learned:** Applying precedence is not enough for an auditable authority chain. The recommendation must retain the supplied rule that authorized selection, even when the precedence is unconditional and therefore has no activating condition to cite.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies explicit precedence between the same two satisfied fallback branches, checking that the governing branch is selected while the displaced branch remains satisfied but non-governing.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies conflicting explicit precedence sources, checking that the compiler refuses to choose unless supplied applicability authority resolves which source governs.
