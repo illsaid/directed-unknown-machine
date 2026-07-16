@@ -45,10 +45,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 147 / `SCENARIOS/145-governance-exception-blocks-precedence.md`:** QG-4 generally resolved DP-9 versus NT-3 but explicitly exempted contamination-hold batches, including B-261. The recommendation obligation now states that governance authority applies only when the target is inside the rule's scope and outside every explicit exception; the exception remains visible and the precedence conflict remains unresolved.
 - **Run 148 / `SCENARIOS/146-unresolved-governance-exception-applicability.md`:** A contamination-review alert did not establish either an active hold or clearance. The recommendation obligation now requires supplied evidence that the target is outside every exception before governance may resolve precedence; unresolved exception applicability preserves the uncertainty, leaves governance and branch authority unresolved, and names the evidence needed to decide whether the exception applies.
 - **Run 149 / `SCENARIOS/147-governed-conflicting-exception-applicability.md`:** CH-14 and CR-8 conflicted about whether B-271 was inside QG-4's contamination-hold exception, while AR-6 explicitly made the QA-director-signed release record governing. Existing evidence-preservation and governance obligations composed correctly without a new rule: CR-8 established that the exception did not apply, CH-14 remained conflicting but non-governing, QG-4 and DP-9 governed, and local reprocessing was authorized.
+- **Run 150 / `SCENARIOS/148-conflicting-applicability-authorities.md`:** AR-6 and AR-9 selected opposite hold-status records, with no supplied rule deciding which applicability authority controlled. The recommendation obligation now preserves both authorities and affected evidence, leaves exception applicability and all downstream authority unresolved, and names the governance evidence needed before either authority may govern.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Supply conflicting applicability authorities that select opposite exception-status records, testing whether authority remains unresolved rather than allowing either source to govern.
+**Next test:** Supply a governance rule that explicitly selects one of two conflicting applicability authorities, testing whether the complete authority chain remains visible while the displaced applicability authority and evidence source remain conflicting but non-governing.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -63,7 +64,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–149 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–150 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
