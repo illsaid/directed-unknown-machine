@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–132 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–133 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -59,19 +59,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 130:** Kept distinct fallback-specific gates independently evidenced and allowed shared support only when the supplied record explicitly supported both.
 - **Run 131:** Verified that one record may support two fallback gates when it explicitly states support for each.
 - **Run 132:** Rejected implied support for a second fallback gate; explicit support for assay-start capacity did not establish storage availability.
+- **Run 133:** Limited duration-bound fallback evidence to its stated period and preserved the uncovered remainder.
 
-## Run 133 — Preserve uncovered fallback duration
+## Run 134 — Compose complementary fallback durations
 
-**What changed:** Added `SCENARIOS/131-partial-duration-fallback-evidence.md`. Tightened the `Decision: recommend` obligation so evidence for a duration-bound gate governs only the period it explicitly covers; shorter evidence must preserve covered and uncovered periods separately and leave the full-duration gate unresolved.
+**What changed:** Added `SCENARIOS/132-complementary-duration-fallback-evidence.md`. Tightened the `Decision: recommend` obligation so separate duration records may jointly satisfy one full-duration gate only when their explicit scopes cover the entire required period without gaps or conflicting overlap.
 
-**Scenario tested:** Refrigerated shipment L-210 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. A signed laboratory certificate explicitly confirms assay start within 48 hours and qualified 2–8°C storage for the first five days, while the fallback requires storage for the full seven-day assay period. No evidence covers days six and seven.
+**Scenario tested:** Refrigerated shipment L-211 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. One signed certificate confirms assay start within 48 hours and qualified storage for assay days one through four. A second signed confirmation reserves qualified storage for assay days five through seven. Together the records explicitly cover the required seven-day period.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/131-partial-duration-fallback-evidence.md` reaches complete-contract output and now emits an obligation requiring the five covered days and two uncovered days to remain separate. The temperature conflict establishes the fallback trigger; the seal and assay-start gates are satisfied; the storage gate remains unresolved; quarantine is not authorized.
+**Observable output:** `python decision_brief.py SCENARIOS/132-complementary-duration-fallback-evidence.md` reaches complete-contract output and now emits an obligation permitting the two explicit duration scopes to compose. The temperature conflict establishes the fallback trigger; the seal, assay-start, and full-duration storage gates are satisfied; quarantine plus the named assay is authorized.
 
-**What was removed or rejected:** Rejected extrapolating a five-day storage reservation across seven days, adding date arithmetic, and building a temporal evidence engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected requiring one document to cover the entire duration, silently bridging gaps, adding date arithmetic, and building a temporal evidence engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** Explicit evidence is still scope-bound. A concrete storage commitment can be fully trustworthy for the period it states while providing no authority for an uncovered remainder.
+**What was learned:** Scope-bound evidence can compose without extrapolation. The decisive condition is complete explicit coverage of the required period, not whether one source supplies all of it.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is two complementary records whose non-overlapping durations jointly cover the full required period.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is complementary duration records with a one-day gap; the uncovered day must keep the full-duration gate unresolved.
