@@ -25,16 +25,16 @@ The contract must mark the temperature gate violated and the seal gate satisfied
 
 ## Actual outcome
 
-Run 146 exposed a scope-specific authority gap. The compiler required governance evidence to resolve conflicting precedence, but did not explicitly state that governance authority is usable only within its supplied scope.
+Run 146 confirmed that the existing scope-preservation obligations already handle this case. QG-2 remains visible but cannot govern the on-site disposition. DP-9 and NT-3 remain conflicting, both fallback branches remain satisfied candidates, branch authority remains unresolved, and hold is authorized pending governance authority covering on-site disposition.
 
 ## Whether the system helped
 
-partial
+yes
 
 ## What broke
 
-A downstream analyst could borrow QG-2 from off-site disposition to resolve an on-site policy conflict merely because the same policy names appear.
+Nothing. The general rule that authority governs only its explicit scope transferred cleanly to governance evidence without a new rule or domain-specific mechanism.
 
 ## What would make the result more useful
 
-Require governance evidence to resolve conflicting precedence only when its explicit scope covers the target decision; otherwise preserve the conflict and name governance authority for the uncovered scope as missing.
+Test a generally applicable governance rule with an explicit exception covering the target batch.
