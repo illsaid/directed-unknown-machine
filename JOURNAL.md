@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–151 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–152 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–87:** Consolidated and ordered six audit operations, then removed duplicate framing.
@@ -36,19 +36,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 149:** Confirmed that supplied applicability authority can resolve conflicting exception-status evidence without an exception-specific mechanism.
 - **Run 150:** Preserved conflicting applicability authorities and withheld every downstream authority when no supplied rule established which applicability authority controlled.
 - **Run 151:** Confirmed that supplied governance can select one applicability authority while retaining the complete selected and displaced authority chain.
+- **Run 152:** Confined governance selecting an applicability authority to the exact named status dimension.
 
-## Run 152 — Confine governance to the named status dimension
+## Run 153 — Treat enumerated governance scope as closed
 
-**What changed:** Added and completed `SCENARIOS/150-governed-one-status-unresolved-other-status.md`. Tightened `decision_brief.py` so governance selecting an applicability authority governs only the exact status, metric, period, population, or other dimension it explicitly names. Separate conflicts outside that dimension must remain unresolved.
+**What changed:** Added and completed `SCENARIOS/151-enumerated-governance-scope-omits-third-status.md`. No executable clause was added because the existing requirement that governance applies only to the exact dimension it explicitly names already resolves the scenario.
 
-**Scenario tested:** Specimen batch B-286 violated its release-temperature gate. Local reprocessing and salvage shipment otherwise qualified. DP-9 and NT-3 supplied opposite fallback precedence. QG-4 made DP-9 controlling only when neither contamination hold nor release hold applied. CH-28 and CR-20 conflicted on contamination status; AR-6 and AR-9 selected opposite records; AG-2 made AR-6 controlling for contamination-hold status only. RH-7 and RR-4 separately conflicted on release-hold status, with no supplied applicability authority.
+**Scenario tested:** Specimen batch B-291 violated its release-temperature gate. Local reprocessing and salvage shipment otherwise qualified. QG-4 made DP-9 controlling only when contamination hold, release hold, and quarantine were all absent. AG-5 explicitly resolved applicability-authority conflicts for contamination-hold and release-hold status, but omitted quarantine status. Conflicting quarantine records and applicability rules remained, with no supplied authority selecting between them.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/150-governed-one-status-unresolved-other-status.md` reaches complete-contract output. Applying the tightened obligation, AG-2 selects AR-6 and CR-20 for contamination-hold status only; AR-9 and CH-28 remain conflicting but non-governing on that dimension. RH-7 and RR-4 remain independently conflicting; QG-4 exception applicability remains unresolved; DP-9 and NT-3 remain conflicting; neither fallback receives authority; and hold is authorized pending release-status applicability authority.
+**Observable output:** `python decision_brief.py SCENARIOS/151-enumerated-governance-scope-omits-third-status.md` reaches complete-contract output. Applying the existing exact-dimension obligation, AG-5 resolves contamination-hold and release-hold status only. Quarantine status remains unresolved; QG-4 cannot govern; DP-9 and NT-3 remain conflicting; both fallback branches remain satisfied candidates but unauthorized; and hold is authorized pending quarantine-status applicability authority.
 
-**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected a general authority graph, automatic status taxonomy, laboratory-specific hold logic, and cross-status inheritance. One scope sentence is sufficient for the named scenario.
+**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected a duplicate “enumerations are closed” sentence, an automatic open-versus-closed list parser, and laboratory-specific quarantine logic. The existing scope rule already covers the named scenario.
 
-**What was learned:** Authority scope is dimensional, not merely source-specific. Resolving who governs one status does not authorize that source or governance rule to settle another status concerning the same target. The compiler is becoming specifically useful at preventing authority-chain results from leaking sideways into adjacent unresolved questions.
+**What was learned:** Explicitly naming two dimensions does not authorize a third by analogy. The current contract already encodes this because governance is confined to each exact named dimension. The next useful boundary is not another closed-list rule, but whether supplied wording such as “including” can explicitly make a scope non-exhaustive without requiring semantic classification.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies governance naming two status dimensions while omitting a third, testing whether enumerated scope remains closed.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test uses explicitly open governance wording before named dimensions.
