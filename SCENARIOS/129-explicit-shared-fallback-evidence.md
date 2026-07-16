@@ -21,11 +21,11 @@ Success: Release if both release gates are satisfied. If the temperature gate is
 
 ## Expected useful outcome
 
-The compiled contract must preserve both temperature records, mark the temperature gate unresolved, mark the seal gate satisfied, and recommend quarantine plus the named independent stability assay. The authorization trace may cite the signed laboratory certificate for both operational gates only by naming its separate support for assay start within 48 hours and qualified storage for seven days.
+The compiled contract must preserve both temperature records, mark the temperature gate unresolved, mark the seal gate satisfied, and recommend quarantine plus the named independent stability assay. The authorization trace may cite the signed laboratory certificate for both operational gates only because the record explicitly supports assay start within 48 hours and qualified storage for seven days.
 
 ## Actual outcome
 
-Run 131 strengthened the recommendation obligation so one supplied record may support multiple fallback gates only when the authorization trace identifies each gate and the record's explicit support for it.
+Run 131 verified that the existing recommendation obligation permits one supplied record to support multiple fallback gates only when the record explicitly supports both. The compiled contract reaches complete-contract output without weakening the independent-evidence boundary added in Run 130. No executable change was justified.
 
 ## Whether the system helped
 
@@ -33,7 +33,7 @@ yes
 
 ## What broke
 
-The prior obligation allowed shared evidence when a record explicitly supported both gates, but did not require the output to identify the separate statement supporting each gate. An analyst could cite the certificate generically and leave dual support unauditable.
+Nothing. The Run 130 rule already distinguishes explicit dual support from silent evidence reuse.
 
 ## What would make the result more useful
 
