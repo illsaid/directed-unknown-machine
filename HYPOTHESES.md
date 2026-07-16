@@ -39,11 +39,12 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Runs 112–126:** Required gate-to-branch accounting, fully authorized recommendations, branch-local blocking, nested-branch specificity, non-nested precedence discipline, conditional precedence evidence, and scope-aware applicability.
 - **Runs 127–140:** Distinguished unresolved evidence from authorized fallbacks; required every fallback gate and its evidence; preserved duration gaps, overlaps, violations, and unavailable branches without domain-specific machinery.
 - **Runs 141–143:** Kept fallback failure branch-local, refused arbitrary selection between satisfied non-nested branches, and required applied unconditional precedence authority to remain visible.
-- **Run 144 / `SCENARIOS/142-conflicting-explicit-fallback-precedence.md`:** Two fully satisfied fallback branches were governed by opposite supplied policies, DP-9 and NT-3, with no supplied rule establishing which policy controlled. The recommendation obligation now preserves every conflicting precedence rule and leaves branch authority unresolved unless supplied applicability or governance evidence selects a governing source. It forbids choosing by field order, policy name, or convenience.
+- **Run 144:** Preserved conflicting precedence policies and left branch authority unresolved when no supplied rule established which policy controlled.
+- **Run 145 / `SCENARIOS/143-governed-conflicting-fallback-precedence.md`:** A supplied governance rule established that DP-9 controlled the opposing NT-3 policy for the target disposition. The recommendation obligation now requires the full authority trace: cite the governance rule and selected precedence policy, preserve displaced policies as conflicting but non-governing, and preserve displaced satisfied branches as satisfied but non-governing.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Supply the same conflicting precedence policies plus an explicit governance rule that establishes which policy controls, testing whether the compiler selects the authorized branch while preserving the displaced policy as conflicting but non-governing.
+**Next test:** Supply a governance rule whose scope covers only a different facility or disposition type, testing whether the compiler refuses to apply it to the target conflict.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -58,7 +59,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–144 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–145 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
