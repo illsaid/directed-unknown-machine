@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–138 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–139 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -65,19 +65,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 136:** Preserved both claims in a conflicting duration overlap, marked the shared day unresolved, and blocked the full-duration fallback gate.
 - **Run 137:** Extended explicit fallback handling to supplied violated conditions while retaining every fallback-specific gate.
 - **Run 138:** Verified that an unresolved rollback-specific gate leaves the fallback awaiting evidence rather than authorized.
+- **Run 139:** Distinguished a violated fallback-specific gate from an unresolved one and prohibited requests for evidence already supplied.
 
-## Run 139 — Distinguish a violated fallback gate from an unresolved one
+## Run 140 — Transfer failed-fallback handling to cold-chain operations
 
-**What changed:** Added `SCENARIOS/137-violated-trigger-violated-rollback-gate.md` and strengthened the `Decision: recommend` obligation. A violated fallback-specific gate now makes that branch unavailable under the supplied evidence; an unresolved fallback-specific gate leaves it awaiting evidence. The compiler must not request evidence for a gate already established as violated.
+**What changed:** Added `SCENARIOS/138-violated-trigger-violated-transfer-gate.md`. No executable wording changed because the Run 139 recommendation obligation already distinguishes violated fallback gates from unresolved ones in domain-neutral terms.
 
-**Scenario tested:** Production release R-49 has a 2.9 percent canary error rate against an at-or-below 1.0 percent continuation boundary. Snapshot S-917 passed checksum verification and no Severity 1 incident is open. The on-call SRE explicitly states that no qualified rollback operator will be available for at least 75 minutes, violating the supplied 30-minute rollback condition.
+**Scenario tested:** Specimen batch B-204 was held in freezer F-12 at minus 61 degrees Celsius against an at-or-below minus 70 degree release boundary. Backup freezer F-19 had validated capacity reserved, but the duty technician explicitly stated that the earliest qualified arrival was 45 minutes, violating the supplied 20-minute emergency-transfer condition.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/137-violated-trigger-violated-rollback-gate.md` reaches complete-contract output. Under the strengthened recommendation obligation, the error-rate gate is violated and activates consideration of rollback, the snapshot gate is satisfied, the operator-availability gate is violated, rollback is unavailable under the supplied evidence, and the output does not ask for operator confirmation that has already been supplied.
+**Observable output:** `python decision_brief.py SCENARIOS/138-violated-trigger-violated-transfer-gate.md` reaches complete-contract output. Under the existing recommendation obligation, the storage-temperature gate is violated and activates emergency-transfer consideration, the seal and backup-capacity gates are satisfied, the technician-timing gate is violated, emergency transfer is unavailable under supplied evidence, and the supplied hold action governs without requesting technician evidence already present.
 
-**What was removed or rejected:** Rejected a software-release mode, automatic incident interpretation, a retry timer, and a generic fallback-state engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected cold-chain-specific logic, temperature calculations, freezer integrations, a timer, and a generic fallback-state engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** “Not authorized” has two materially different causes. An unresolved fallback gate means authority may emerge when named evidence arrives; a violated fallback gate means the branch fails under the current supplied facts. Collapsing them loses both operational meaning and the correct next action.
+**What was learned:** The failed-fallback distinction is operational rather than software-specific. The same wording preserves the difference between “awaiting proof” and “proven unavailable” in a physical cold-chain handoff, while still honoring an explicitly supplied hold branch.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test transfers this failed-fallback distinction to a non-software domain.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test gives Success a second independently conditioned fallback, checking that failure of the first fallback does not erase a separately authorized alternative.
