@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–135 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–136 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -62,19 +62,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 133:** Limited duration-bound fallback evidence to its stated period and preserved the uncovered remainder.
 - **Run 134:** Allowed complementary duration evidence to compose only when explicit scopes cover the full required period without gaps or conflicting overlap.
 - **Run 135:** Verified that a one-day gap keeps the full-duration gate unresolved and blocks the fallback.
+- **Run 136:** Preserved both claims in a conflicting duration overlap, marked the shared day unresolved, and blocked the full-duration fallback gate.
 
-## Run 136 — Preserve a conflicting duration overlap
+## Run 137 — Honor a fallback triggered by a violated gate
 
-**What changed:** Added `SCENARIOS/134-conflicting-overlap-duration-evidence.md` and strengthened the `Decision: recommend` obligation. When explicit duration scopes overlap and conflict, the compiler must preserve both results for the shared period, mark that period unresolved, and keep the full-duration gate unresolved even when every required day is nominally mentioned.
+**What changed:** Added `SCENARIOS/135-violated-gate-rollback-fallback.md` and expanded one phrase in the `Decision: recommend` obligation. An explicit fallback may now be triggered by a supplied violated condition as well as an unresolved or conflicting condition, while every additional fallback-specific gate must still be established and cited.
 
-**Scenario tested:** Refrigerated shipment L-213 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. One signed record establishes assay start within 48 hours and qualified storage for days one through four. A second record nominally covers days four through seven but states that its storage unit was outside its qualified calibration interval on day four.
+**Scenario tested:** Production release R-47 has a canary error rate of 3.2 percent against an at-or-below 1.0 percent continuation boundary. A post-canary recovery snapshot passed checksum verification, the on-call SRE confirmed rollback availability within 30 minutes, and no Severity 1 incident is open. The supplied Success rule authorizes rollback when the error-rate gate is violated and both rollback-specific gates are satisfied.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/134-conflicting-overlap-duration-evidence.md` reaches complete-contract output. Under the strengthened obligation, both day-four claims remain visible, day four is unresolved, the seven-day storage gate remains unresolved despite nominal day-one-through-seven coverage, and quarantine is not authorized.
+**Observable output:** `python decision_brief.py SCENARIOS/135-violated-gate-rollback-fallback.md` reaches complete-contract output. Under the strengthened obligation, the error-rate gate is violated, the no-Severity-1 gate is satisfied, the violated error-rate result activates the supplied rollback branch, the snapshot and operator gates are separately established, and rollback to snapshot S-884 is the authorized recommendation.
 
-**What was removed or rejected:** Rejected source-ranking, date arithmetic, a temporal evidence engine, and further duration permutations. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected a software-release mode, automatic incident classification, deployment integrations, and a generic state machine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** A no-conflicting-overlap rule is not fully auditable unless it also identifies the exact shared period whose authority failed. Nominal coverage is not established coverage when one required period has contradictory support.
+**What was learned:** A failed primary gate does not always mean authority is exhausted. When Success explicitly maps that failure state to a bounded fallback, the violation is positive evidence for the fallback trigger, not merely a blocker. The fallback still requires its own complete authority chain.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. Duration-scope permutations are now closed; the next test transfers the fallback-authority obligations to a fresh operational domain with a different bounded decision and evidence shape.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test keeps the violated trigger but leaves one fallback-specific gate unresolved to verify that the broader trigger wording does not over-authorize the branch.
