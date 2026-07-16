@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–134 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–135 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -61,19 +61,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 132:** Rejected implied support for a second fallback gate; explicit support for assay-start capacity did not establish storage availability.
 - **Run 133:** Limited duration-bound fallback evidence to its stated period and preserved the uncovered remainder.
 - **Run 134:** Allowed complementary duration evidence to compose only when explicit scopes cover the full required period without gaps or conflicting overlap.
+- **Run 135:** Verified that a one-day gap keeps the full-duration gate unresolved and blocks the fallback.
 
-## Run 135 — Reject a gap between complementary durations
+## Run 136 — Preserve a conflicting duration overlap
 
-**What changed:** Added `SCENARIOS/133-gapped-complementary-duration-evidence.md`. No executable change was made because the current `Decision: recommend` obligation already states the exact required boundary: complementary duration records may compose only when their explicit scopes cover the entire required period without gaps or conflicting overlap.
+**What changed:** Added `SCENARIOS/134-conflicting-overlap-duration-evidence.md` and strengthened the `Decision: recommend` obligation. When explicit duration scopes overlap and conflict, the compiler must preserve both results for the shared period, mark that period unresolved, and keep the full-duration gate unresolved even when every required day is nominally mentioned.
 
-**Scenario tested:** Refrigerated shipment L-212 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. One signed record establishes assay start within 48 hours and qualified storage for assay days one through four. A second signed record establishes storage for days six and seven. No supplied evidence covers day five.
+**Scenario tested:** Refrigerated shipment L-213 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. One signed record establishes assay start within 48 hours and qualified storage for days one through four. A second record nominally covers days four through seven but states that its storage unit was outside its qualified calibration interval on day four.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/133-gapped-complementary-duration-evidence.md` reaches complete-contract output. Under the existing obligation, days one through four and six through seven remain separately supported, day five remains uncovered, the full-duration storage gate remains unresolved, and quarantine is not authorized.
+**Observable output:** `python decision_brief.py SCENARIOS/134-conflicting-overlap-duration-evidence.md` reaches complete-contract output. Under the strengthened obligation, both day-four claims remain visible, day four is unresolved, the seven-day storage gate remains unresolved despite nominal day-one-through-seven coverage, and quarantine is not authorized.
 
-**What was removed or rejected:** Rejected adding a redundant no-gap sentence, date arithmetic, continuity inference, or a temporal evidence engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected source-ranking, date arithmetic, a temporal evidence engine, and further duration permutations. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** The positive composition rule from Run 134 also supplies the hostile refusal boundary. Complete nominal coverage cannot be claimed when even one required day lacks explicit support.
+**What was learned:** A no-conflicting-overlap rule is not fully auditable unless it also identifies the exact shared period whose authority failed. Nominal coverage is not established coverage when one required period has contradictory support.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is complementary duration records whose scopes overlap and conflict on one required day; nominal full-period coverage must not satisfy the duration gate.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. Duration-scope permutations are now closed; the next test transfers the fallback-authority obligations to a fresh operational domain with a different bounded decision and evidence shape.
