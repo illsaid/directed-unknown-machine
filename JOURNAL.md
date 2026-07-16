@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–139 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–140 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -66,19 +66,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 137:** Extended explicit fallback handling to supplied violated conditions while retaining every fallback-specific gate.
 - **Run 138:** Verified that an unresolved rollback-specific gate leaves the fallback awaiting evidence rather than authorized.
 - **Run 139:** Distinguished a violated fallback-specific gate from an unresolved one and prohibited requests for evidence already supplied.
+- **Run 140:** Transferred the failed-fallback distinction to cold-chain operations; the violated transfer branch correctly yielded the supplied hold action without domain-specific logic.
 
-## Run 140 — Transfer failed-fallback handling to cold-chain operations
+## Run 141 — Preserve an independently authorized second fallback
 
-**What changed:** Added `SCENARIOS/138-violated-trigger-violated-transfer-gate.md`. No executable wording changed because the Run 139 recommendation obligation already distinguishes violated fallback gates from unresolved ones in domain-neutral terms.
+**What changed:** Added `SCENARIOS/139-failed-primary-fallback-independent-secondary.md` and strengthened the `Decision: recommend` obligation. Each supplied fallback branch must now be evaluated independently; a failed gate in one fallback cannot block another fallback unless the latter explicitly depends on it.
 
-**Scenario tested:** Specimen batch B-204 was held in freezer F-12 at minus 61 degrees Celsius against an at-or-below minus 70 degree release boundary. Backup freezer F-19 had validated capacity reserved, but the duty technician explicitly stated that the earliest qualified arrival was 45 minutes, violating the supplied 20-minute emergency-transfer condition.
+**Scenario tested:** Specimen batch B-219 violated its release-temperature gate. Emergency transfer had reserved backup capacity but failed its 20-minute technician condition because the earliest qualified arrival was 45 minutes. A separate salvage-shipment branch had an intact seal, reserved validated dry-ice overpack, signed quality authorization, and confirmed courier collection within four hours.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/138-violated-trigger-violated-transfer-gate.md` reaches complete-contract output. Under the existing recommendation obligation, the storage-temperature gate is violated and activates emergency-transfer consideration, the seal and backup-capacity gates are satisfied, the technician-timing gate is violated, emergency transfer is unavailable under supplied evidence, and the supplied hold action governs without requesting technician evidence already present.
+**Observable output:** `python decision_brief.py SCENARIOS/139-failed-primary-fallback-independent-secondary.md` reaches complete-contract output. Under the strengthened recommendation obligation, emergency transfer is unavailable because its technician gate is violated, while the independently conditioned salvage branch remains fully satisfied and governs. The failed transfer branch remains visible rather than being rewritten as missing evidence or allowed to contaminate salvage authority.
 
-**What was removed or rejected:** Rejected cold-chain-specific logic, temperature calculations, freezer integrations, a timer, and a generic fallback-state engine. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected a fallback state machine, ordered-fallback parser, laboratory-specific disposition mode, and automatic branch extraction. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** The failed-fallback distinction is operational rather than software-specific. The same wording preserves the difference between “awaiting proof” and “proven unavailable” in a physical cold-chain handoff, while still honoring an explicitly supplied hold branch.
+**What was learned:** “Fallback failed” is branch-local, not stage-global. A recommendation compiler must preserve failure within the branch that owns the failed gate while continuing to evaluate other supplied branches on their own conditions.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test gives Success a second independently conditioned fallback, checking that failure of the first fallback does not erase a separately authorized alternative.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies two independently satisfied fallback branches with no precedence, checking that the existing non-nested branch rule leaves authority unresolved rather than selecting one.
