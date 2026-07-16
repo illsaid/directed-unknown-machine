@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–146 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–147 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–87:** Consolidated and ordered six audit operations, then removed duplicate framing.
@@ -31,19 +31,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 144:** Preserved opposing precedence policies and withheld branch authority when no supplied governance rule established which policy controlled.
 - **Run 145:** Required the full governance-to-precedence authority trace when supplied governance validly resolves a policy conflict.
 - **Run 146:** Confirmed that governance authority cannot be borrowed outside its explicit scope.
+- **Run 147:** Required otherwise applicable governance to remain non-governing when an explicit exception covers the target.
 
-## Run 147 — Honor an explicit exception inside otherwise applicable governance
+## Run 148 — Preserve unresolved governance exception applicability
 
-**What changed:** Added `SCENARIOS/145-governance-exception-blocks-precedence.md` and tightened the recommendation obligation in `decision_brief.py`: a governance rule governs only when the target is inside its stated scope and outside every explicit exception. An applicable exception must remain visible and leaves the underlying precedence conflict unresolved.
+**What changed:** Added `SCENARIOS/146-unresolved-governance-exception-applicability.md` and tightened the recommendation obligation in `decision_brief.py`: governance may resolve precedence only when supplied evidence establishes that the target is outside every explicit exception. When exception applicability is unresolved, the uncertainty, governance conflict, and candidate branches must remain visible, and the output must name the evidence needed to determine whether the exception applies.
 
-**Scenario tested:** Specimen batch B-261 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 and NT-3 supplied opposite precedence. QG-4 generally established that DP-9 controls NT-3 for specimen disposition but explicitly exempted contamination-hold batches; B-261 was under contamination hold CH-11.
+**Scenario tested:** Specimen batch B-266 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 and NT-3 supplied opposite precedence. QG-4 generally established that DP-9 controls NT-3 except for contamination-hold batches. Monitoring alert MA-27 triggered contamination review, but no hold order or clearance record was supplied.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/145-governance-exception-blocks-precedence.md` reaches complete-contract output. Applying the tightened obligation, QG-4 remains visible but cannot govern B-261; DP-9 and NT-3 remain conflicting; both fallback branches remain satisfied candidates; branch authority remains unresolved; and hold is authorized pending governance authority covering contamination-hold batches.
+**Observable output:** `python decision_brief.py SCENARIOS/146-unresolved-governance-exception-applicability.md` reaches complete-contract output. Applying the tightened obligation, MA-27 cannot be promoted to a hold or clearance result; QG-4 remains visible but cannot govern; DP-9 and NT-3 remain conflicting; both fallback branches remain satisfied candidates; branch authority remains unresolved; and hold is authorized pending a contamination-hold order or clearance record.
 
-**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected adding a policy parser, exception taxonomy, contamination-hold mode, or automated rule interpretation.
+**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected adding a hold-status parser, exception-state enum, laboratory-specific mode, or automated policy interpretation.
 
-**What was learned:** Scope alone is insufficient when the same authority supplies explicit carve-outs. A rule can cover the general decision class yet still lack authority over the target. Exceptions must constrain authority before precedence is applied, not be treated as commentary after a branch is selected.
+**What was learned:** An exception need not be proven applicable to block general authority. When the supplied evidence cannot establish whether the target is inside or outside the exception, applying the general rule would silently convert missing clearance into clearance. Authority therefore requires positive support for being outside every exception, not merely absence of proof that an exception applies.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies an exception whose applicability to the target is unresolved.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies conflicting evidence about exception applicability and asks whether supplied applicability authority is required before either status can govern.
