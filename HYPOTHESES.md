@@ -76,10 +76,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 136 / `SCENARIOS/134-conflicting-overlap-duration-evidence.md`:** Two records nominally mentioned every assay day but directly conflicted on day four. The recommendation obligation now preserves both overlap results, marks the shared day unresolved, and keeps the full-duration gate unresolved rather than hiding the exact period where authority fails.
 - **Run 137 / `SCENARIOS/135-violated-gate-rollback-fallback.md`:** A production-release handoff exposed that explicit fallback handling covered unresolved and conflicting triggers but not a violated primary gate. The recommendation obligation now recognizes a supplied violated condition as a valid fallback trigger while still requiring every additional fallback-specific gate and its evidence before rollback can govern.
 - **Run 138 / `SCENARIOS/136-violated-trigger-unresolved-rollback-gate.md`:** A hostile production-release handoff kept the rollback trigger violated and the recovery snapshot verified but supplied only an unacknowledged operator page. The existing fallback obligation correctly left operator availability unresolved, withheld rollback, and required operator confirmation. Expanding fallback triggers to include violations did not bypass the remaining fallback-specific gates; no executable change was justified.
+- **Run 139 / `SCENARIOS/137-violated-trigger-violated-rollback-gate.md`:** The rollback trigger was established and the snapshot verified, but the acknowledged operator estimate explicitly exceeded the 30-minute limit. The recommendation obligation now distinguishes a violated fallback-specific gate from an unresolved one: the rollback branch is unavailable under supplied evidence rather than awaiting confirmation, and the output must not request evidence already supplied.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** A violated primary gate with one explicitly violated fallback-specific gate, confirming that the output distinguishes a failed fallback branch from one that is merely awaiting evidence.
+**Next test:** Transfer the failed-fallback distinction to a non-software domain, verifying that the wording is operational rather than deployment-specific.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -94,7 +95,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–138 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–139 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
