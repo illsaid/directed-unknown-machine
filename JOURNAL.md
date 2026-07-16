@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–148 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–149 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–87:** Consolidated and ordered six audit operations, then removed duplicate framing.
@@ -33,19 +33,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 146:** Confirmed that governance authority cannot be borrowed outside its explicit scope.
 - **Run 147:** Required otherwise applicable governance to remain non-governing when an explicit exception covers the target.
 - **Run 148:** Required positive supplied evidence that a target is outside every explicit exception before governance may resolve precedence.
+- **Run 149:** Confirmed that supplied applicability authority can resolve conflicting exception-status evidence without an exception-specific mechanism.
 
-## Run 149 — Resolve conflicting exception evidence with supplied applicability authority
+## Run 150 — Preserve conflicting applicability authorities
 
-**What changed:** Added and completed `SCENARIOS/147-governed-conflicting-exception-applicability.md`. No executable change was made because the existing evidence-preservation and governance obligations already compose to handle the scenario correctly.
+**What changed:** Added and completed `SCENARIOS/148-conflicting-applicability-authorities.md`. Tightened the recommendation obligation in `decision_brief.py`: when supplied applicability authorities select opposite evidence sources, preserve every authority and affected source, leave the applicability result and every downstream authority unresolved, and identify the governance evidence required to select among those authorities.
 
-**Scenario tested:** Specimen batch B-271 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 and NT-3 supplied opposite precedence. QG-4 established that DP-9 controls NT-3 except for contamination-hold batches. Hold order CH-14 said B-271 was under hold, quality release record CR-8 said it was cleared, and applicability rule AR-6 made the QA-director-signed release record governing when hold-status records conflict.
+**Scenario tested:** Specimen batch B-276 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 and NT-3 supplied opposite fallback precedence. QG-4 made DP-9 controlling unless the batch was under contamination hold. CH-19 said B-276 remained under hold; CR-11 said it was cleared. AR-6 selected CR-11, while AR-9 selected CH-19, and no supplied rule established which applicability authority controlled.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/147-governed-conflicting-exception-applicability.md` reaches complete-contract output. Applying the existing obligations, AR-6 selects CR-8 as governing evidence of current hold status; CH-14 remains visible as conflicting but non-governing; B-271 is established outside QG-4's exception; QG-4 selects DP-9; DP-9 selects local reprocessing; and NT-3 plus salvage shipment remain satisfied but non-governing.
+**Observable output:** `python decision_brief.py SCENARIOS/148-conflicting-applicability-authorities.md` reaches complete-contract output. Applying the tightened obligation, AR-6, AR-9, CH-19, and CR-11 remain visible; current hold status remains unresolved; QG-4 cannot govern; DP-9 and NT-3 remain conflicting; both fallback branches remain satisfied candidates; branch authority remains unresolved; and hold is authorized pending governance evidence selecting the governing applicability rule.
 
-**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected adding a contamination-status parser, source-rank table, exception-specific rule, or laboratory mode. The scenario demonstrated composition rather than a missing feature.
+**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected a source-rank table, automatic recency comparison, laboratory-specific applicability mode, and semantic policy parser. None is needed to preserve the authority boundary.
 
-**What was learned:** Exception applicability does not need a separate reasoning mechanism. The general evidence rule already preserves conflicting records and allows supplied applicability authority to identify the governing source; the governance rule then consumes that resolved status only within its stated scope. Adding an exception-specific duplicate would make the compiler longer without making it more precise.
+**What was learned:** Applicability authority is itself subject to the same non-borrowing rule as evidence, precedence, and governance. A rule that selects evidence cannot silently outrank an opposing rule that selects different evidence. Without supplied authority over the authority conflict, every downstream conclusion depending on the selected evidence must remain unresolved.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies conflicting applicability authorities that select opposite exception-status records, testing whether authority remains unresolved rather than allowing either source to govern.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies governance that explicitly selects one of the conflicting applicability authorities and checks whether the complete authority chain and displaced sources remain visible.
