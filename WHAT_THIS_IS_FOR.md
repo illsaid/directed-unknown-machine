@@ -1,31 +1,49 @@
 # What This Is For
 
-_Last rewritten: 2026-07-15 after Run 135_
+_Last rewritten: 2026-07-16 after Run 146_
 
-## 1. What problem is this system currently the best solution to?
+## 1. What is this now?
 
-Compiling a small, explicitly labeled decision handoff into an auditable analysis contract that prevents an analyst or agent from silently changing evidence, applicability, thresholds, gate logic, or authorized outcomes.
+A small authority-preservation compiler for bounded decision handoffs.
 
-## 2. Who has this problem?
+It accepts exactly four labeled fields — `Decision`, `Evidence`, `Constraints`, and `Success` — and emits a fixed audit contract that tells a downstream analyst or agent what must remain visible, what may be transformed, which gates govern which branches, and when no supplied authority permits a recommendation.
 
-A nontechnical operator delegating one bounded decision whose source notes already state the decision, evidence, constraints, and success rule. The dangerous failure is not weak ideation; it is a plausible-looking recommendation that borrows authority from the wrong source, hides an unresolved gate, extrapolates beyond evidence scope, or invents a branch.
+## 2. Who should use it?
 
-## 3. What is the narrowest version it already solves well?
+An operator delegating a consequential but bounded decision from messy notes to an analyst, contractor, or agent. The operator already knows the decision to be made and can label the relevant material. The risk is that the recipient produces a plausible answer by changing scope, collapsing conflicts, borrowing authority, treating missing evidence as failure, or choosing an attractive branch that the supplied rule never authorized.
 
-Given exactly `Decision`, `Evidence`, `Constraints`, and `Success`, the tool either returns a repairable structural refusal or emits six ordered audit obligations. Those obligations preserve source-specific facts and conflicts, restrict transformations to supplied support, apply boundaries literally, judge every gate independently, and keep the recommendation inside a fully authorized Success branch.
+## 3. What narrow task does it solve well?
 
-## 4. What has the repeated testing revealed it is unusually good at?
+It converts a complete labeled handoff into six inspectable reasoning obligations. Those obligations preserve source-specific evidence, restrict transformations to explicitly supported operations, apply boundaries literally, judge each gate independently, map gates to supplied branches, and keep the final action inside the authority provided by `Success`.
 
-It is becoming a compact authority-preservation compiler for messy but labeled decision notes. Its strongest behavior is maintaining the chain from supplied evidence to scope, from scope to gate judgment, and from gate judgment to the one action the supplied rule actually authorizes. Recent shipment scenarios show that it can distinguish unresolved evidence from an authorized fallback, require every fallback-specific gate, and compose complementary evidence without bridging gaps or reusing support by implication.
+When the handoff is structurally invalid, it refuses with a repairable explanation rather than inventing missing fields.
 
-## 5. Why use it instead of a prompt or checklist?
+## 4. What has repeated testing revealed?
 
-The accumulated refusal boundaries are executable and scenario-tested. A checklist can say “consider evidence quality”; this compiler states what must remain visible, what cannot be inferred, when evidence may compose, which gates remain unresolved, and why a recommendation lacks authority. The result is inspectable before downstream analysis begins.
+The useful core is not summarization or recommendation generation. It is preventing authority leakage.
 
-## 6. What is the biggest threat to usefulness?
+Across measurement conflicts, threshold rules, fallback branches, duration scopes, overlapping populations, competing precedence policies, and governance rules, the same principle has held: a fact, rule, or authority may govern only the operation and scope it explicitly supports. Run 146 confirmed that even a valid governance rule cannot be borrowed from off-site disposition to settle an on-site policy conflict.
 
-Continuing to enumerate near-duplicate scope permutations after the authority model is already stable. A new rule is justified only when a concrete handoff exposes a distinct way the current obligations could authorize the wrong action, suppress an authorized action, or lose supplied meaning.
+## 5. Why is this better than a checklist?
 
-## 7. What should be removed or avoided?
+The rules are executable, ordered, and pressure-tested against concrete hostile scenarios. A checklist can remind an analyst to “check applicability.” This compiler states the consequence: preserve the out-of-scope authority, do not apply it, leave the affected branch unresolved, and name the exact authority still missing.
 
-Keep `machine.py` only because the historical demo command is mandatory. Do not add semantic classification, domain modes, calculations, configurable schemas, dashboards, evidence graphs, date engines, or generic workflow machinery. Prefer proving that an existing obligation survives a hostile scenario over adding redundant prose.
+## 6. What is the current best use case?
+
+Preparing an auditable decision-analysis handoff where multiple supplied rules, fallback actions, or precedence authorities could produce a confident but unauthorized answer.
+
+Current demonstration:
+
+```bash
+python decision_brief.py SCENARIOS/144-out-of-scope-governance-precedence.md
+```
+
+The historical harness remains runnable:
+
+```bash
+python machine.py run SCENARIOS/001-friendly.md
+```
+
+## 7. What should not be built?
+
+Do not add semantic classification, automatic policy interpretation, domain modes, dashboards, evidence graphs, date engines, configurable schemas, or workflow orchestration. The present threat is not missing flexibility; it is accumulating near-duplicate rules after the authority model has already generalized. Add executable behavior only when a concrete scenario exposes a distinct way the current contract can authorize the wrong action, suppress an authorized action, or lose supplied meaning.
