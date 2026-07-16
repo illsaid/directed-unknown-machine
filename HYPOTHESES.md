@@ -42,10 +42,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 144:** Preserved conflicting precedence policies and left branch authority unresolved when no supplied rule established which policy controlled.
 - **Run 145 / `SCENARIOS/143-governed-conflicting-fallback-precedence.md`:** A supplied governance rule established that DP-9 controlled the opposing NT-3 policy for the target disposition. The recommendation obligation now requires the full authority trace: cite the governance rule and selected precedence policy, preserve displaced policies as conflicting but non-governing, and preserve displaced satisfied branches as satisfied but non-governing.
 - **Run 146 / `SCENARIOS/144-out-of-scope-governance-precedence.md`:** QG-2 resolved DP-9 versus NT-3 only for off-site disposition, while the target batch was on site. Existing scope-preservation obligations correctly prohibit borrowing that governance authority: both policies and both satisfied branches remain visible, branch authority remains unresolved, and the missing input is governance authority covering on-site disposition.
+- **Run 147 / `SCENARIOS/145-governance-exception-blocks-precedence.md`:** QG-4 generally resolved DP-9 versus NT-3 but explicitly exempted contamination-hold batches, including B-261. The recommendation obligation now states that governance authority applies only when the target is inside the rule's scope and outside every explicit exception; the exception remains visible and the precedence conflict remains unresolved.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Supply a governance rule whose general scope covers the target disposition but contains an explicit exception that includes the target batch, testing whether the exception prevents the rule from governing.
+**Next test:** Supply an explicit governance exception whose applicability to the target is unresolved, testing whether uncertainty about the exception prevents the general rule from governing.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -60,7 +61,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–146 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–147 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
