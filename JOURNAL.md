@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–129 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–130 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–62:** Consolidated those obligations into six audit operations without weakening them.
@@ -56,19 +56,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 127:** Honored an explicit unresolved-condition fallback instead of confusing unresolved evidence with unresolved branch authority.
 - **Run 128:** Required the fallback trigger and every additional fallback-specific gate to be established before the fallback can govern.
 - **Run 129:** Required an activated fallback recommendation to cite the evidence establishing its trigger and every additional fallback-specific gate.
+- **Run 130:** Kept distinct fallback-specific gates independently evidenced and allowed shared support only when the supplied record explicitly supported both.
 
-## Run 130 — Keep independent fallback gates independently evidenced
+## Run 131 — Verify explicit shared fallback evidence
 
-**What changed:** Added `SCENARIOS/128-multi-gate-conflict-fallback.md`. Tightened the `Decision: recommend` obligation so evidence for one fallback-specific gate cannot satisfy another distinct gate unless the supplied evidence explicitly supports both.
+**What changed:** Added and completed `SCENARIOS/129-explicit-shared-fallback-evidence.md`. No executable change was made because the Run 130 recommendation obligation already handled the tested case correctly.
 
-**Scenario tested:** Refrigerated shipment L-207 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. Quarantine requires two independently evidenced operational gates: written laboratory confirmation that the assay can begin within 48 hours and separate receiving-site confirmation of qualified 2–8°C storage for the full seven-day assay period.
+**Scenario tested:** Refrigerated shipment L-208 has conflicting maximum-temperature records at 7.8°C and 8.3°C and an intact seal. One signed laboratory certificate explicitly confirms both that the stability assay can begin within 48 hours and that qualified 2–8°C storage is reserved for the full seven-day assay period.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/128-multi-gate-conflict-fallback.md` reaches complete-contract output and now emits an obligation requiring distinct fallback-specific gates to remain independently evidenced. Shared support is permitted only when the supplied record explicitly supports both gates.
+**Observable output:** `python decision_brief.py SCENARIOS/129-explicit-shared-fallback-evidence.md` reaches complete-contract output. The existing recommendation obligation permits the certificate to support both operational gates because the supplied record explicitly states both capabilities; the independent-evidence rule remains intact.
 
-**What was removed or rejected:** Rejected reusing the laboratory-capacity confirmation as evidence of qualified storage, adding shipment-specific execution logic, and introducing a generic evidence graph. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
+**What was removed or rejected:** Rejected adding a source-to-gate data structure, changing the compiler for a case already covered, and treating one record as inherently limited to one gate. No dead H1 code was removed because `machine.py` remains required for the historical demo command.
 
-**What was learned:** An authorization trace can name every gate and still be false if evidence silently spills from one gate to another. Gate completeness therefore requires both visible conditions and source-to-gate fidelity.
+**What was learned:** Evidence independence is about support fidelity, not source count. One record may legitimately establish multiple gates when each support relationship is explicit; the defect is silent spill, not reuse itself.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is a fallback whose single supplied record explicitly supports two operational gates, verifying that shared evidence is allowed only because its dual support is explicit.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test is one record that supports one fallback gate explicitly and a second only by implication; the implied gate must remain unresolved.
