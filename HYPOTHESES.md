@@ -69,10 +69,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 129 / `SCENARIOS/127-established-conditional-conflict-fallback.md`:** The contrasting shipment handoff established both the conflicting-temperature fallback trigger and written laboratory capacity within 48 hours. The recommendation obligation now requires an activated fallback recommendation to cite the supplied evidence establishing its trigger and every additional fallback-specific gate, making the complete authority chain inspectable.
 - **Run 130 / `SCENARIOS/128-multi-gate-conflict-fallback.md`:** A fallback requiring both assay-start capacity and qualified storage exposed that listing every gate is insufficient if one source is silently reused across distinct gates. The recommendation obligation now keeps fallback-specific gates independently evidenced and permits shared support only when the supplied evidence explicitly supports both gates.
 - **Run 131 / `SCENARIOS/129-explicit-shared-fallback-evidence.md`:** One signed laboratory certificate explicitly established both assay start within 48 hours and qualified storage for the seven-day assay period. The existing Run 130 obligation correctly permitted the same record to support both fallback gates because its dual support was explicit. No executable change was justified.
+- **Run 132 / `SCENARIOS/130-implied-shared-fallback-evidence.md`:** One laboratory certificate explicitly established assay-start capacity but merely suggested storage capability by saying the laboratory routinely handles refrigerated stability work. The recommendation obligation now states the observable consequence: the record supports only the explicit gate, the implied storage gate remains unresolved, and the fallback branch cannot govern.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test one supplied record that explicitly supports one fallback gate but supports a second only by implication; the implied gate must remain unresolved.
+**Next test:** Test explicit storage capacity whose stated duration is shorter than the fallback's required assay period; the uncovered period must remain unresolved.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -87,7 +88,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–131 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–132 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
