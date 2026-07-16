@@ -48,10 +48,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 150 / `SCENARIOS/148-conflicting-applicability-authorities.md`:** AR-6 and AR-9 selected opposite hold-status records, with no supplied rule deciding which applicability authority controlled. The recommendation obligation now preserves both authorities and affected evidence, leaves exception applicability and all downstream authority unresolved, and names the governance evidence needed before either authority may govern.
 - **Run 151 / `SCENARIOS/149-governed-conflicting-applicability-authorities.md`:** AG-2 explicitly made AR-6 controlling over AR-9 for current specimen contamination-hold status. Existing governance, applicability, and evidence-preservation obligations compose without another rule: AG-2 selects AR-6; AR-6 selects CR-15; AR-9 and CH-23 remain conflicting but non-governing; CR-15 establishes that QG-4's exception does not apply; QG-4 selects DP-9; and DP-9 authorizes local reprocessing while NT-3 and salvage shipment remain satisfied but non-governing.
 - **Run 152 / `SCENARIOS/150-governed-one-status-unresolved-other-status.md`:** AG-2 resolved conflicting contamination-hold evidence only. A separate release-hold conflict remained unresolved. The recommendation obligation now states that governance selecting an applicability authority is confined to the exact status, metric, period, population, or other dimension it names; the governed contamination result cannot resolve release status, so QG-4 and downstream branch authority remain unresolved.
+- **Run 153 / `SCENARIOS/151-enumerated-governance-scope-omits-third-status.md`:** AG-5 explicitly resolved applicability-authority conflicts for contamination-hold and release-hold status while omitting quarantine status. The existing exact-dimension obligation already treats the enumeration as closed: quarantine remains unresolved, QG-4 cannot govern, and neither fallback is authorized. No duplicate executable clause was added.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Supply governance that names two status dimensions but omits a third, testing whether enumerated governance scope is treated as closed rather than illustrative.
+**Next test:** Supply governance using explicitly open wording such as “including” before named dimensions, testing whether only supplied language—not analogy—can make an enumeration non-exhaustive.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -66,7 +67,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–152 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–153 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
