@@ -78,10 +78,11 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 - **Run 138 / `SCENARIOS/136-violated-trigger-unresolved-rollback-gate.md`:** A hostile production-release handoff kept the rollback trigger violated and the recovery snapshot verified but supplied only an unacknowledged operator page. The existing fallback obligation correctly left operator availability unresolved, withheld rollback, and required operator confirmation. Expanding fallback triggers to include violations did not bypass the remaining fallback-specific gates; no executable change was justified.
 - **Run 139 / `SCENARIOS/137-violated-trigger-violated-rollback-gate.md`:** The rollback trigger was established and the snapshot verified, but the acknowledged operator estimate explicitly exceeded the 30-minute limit. The recommendation obligation now distinguishes a violated fallback-specific gate from an unresolved one: the rollback branch is unavailable under supplied evidence rather than awaiting confirmation, and the output must not request evidence already supplied.
 - **Run 140 / `SCENARIOS/138-violated-trigger-violated-transfer-gate.md`:** A cold-chain specimen handoff transferred the Run 139 distinction unchanged. A storage-temperature violation activated emergency-transfer consideration, validated backup capacity was established, and the supplied 45-minute technician estimate violated the 20-minute transfer gate. The existing obligation correctly made emergency transfer unavailable under supplied evidence, selected the supplied hold action, and did not request technician evidence already present. No executable change was justified.
+- **Run 141 / `SCENARIOS/139-failed-primary-fallback-independent-secondary.md`:** A failed emergency-transfer branch and a separately satisfied salvage-shipment branch exposed that fallback failure must remain branch-local. The recommendation obligation now evaluates every supplied fallback independently: the violated transfer-timing gate makes emergency transfer unavailable but cannot suppress salvage shipment unless salvage explicitly depends on it.
 
 **Evidence against:** The transformation does not apply to coordination problems or unlabeled prose. The executable does not classify sentences or detect semantic conflict automatically; it constrains the downstream analyst, so trust still depends on an operator being able to inspect the supplied fields and fixed reasoning obligations.
 
-**Next test:** Test a violated fallback branch when Success supplies a second, independently conditioned fallback, checking that failure of the first does not erase a separately authorized alternative.
+**Next test:** Supply two independently satisfied fallback branches with no precedence, checking that the existing non-nested branch rule leaves authority unresolved rather than selecting one.
 
 **Kill criterion:** Kill if two labeled decision-support scenarios still lose the decision, supplied evidence, constraints, or success condition, or if preserving the boundary requires automatic semantic classification.
 
@@ -96,7 +97,7 @@ Confidence is 0.00–1.00. Keep scores conservative. Scenario evidence beats spe
 
 **Evidence for:** The scenario taxonomy includes hostile, comparative, and transfer tests. Run 4 exposed a concrete category error.
 
-**Evidence against:** Runs 5–140 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
+**Evidence against:** Runs 5–141 produced useful results by shaping and auditing decision contracts, not by providing general failure explanations.
 
 **Next test:** Do not lead implementation. Reassess only if failure analysis contributes a correction the decision-contract shaper could not derive directly.
 
