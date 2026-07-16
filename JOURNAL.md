@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–144 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–145 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–87:** Consolidated and ordered six audit operations, then removed duplicate framing.
@@ -29,19 +29,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 127–140:** Established fallback triggers and gates, explicit evidence reuse, duration scope composition, conflict preservation, and the distinction between unavailable and unresolved fallback branches.
 - **Runs 141–143:** Kept fallback failures local, refused arbitrary selection between satisfied non-nested branches, and required applied precedence authority to remain visible.
 - **Run 144:** Preserved opposing precedence policies and withheld branch authority when no supplied governance rule established which policy controlled.
+- **Run 145:** Required the full governance-to-precedence authority trace when supplied governance validly resolves a policy conflict.
 
-## Run 145 — Preserve the full governed-precedence authority trace
+## Run 146 — Refuse governance authority outside its supplied scope
 
-**What changed:** Added `SCENARIOS/143-governed-conflicting-fallback-precedence.md` and strengthened the final recommendation obligation. When supplied governance resolves conflicting precedence authorities, the compiler must cite both the governance rule and selected precedence policy, preserve displaced policies as conflicting but non-governing, and preserve displaced fully satisfied branches as satisfied but non-governing.
+**What changed:** Added `SCENARIOS/144-out-of-scope-governance-precedence.md`. No executable change was justified because the existing scope-preservation obligations already prohibit applying authority beyond the scope explicitly supplied.
 
-**Scenario tested:** Specimen batch B-251 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 gave local reprocessing precedence; NT-3 gave salvage shipment precedence. Governance rule QG-2 explicitly established that DP-9 controls NT-3 for this on-site disposition.
+**Scenario tested:** Specimen batch B-257 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 and NT-3 supplied opposite precedence. QG-2 established that DP-9 controls NT-3 only for off-site disposition, while B-257 was being dispositioned on site.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/143-governed-conflicting-fallback-precedence.md` reaches complete-contract output. Under the strengthened obligation, local reprocessing governs; QG-2 and DP-9 remain visible as the authority chain; NT-3 remains conflicting but non-governing; and salvage shipment remains satisfied but non-governing.
+**Observable output:** `python decision_brief.py SCENARIOS/144-out-of-scope-governance-precedence.md` reaches complete-contract output. Applying the existing obligations, QG-2 cannot govern the on-site decision; DP-9 and NT-3 remain conflicting; both fallback branches remain satisfied candidates; branch authority remains unresolved; and the authorized action is hold pending governance authority covering on-site disposition.
 
-**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected automatic policy ranking, policy-name heuristics, a governance parser, and laboratory-specific disposition logic.
+**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected adding a policy-scope parser, laboratory disposition mode, policy-name ranking, or another near-duplicate recommendation rule.
 
-**What was learned:** Correct branch selection is not enough. A governance-resolved decision is auditable only when the output preserves the full chain from governance rule to selected precedence policy and retains the displaced conflicting authority rather than silently erasing it.
+**What was learned:** Governance evidence is not globally portable merely because it names the same conflicting policies. Authority remains bounded by its supplied scope, just like measurements, applicability evidence, and trigger evidence. The current general scope rule survived transfer to governance without new machinery.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies a governance rule whose scope does not cover the target disposition, testing whether the compiler refuses to borrow authority across scope.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies a generally applicable governance rule with an explicit exception covering the target batch.
