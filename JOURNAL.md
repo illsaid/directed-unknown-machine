@@ -20,29 +20,28 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–143 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–144 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–87:** Consolidated and ordered six audit operations, then removed duplicate framing.
 - **Runs 88–111:** Tightened field repair, explicit-label grammar, ambiguity handling, duplicate refusal, and multiline preservation.
 - **Runs 112–126:** Established gate-to-branch accounting, branch-local blocking, nested and non-nested branch authority, conditional precedence, and scope-aware applicability.
 - **Runs 127–140:** Established fallback triggers and gates, explicit evidence reuse, duration scope composition, conflict preservation, and the distinction between unavailable and unresolved fallback branches.
-- **Run 141:** Kept fallback failure branch-local so a failed emergency-transfer branch could not suppress an independently satisfied salvage-shipment branch.
-- **Run 142:** Verified that two fully satisfied non-nested fallback branches remain unresolved when no precedence or tie-breaker is supplied.
-- **Run 143:** Required an applied unconditional precedence rule to remain visible in the governing recommendation.
+- **Runs 141–143:** Kept fallback failures local, refused arbitrary selection between satisfied non-nested branches, and required applied precedence authority to remain visible.
+- **Run 144:** Preserved opposing precedence policies and withheld branch authority when no supplied governance rule established which policy controlled.
 
-## Run 144 — Preserve conflicting explicit precedence authorities
+## Run 145 — Preserve the full governed-precedence authority trace
 
-**What changed:** Added `SCENARIOS/142-conflicting-explicit-fallback-precedence.md` and strengthened the final recommendation obligation. When supplied precedence authorities conflict, the compiler must now preserve every conflicting rule and leave branch authority unresolved unless supplied applicability or governance evidence establishes which precedence source governs. It may not choose by field order, policy name, or convenience.
+**What changed:** Added `SCENARIOS/143-governed-conflicting-fallback-precedence.md` and strengthened the final recommendation obligation. When supplied governance resolves conflicting precedence authorities, the compiler must cite both the governance rule and selected precedence policy, preserve displaced policies as conflicting but non-governing, and preserve displaced fully satisfied branches as satisfied but non-governing.
 
-**Scenario tested:** Specimen batch B-248 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. Laboratory disposition policy DP-9 gave local reprocessing precedence, while network transport policy NT-3 gave salvage shipment precedence. No supplied rule established which policy controlled.
+**Scenario tested:** Specimen batch B-251 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 gave local reprocessing precedence; NT-3 gave salvage shipment precedence. Governance rule QG-2 explicitly established that DP-9 controls NT-3 for this on-site disposition.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/142-conflicting-explicit-fallback-precedence.md` reaches complete-contract output. Under the strengthened recommendation obligation, both precedence policies remain visible, both fallback branches remain satisfied candidates, branch authority remains unresolved, and the supplied hold action governs until a governance rule establishes which policy controls.
+**Observable output:** `python decision_brief.py SCENARIOS/143-governed-conflicting-fallback-precedence.md` reaches complete-contract output. Under the strengthened obligation, local reprocessing governs; QG-2 and DP-9 remain visible as the authority chain; NT-3 remains conflicting but non-governing; and salvage shipment remains satisfied but non-governing.
 
-**What was removed or rejected:** Rejected automatic policy ranking, policy-name heuristics, a precedence parser, and laboratory-specific disposition logic. Historical H2 evidence in `HYPOTHESES.md` was compacted into run ranges so the new authority boundary remains inspectable without extending a near-line-by-line chronology.
+**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected automatic policy ranking, policy-name heuristics, a governance parser, and laboratory-specific disposition logic.
 
-**What was learned:** Citation alone does not make precedence auditable. A downstream analyst can still cite one supplied policy and omit an equally explicit opposing policy. Authority is established only when the supplied record resolves which precedence source governs.
+**What was learned:** Correct branch selection is not enough. A governance-resolved decision is auditable only when the output preserves the full chain from governance rule to selected precedence policy and retains the displaced conflicting authority rather than silently erasing it.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies an explicit governance rule selecting one of the conflicting precedence policies, testing whether the compiler applies it while preserving the displaced policy as conflicting but non-governing.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies a governance rule whose scope does not cover the target disposition, testing whether the compiler refuses to borrow authority across scope.
