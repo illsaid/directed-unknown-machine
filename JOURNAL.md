@@ -20,7 +20,7 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Runs 14–17:** Preserved observations and conflicting interpretations without promoting them to fact; split dense obligations into inspectable requirements.
 - **Runs 18–21:** Distinguished satisfied, violated, unresolved, and conflicting gates and required evidence for every judgment.
 
-## Runs 22–147 — Evidence, boundaries, sequencing, repair grammar, and branch authority
+## Runs 22–148 — Evidence, boundaries, sequencing, repair grammar, and branch authority
 
 - **Runs 22–46:** Established provenance, applicability, adjustment, range, equality, conflict, equivalence, and precedence refusal boundaries.
 - **Runs 47–87:** Consolidated and ordered six audit operations, then removed duplicate framing.
@@ -32,19 +32,20 @@ Record every autonomous run here. Historical entries are compacted once their ev
 - **Run 145:** Required the full governance-to-precedence authority trace when supplied governance validly resolves a policy conflict.
 - **Run 146:** Confirmed that governance authority cannot be borrowed outside its explicit scope.
 - **Run 147:** Required otherwise applicable governance to remain non-governing when an explicit exception covers the target.
+- **Run 148:** Required positive supplied evidence that a target is outside every explicit exception before governance may resolve precedence.
 
-## Run 148 — Preserve unresolved governance exception applicability
+## Run 149 — Resolve conflicting exception evidence with supplied applicability authority
 
-**What changed:** Added `SCENARIOS/146-unresolved-governance-exception-applicability.md` and tightened the recommendation obligation in `decision_brief.py`: governance may resolve precedence only when supplied evidence establishes that the target is outside every explicit exception. When exception applicability is unresolved, the uncertainty, governance conflict, and candidate branches must remain visible, and the output must name the evidence needed to determine whether the exception applies.
+**What changed:** Added and completed `SCENARIOS/147-governed-conflicting-exception-applicability.md`. No executable change was made because the existing evidence-preservation and governance obligations already compose to handle the scenario correctly.
 
-**Scenario tested:** Specimen batch B-266 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 and NT-3 supplied opposite precedence. QG-4 generally established that DP-9 controls NT-3 except for contamination-hold batches. Monitoring alert MA-27 triggered contamination review, but no hold order or clearance record was supplied.
+**Scenario tested:** Specimen batch B-271 violated its release-temperature gate. Local reprocessing and salvage shipment were independently fully satisfied. DP-9 and NT-3 supplied opposite precedence. QG-4 established that DP-9 controls NT-3 except for contamination-hold batches. Hold order CH-14 said B-271 was under hold, quality release record CR-8 said it was cleared, and applicability rule AR-6 made the QA-director-signed release record governing when hold-status records conflict.
 
 **Demo check:** Before changes, `python machine.py run SCENARIOS/001-friendly.md` was mentally simulated from the unchanged historical harness. `partial` still maps to `hold-but-improve`, and the recommended action still targets the recorded comparative-test gap.
 
-**Observable output:** `python decision_brief.py SCENARIOS/146-unresolved-governance-exception-applicability.md` reaches complete-contract output. Applying the tightened obligation, MA-27 cannot be promoted to a hold or clearance result; QG-4 remains visible but cannot govern; DP-9 and NT-3 remain conflicting; both fallback branches remain satisfied candidates; branch authority remains unresolved; and hold is authorized pending a contamination-hold order or clearance record.
+**Observable output:** `python decision_brief.py SCENARIOS/147-governed-conflicting-exception-applicability.md` reaches complete-contract output. Applying the existing obligations, AR-6 selects CR-8 as governing evidence of current hold status; CH-14 remains visible as conflicting but non-governing; B-271 is established outside QG-4's exception; QG-4 selects DP-9; DP-9 selects local reprocessing; and NT-3 plus salvage shipment remain satisfied but non-governing.
 
-**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected adding a hold-status parser, exception-state enum, laboratory-specific mode, or automated policy interpretation.
+**What was removed or rejected:** No dead H2 mechanism remained to remove. Rejected adding a contamination-status parser, source-rank table, exception-specific rule, or laboratory mode. The scenario demonstrated composition rather than a missing feature.
 
-**What was learned:** An exception need not be proven applicable to block general authority. When the supplied evidence cannot establish whether the target is inside or outside the exception, applying the general rule would silently convert missing clearance into clearance. Authority therefore requires positive support for being outside every exception, not merely absence of proof that an exception applies.
+**What was learned:** Exception applicability does not need a separate reasoning mechanism. The general evidence rule already preserves conflicting records and allows supplied applicability authority to identify the governing source; the governance rule then consumes that resolved status only within its stated scope. Adding an exception-specific duplicate would make the compiler longer without making it more precise.
 
-**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies conflicting evidence about exception applicability and asks whether supplied applicability authority is required before either status can govern.
+**Hypothesis movement:** H2 remains primary at 0.99 and survived. The next test supplies conflicting applicability authorities that select opposite exception-status records, testing whether authority remains unresolved rather than allowing either source to govern.
